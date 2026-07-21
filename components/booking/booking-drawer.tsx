@@ -101,7 +101,7 @@ export function BookingProvider({ children }: { children: ReactNode }) {
     <BookingContext.Provider value={{ openBooking }}>
       {children}
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetContent className="w-full overflow-y-auto border-border bg-background p-0 sm:max-w-xl">
+        <SheetContent className="w-full overflow-y-auto border-border bg-background p-0 sm:max-w-xl" style={{zIndex: 60}}>
           <SheetHeader className="border-b border-border px-6 py-5 pr-14">
             <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.2em] text-primary">
               <Sparkles aria-hidden="true" className="size-4" /> Free quote request
@@ -120,7 +120,7 @@ export function BookingProvider({ children }: { children: ReactNode }) {
               <Button onClick={reset}>Back to Breeze</Button>
             </div>
           ) : (
-            <form onSubmit={submit} className="flex min-h-[calc(100vh-140px)] flex-col">
+            <form onSubmit={submit} className="flex min-h-[calc(100vh-140px)] flex-col" style={{pointerEvents: 'auto'}}>
               <input name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
               <div className="border-b border-border px-6 py-4">
                 <div className="mb-2 flex items-center justify-between font-mono text-xs uppercase tracking-wider text-muted-foreground">

@@ -33,9 +33,9 @@
       "_template": "services"
     },
     {
-      "eyebrow": "02 / How it works",
-      "heading": "Simple from start to shine.",
-      "copy": "A compact quote flow designed around your home—not a generic one-price-fits-all form.",
+      "eyebrow": "",
+      "heading": "It's a Breeze",
+      "copy": "",
       "steps": [
         {
           "number": "01",
@@ -45,7 +45,7 @@
         {
           "number": "02",
           "title": "Share the details",
-          "description": "Add extras and, if you would like, securely upload photos for a more accurate quote."
+          "description": "Add extras and upload photos"
         },
         {
           "number": "03",

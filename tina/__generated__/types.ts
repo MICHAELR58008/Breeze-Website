@@ -392,39 +392,43 @@ export type PageConnection = Connection & {
   edges?: Maybe<Array<Maybe<PageConnectionEdges>>>;
 };
 
-export type PricingDeepPrices = {
-  __typename?: 'PricingDeepPrices';
+export type PricingServicesDeepPrices = {
+  __typename?: 'PricingServicesDeepPrices';
   key?: Maybe<Scalars['String']['output']>;
   bedrooms?: Maybe<Scalars['String']['output']>;
   bathrooms?: Maybe<Scalars['String']['output']>;
   cents?: Maybe<Scalars['Float']['output']>;
 };
 
-export type PricingDeep = {
-  __typename?: 'PricingDeep';
-  name?: Maybe<Scalars['String']['output']>;
+export type PricingServicesDeep = {
+  __typename?: 'PricingServicesDeep';
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
   description?: Maybe<Scalars['String']['output']>;
   subtitle?: Maybe<Scalars['String']['output']>;
   features?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  prices?: Maybe<Array<Maybe<PricingDeepPrices>>>;
+  prices?: Maybe<Array<Maybe<PricingServicesDeepPrices>>>;
 };
 
-export type PricingRegularPrices = {
-  __typename?: 'PricingRegularPrices';
+export type PricingServicesRegularPrices = {
+  __typename?: 'PricingServicesRegularPrices';
   key?: Maybe<Scalars['String']['output']>;
   bedrooms?: Maybe<Scalars['String']['output']>;
   bathrooms?: Maybe<Scalars['String']['output']>;
   cents?: Maybe<Scalars['Float']['output']>;
 };
 
-export type PricingRegular = {
-  __typename?: 'PricingRegular';
-  name?: Maybe<Scalars['String']['output']>;
+export type PricingServicesRegular = {
+  __typename?: 'PricingServicesRegular';
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
   description?: Maybe<Scalars['String']['output']>;
   subtitle?: Maybe<Scalars['String']['output']>;
   features?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  prices?: Maybe<Array<Maybe<PricingRegularPrices>>>;
+  prices?: Maybe<Array<Maybe<PricingServicesRegularPrices>>>;
 };
+
+export type PricingServices = PricingServicesDeep | PricingServicesRegular;
 
 export type PricingAddOns = {
   __typename?: 'PricingAddOns';
@@ -435,8 +439,7 @@ export type PricingAddOns = {
 
 export type Pricing = Node & Document & {
   __typename?: 'Pricing';
-  deep?: Maybe<PricingDeep>;
-  regular?: Maybe<PricingRegular>;
+  services?: Maybe<Array<Maybe<PricingServices>>>;
   addOns?: Maybe<Array<Maybe<PricingAddOns>>>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
@@ -453,34 +456,41 @@ export type NumberFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
 };
 
-export type PricingDeepPricesFilter = {
+export type PricingServicesDeepPricesFilter = {
   key?: InputMaybe<StringFilter>;
   bedrooms?: InputMaybe<StringFilter>;
   bathrooms?: InputMaybe<StringFilter>;
   cents?: InputMaybe<NumberFilter>;
 };
 
-export type PricingDeepFilter = {
+export type PricingServicesDeepFilter = {
+  id?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringFilter>;
   description?: InputMaybe<StringFilter>;
   subtitle?: InputMaybe<StringFilter>;
   features?: InputMaybe<StringFilter>;
-  prices?: InputMaybe<PricingDeepPricesFilter>;
+  prices?: InputMaybe<PricingServicesDeepPricesFilter>;
 };
 
-export type PricingRegularPricesFilter = {
+export type PricingServicesRegularPricesFilter = {
   key?: InputMaybe<StringFilter>;
   bedrooms?: InputMaybe<StringFilter>;
   bathrooms?: InputMaybe<StringFilter>;
   cents?: InputMaybe<NumberFilter>;
 };
 
-export type PricingRegularFilter = {
+export type PricingServicesRegularFilter = {
+  id?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringFilter>;
   description?: InputMaybe<StringFilter>;
   subtitle?: InputMaybe<StringFilter>;
   features?: InputMaybe<StringFilter>;
-  prices?: InputMaybe<PricingRegularPricesFilter>;
+  prices?: InputMaybe<PricingServicesRegularPricesFilter>;
+};
+
+export type PricingServicesFilter = {
+  deep?: InputMaybe<PricingServicesDeepFilter>;
+  regular?: InputMaybe<PricingServicesRegularFilter>;
 };
 
 export type PricingAddOnsFilter = {
@@ -490,8 +500,7 @@ export type PricingAddOnsFilter = {
 };
 
 export type PricingFilter = {
-  deep?: InputMaybe<PricingDeepFilter>;
-  regular?: InputMaybe<PricingRegularFilter>;
+  services?: InputMaybe<PricingServicesFilter>;
   addOns?: InputMaybe<PricingAddOnsFilter>;
 };
 
@@ -677,34 +686,41 @@ export type PageMutation = {
   sections?: InputMaybe<Array<InputMaybe<PageSectionsMutation>>>;
 };
 
-export type PricingDeepPricesMutation = {
+export type PricingServicesDeepPricesMutation = {
   key?: InputMaybe<Scalars['String']['input']>;
   bedrooms?: InputMaybe<Scalars['String']['input']>;
   bathrooms?: InputMaybe<Scalars['String']['input']>;
   cents?: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type PricingDeepMutation = {
+export type PricingServicesDeepMutation = {
+  id?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   subtitle?: InputMaybe<Scalars['String']['input']>;
   features?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  prices?: InputMaybe<Array<InputMaybe<PricingDeepPricesMutation>>>;
+  prices?: InputMaybe<Array<InputMaybe<PricingServicesDeepPricesMutation>>>;
 };
 
-export type PricingRegularPricesMutation = {
+export type PricingServicesRegularPricesMutation = {
   key?: InputMaybe<Scalars['String']['input']>;
   bedrooms?: InputMaybe<Scalars['String']['input']>;
   bathrooms?: InputMaybe<Scalars['String']['input']>;
   cents?: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type PricingRegularMutation = {
+export type PricingServicesRegularMutation = {
+  id?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   subtitle?: InputMaybe<Scalars['String']['input']>;
   features?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  prices?: InputMaybe<Array<InputMaybe<PricingRegularPricesMutation>>>;
+  prices?: InputMaybe<Array<InputMaybe<PricingServicesRegularPricesMutation>>>;
+};
+
+export type PricingServicesMutation = {
+  deep?: InputMaybe<PricingServicesDeepMutation>;
+  regular?: InputMaybe<PricingServicesRegularMutation>;
 };
 
 export type PricingAddOnsMutation = {
@@ -714,14 +730,13 @@ export type PricingAddOnsMutation = {
 };
 
 export type PricingMutation = {
-  deep?: InputMaybe<PricingDeepMutation>;
-  regular?: InputMaybe<PricingRegularMutation>;
+  services?: InputMaybe<Array<InputMaybe<PricingServicesMutation>>>;
   addOns?: InputMaybe<Array<InputMaybe<PricingAddOnsMutation>>>;
 };
 
 export type PagePartsFragment = { __typename: 'Page', sections?: Array<{ __typename: 'PageSectionsHero', location?: string | null, headingLine1?: string | null, headingLine2?: string | null, subheading?: string | null, phoneNumber?: string | null, calloutTitle?: string | null, calloutText?: string | null, imageSrc?: string | null, imageAlt?: string | null, proofs?: Array<{ __typename: 'PageSectionsHeroProofs', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageSectionsServices', eyebrow?: string | null, heading?: string | null, copy?: string | null, disclaimer?: string | null } | { __typename: 'PageSectionsProcess', eyebrow?: string | null, heading?: string | null, copy?: string | null, steps?: Array<{ __typename: 'PageSectionsProcessSteps', number?: string | null, title?: string | null, description?: string | null } | null> | null } | { __typename: 'PageSectionsAbout', eyebrow?: string | null, ownerName?: string | null, nameInitial?: string | null, tagline?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null } | { __typename: 'PageSectionsTestimonials', eyebrow?: string | null, heading?: string | null, copy?: string | null, reviews?: Array<{ __typename: 'PageSectionsTestimonialsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsContact', eyebrow?: string | null, heading?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null } | { __typename: 'PageSectionsFooter', tagline?: string | null } | null> | null };
 
-export type PricingPartsFragment = { __typename: 'Pricing', deep?: { __typename: 'PricingDeep', name?: string | null, description?: string | null, subtitle?: string | null, features?: Array<string | null> | null, prices?: Array<{ __typename: 'PricingDeepPrices', key?: string | null, bedrooms?: string | null, bathrooms?: string | null, cents?: number | null } | null> | null } | null, regular?: { __typename: 'PricingRegular', name?: string | null, description?: string | null, subtitle?: string | null, features?: Array<string | null> | null, prices?: Array<{ __typename: 'PricingRegularPrices', key?: string | null, bedrooms?: string | null, bathrooms?: string | null, cents?: number | null } | null> | null } | null, addOns?: Array<{ __typename: 'PricingAddOns', id?: string | null, name?: string | null, cents?: number | null } | null> | null };
+export type PricingPartsFragment = { __typename: 'Pricing', services?: Array<{ __typename: 'PricingServicesDeep', id: string, name: string, description?: string | null, subtitle?: string | null, features?: Array<string | null> | null, prices?: Array<{ __typename: 'PricingServicesDeepPrices', key?: string | null, bedrooms?: string | null, bathrooms?: string | null, cents?: number | null } | null> | null } | { __typename: 'PricingServicesRegular', id: string, name: string, description?: string | null, subtitle?: string | null, features?: Array<string | null> | null, prices?: Array<{ __typename: 'PricingServicesRegularPrices', key?: string | null, bedrooms?: string | null, bathrooms?: string | null, cents?: number | null } | null> | null } | null> | null, addOns?: Array<{ __typename: 'PricingAddOns', id?: string | null, name?: string | null, cents?: number | null } | null> | null };
 
 export type PageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -747,7 +762,7 @@ export type PricingQueryVariables = Exact<{
 }>;
 
 
-export type PricingQuery = { __typename?: 'Query', pricing: { __typename: 'Pricing', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, deep?: { __typename: 'PricingDeep', name?: string | null, description?: string | null, subtitle?: string | null, features?: Array<string | null> | null, prices?: Array<{ __typename: 'PricingDeepPrices', key?: string | null, bedrooms?: string | null, bathrooms?: string | null, cents?: number | null } | null> | null } | null, regular?: { __typename: 'PricingRegular', name?: string | null, description?: string | null, subtitle?: string | null, features?: Array<string | null> | null, prices?: Array<{ __typename: 'PricingRegularPrices', key?: string | null, bedrooms?: string | null, bathrooms?: string | null, cents?: number | null } | null> | null } | null, addOns?: Array<{ __typename: 'PricingAddOns', id?: string | null, name?: string | null, cents?: number | null } | null> | null } };
+export type PricingQuery = { __typename?: 'Query', pricing: { __typename: 'Pricing', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, services?: Array<{ __typename: 'PricingServicesDeep', id: string, name: string, description?: string | null, subtitle?: string | null, features?: Array<string | null> | null, prices?: Array<{ __typename: 'PricingServicesDeepPrices', key?: string | null, bedrooms?: string | null, bathrooms?: string | null, cents?: number | null } | null> | null } | { __typename: 'PricingServicesRegular', id: string, name: string, description?: string | null, subtitle?: string | null, features?: Array<string | null> | null, prices?: Array<{ __typename: 'PricingServicesRegularPrices', key?: string | null, bedrooms?: string | null, bathrooms?: string | null, cents?: number | null } | null> | null } | null> | null, addOns?: Array<{ __typename: 'PricingAddOns', id?: string | null, name?: string | null, cents?: number | null } | null> | null } };
 
 export type PricingConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -759,7 +774,7 @@ export type PricingConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PricingConnectionQuery = { __typename?: 'Query', pricingConnection: { __typename?: 'PricingConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PricingConnectionEdges', cursor: string, node?: { __typename: 'Pricing', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, deep?: { __typename: 'PricingDeep', name?: string | null, description?: string | null, subtitle?: string | null, features?: Array<string | null> | null, prices?: Array<{ __typename: 'PricingDeepPrices', key?: string | null, bedrooms?: string | null, bathrooms?: string | null, cents?: number | null } | null> | null } | null, regular?: { __typename: 'PricingRegular', name?: string | null, description?: string | null, subtitle?: string | null, features?: Array<string | null> | null, prices?: Array<{ __typename: 'PricingRegularPrices', key?: string | null, bedrooms?: string | null, bathrooms?: string | null, cents?: number | null } | null> | null } | null, addOns?: Array<{ __typename: 'PricingAddOns', id?: string | null, name?: string | null, cents?: number | null } | null> | null } | null } | null> | null } };
+export type PricingConnectionQuery = { __typename?: 'Query', pricingConnection: { __typename?: 'PricingConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PricingConnectionEdges', cursor: string, node?: { __typename: 'Pricing', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, services?: Array<{ __typename: 'PricingServicesDeep', id: string, name: string, description?: string | null, subtitle?: string | null, features?: Array<string | null> | null, prices?: Array<{ __typename: 'PricingServicesDeepPrices', key?: string | null, bedrooms?: string | null, bathrooms?: string | null, cents?: number | null } | null> | null } | { __typename: 'PricingServicesRegular', id: string, name: string, description?: string | null, subtitle?: string | null, features?: Array<string | null> | null, prices?: Array<{ __typename: 'PricingServicesRegularPrices', key?: string | null, bedrooms?: string | null, bathrooms?: string | null, cents?: number | null } | null> | null } | null> | null, addOns?: Array<{ __typename: 'PricingAddOns', id?: string | null, name?: string | null, cents?: number | null } | null> | null } | null } | null> | null } };
 
 export const PagePartsFragmentDoc = gql`
     fragment PageParts on Page {
@@ -836,32 +851,35 @@ export const PagePartsFragmentDoc = gql`
 export const PricingPartsFragmentDoc = gql`
     fragment PricingParts on Pricing {
   __typename
-  deep {
+  services {
     __typename
-    name
-    description
-    subtitle
-    features
-    prices {
-      __typename
-      key
-      bedrooms
-      bathrooms
-      cents
+    ... on PricingServicesDeep {
+      id
+      name
+      description
+      subtitle
+      features
+      prices {
+        __typename
+        key
+        bedrooms
+        bathrooms
+        cents
+      }
     }
-  }
-  regular {
-    __typename
-    name
-    description
-    subtitle
-    features
-    prices {
-      __typename
-      key
-      bedrooms
-      bathrooms
-      cents
+    ... on PricingServicesRegular {
+      id
+      name
+      description
+      subtitle
+      features
+      prices {
+        __typename
+        key
+        bedrooms
+        bathrooms
+        cents
+      }
     }
   }
   addOns {
@@ -1048,7 +1066,7 @@ export const ExperimentalGetTinaClient = () =>
   getSdk(
     generateRequester(
       createClient({
-        url: "https://content.tinajs.io/2.4/content/5f72f69a-7b8c-4a38-a12d-385517cedfdd/github/main",
+        url: "https://content.tinajs.io/2.4/content/local-dev/github/main",
         queries,
       })
     )

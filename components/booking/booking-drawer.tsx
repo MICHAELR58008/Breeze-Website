@@ -9,18 +9,18 @@ import { Input } from "@/components/ui/input"
 import { Progress } from "@/components/ui/progress"
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { Field, FieldDescription, FieldGroup, FieldLabel, FieldLegend, FieldSet } from "@/components/ui/field"
-import { addOnDetails, calculateEstimate, formatPrice, serviceDetails, type AddOn, type ServiceType } from "@/lib/pricing"
+import { findService, calculateEstimate, formatPrice, servicesList, addOnsList } from "@/lib/pricing"
 import { cn } from "@/lib/utils"
 
-const BookingContext = createContext<{ openBooking: (service?: ServiceType) => void }>({ openBooking: () => undefined })
+const BookingContext = createContext<{ openBooking: (service?: string) => void }>({ openBooking: () => undefined })
 export const useBooking = () => useContext(BookingContext)
 
 const stepNames = ["Service", "Home", "Extras", "Photos", "Schedule", "Contact", "Review"]
 const initialState = {
-  serviceType: "deep" as ServiceType,
+  serviceType: "deep",
   bedrooms: 1,
   bathrooms: 1,
-  addOns: [] as AddOn[],
+  addOns: [] as string[],
   preferredDate: "",
   preferredWindow: "flexible",
   name: "",
@@ -42,7 +42,7 @@ export function BookingProvider({ children }: { children: ReactNode }) {
     [data],
   )
 
-  const openBooking = (service?: ServiceType) => {
+  const openBooking = (service?: string) => {
     setData((current) => ({ ...current, ...(service ? { serviceType: service } : {}) }))
     setStartedAt(Date.now())
     setOpen(true)
@@ -58,7 +58,7 @@ export function BookingProvider({ children }: { children: ReactNode }) {
     true,
   ][step]
 
-  const toggleAddOn = (addOn: AddOn) => {
+  const toggleAddOn = (addOn: string) => {
     setData((current) => ({
       ...current,
       addOns: current.addOns.includes(addOn)
@@ -71,7 +71,7 @@ export function BookingProvider({ children }: { children: ReactNode }) {
     event.preventDefault()
     setSubmitting(true)
     const body = new FormData()
-    Object.entries(data).forEach(([key, value]) => body.set(key, key === "addOns" ? JSON.stringify(value) : String(value)))
+    Object.entries(data).forEach(([key, value]) => body.set(key, typeof value === "object" ? JSON.stringify(value) : String(value)))
     body.set("startedAt", String(startedAt))
     body.set("website", "")
     photos.forEach((photo) => body.append("photos", photo))
@@ -94,6 +94,8 @@ export function BookingProvider({ children }: { children: ReactNode }) {
     setComplete(false)
     setOpen(false)
   }
+
+  const selectedService = findService(data.serviceType)
 
   return (
     <BookingContext.Provider value={{ openBooking }}>
@@ -131,10 +133,10 @@ export function BookingProvider({ children }: { children: ReactNode }) {
                 {step === 0 && (
                   <FieldSet><FieldLegend>What kind of clean do you need?</FieldLegend>
                     <div className="grid gap-3">
-                      {(Object.keys(serviceDetails) as ServiceType[]).map((service) => (
-                        <button key={service} type="button" onClick={() => setData({ ...data, serviceType: service })} className={cn("rounded-lg border p-5 text-left transition-colors", data.serviceType === service ? "border-primary bg-primary/10" : "border-border bg-card hover:border-primary/50")}>
-                          <span className="block text-lg font-medium">{serviceDetails[service].name}</span>
-                          <span className="mt-1 block text-sm text-muted-foreground">{serviceDetails[service].description}</span>
+                      {servicesList.map((svc) => (
+                        <button key={svc.id} type="button" onClick={() => setData({ ...data, serviceType: svc.id })} className={cn("rounded-lg border p-5 text-left transition-colors", data.serviceType === svc.id ? "border-primary bg-primary/10" : "border-border bg-card hover:border-primary/50")}>
+                          <span className="block text-lg font-medium">{svc.name}</span>
+                          <span className="mt-1 block text-sm text-muted-foreground">{svc.description}</span>
                         </button>
                       ))}
                     </div>
@@ -150,10 +152,10 @@ export function BookingProvider({ children }: { children: ReactNode }) {
                 {step === 2 && (
                   <FieldSet><FieldLegend>Would you like any extras?</FieldLegend>
                     <div className="flex flex-col gap-3">
-                      {(Object.keys(addOnDetails) as AddOn[]).map((addOn) => (
-                        <Field key={addOn} orientation="horizontal" className="rounded-lg border border-border bg-card p-4">
-                          <Checkbox id={addOn} checked={data.addOns.includes(addOn)} onCheckedChange={() => toggleAddOn(addOn)} />
-                          <FieldLabel htmlFor={addOn} className="flex flex-1 justify-between"><span>{addOnDetails[addOn].name}</span><span className="font-mono text-primary">+{formatPrice(addOnDetails[addOn].price)}</span></FieldLabel>
+                      {addOnsList.map((addOn) => (
+                        <Field key={addOn.id} orientation="horizontal" className="rounded-lg border border-border bg-card p-4">
+                          <Checkbox id={addOn.id} checked={data.addOns.includes(addOn.id)} onCheckedChange={() => toggleAddOn(addOn.id)} />
+                          <FieldLabel htmlFor={addOn.id} className="flex flex-1 justify-between"><span>{addOn.name}</span><span className="font-mono text-primary">+{formatPrice(addOn.cents)}</span></FieldLabel>
                         </Field>
                       ))}
                     </div>
@@ -181,9 +183,9 @@ export function BookingProvider({ children }: { children: ReactNode }) {
                     <Field><FieldLabel htmlFor="phone">Phone</FieldLabel><Input id="phone" type="tel" autoComplete="tel" required value={data.phone} onChange={(e) => setData({ ...data, phone: e.target.value })} /></Field>
                   </FieldGroup>
                 )}
-                {step === 6 && (
+                {step === 6 && selectedService && (
                   <div className="flex flex-col gap-6">
-                    <div><p className="font-mono text-xs uppercase tracking-wider text-muted-foreground">Your request</p><h3 className="mt-2 font-display text-4xl">{serviceDetails[data.serviceType].name}</h3></div>
+                    <div><p className="font-mono text-xs uppercase tracking-wider text-muted-foreground">Your request</p><h3 className="mt-2 font-display text-4xl">{selectedService.name}</h3></div>
                     <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border text-sm">
                       {[['Home', `${data.bedrooms} bed / ${data.bathrooms} bath`], ['Preferred date', data.preferredDate], ['Window', data.preferredWindow], ['Photos', String(photos.length)]].map(([label, value]) => <div key={label} className="bg-card p-4"><dt className="text-muted-foreground">{label}</dt><dd className="mt-1 capitalize">{value}</dd></div>)}
                     </dl>

@@ -1,5 +1,5 @@
 import { Hero, type HeroProps } from "@/components/sections/hero"
-import { Services, type ServicesProps, type ServiceItem } from "@/components/sections/services"
+import { Services, type ServicesProps } from "@/components/sections/services"
 import { Process, type ProcessProps } from "@/components/sections/process"
 import { About, type AboutProps } from "@/components/sections/about"
 import { Testimonials, type TestimonialsProps } from "@/components/sections/testimonials"
@@ -40,7 +40,7 @@ export function renderBlock(block: Block, index: number) {
         <Services
           key={`services-${index}`}
           {...(block as ServicesProps)}
-          serviceDetails={serviceDetails as unknown as Record<string, ServiceItem>}
+          services={Object.values(serviceDetails)}
           addOnDetails={Object.entries(addOnDetails).map(([, v]) => ({
             name: v.name,
             cents: v.price,

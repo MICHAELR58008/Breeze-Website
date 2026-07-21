@@ -244,46 +244,96 @@ var config_default = defineConfig({
         fields: [
           {
             type: "object",
-            name: "deep",
-            label: "Deep Cleaning",
-            fields: [
-              { type: "string", name: "name" },
-              { type: "string", name: "description" },
-              { type: "string", name: "subtitle" },
-              { type: "string", name: "features", list: true },
+            name: "services",
+            label: "Services",
+            description: "Add, remove, and reorder services",
+            list: true,
+            ui: {
+              visualSelector: true
+            },
+            templates: [
               {
-                type: "object",
-                name: "prices",
-                label: "Prices",
-                list: true,
+                name: "deep",
+                label: "Deep Cleaning",
+                ui: {
+                  defaultItem: {
+                    id: "deep",
+                    name: "Deep Cleaning",
+                    description: "A detailed reset for your entire home.",
+                    subtitle: "The complete reset",
+                    features: [
+                      "Full kitchen & bathroom sanitization",
+                      "Baseboards, light fixtures, ceiling fans",
+                      "Inside cabinets & appliances",
+                      "Window sills, door frames, blinds"
+                    ],
+                    prices: [
+                      { key: "1-1", bedrooms: "1", bathrooms: "1", cents: 18e3 },
+                      { key: "2-2", bedrooms: "2", bathrooms: "2", cents: 22e3 },
+                      { key: "3-3", bedrooms: "3", bathrooms: "3", cents: 29e3 }
+                    ]
+                  }
+                },
                 fields: [
-                  { type: "string", name: "key" },
-                  { type: "string", name: "bedrooms" },
-                  { type: "string", name: "bathrooms" },
-                  { type: "number", name: "cents" }
+                  { type: "string", name: "id", required: true },
+                  { type: "string", name: "name", required: true },
+                  { type: "string", name: "description" },
+                  { type: "string", name: "subtitle" },
+                  { type: "string", name: "features", list: true },
+                  {
+                    type: "object",
+                    name: "prices",
+                    label: "Prices",
+                    list: true,
+                    fields: [
+                      { type: "string", name: "key" },
+                      { type: "string", name: "bedrooms" },
+                      { type: "string", name: "bathrooms" },
+                      { type: "number", name: "cents" }
+                    ]
+                  }
                 ]
-              }
-            ]
-          },
-          {
-            type: "object",
-            name: "regular",
-            label: "Regular Cleaning",
-            fields: [
-              { type: "string", name: "name" },
-              { type: "string", name: "description" },
-              { type: "string", name: "subtitle" },
-              { type: "string", name: "features", list: true },
+              },
               {
-                type: "object",
-                name: "prices",
-                label: "Prices",
-                list: true,
+                name: "regular",
+                label: "Regular Cleaning",
+                ui: {
+                  defaultItem: {
+                    id: "regular",
+                    name: "Regular Cleaning",
+                    description: "Consistent care that keeps your home feeling fresh.",
+                    subtitle: "The reliable rhythm",
+                    features: [
+                      "All living areas vacuumed & mopped",
+                      "Kitchen surfaces cleaned & sanitized",
+                      "Bathrooms scrubbed & disinfected",
+                      "General dusting & tidying"
+                    ],
+                    prices: [
+                      { key: "1-1", bedrooms: "1", bathrooms: "1", cents: 13500 },
+                      { key: "2-2", bedrooms: "2", bathrooms: "2", cents: 15e3 },
+                      { key: "3-3", bedrooms: "3", bathrooms: "3", cents: 18e3 }
+                    ]
+                  }
+                },
                 fields: [
-                  { type: "string", name: "key" },
-                  { type: "string", name: "bedrooms" },
-                  { type: "string", name: "bathrooms" },
-                  { type: "number", name: "cents" }
+                  { type: "string", name: "id", required: true },
+                  { type: "string", name: "name", required: true },
+                  { type: "string", name: "description" },
+                  { type: "string", name: "subtitle" },
+                  { type: "string", name: "features", list: true },
+                  {
+                    type: "object",
+                    name: "prices",
+                    label: "Prices",
+                    list: true,
+                    fields: [
+                      { type: "string", name: "key" },
+                      { type: "string", name: "bedrooms" },
+                      { type: "string", name: "bathrooms" },
+                      { type: "number", name: "cents" }
+                    ]
+                  }
                 ]
               }
             ]

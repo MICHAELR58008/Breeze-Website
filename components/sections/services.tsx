@@ -3,7 +3,7 @@
 import { ArrowRight, Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { SectionHeader } from "@/components/sections/shared"
-import { formatPrice, type ServiceType } from "@/lib/pricing"
+import { formatPrice } from "@/lib/pricing"
 import { useBooking } from "@/components/booking/booking-drawer"
 import { tinaField } from "tinacms/dist/tina-field"
 
@@ -15,10 +15,12 @@ export interface PriceEntry {
 }
 
 export interface ServiceItem {
+  _template: string
+  id: string
   name: string
   description: string
+  subtitle: string
   features: string[]
-  subtitle?: string
   prices: PriceEntry[]
 }
 
@@ -27,7 +29,7 @@ export interface ServicesProps {
   heading?: string
   copy?: string
   disclaimer?: string
-  serviceDetails?: Record<string, ServiceItem>
+  services?: ServiceItem[]
   addOnDetails?: Array<{ name: string; cents: number }>
 }
 
@@ -40,9 +42,8 @@ const defaults: ServicesProps = {
 
 export function Services(props: ServicesProps) {
   const { openBooking } = useBooking()
-  const { eyebrow, heading, copy, disclaimer, serviceDetails, addOnDetails } = { ...defaults, ...props }
+  const { eyebrow, heading, copy, disclaimer, services, addOnDetails } = { ...defaults, ...props }
 
-  const serviceEntries = serviceDetails ? Object.entries(serviceDetails) : []
   const defaultAddOns = [
     { name: "Garage clean", cents: 4500 },
     { name: "Oven clean", cents: 3000 },
@@ -62,12 +63,12 @@ export function Services(props: ServicesProps) {
         }}
       />
       
-      {serviceEntries.length > 0 && (
+      {services && services.length > 0 && (
         <div className="grid gap-px border-x border-b border-border bg-border lg:grid-cols-2">
-          {serviceEntries.map(([service, item]) => (
-            <article key={service} className="flex flex-col bg-card p-6 sm:p-10">
+          {services.map((item) => (
+            <article key={item.id} className="flex flex-col bg-card p-6 sm:p-10">
               <span className="font-mono text-xs uppercase tracking-wider text-primary">
-                {service === "deep" ? "The complete reset" : "The reliable rhythm"}
+                {item.subtitle}
               </span>
               <h3 className="mt-4 font-display text-5xl">{item.name}</h3>
               <ul className="my-8 flex flex-col gap-3">
@@ -79,7 +80,7 @@ export function Services(props: ServicesProps) {
                 ))}
               </ul>
               <div className="mt-auto border-t border-border">
-                {(item.prices as PriceEntry[]).map((priceEntry) => {
+                {item.prices.map((priceEntry) => {
                   const [bed, bath] = priceEntry.key.split("-")
                   return (
                     <div key={priceEntry.key} className="flex items-center justify-between border-b border-border py-4">
@@ -91,7 +92,7 @@ export function Services(props: ServicesProps) {
                   )
                 })}
               </div>
-              <Button className="mt-6" variant="outline" onClick={() => openBooking(service as ServiceType)}>
+              <Button className="mt-6" variant="outline" onClick={() => openBooking(item.id)}>
                 Quote this service <ArrowRight data-icon="inline-end" />
               </Button>
             </article>

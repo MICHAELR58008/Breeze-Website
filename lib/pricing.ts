@@ -1,55 +1,78 @@
 import sitePricing from "@/content/pricing/pricing.json"
 
+type PriceEntry = {
+  key: string
+  bedrooms: string
+  bathrooms: string
+  cents: number
+}
+
+type ServiceItemData = {
+  _template: string
+  id: string
+  name: string
+  description: string
+  subtitle: string
+  features: string[]
+  prices: PriceEntry[]
+}
+
+type AddOnData = {
+  id: string
+  name: string
+  cents: number
+}
+
 type PricingData = {
-  deep: {
-    name: string
-    description: string
-    subtitle: string
-    features: string[]
-    prices: { key: string; bedrooms: string; bathrooms: string; cents: number }[]
-  }
-  regular: {
-    name: string
-    description: string
-    subtitle: string
-    features: string[]
-    prices: { key: string; bedrooms: string; bathrooms: string; cents: number }[]
-  }
-  addOns: { id: string; name: string; cents: number }[]
+  services: ServiceItemData[]
+  addOns: AddOnData[]
 }
 
 const data = sitePricing as PricingData
 
-export type ServiceType = keyof typeof data
-export type ServiceTypeEnum = "deep" | "regular"
-export type AddOn = "garage" | "oven" | "fridge"
+export type AddOn = string
 
-export const serviceDetails = {
-  deep: data.deep,
-  regular: data.regular,
+/** Find a service by its unique id */
+export function findService(id: string): ServiceItemData | undefined {
+  return data.services.find((s) => s.id === id)
 }
+
+/** All services as a flat array */
+export const servicesList = data.services
+
+/** All add-ons as a flat array */
+export const addOnsList = data.addOns
+
+/** For backward compatibility — lookup by id */
+export const serviceDetails = data.services.reduce(
+  (acc, svc) => {
+    acc[svc.id] = svc
+    return acc
+  },
+  {} as Record<string, ServiceItemData>,
+)
 
 export const addOnDetails = data.addOns.reduce(
   (acc, addon) => {
-    acc[addon.id as AddOn] = { name: addon.name, price: addon.cents }
+    acc[addon.id] = { name: addon.name, price: addon.cents }
     return acc
   },
-  {} as Record<AddOn, { name: string; price: number }>,
+  {} as Record<string, { name: string; price: number }>,
 )
 
 export function calculateEstimate(
-  service: ServiceTypeEnum,
+  serviceId: string,
   bedrooms: number,
   bathrooms: number,
-  addOns: AddOn[],
+  selectedAddOns: string[],
 ): number | null {
-  const svc = data[service]
+  const svc = findService(serviceId)
   if (!svc) return null
   const key = `${bedrooms}-${bathrooms}`
-  const priceEntry = svc.prices.find((p) => p.key === key)
+  const priceEntry = svc.prices.find((p: PriceEntry) => p.key === key)
   if (!priceEntry) return null
   const base = priceEntry.cents
-  const addOnTotal = addOns.reduce((sum, id) => {
+  const addOnTotal = selectedAddOns.reduce((sum, id) => {
     const addon = data.addOns.find((a) => a.id === id)
     return sum + (addon?.cents ?? 0)
   }, 0)

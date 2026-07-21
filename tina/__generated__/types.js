@@ -80,32 +80,35 @@ export const PagePartsFragmentDoc = gql`
 export const PricingPartsFragmentDoc = gql`
     fragment PricingParts on Pricing {
   __typename
-  deep {
+  services {
     __typename
-    name
-    description
-    subtitle
-    features
-    prices {
-      __typename
-      key
-      bedrooms
-      bathrooms
-      cents
+    ... on PricingServicesDeep {
+      id
+      name
+      description
+      subtitle
+      features
+      prices {
+        __typename
+        key
+        bedrooms
+        bathrooms
+        cents
+      }
     }
-  }
-  regular {
-    __typename
-    name
-    description
-    subtitle
-    features
-    prices {
-      __typename
-      key
-      bedrooms
-      bathrooms
-      cents
+    ... on PricingServicesRegular {
+      id
+      name
+      description
+      subtitle
+      features
+      prices {
+        __typename
+        key
+        bedrooms
+        bathrooms
+        cents
+      }
     }
   }
   addOns {
@@ -266,7 +269,7 @@ const generateRequester = (client) => {
 export const ExperimentalGetTinaClient = () => getSdk(
   generateRequester(
     createClient({
-      url: "https://content.tinajs.io/2.4/content/5f72f69a-7b8c-4a38-a12d-385517cedfdd/github/main",
+      url: "https://content.tinajs.io/2.4/content/local-dev/github/main",
       queries
     })
   )

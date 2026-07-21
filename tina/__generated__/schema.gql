@@ -286,35 +286,39 @@ type PageConnection implements Connection {
   edges: [PageConnectionEdges]
 }
 
-type PricingDeepPrices {
+type PricingServicesDeepPrices {
   key: String
   bedrooms: String
   bathrooms: String
   cents: Float
 }
 
-type PricingDeep {
-  name: String
+type PricingServicesDeep {
+  id: String!
+  name: String!
   description: String
   subtitle: String
   features: [String]
-  prices: [PricingDeepPrices]
+  prices: [PricingServicesDeepPrices]
 }
 
-type PricingRegularPrices {
+type PricingServicesRegularPrices {
   key: String
   bedrooms: String
   bathrooms: String
   cents: Float
 }
 
-type PricingRegular {
-  name: String
+type PricingServicesRegular {
+  id: String!
+  name: String!
   description: String
   subtitle: String
   features: [String]
-  prices: [PricingRegularPrices]
+  prices: [PricingServicesRegularPrices]
 }
+
+union PricingServices = PricingServicesDeep | PricingServicesRegular
 
 type PricingAddOns {
   id: String
@@ -323,8 +327,7 @@ type PricingAddOns {
 }
 
 type Pricing implements Node & Document {
-  deep: PricingDeep
-  regular: PricingRegular
+  services: [PricingServices]
   addOns: [PricingAddOns]
   id: ID!
   _sys: SystemInfo!
@@ -341,34 +344,41 @@ input NumberFilter {
   in: [Float]
 }
 
-input PricingDeepPricesFilter {
+input PricingServicesDeepPricesFilter {
   key: StringFilter
   bedrooms: StringFilter
   bathrooms: StringFilter
   cents: NumberFilter
 }
 
-input PricingDeepFilter {
+input PricingServicesDeepFilter {
+  id: StringFilter
   name: StringFilter
   description: StringFilter
   subtitle: StringFilter
   features: StringFilter
-  prices: PricingDeepPricesFilter
+  prices: PricingServicesDeepPricesFilter
 }
 
-input PricingRegularPricesFilter {
+input PricingServicesRegularPricesFilter {
   key: StringFilter
   bedrooms: StringFilter
   bathrooms: StringFilter
   cents: NumberFilter
 }
 
-input PricingRegularFilter {
+input PricingServicesRegularFilter {
+  id: StringFilter
   name: StringFilter
   description: StringFilter
   subtitle: StringFilter
   features: StringFilter
-  prices: PricingRegularPricesFilter
+  prices: PricingServicesRegularPricesFilter
+}
+
+input PricingServicesFilter {
+  deep: PricingServicesDeepFilter
+  regular: PricingServicesRegularFilter
 }
 
 input PricingAddOnsFilter {
@@ -378,8 +388,7 @@ input PricingAddOnsFilter {
 }
 
 input PricingFilter {
-  deep: PricingDeepFilter
-  regular: PricingRegularFilter
+  services: PricingServicesFilter
   addOns: PricingAddOnsFilter
 }
 
@@ -505,34 +514,41 @@ input PageMutation {
   sections: [PageSectionsMutation]
 }
 
-input PricingDeepPricesMutation {
+input PricingServicesDeepPricesMutation {
   key: String
   bedrooms: String
   bathrooms: String
   cents: Float
 }
 
-input PricingDeepMutation {
+input PricingServicesDeepMutation {
+  id: String
   name: String
   description: String
   subtitle: String
   features: [String]
-  prices: [PricingDeepPricesMutation]
+  prices: [PricingServicesDeepPricesMutation]
 }
 
-input PricingRegularPricesMutation {
+input PricingServicesRegularPricesMutation {
   key: String
   bedrooms: String
   bathrooms: String
   cents: Float
 }
 
-input PricingRegularMutation {
+input PricingServicesRegularMutation {
+  id: String
   name: String
   description: String
   subtitle: String
   features: [String]
-  prices: [PricingRegularPricesMutation]
+  prices: [PricingServicesRegularPricesMutation]
+}
+
+input PricingServicesMutation {
+  deep: PricingServicesDeepMutation
+  regular: PricingServicesRegularMutation
 }
 
 input PricingAddOnsMutation {
@@ -542,8 +558,7 @@ input PricingAddOnsMutation {
 }
 
 input PricingMutation {
-  deep: PricingDeepMutation
-  regular: PricingRegularMutation
+  services: [PricingServicesMutation]
   addOns: [PricingAddOnsMutation]
 }
 

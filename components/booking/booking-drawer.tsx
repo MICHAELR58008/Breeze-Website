@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useMemo, useState, type FormEvent, type ReactNode } from "react"
+import { createContext, useContext, useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react"
 import { ArrowLeft, ArrowRight, CalendarDays, Check, ImagePlus, Loader2, Sparkles } from "lucide-react"
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
@@ -37,12 +37,31 @@ export function BookingProvider({ children }: { children: ReactNode }) {
   const [submitting, setSubmitting] = useState(false)
   const [complete, setComplete] = useState(false)
 
+  // DEBUG: trace clicks inside the dialog
+  useEffect(() => {
+    if (!open) return
+    const handler = (e: MouseEvent) => {
+      const dialog = document.querySelector('[role="dialog"]')
+      const isInDialog = dialog?.contains(e.target as Node)
+      if (isInDialog) {
+        console.log('[DEBUG] Event on dialog:', e.type, 'target:', (e.target as Element)?.tagName, 'isTrusted:', e.isTrusted)
+      }
+    }
+    document.addEventListener('mousedown', handler, true)
+    document.addEventListener('click', handler, true)
+    return () => {
+      document.removeEventListener('mousedown', handler, true)
+      document.removeEventListener('click', handler, true)
+    }
+  }, [open])
+
   const estimate = useMemo(
     () => calculateEstimate(data.serviceType, data.bedrooms, data.bathrooms, data.addOns),
     [data],
   )
 
   const openBooking = (service?: string) => {
+    console.log('[DEBUG] openBooking called with:', service, '| isTrusted:', typeof window !== 'undefined' && window.event ? (window.event as Event).isTrusted : 'N/A')
     setData((current) => ({ ...current, ...(service ? { serviceType: service } : {}) }))
     setStartedAt(Date.now())
     setOpen(true)

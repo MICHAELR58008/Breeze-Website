@@ -1,19 +1,38 @@
 import { client } from "@/tina/__generated__/client"
 import { type Block, defaultBlocks } from "@/lib/page-sections"
 
+export interface TinaResult {
+  data: any
+  query: string
+  variables: { relativePath: string }
+}
+
+export interface PageData {
+  tina: TinaResult | null
+  sections: Block[]
+}
+
 /**
- * Fetch page sections from TinaCMS.
- * Returns default blocks if TinaCloud is not configured.
+ * Fetch page data from TinaCMS.
+ * Returns the raw GraphQL result (for useTina) and extracted sections.
+ * Falls back to defaultBlocks when Tina is unavailable.
  */
-export async function fetchPageSections(): Promise<Block[]> {
+export async function fetchPageData(): Promise<PageData> {
   try {
-    // Always try the Tina client — works locally with `tinacms dev`
-    // and in production with real TinaCloud credentials
     const result = await client.queries.page({ relativePath: "page.json" })
     const data = result.data as any
-    return data.page.sections as Block[]
+    return {
+      tina: {
+        data: result.data,
+        query: result.query,
+        variables: { relativePath: "page.json" },
+      },
+      sections: (data.page?.sections as Block[]) || defaultBlocks,
+    }
   } catch {
-    // No CMS available — return hardcoded defaults
-    return defaultBlocks
+    return {
+      tina: null,
+      sections: defaultBlocks,
+    }
   }
 }

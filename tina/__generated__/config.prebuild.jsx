@@ -23,6 +23,7 @@ var config_default = defineConfig({
         path: "content/page",
         format: "json",
         ui: {
+          router: () => "/",
           allowedActions: {
             create: false,
             delete: false

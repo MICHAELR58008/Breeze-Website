@@ -1,14 +1,19 @@
 import { BookingProvider } from "@/components/booking/booking-drawer"
 import { BreezeSite } from "@/components/breeze-site"
-import { fetchPageSections } from "@/lib/queries"
+import { HomePageClient } from "./page-client"
+import { fetchPageData } from "@/lib/queries"
 
 export default async function Home() {
-  const sections = await fetchPageSections()
+  const { tina, sections } = await fetchPageData()
 
   return (
     <BookingProvider>
       <main className="min-h-screen overflow-x-hidden">
-        <BreezeSite sections={sections} />
+        {tina ? (
+          <HomePageClient tina={tina} />
+        ) : (
+          <BreezeSite sections={sections} />
+        )}
       </main>
     </BookingProvider>
   )

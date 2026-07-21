@@ -15,7 +15,8 @@ fragment PageParts on Page {
         value
         label
       }
-      heroImage
+      imageSrc
+      imageAlt
     }
     ... on PageSectionsServices {
       eyebrow

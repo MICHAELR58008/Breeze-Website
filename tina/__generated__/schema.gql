@@ -104,7 +104,8 @@ type PageSectionsHero {
   calloutTitle: String
   calloutText: String
   proofs: [PageSectionsHeroProofs]
-  heroImage: String
+  imageSrc: String
+  imageAlt: String
 }
 
 type PageSectionsServices {
@@ -200,7 +201,8 @@ input PageSectionsHeroFilter {
   calloutTitle: StringFilter
   calloutText: StringFilter
   proofs: PageSectionsHeroProofsFilter
-  heroImage: ImageFilter
+  imageSrc: ImageFilter
+  imageAlt: StringFilter
 }
 
 input PageSectionsServicesFilter {
@@ -429,7 +431,8 @@ input PageSectionsHeroMutation {
   calloutTitle: String
   calloutText: String
   proofs: [PageSectionsHeroProofsMutation]
-  heroImage: String
+  imageSrc: String
+  imageAlt: String
 }
 
 input PageSectionsServicesMutation {

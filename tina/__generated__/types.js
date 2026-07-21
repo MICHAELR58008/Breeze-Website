@@ -23,7 +23,8 @@ export const PagePartsFragmentDoc = gql`
         value
         label
       }
-      heroImage
+      imageSrc
+      imageAlt
     }
     ... on PageSectionsServices {
       eyebrow

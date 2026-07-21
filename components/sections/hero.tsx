@@ -96,7 +96,7 @@ export function Hero(props: HeroProps) {
         </div>
         <div className="relative min-h-[420px] border-r border-border lg:col-span-5">
           <Image
-            data-tina-field={tinaField(props, "heroImage")}
+            data-tina-field={tinaField(props, "imageSrc")}
             src={imageSrc || ""}
             alt={imageAlt || ""}
             fill

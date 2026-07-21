@@ -66,7 +66,8 @@ export default defineConfig({
                       { value: "Local", label: "Owner-led team" },
                       { value: "Free", label: "Personalized quote" },
                     ],
-                    heroImage: "/images/breeze-clean-home.png",
+                    imageSrc: "/images/breeze-clean-home.png",
+                    imageAlt: "A bright, professionally cleaned modern home",
                   },
                 },
                 fields: [
@@ -87,7 +88,8 @@ export default defineConfig({
                       { type: "string", name: "label" },
                     ],
                   },
-                  { type: "image", name: "heroImage", label: "Hero Image" },
+                  { type: "image", name: "imageSrc", label: "Hero Image" },
+                  { type: "string", name: "imageAlt", label: "Image Alt Text" },
                 ],
               },
               {

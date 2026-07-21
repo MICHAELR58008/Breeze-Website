@@ -113,7 +113,8 @@ export const defaultBlocks: Block[] = [
       { value: "Local", label: "Owner-led team" },
       { value: "Free", label: "Personalized quote" },
     ],
-    heroImage: "/images/breeze-clean-home.png",
+    imageSrc: "/images/breeze-clean-home.png",
+    imageAlt: "A bright, professionally cleaned modern home",
   } as HeroProps & { _template: "hero" },
   {
     _template: "services",

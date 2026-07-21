@@ -16,7 +16,12 @@ export function HomePageClient({ tina }: HomePageClientProps) {
     data: tina.data,
   })
 
-  const sections = ((data as any)?.page?.sections as Block[]) || []
+  // Normalize __typename → _template so renderBlock works with both
+  const rawSections = ((data as any)?.page?.sections as any[]) || []
+  const sections: Block[] = rawSections.map((s: any) => ({
+    ...s,
+    _template: s._template || s.__typename?.replace("PageSections", "").toLowerCase(),
+  }))
 
   return <BreezeSite sections={sections} />
 }

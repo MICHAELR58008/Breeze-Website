@@ -18,10 +18,21 @@ export type Block =
   | ({ _template: "contact" } & ContactProps)
   | ({ _template: "footer" } & FooterProps)
 
+/* ── Helper: get template name from either _template or __typename ── */
+
+function getTemplate(block: any): string | undefined {
+  if (block._template) return block._template
+  if (block.__typename?.startsWith("PageSections")) {
+    return block.__typename.replace("PageSections", "").toLowerCase()
+  }
+  return undefined
+}
+
 /* ── Block renderer ── */
 
 export function renderBlock(block: Block, index: number) {
-  switch (block._template) {
+  const template = getTemplate(block)
+  switch (template) {
     case "hero":
       return <Hero key={`hero-${index}`} {...(block as HeroProps)} />
     case "services":
@@ -71,12 +82,18 @@ const sectionLabels: Record<string, string> = {
 
 export function buildNavLinks(sections: Block[]): NavEntry[] {
   return sections
-    .filter((s) => sectionLabels[s._template])
-    .map((s) => ({
-      id: s._template,
-      label: sectionLabels[s._template],
-      href: `#${s._template}`,
-    }))
+    .filter((s) => {
+      const t = getTemplate(s)
+      return t ? sectionLabels[t] : false
+    })
+    .map((s) => {
+      const t = getTemplate(s)!
+      return {
+        id: t,
+        label: sectionLabels[t],
+        href: `#${t}`,
+      }
+    })
 }
 
 /* ── Default blocks for fallback (no Tina credentials) ── */

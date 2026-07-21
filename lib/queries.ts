@@ -27,7 +27,10 @@ export async function fetchPageData(): Promise<PageData> {
         query: result.query,
         variables: { relativePath: "page.json" },
       },
-      sections: (data.page?.sections as Block[]) || defaultBlocks,
+      sections: ((data.page?.sections as any[]) || []).map((s: any) => ({
+        ...s,
+        _template: s._template || s.__typename?.replace("PageSections", "").toLowerCase(),
+      })) as Block[],
     }
   } catch {
     return {

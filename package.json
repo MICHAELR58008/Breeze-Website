@@ -6,9 +6,9 @@
     "dev": "next dev",
     "dev:tina": "tinacms dev -c \"next dev\"",
     "build": "next build",
-    "build:tina": "tinacms build && next build",
+    "build:tina": "tinacms build --skip-cloud-checks && next build",
     "start": "next start",
-    "start:tina": "tinacms build && next start",
+    "start:tina": "tinacms build --skip-cloud-checks && next start",
     "lint": "eslint ."
   },
   "dependencies": {

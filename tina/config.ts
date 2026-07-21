@@ -244,6 +244,7 @@ export default defineConfig({
         path: "content/pricing",
         format: "json",
         ui: {
+          router: () => "/#services",
           allowedActions: {
             create: false,
             delete: false,

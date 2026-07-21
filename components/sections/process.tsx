@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { SectionHeader } from "@/components/sections/shared"
 import { useBooking } from "@/components/booking/booking-drawer"
+import { tinaField } from "tinacms/dist/tina-field"
 
 export interface ProcessStep {
   number: string
@@ -37,8 +38,17 @@ export function Process(props: ProcessProps) {
   return (
     <section id="process" className="border-y border-border bg-card">
       <div className="mx-auto max-w-[1400px] border-x border-border px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
-        <SectionHeader eyebrow={eyebrow || ""} title={heading || ""} copy={copy || ""} />
-        <div className="grid gap-px border-x border-b border-border bg-border md:grid-cols-2 lg:grid-cols-4">
+        <SectionHeader
+          eyebrow={eyebrow || ""}
+          title={heading || ""}
+          copy={copy || ""}
+          tinaFields={{
+            eyebrow: tinaField(props, "eyebrow"),
+            title: tinaField(props, "heading"),
+            copy: tinaField(props, "copy"),
+          }}
+        />
+        <div data-tina-field={tinaField(props, "steps")} className="grid gap-px border-x border-b border-border bg-border md:grid-cols-2 lg:grid-cols-4">
           {(steps || []).map((step) => (
             <article key={step.number} className="flex min-h-72 flex-col bg-card p-6">
               <span className="font-mono text-xs text-primary">{step.number}</span>

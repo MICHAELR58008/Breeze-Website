@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { SectionHeader } from "@/components/sections/shared"
 import { formatPrice, type ServiceType } from "@/lib/pricing"
 import { useBooking } from "@/components/booking/booking-drawer"
+import { tinaField } from "tinacms/dist/tina-field"
 
 export interface PriceEntry {
   key: string
@@ -50,7 +51,16 @@ export function Services(props: ServicesProps) {
 
   return (
     <section id="services" className="mx-auto max-w-[1400px] border-x border-border px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
-      <SectionHeader eyebrow={eyebrow || ""} title={heading || ""} copy={copy || ""} />
+      <SectionHeader
+        eyebrow={eyebrow || ""}
+        title={heading || ""}
+        copy={copy || ""}
+        tinaFields={{
+          eyebrow: tinaField(props, "eyebrow"),
+          title: tinaField(props, "heading"),
+          copy: tinaField(props, "copy"),
+        }}
+      />
       
       {serviceEntries.length > 0 && (
         <div className="grid gap-px border-x border-b border-border bg-border lg:grid-cols-2">
@@ -102,7 +112,7 @@ export function Services(props: ServicesProps) {
         </div>
       )}
 
-      <div className="mt-6 border-l-2 border-accent bg-accent/5 p-5 text-sm leading-relaxed text-muted-foreground">
+      <div data-tina-field={tinaField(props, "disclaimer")} className="mt-6 border-l-2 border-accent bg-accent/5 p-5 text-sm leading-relaxed text-muted-foreground">
         <strong className="text-foreground">A free quote is required</strong> — {disclaimer}
       </div>
     </section>

@@ -3,6 +3,7 @@
 import { ArrowRight, Clock3, Mail, MapPin, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useBooking } from "@/components/booking/booking-drawer"
+import { tinaField } from "tinacms/dist/tina-field"
 
 export interface ContactDetail {
   icon: string
@@ -39,32 +40,32 @@ export function Contact(props: ContactProps) {
     ...props,
   }
 
-  const details: Array<{ icon: typeof MapPin; label: string; href: string }> = [
-    { icon: MapPin, label: address || "", href: "#" },
-    { icon: Phone, label: phone || "", href: phoneHref || "" },
-    { icon: Mail, label: email || "", href: emailHref || "" },
-    { icon: Clock3, label: hours || "", href: "#" },
+  const details: Array<{ icon: typeof MapPin; label: string; href: string; field: string }> = [
+    { icon: MapPin, label: address || "", href: "#", field: "address" },
+    { icon: Phone, label: phone || "", href: phoneHref || "", field: "phone" },
+    { icon: Mail, label: email || "", href: emailHref || "", field: "email" },
+    { icon: Clock3, label: hours || "", href: "#", field: "hours" },
   ]
 
   return (
     <section id="contact" className="mx-auto max-w-[1400px] border-x border-border px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
       <div className="grid gap-12 lg:grid-cols-12">
         <div className="lg:col-span-7">
-          <p className="mb-5 font-mono text-xs uppercase tracking-widest text-primary">{eyebrow}</p>
-          <h2 className="text-balance font-display text-6xl leading-none sm:text-8xl lg:text-9xl">{heading}</h2>
+          <p data-tina-field={tinaField(props, "eyebrow")} className="mb-5 font-mono text-xs uppercase tracking-widest text-primary">{eyebrow}</p>
+          <h2 data-tina-field={tinaField(props, "heading")} className="text-balance font-display text-6xl leading-none sm:text-8xl lg:text-9xl">{heading}</h2>
           <Button className="mt-8" size="lg" onClick={() => openBooking()}>
             Start your free quote <ArrowRight data-icon="inline-end" />
           </Button>
         </div>
         <div className="flex flex-col justify-end gap-3 lg:col-span-5">
-          {details.map(({ icon: Icon, label, href }) => (
+          {details.map(({ icon: Icon, label, href, field }) => (
             <a
               key={String(label)}
               href={href}
               className="flex items-center gap-4 border-b border-border py-5 text-muted-foreground transition-colors hover:text-foreground"
             >
               <Icon className="size-5 text-primary" aria-hidden="true" />
-              <span>{String(label)}</span>
+              <span data-tina-field={tinaField(props, field)}>{String(label)}</span>
             </a>
           ))}
         </div>

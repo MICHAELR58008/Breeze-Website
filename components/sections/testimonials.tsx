@@ -1,6 +1,7 @@
 "use client"
 
 import { SectionHeader } from "@/components/sections/shared"
+import { tinaField } from "tinacms/dist/tina-field"
 
 export interface TestimonialReview {
   quote: string
@@ -31,8 +32,17 @@ export function Testimonials(props: TestimonialsProps) {
   return (
     <section id="reviews" className="border-y border-border bg-card">
       <div className="mx-auto max-w-[1400px] border-x border-border px-5 py-24 sm:px-8 lg:px-12">
-        <SectionHeader eyebrow={eyebrow || ""} title={heading || ""} copy={copy || ""} />
-        <div className="grid gap-px border border-border bg-border lg:grid-cols-3">
+        <SectionHeader
+          eyebrow={eyebrow || ""}
+          title={heading || ""}
+          copy={copy || ""}
+          tinaFields={{
+            eyebrow: tinaField(props, "eyebrow"),
+            title: tinaField(props, "heading"),
+            copy: tinaField(props, "copy"),
+          }}
+        />
+        <div data-tina-field={tinaField(props, "reviews")} className="grid gap-px border border-border bg-border lg:grid-cols-3">
           {(reviews || []).map((review) => (
             <figure key={review.quote} className="flex min-h-64 flex-col justify-between bg-card p-6 sm:p-8">
               <div className="flex gap-1 text-accent" aria-label="5 out of 5 stars">

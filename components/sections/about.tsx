@@ -1,5 +1,7 @@
 "use client"
 
+import { tinaField } from "tinacms/dist/tina-field"
+
 export interface AboutProps {
   eyebrow?: string
   ownerName?: string
@@ -31,17 +33,17 @@ export function About(props: AboutProps) {
       <div className="relative min-h-[440px] overflow-hidden border-b border-border bg-primary p-8 text-primary-foreground lg:col-span-5 lg:border-b-0 lg:border-r">
         <div className="grid-surface absolute inset-0 opacity-15" />
         <div className="relative flex h-full flex-col justify-between">
-          <p className="font-mono text-xs uppercase tracking-widest">{eyebrow}</p>
+          <p data-tina-field={tinaField(props, "eyebrow")} className="font-mono text-xs uppercase tracking-widest">{eyebrow}</p>
           <div>
-            <p className="font-display text-[9rem] leading-none">{nameInitial}</p>
-            <p className="text-sm">{tagline}</p>
+            <p data-tina-field={tinaField(props, "nameInitial")} className="font-display text-[9rem] leading-none">{nameInitial}</p>
+            <p data-tina-field={tinaField(props, "tagline")} className="text-sm">{tagline}</p>
           </div>
         </div>
       </div>
       <div className="flex flex-col justify-center gap-7 p-6 sm:p-10 lg:col-span-7 lg:p-16">
-        <h2 className="font-display text-6xl sm:text-8xl">{ownerName}</h2>
-        <p className="text-pretty text-lg leading-relaxed text-muted-foreground">{bioParagraph1}</p>
-        <p className="text-pretty text-lg leading-relaxed">{bioParagraph2}</p>
+        <h2 data-tina-field={tinaField(props, "ownerName")} className="font-display text-6xl sm:text-8xl">{ownerName}</h2>
+        <p data-tina-field={tinaField(props, "bioParagraph1")} className="text-pretty text-lg leading-relaxed text-muted-foreground">{bioParagraph1}</p>
+        <p data-tina-field={tinaField(props, "bioParagraph2")} className="text-pretty text-lg leading-relaxed">{bioParagraph2}</p>
       </div>
     </section>
   )

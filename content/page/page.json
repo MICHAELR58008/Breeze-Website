@@ -1,0 +1,74 @@
+{
+  "sections": [
+    {
+      "_template": "hero",
+      "location": "Ventura County, CA",
+      "headingLine1": "A cleaner home.",
+      "headingLine2": "A lighter life.",
+      "subheading": "Professional Cleaning Services",
+      "phoneNumber": "(805) 760-8765",
+      "calloutTitle": "Care you can feel",
+      "calloutText": "Every surface considered. Every room treated like our own.",
+      "proofs": [
+        { "value": "24 hr", "label": "Response time" },
+        { "value": "Local", "label": "Owner-led team" },
+        { "value": "Free", "label": "Personalized quote" }
+      ],
+      "heroImage": "/images/breeze-clean-home.png"
+    },
+    {
+      "_template": "services",
+      "eyebrow": "01 / Our services",
+      "heading": "Clean, your way.",
+      "copy": "Professional cleaning tailored to your home — because your time matters.",
+      "disclaimer": "either through an in-person visit or by sending 3–5 photos/videos. This ensures you receive a fair and accurate price."
+    },
+    {
+      "_template": "process",
+      "eyebrow": "02 / How it works",
+      "heading": "Simple from start to shine.",
+      "copy": "A compact quote flow designed around your home—not a generic one-price-fits-all form.",
+      "steps": [
+        { "number": "01", "title": "Choose your clean", "description": "Select deep or regular cleaning, then tell us about your bedrooms and bathrooms." },
+        { "number": "02", "title": "Share the details", "description": "Add extras and, if you would like, securely upload photos for a more accurate quote." },
+        { "number": "03", "title": "Request a time", "description": "Pick your preferred date and a morning, afternoon, or flexible time window." },
+        { "number": "04", "title": "We confirm", "description": "Breeze reviews your request and gets back to you within 24 hours with availability and final pricing." }
+      ]
+    },
+    {
+      "_template": "about",
+      "eyebrow": "03 / Meet the owner",
+      "ownerName": "Evelyn Rivas",
+      "nameInitial": "E",
+      "tagline": "Owner-led care in Ventura County.",
+      "bioParagraph1": "Evelyn started Breeze because she believes a clean home shouldn't feel like a luxury. Based in Ventura County, she and her team treat every home like their own — with care, attention to detail, and a genuine pride in making spaces shine.",
+      "bioParagraph2": "When you book with Breeze, you're not just getting a clean home — you're getting someone who truly cares about getting it right."
+    },
+    {
+      "_template": "testimonials",
+      "eyebrow": "04 / Testimonials",
+      "heading": "Care that shows.",
+      "copy": "This section is ready for your real customer feedback. The reviews below are clearly labeled sample content.",
+      "reviews": [
+        { "quote": "The house felt completely refreshed, and every detail was handled with care.", "byline": "Sample review · Replace with customer name" },
+        { "quote": "Clear communication, thoughtful service, and a result we were proud to come home to.", "byline": "Sample review · Replace with customer name" },
+        { "quote": "Breeze made the whole process feel easy from the first quote to the final walkthrough.", "byline": "Sample review · Replace with customer name" }
+      ]
+    },
+    {
+      "_template": "contact",
+      "eyebrow": "05 / Get in touch",
+      "heading": "We'd love to hear from you.",
+      "address": "Ventura County, CA",
+      "phone": "(805) 760-8765",
+      "phoneHref": "tel:+18057608765",
+      "email": "sacrementado27@gmail.com",
+      "emailHref": "mailto:sacrementado27@gmail.com",
+      "hours": "We reply within 24 hours"
+    },
+    {
+      "_template": "footer",
+      "tagline": "Professional cleaning services in Ventura County, California."
+    }
+  ]
+}

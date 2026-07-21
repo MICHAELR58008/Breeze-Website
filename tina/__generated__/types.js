@@ -1,0 +1,276 @@
+export function gql(strings, ...args) {
+  let str = "";
+  strings.forEach((string, i) => {
+    str += string + (args[i] || "");
+  });
+  return str;
+}
+export const PagePartsFragmentDoc = gql`
+    fragment PageParts on Page {
+  __typename
+  sections {
+    __typename
+    ... on PageSectionsHero {
+      location
+      headingLine1
+      headingLine2
+      subheading
+      phoneNumber
+      calloutTitle
+      calloutText
+      proofs {
+        __typename
+        value
+        label
+      }
+      heroImage
+    }
+    ... on PageSectionsServices {
+      eyebrow
+      heading
+      copy
+      disclaimer
+    }
+    ... on PageSectionsProcess {
+      eyebrow
+      heading
+      copy
+      steps {
+        __typename
+        number
+        title
+        description
+      }
+    }
+    ... on PageSectionsAbout {
+      eyebrow
+      ownerName
+      nameInitial
+      tagline
+      bioParagraph1
+      bioParagraph2
+    }
+    ... on PageSectionsTestimonials {
+      eyebrow
+      heading
+      copy
+      reviews {
+        __typename
+        quote
+        byline
+      }
+    }
+    ... on PageSectionsContact {
+      eyebrow
+      heading
+      address
+      phone
+      phoneHref
+      email
+      emailHref
+      hours
+    }
+    ... on PageSectionsFooter {
+      tagline
+    }
+  }
+}
+    `;
+export const PricingPartsFragmentDoc = gql`
+    fragment PricingParts on Pricing {
+  __typename
+  deep {
+    __typename
+    name
+    description
+    subtitle
+    features
+    prices {
+      __typename
+      key
+      bedrooms
+      bathrooms
+      cents
+    }
+  }
+  regular {
+    __typename
+    name
+    description
+    subtitle
+    features
+    prices {
+      __typename
+      key
+      bedrooms
+      bathrooms
+      cents
+    }
+  }
+  addOns {
+    __typename
+    id
+    name
+    cents
+  }
+}
+    `;
+export const PageDocument = gql`
+    query page($relativePath: String!) {
+  page(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...PageParts
+  }
+}
+    ${PagePartsFragmentDoc}`;
+export const PageConnectionDocument = gql`
+    query pageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PageFilter) {
+  pageConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...PageParts
+      }
+    }
+  }
+}
+    ${PagePartsFragmentDoc}`;
+export const PricingDocument = gql`
+    query pricing($relativePath: String!) {
+  pricing(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...PricingParts
+  }
+}
+    ${PricingPartsFragmentDoc}`;
+export const PricingConnectionDocument = gql`
+    query pricingConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PricingFilter) {
+  pricingConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...PricingParts
+      }
+    }
+  }
+}
+    ${PricingPartsFragmentDoc}`;
+export function getSdk(requester) {
+  return {
+    page(variables, options) {
+      return requester(PageDocument, variables, options);
+    },
+    pageConnection(variables, options) {
+      return requester(PageConnectionDocument, variables, options);
+    },
+    pricing(variables, options) {
+      return requester(PricingDocument, variables, options);
+    },
+    pricingConnection(variables, options) {
+      return requester(PricingConnectionDocument, variables, options);
+    }
+  };
+}
+import { createClient } from "tinacms/dist/client";
+const generateRequester = (client) => {
+  const requester = async (doc, vars, options) => {
+    let url = client.apiUrl;
+    if (options?.branch) {
+      const index = client.apiUrl.lastIndexOf("/");
+      url = client.apiUrl.substring(0, index + 1) + options.branch;
+    }
+    const data = await client.request({
+      query: doc,
+      variables: vars,
+      url
+    }, options);
+    return { data: data?.data, errors: data?.errors, query: doc, variables: vars || {} };
+  };
+  return requester;
+};
+export const ExperimentalGetTinaClient = () => getSdk(
+  generateRequester(
+    createClient({
+      url: "http://localhost:4001/graphql",
+      queries
+    })
+  )
+);
+export const queries = (client) => {
+  const requester = generateRequester(client);
+  return getSdk(requester);
+};

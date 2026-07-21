@@ -1,0 +1,107 @@
+fragment PageParts on Page {
+  __typename
+  sections {
+    __typename
+    ... on PageSectionsHero {
+      location
+      headingLine1
+      headingLine2
+      subheading
+      phoneNumber
+      calloutTitle
+      calloutText
+      proofs {
+        __typename
+        value
+        label
+      }
+      heroImage
+    }
+    ... on PageSectionsServices {
+      eyebrow
+      heading
+      copy
+      disclaimer
+    }
+    ... on PageSectionsProcess {
+      eyebrow
+      heading
+      copy
+      steps {
+        __typename
+        number
+        title
+        description
+      }
+    }
+    ... on PageSectionsAbout {
+      eyebrow
+      ownerName
+      nameInitial
+      tagline
+      bioParagraph1
+      bioParagraph2
+    }
+    ... on PageSectionsTestimonials {
+      eyebrow
+      heading
+      copy
+      reviews {
+        __typename
+        quote
+        byline
+      }
+    }
+    ... on PageSectionsContact {
+      eyebrow
+      heading
+      address
+      phone
+      phoneHref
+      email
+      emailHref
+      hours
+    }
+    ... on PageSectionsFooter {
+      tagline
+    }
+  }
+}
+
+fragment PricingParts on Pricing {
+  __typename
+  deep {
+    __typename
+    name
+    description
+    subtitle
+    features
+    prices {
+      __typename
+      key
+      bedrooms
+      bathrooms
+      cents
+    }
+  }
+  regular {
+    __typename
+    name
+    description
+    subtitle
+    features
+    prices {
+      __typename
+      key
+      bedrooms
+      bathrooms
+      cents
+    }
+  }
+  addOns {
+    __typename
+    id
+    name
+    cents
+  }
+}

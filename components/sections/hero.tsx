@@ -166,7 +166,7 @@ export function Hero(props: HeroProps) {
               <Button size="lg" onClick={() => openBooking()}>
                 Get a free quote <ArrowRight data-icon="inline-end" />
               </Button>
-              <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10" asChild>
+              <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 border-white/30 text-white hover:text-white" data-tina-field={tinaField(props, "phoneNumber")} asChild>
                 <a href={`tel:+1${phoneNumber?.replace(/\D/g, "")}`}>
                   <Phone data-icon="inline-start" /> {phoneNumber}
                 </a>

@@ -4,12 +4,14 @@ import { useTina } from "tinacms/dist/react"
 import { BreezeSite } from "@/components/breeze-site"
 import type { TinaResult } from "@/lib/queries"
 import type { Block } from "@/lib/page-sections"
+import type { NavigationConfig } from "@/lib/navigation-config"
 
 interface HomePageClientProps {
   tina: TinaResult
+  navigation?: NavigationConfig
 }
 
-export function HomePageClient({ tina }: HomePageClientProps) {
+export function HomePageClient({ tina, navigation }: HomePageClientProps) {
   const { data } = useTina({
     query: tina.query,
     variables: tina.variables,
@@ -23,5 +25,9 @@ export function HomePageClient({ tina }: HomePageClientProps) {
     _template: s._template || s.__typename?.replace("PageSections", "").toLowerCase(),
   }))
 
-  return <BreezeSite sections={sections} />
+  // Use navigation from Tina if available, else the passed prop
+  const navFromTina = (data as any)?.page?.navigation as NavigationConfig | undefined
+  const navConfig = navFromTina || navigation
+
+  return <BreezeSite sections={sections} navigation={navConfig} />
 }

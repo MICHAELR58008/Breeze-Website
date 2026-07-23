@@ -1,5 +1,6 @@
 import { client } from "@/tina/__generated__/client"
 import { type Block, defaultBlocks } from "@/lib/page-sections"
+import { navDefaults, type NavigationConfig } from "@/lib/navigation-config"
 
 export interface TinaResult {
   data: any
@@ -10,12 +11,13 @@ export interface TinaResult {
 export interface PageData {
   tina: TinaResult | null
   sections: Block[]
+  navigation: NavigationConfig
 }
 
 /**
  * Fetch page data from TinaCMS.
- * Returns the raw GraphQL result (for useTina) and extracted sections.
- * Falls back to defaultBlocks when Tina is unavailable.
+ * Returns the raw GraphQL result (for useTina), extracted sections, and navigation config.
+ * Falls back to defaults when Tina is unavailable.
  */
 export async function fetchPageData(): Promise<PageData> {
   try {
@@ -31,11 +33,13 @@ export async function fetchPageData(): Promise<PageData> {
         ...s,
         _template: s._template || s.__typename?.replace("PageSections", "").toLowerCase(),
       })) as Block[],
+      navigation: (data.page?.navigation as NavigationConfig) || navDefaults,
     }
   } catch {
     return {
       tina: null,
       sections: defaultBlocks,
+      navigation: navDefaults,
     }
   }
 }

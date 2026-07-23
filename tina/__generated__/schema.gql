@@ -274,8 +274,30 @@ type PageSectionsFooter {
 
 union PageSections = PageSectionsHero | PageSectionsServices | PageSectionsProcess | PageSectionsAbout | PageSectionsTestimonials | PageSectionsContact | PageSectionsFooter
 
+type PageNavigationNavLinks {
+  sectionId: String!
+  label: String!
+  visible: Boolean
+}
+
+type PageNavigation {
+  navLinks: [PageNavigationNavLinks]
+  ctaVisible: Boolean
+  ctaText: String
+  linkFontSize: Float
+  linkColor: String
+  linkHoverColor: String
+  linkActiveColor: String
+  linkUppercase: Boolean
+  barBackground: String
+  barBorderColor: String
+  barHeight: Float
+  barBlur: Boolean
+}
+
 type Page implements Node & Document {
   sections: [PageSections]
+  navigation: PageNavigation
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -502,8 +524,30 @@ input PageSectionsFilter {
   footer: PageSectionsFooterFilter
 }
 
+input PageNavigationNavLinksFilter {
+  sectionId: StringFilter
+  label: StringFilter
+  visible: BooleanFilter
+}
+
+input PageNavigationFilter {
+  navLinks: PageNavigationNavLinksFilter
+  ctaVisible: BooleanFilter
+  ctaText: StringFilter
+  linkFontSize: NumberFilter
+  linkColor: StringFilter
+  linkHoverColor: StringFilter
+  linkActiveColor: StringFilter
+  linkUppercase: BooleanFilter
+  barBackground: StringFilter
+  barBorderColor: StringFilter
+  barHeight: NumberFilter
+  barBlur: BooleanFilter
+}
+
 input PageFilter {
   sections: PageSectionsFilter
+  navigation: PageNavigationFilter
 }
 
 type PageConnectionEdges {
@@ -1162,8 +1206,30 @@ input PageSectionsMutation {
   footer: PageSectionsFooterMutation
 }
 
+input PageNavigationNavLinksMutation {
+  sectionId: String
+  label: String
+  visible: Boolean
+}
+
+input PageNavigationMutation {
+  navLinks: [PageNavigationNavLinksMutation]
+  ctaVisible: Boolean
+  ctaText: String
+  linkFontSize: Float
+  linkColor: String
+  linkHoverColor: String
+  linkActiveColor: String
+  linkUppercase: Boolean
+  barBackground: String
+  barBorderColor: String
+  barHeight: Float
+  barBlur: Boolean
+}
+
 input PageMutation {
   sections: [PageSectionsMutation]
+  navigation: PageNavigationMutation
 }
 
 input BookingServicesMutation {

@@ -52,3 +52,38 @@ Wrap the `<Image />` component inside `components/sections/about.tsx` with the n
 - [ ] The app builds cleanly without TypeScript or React errors (`npm run build`).
 </USER_REQUEST>
 
+## 2026-07-23T04:27:32Z
+
+<USER_REQUEST>
+Fix the secondary CTA phone button styling in the Hero section (`components/sections/hero.tsx`) so the phone number is clearly visible instead of obscured by a solid white background, and add direct TinaCMS inline editing support for `phoneNumber`.
+
+Working directory: c:/Users/SOL/Desktop/Projet for Breeze/wesite
+Integrity mode: development
+
+## Requirements
+
+### R1. Secondary CTA Button Contrast & Styling Fix
+Update the phone CTA button next to "Get a free quote" in `components/sections/hero.tsx` so its background is transparent/glassmorphic (`bg-white/10 hover:bg-white/20 border-white/30 text-white`) and the phone text is crisp and readable.
+
+### R2. TinaCMS Visual Editing Support for Phone Number
+Add `data-tina-field={tinaField(props, "phoneNumber")}` to the phone CTA button in `components/sections/hero.tsx` so editors can click to edit the phone number directly in the TinaCMS visual editor.
+
+## Verification Resources & Stack-Specific Tests
+- **TypeScript Type Checker**: `npx tsc --noEmit` to ensure zero type errors in React/Next.js components.
+- **ESLint Compliance**: `npm run lint` to enforce project code standards.
+- **Next.js Production Build**: `npm run build` to verify full compilation without bundle or SSR errors.
+
+## Acceptance Criteria
+
+### Styling & Visual Contrast
+- [ ] The phone CTA button next to "Get a free quote" in `components/sections/hero.tsx` displays white text on a transparent/subtle translucent background instead of a solid white block.
+- [ ] Phone number text `(805) 760-8765` is clearly legible.
+
+### TinaCMS Visual Editor
+- [ ] The phone CTA button includes `data-tina-field={tinaField(props, "phoneNumber")}`.
+
+### Stack-Specific Verification Tests
+- [ ] `npx tsc --noEmit` completes with 0 type errors.
+- [ ] `npm run lint` passes without errors.
+- [ ] `npm run build` completes successfully with static/SSR route generation.
+</USER_REQUEST>

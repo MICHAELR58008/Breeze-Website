@@ -183,6 +183,26 @@ export const PagePartsFragmentDoc = gql`
       taglineColor
     }
   }
+  navigation {
+    __typename
+    navLinks {
+      __typename
+      sectionId
+      label
+      visible
+    }
+    ctaVisible
+    ctaText
+    linkFontSize
+    linkColor
+    linkHoverColor
+    linkActiveColor
+    linkUppercase
+    barBackground
+    barBorderColor
+    barHeight
+    barBlur
+  }
 }
     `;
 export const BookingPartsFragmentDoc = gql`

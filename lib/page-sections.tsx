@@ -5,6 +5,7 @@ import { About, type AboutProps } from "@/components/sections/about"
 import { Testimonials, type TestimonialsProps } from "@/components/sections/testimonials"
 import { Contact, type ContactProps } from "@/components/sections/contact"
 import { Footer, type FooterProps } from "@/components/sections/footer"
+import type { NavLinkOverride } from "@/lib/navigation-config"
 
 /* ── Tina block type discriminators ── */
 
@@ -69,8 +70,9 @@ const sectionLabels: Record<string, string> = {
   footer: "",
 }
 
-export function buildNavLinks(sections: Block[]): NavEntry[] {
-  return sections
+export function buildNavLinks(sections: Block[], overrides?: NavLinkOverride[]): NavEntry[] {
+  // 1. Detect nav-worthy sections (unchanged)
+  const detected = sections
     .filter((s) => {
       const t = getTemplate(s)
       return t ? sectionLabels[t] : false
@@ -81,8 +83,23 @@ export function buildNavLinks(sections: Block[]): NavEntry[] {
         id: t,
         label: sectionLabels[t],
         href: `#${t}`,
-      }
+      } as NavEntry
     })
+
+  // 2. No overrides → return detected as-is (fallback path)
+  if (!overrides || overrides.length === 0) return detected
+
+  // 3. Apply overrides: hide hidden, relabel the rest
+  const result: NavEntry[] = []
+  for (const entry of detected) {
+    const override = overrides.find((o) => o.sectionId === entry.id)
+    if (override?.visible === false) continue // hidden by CMS
+    result.push({
+      ...entry,
+      label: override?.label || entry.label,
+    })
+  }
+  return result
 }
 
 /* ── Default blocks for fallback (no Tina credentials) ── */

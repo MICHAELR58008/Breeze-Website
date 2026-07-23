@@ -23,6 +23,8 @@
         }
       ],
       "imageSrc": "/uploads/premium_photo-1676968002767-1f6a09891350.avif",
+      "locationVisible": true,
+      "headingLine1Visible": true,
       "_template": "hero"
     },
     {
@@ -80,5 +82,34 @@
       "tagline": "",
       "_template": "footer"
     }
-  ]
+  ],
+  "navigation": {
+    "navLinks": [
+      {
+        "sectionId": "services",
+        "label": "Services",
+        "visible": true
+      },
+      {
+        "sectionId": "about",
+        "label": "About",
+        "visible": true
+      },
+      {
+        "sectionId": "testimonials",
+        "label": "Reviews",
+        "visible": true
+      },
+      {
+        "sectionId": "contact",
+        "label": "Contact",
+        "visible": true
+      }
+    ],
+    "ctaVisible": true,
+    "ctaText": "Get a free quote",
+    "linkColor": "#000000",
+    "linkUppercase": false,
+    "barBackground": "#E2E2E2"
+  }
 }

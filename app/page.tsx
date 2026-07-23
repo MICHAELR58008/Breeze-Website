@@ -7,7 +7,7 @@ import { fetchBookingContent } from "@/lib/booking-content"
 export const dynamic = "force-dynamic"
 
 export default async function Home() {
-  const { tina, sections } = await fetchPageData()
+  const { tina, sections, navigation } = await fetchPageData()
   const bookingResult = await fetchBookingContent()
 
   return (
@@ -17,9 +17,9 @@ export default async function Home() {
     >
       <main className="min-h-screen overflow-x-hidden">
         {tina ? (
-          <HomePageClient tina={tina} />
+          <HomePageClient tina={tina} navigation={navigation} />
         ) : (
-          <BreezeSite sections={sections} />
+          <BreezeSite sections={sections} navigation={navigation} />
         )}
       </main>
     </BookingProvider>

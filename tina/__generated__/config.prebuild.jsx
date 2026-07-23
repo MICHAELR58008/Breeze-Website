@@ -486,7 +486,8 @@ var config_default = defineConfig({
   token: process.env.TINA_TOKEN || "local-dev-token",
   build: {
     outputFolder: "admin",
-    publicFolder: "public"
+    publicFolder: "public",
+    host: "127.0.0.1"
   },
   media: {
     tina: {
@@ -820,6 +821,52 @@ var config_default = defineConfig({
                   { type: "string", name: "taglineColor", label: "Tagline \u2014 Color", ui: { component: "color" } }
                 ]
               }
+            ]
+          },
+          {
+            type: "object",
+            name: "navigation",
+            label: "Navigation Bar",
+            ui: {
+              defaultItem: {
+                ctaVisible: true,
+                ctaText: "Get a free quote"
+              }
+            },
+            fields: [
+              {
+                type: "object",
+                name: "navLinks",
+                label: "Nav Links",
+                description: "Override each link's label and visibility. Links are auto-detected from page sections.",
+                list: true,
+                ui: {
+                  itemProps: (item) => ({ label: item?.label || item?.sectionId || "New Link" }),
+                  defaultItem: { sectionId: "services", label: "Services", visible: true }
+                },
+                fields: [
+                  {
+                    type: "string",
+                    name: "sectionId",
+                    label: "Section",
+                    required: true,
+                    options: ["services", "process", "about", "testimonials", "contact"]
+                  },
+                  { type: "string", name: "label", label: "Label", required: true },
+                  { type: "boolean", name: "visible", label: "Show in nav" }
+                ]
+              },
+              { type: "boolean", name: "ctaVisible", label: "Show CTA button" },
+              { type: "string", name: "ctaText", label: "CTA button text" },
+              { type: "number", name: "linkFontSize", label: "Link Font Size (px)" },
+              { type: "string", name: "linkColor", label: "Link Color", ui: { component: "color" } },
+              { type: "string", name: "linkHoverColor", label: "Link Hover Color", ui: { component: "color" } },
+              { type: "string", name: "linkActiveColor", label: "Link Active Color", ui: { component: "color" } },
+              { type: "boolean", name: "linkUppercase", label: "Uppercase links" },
+              { type: "string", name: "barBackground", label: "Bar Background", ui: { component: "color" } },
+              { type: "string", name: "barBorderColor", label: "Bar Border Color", ui: { component: "color" } },
+              { type: "number", name: "barHeight", label: "Bar Height (px)" },
+              { type: "boolean", name: "barBlur", label: "Backdrop blur" }
             ]
           }
         ]

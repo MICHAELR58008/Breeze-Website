@@ -36,7 +36,7 @@ const defaults: ContactProps = {
 
 export function Contact(props: ContactProps) {
   const { openBooking } = useBooking()
-  const { eyebrow, heading, address, phone, phoneHref, email, emailHref, hours } = {
+  const { eyebrow, heading, address, phone, phoneHref, email, emailHref, hours, eyebrowSize, eyebrowColor, headingSize, headingColor, bodySize, bodyColor } = {
     ...defaults,
     ...props,
   }
@@ -52,8 +52,10 @@ export function Contact(props: ContactProps) {
     <section id="contact" className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
       <div className="grid gap-12 lg:grid-cols-12">
         <div className="lg:col-span-7">
-          <p data-tina-field={tinaField(props, "eyebrow")} className="mb-5 font-mono text-xs uppercase tracking-widest text-primary">{eyebrow}</p>
-          <h2 data-tina-field={tinaField(props, "heading")} className="text-balance font-display text-6xl leading-none sm:text-8xl lg:text-9xl">{heading}</h2>
+          <p data-tina-field={tinaField(props, "eyebrow")} className="mb-5 font-mono text-xs uppercase tracking-widest text-primary"
+            style={{ fontSize: eyebrowSize ? `${eyebrowSize}px` : undefined, color: eyebrowColor || undefined }}>{eyebrow}</p>
+          <h2 data-tina-field={tinaField(props, "heading")} className="text-balance font-display text-6xl leading-none sm:text-8xl lg:text-9xl"
+            style={{ fontSize: headingSize ? `${headingSize}px` : undefined, color: headingColor || undefined }}>{heading}</h2>
           <Button className="mt-8" size="lg" onClick={() => openBooking()}>
             Start your free quote <ArrowRight data-icon="inline-end" />
           </Button>
@@ -64,6 +66,7 @@ export function Contact(props: ContactProps) {
               key={String(label)}
               href={href}
               className="flex items-center gap-4 border-b border-border py-5 text-muted-foreground transition-colors hover:text-foreground"
+              style={{ fontSize: bodySize ? `${bodySize}px` : undefined, color: bodyColor || undefined }}
             >
               <Icon className="size-5 text-primary" aria-hidden="true" />
               <span data-tina-field={tinaField(props, field)}>{String(label)}</span>

@@ -15,8 +15,13 @@ export interface HeroProof {
 export interface HeroProps {
   location?: string
   headingLine1?: string
-  headingLine1X?: number
-  headingLine1Y?: number
+  locationSize?: number
+  locationColor?: string
+  headingSize?: number
+  headingColor?: string
+  headingAccentColor?: string
+  subheadingSize?: number
+  subheadingColor?: string
   headingLine2?: string
   headingLine2X?: number
   headingLine2Y?: number
@@ -60,14 +65,21 @@ export function Hero(props: HeroProps) {
   const {
     location,
     headingLine1,
+    locationSize,
+    locationColor,
     headingLine1X,
     headingLine1Y,
     headingLine2,
     headingLine2X,
     headingLine2Y,
+    headingSize,
+    headingColor,
+    headingAccentColor,
     subheading,
     subheadingX,
     subheadingY,
+    subheadingSize,
+    subheadingColor,
     phoneNumber,
     imageSrc,
     imageAlt,
@@ -93,14 +105,14 @@ export function Hero(props: HeroProps) {
         <div className="flex flex-col justify-between px-5 py-16 sm:px-8 lg:px-12 lg:py-20">
           <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.22em] text-primary">
             <span className="size-2 rounded-full bg-accent" />
-            <span data-tina-field={tinaField(props, "location")} className="text-white/80">{location}</span>
+            <span data-tina-field={tinaField(props, "location")} className="text-white/80" style={{ fontSize: locationSize ? `${locationSize}px` : undefined, color: locationColor || undefined }}>{location}</span>
           </div>
 
           <div className="flex flex-col gap-8">
             <h1 className="max-w-4xl text-balance font-display text-6xl leading-[0.9] tracking-tight text-white sm:text-7xl lg:text-[7.5rem]">
               <span
                 data-tina-field={tinaField(props, "headingLine1")}
-                style={{ transform: `translate(${headingLine1X ?? 0}px, ${headingLine1Y ?? 0}px)` }}
+                style={{ transform: `translate(${headingLine1X ?? 0}px, ${headingLine1Y ?? 0}px)`, fontSize: headingSize ? `${headingSize}px` : undefined, color: headingColor || undefined }}
               >
                 {headingLine1}
               </span>
@@ -108,7 +120,7 @@ export function Hero(props: HeroProps) {
               <span
                 data-tina-field={tinaField(props, "headingLine2")}
                 className="text-primary"
-                style={{ transform: `translate(${headingLine2X ?? 0}px, ${headingLine2Y ?? 0}px)` }}
+                style={{ transform: `translate(${headingLine2X ?? 0}px, ${headingLine2Y ?? 0}px)`, fontSize: headingSize ? `${headingSize}px` : undefined, color: headingAccentColor || undefined }}
               >
                 {headingLine2}
               </span>
@@ -117,7 +129,7 @@ export function Hero(props: HeroProps) {
             <p
               data-tina-field={tinaField(props, "subheading")}
               className="max-w-xl text-pretty text-lg leading-relaxed text-white/70 sm:text-xl"
-              style={{ transform: `translate(${subheadingX ?? 0}px, ${subheadingY ?? 0}px)` }}
+              style={{ transform: `translate(${subheadingX ?? 0}px, ${subheadingY ?? 0}px)`, fontSize: subheadingSize ? `${subheadingSize}px` : undefined, color: subheadingColor || undefined }}
             >
               {subheading}
             </p>

@@ -22,7 +22,18 @@ export function Proof({ value, label, className = "" }: { value: string; label: 
   )
 }
 
-export function SectionHeader({ eyebrow, title, copy, tinaFields }: { eyebrow: string; title: string; copy: string; tinaFields?: { eyebrow?: string; title?: string; copy?: string } }) {
+export function SectionHeader({ eyebrow, title, copy, tinaFields, eyebrowSize, eyebrowColor, headingSize, headingColor, bodySize, bodyColor }: {
+  eyebrow: string
+  title: string
+  copy: string
+  tinaFields?: { eyebrow?: string; title?: string; copy?: string }
+  eyebrowSize?: number
+  eyebrowColor?: string
+  headingSize?: number
+  headingColor?: string
+  bodySize?: number
+  bodyColor?: string
+}) {
   const hasCopy = Boolean(copy && copy.trim())
   const hasEyebrow = Boolean(eyebrow && eyebrow.trim())
 
@@ -30,14 +41,20 @@ export function SectionHeader({ eyebrow, title, copy, tinaFields }: { eyebrow: s
     <div className="grid gap-6 border-b border-border pb-10 lg:grid-cols-12 lg:items-end">
       <div className={hasCopy ? "lg:col-span-8" : "lg:col-span-12"}>
         {hasEyebrow && (
-          <p data-tina-field={tinaFields?.eyebrow} className="mb-5 font-mono text-xs uppercase tracking-[0.22em] text-primary">{eyebrow}</p>
+          <p data-tina-field={tinaFields?.eyebrow} className="mb-5 font-mono text-xs uppercase tracking-[0.22em] text-primary"
+            style={{ fontSize: eyebrowSize ? `${eyebrowSize}px` : undefined, color: eyebrowColor || undefined }}
+          >{eyebrow}</p>
         )}
         {title && (
-          <h2 data-tina-field={tinaFields?.title} className="text-balance font-display text-5xl leading-none sm:text-7xl lg:text-8xl">{title}</h2>
+          <h2 data-tina-field={tinaFields?.title} className="text-balance font-display text-5xl leading-none sm:text-7xl lg:text-8xl"
+            style={{ fontSize: headingSize ? `${headingSize}px` : undefined, color: headingColor || undefined }}
+          >{title}</h2>
         )}
       </div>
       {hasCopy && (
-        <p data-tina-field={tinaFields?.copy} className="text-pretty text-lg leading-relaxed text-muted-foreground lg:col-span-4">{copy}</p>
+        <p data-tina-field={tinaFields?.copy} className="text-pretty text-lg leading-relaxed text-muted-foreground lg:col-span-4"
+          style={{ fontSize: bodySize ? `${bodySize}px` : undefined, color: bodyColor || undefined }}
+        >{copy}</p>
       )}
     </div>
   )

@@ -11,7 +11,7 @@ const defaults: FooterProps = {
 }
 
 export function Footer(props: FooterProps) {
-  const { tagline } = { ...defaults, ...props }
+  const { tagline, bodySize, bodyColor } = { ...defaults, ...props }
 
   return (
     <footer className="border-t border-border">
@@ -19,7 +19,7 @@ export function Footer(props: FooterProps) {
         <div className="flex flex-col gap-3">
           <Brand />
           {tagline?.trim() && (
-            <p data-tina-field={tinaField(props, "tagline")} className="max-w-sm text-sm text-muted-foreground">{tagline}</p>
+            <p data-tina-field={tinaField(props, "tagline")} className="max-w-sm text-sm text-muted-foreground" style={{ fontSize: bodySize ? `${bodySize}px` : undefined, color: bodyColor || undefined }}>{tagline}</p>
           )}
         </div>
         <div className="flex flex-col gap-2 font-mono text-xs uppercase tracking-wider text-muted-foreground md:text-right">

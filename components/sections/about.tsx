@@ -99,13 +99,13 @@ export function About(props: AboutProps) {
       )}
       <div className={`flex flex-col justify-center gap-7 p-6 sm:p-10 lg:p-16 ${hasLeftContent ? "lg:col-span-7" : "lg:col-span-12"}`}>
         {ownerName?.trim() && (
-          <h2 data-tina-field={tinaField(props, "ownerName")} className="font-display text-6xl sm:text-8xl">{ownerName}</h2>
+          <h2 data-tina-field={tinaField(props, "ownerName")} className="font-display text-6xl sm:text-8xl" style={{ fontSize: headingSize ? `${headingSize}px` : undefined, color: headingColor || undefined }}>{ownerName}</h2>
         )}
         {bioParagraph1?.trim() && (
-          <p data-tina-field={tinaField(props, "bioParagraph1")} className="text-pretty text-lg leading-relaxed text-muted-foreground">{bioParagraph1}</p>
+          <p data-tina-field={tinaField(props, "bioParagraph1")} className="text-pretty text-lg leading-relaxed text-muted-foreground" style={{ fontSize: bodySize ? `${bodySize}px` : undefined, color: bodyColor || undefined }}>{bioParagraph1}</p>
         )}
         {bioParagraph2?.trim() && (
-          <p data-tina-field={tinaField(props, "bioParagraph2")} className="text-pretty text-lg leading-relaxed">{bioParagraph2}</p>
+          <p data-tina-field={tinaField(props, "bioParagraph2")} className="text-pretty text-lg leading-relaxed" style={{ fontSize: bodySize ? `${bodySize}px` : undefined, color: bodyColor || undefined }}>{bioParagraph2}</p>
         )}
       </div>
     </section>

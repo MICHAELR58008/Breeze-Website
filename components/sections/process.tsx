@@ -37,7 +37,7 @@ const defaults: ProcessProps = {
 
 export function Process(props: ProcessProps) {
   const { openBooking } = useBooking()
-  const { eyebrow, heading, copy, steps } = { ...defaults, ...props }
+  const { eyebrow, heading, copy, steps, eyebrowSize, eyebrowColor, headingSize, headingColor, bodySize, bodyColor } = { ...defaults, ...props }
 
   return (
     <section id="process" className="border-y border-border bg-card">
@@ -51,6 +51,12 @@ export function Process(props: ProcessProps) {
             title: tinaField(props, "heading"),
             copy: tinaField(props, "copy"),
           }}
+          eyebrowSize={eyebrowSize}
+          eyebrowColor={eyebrowColor}
+          headingSize={headingSize}
+          headingColor={headingColor}
+          bodySize={bodySize}
+          bodyColor={bodyColor}
         />
         <div data-tina-field={tinaField(props, "steps")} className="grid gap-px border-x border-b border-border bg-border md:grid-cols-2 lg:grid-cols-4">
           {(steps || []).map((step, index) => (

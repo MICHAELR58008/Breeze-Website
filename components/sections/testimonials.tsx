@@ -42,6 +42,12 @@ export function Testimonials(props: TestimonialsProps) {
             title: tinaField(props, "heading"),
             copy: tinaField(props, "copy"),
           }}
+          eyebrowSize={eyebrowSize}
+          eyebrowColor={eyebrowColor}
+          headingSize={headingSize}
+          headingColor={headingColor}
+          bodySize={bodySize}
+          bodyColor={bodyColor}
         />
         <div data-tina-field={tinaField(props, "reviews")} className="grid gap-px border border-border bg-border lg:grid-cols-3">
           {(reviews || []).map((review) => (

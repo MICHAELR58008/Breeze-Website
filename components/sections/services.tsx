@@ -38,7 +38,7 @@ const defaults: ServicesProps = {
 
 export function Services(props: ServicesProps) {
   const { openBooking, servicesList, addOnsList, rawPricing } = useBooking()
-  const { eyebrow, heading, copy, disclaimer } = { ...defaults, ...props }
+  const { eyebrow, heading, copy, disclaimer, eyebrowSize, eyebrowColor, headingSize, headingColor, bodySize, bodyColor } = { ...defaults, ...props }
 
   // Use dynamic list if available from context, otherwise fallback to props/defaults
   const services = servicesList && servicesList.length > 0 ? servicesList : props.services
@@ -65,6 +65,12 @@ export function Services(props: ServicesProps) {
           title: tinaField(props, "heading"),
           copy: tinaField(props, "copy"),
         }}
+        eyebrowSize={eyebrowSize}
+        eyebrowColor={eyebrowColor}
+        headingSize={headingSize}
+        headingColor={headingColor}
+        bodySize={bodySize}
+        bodyColor={bodyColor}
       />
       
       {services && services.length > 0 && (
@@ -133,7 +139,8 @@ export function Services(props: ServicesProps) {
         </div>
       )}
 
-      <div data-tina-field={tinaField(props, "disclaimer")} className="mt-6 border-l-2 border-accent bg-accent/5 p-5 text-sm leading-relaxed text-muted-foreground">
+      <div data-tina-field={tinaField(props, "disclaimer")} className="mt-6 border-l-2 border-accent bg-accent/5 p-5 text-sm leading-relaxed text-muted-foreground"
+        style={{ fontSize: bodySize ? `${bodySize}px` : undefined, color: bodyColor || undefined }}>
         <strong className="text-foreground">A free quote is required</strong> — {disclaimer}
       </div>
     </section>

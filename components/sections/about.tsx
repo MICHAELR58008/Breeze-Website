@@ -27,7 +27,7 @@ const defaults: AboutProps = {
 }
 
 export function About(props: AboutProps) {
-  const { eyebrow, ownerName, nameInitial, tagline, bioParagraph1, bioParagraph2, image, focalPoint } = {
+  const { eyebrow, ownerName, nameInitial, tagline, bioParagraph1, bioParagraph2, image, focalPoint, eyebrowSize, eyebrowColor, headingSize, headingColor, bodySize, bodyColor } = {
     ...defaults,
     ...props,
   }

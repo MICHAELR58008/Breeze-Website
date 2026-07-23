@@ -28,7 +28,7 @@ const defaults: TestimonialsProps = {
 }
 
 export function Testimonials(props: TestimonialsProps) {
-  const { eyebrow, heading, copy, reviews } = { ...defaults, ...props }
+  const { eyebrow, heading, copy, reviews, eyebrowSize, eyebrowColor, headingSize, headingColor, bodySize, bodyColor } = { ...defaults, ...props }
 
   return (
     <section id="reviews" className="border-y border-border bg-card">

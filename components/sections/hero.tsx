@@ -58,55 +58,60 @@ export function Hero(props: HeroProps) {
     proofs,
   } = { ...defaults, ...props }
 
+  const hasBgImage = Boolean(imageSrc && imageSrc.trim())
+
   return (
     <section id="top" className="relative overflow-hidden border-b border-border pt-16">
-      <div className="pointer-events-none absolute inset-0 grid-surface opacity-40" />
-      <div className="relative mx-auto grid min-h-[88vh] max-w-[1400px] lg:grid-cols-12">
-        <div className="flex flex-col justify-between border-x border-border px-5 py-16 sm:px-8 lg:col-span-7 lg:px-12 lg:py-20">
+      {/* Full-bleed background image */}
+      {hasBgImage && (
+        <Image
+          src={imageSrc!}
+          alt={imageAlt || "Background"}
+          fill
+          priority
+          className="object-cover"
+        />
+      )}
+
+      {/* Dark overlay for text readability */}
+      <div className="absolute inset-0 bg-black/50" />
+
+      {/* Decorative grid pattern */}
+      <div className="pointer-events-none absolute inset-0 grid-surface opacity-20" />
+
+      {/* Content */}
+      <div className="relative mx-auto grid min-h-[88vh] max-w-[1400px]">
+        <div className="flex flex-col justify-between border-x border-border px-5 py-16 sm:px-8 lg:px-12 lg:py-20">
           <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.22em] text-primary">
-            <span className="size-2 rounded-full bg-accent" /> <span data-tina-field={tinaField(props, "location")}>{location}</span>
+            <span className="size-2 rounded-full bg-accent" /> <span data-tina-field={tinaField(props, "location")} className="text-white/80">{location}</span>
           </div>
           <div className="flex flex-col gap-8">
-            <h1 className="max-w-4xl text-balance font-display text-6xl leading-[0.9] tracking-tight sm:text-7xl lg:text-[7.5rem]">
+            <h1 className="max-w-4xl text-balance font-display text-6xl leading-[0.9] tracking-tight text-white sm:text-7xl lg:text-[7.5rem]">
               <span data-tina-field={tinaField(props, "headingLine1")}>{headingLine1}</span><br /><span data-tina-field={tinaField(props, "headingLine2")} className="text-primary">{headingLine2}</span>
             </h1>
-            <p data-tina-field={tinaField(props, "subheading")} className="max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground sm:text-xl">
+            <p data-tina-field={tinaField(props, "subheading")} className="max-w-xl text-pretty text-lg leading-relaxed text-white/70 sm:text-xl">
               {subheading}
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Button size="lg" onClick={() => openBooking()}>
                 Get a free quote <ArrowRight data-icon="inline-end" />
               </Button>
-              <Button size="lg" variant="outline" asChild>
+              <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10" asChild>
                 <a href={`tel:+1${phoneNumber?.replace(/\D/g, "")}`}>
                   <Phone data-icon="inline-start" /> {phoneNumber}
                 </a>
               </Button>
             </div>
           </div>
-          <div data-tina-field={tinaField(props, "proofs")} className="grid grid-cols-2 gap-px border border-border bg-border sm:grid-cols-3">
+          <div data-tina-field={tinaField(props, "proofs")} className="grid grid-cols-2 gap-px border border-white/20 bg-white/20 sm:grid-cols-3">
             {proofs?.map((p, i) => (
               <Proof
                 key={p.label}
                 value={p.value}
                 label={p.label}
-                className={i === proofs.length - 1 ? "col-span-2 sm:col-span-1" : ""}
+                className={`${i === proofs.length - 1 ? "col-span-2 sm:col-span-1" : ""} bg-background/70 text-white backdrop-blur-sm`}
               />
             ))}
-          </div>
-        </div>
-        <div className="relative min-h-[420px] border-r border-border lg:col-span-5">
-          <Image
-            data-tina-field={tinaField(props, "imageSrc")}
-            src={imageSrc || ""}
-            alt={imageAlt || ""}
-            fill
-            priority
-            className="object-cover"
-          />
-          <div className="absolute inset-x-5 bottom-5 border border-foreground/20 bg-background/85 p-5 backdrop-blur-xl">
-            <p data-tina-field={tinaField(props, "calloutTitle")} className="font-mono text-xs uppercase tracking-widest text-primary">{calloutTitle}</p>
-            <p data-tina-field={tinaField(props, "calloutText")} className="mt-2 text-pretty text-lg">{calloutText}</p>
           </div>
         </div>
       </div>

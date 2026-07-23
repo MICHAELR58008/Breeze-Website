@@ -88,7 +88,6 @@ export function Hero(props: HeroProps) {
         />
       )}
       <div className="absolute inset-0 bg-black/50" />
-      <div className="pointer-events-none absolute inset-0 grid-surface opacity-20" />
 
       <div className="relative mx-auto grid min-h-[88vh] max-w-[1400px]">
         <div className="flex flex-col justify-between border-x border-border px-5 py-16 sm:px-8 lg:px-12 lg:py-20">

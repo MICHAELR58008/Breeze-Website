@@ -35,7 +35,7 @@
       "_template": "services"
     },
     {
-      "eyebrow": "Meet the owner",
+      "eyebrow": "ceo",
       "ownerName": "Evelyn Rivas",
       "nameInitial": "",
       "tagline": "",
@@ -43,6 +43,8 @@
       "bioParagraph2": "",
       "image": "/uploads/image.jpg",
       "focalPoint": "53% 23%",
+      "eyebrowVisible": true,
+      "eyebrowSize": 26,
       "ownerNameVisible": true,
       "bioParagraph1Visible": true,
       "_template": "about"

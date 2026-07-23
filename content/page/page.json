@@ -43,6 +43,8 @@
       "bioParagraph2": "",
       "image": "/uploads/image.jpg",
       "focalPoint": "53% 23%",
+      "ownerNameVisible": true,
+      "bioParagraph1Visible": true,
       "_template": "about"
     },
     {

@@ -1,5 +1,5 @@
 {
-  "previewOpen": true,
+  "previewOpen": false,
   "services": [
     {
       "id": "regular",
@@ -117,9 +117,9 @@
       "showIfValue": "",
       "fields": [
         {
-          "label": "Add 1–2 photos of kitchen, bathroom, and general areas",
+          "label": "Add 1\u00e2\u20ac\u201c2 photos of kitchen, bathroom, and general areas",
           "prompt": "",
-          "hint": "Optional. JPG, PNG, WEBP, or HEIC · 5 MB each",
+          "hint": "Optional. JPG, PNG, WEBP, or HEIC \u00c2\u00b7 5 MB each",
           "selectedText": "{count} photo{s} selected and stored privately.",
           "emptyText": "",
           "_template": "photoUpload"
@@ -227,7 +227,7 @@
     "rowDate": "Preferred date",
     "rowWindow": "Window",
     "rowPhotos": "Photos",
-    "disclaimer": "A free quote is required — either through an in-person visit or by sending 3–5 photos/videos. This ensures you receive a fair and accurate price."
+    "disclaimer": "A free quote is required \u00e2\u20ac\u201d either through an in-person visit or by sending 3\u00e2\u20ac\u201c5 photos/videos. This ensures you receive a fair and accurate price."
   },
   "navigation": {
     "back": "Back",

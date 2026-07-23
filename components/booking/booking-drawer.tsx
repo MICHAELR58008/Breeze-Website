@@ -120,7 +120,8 @@ function BookingProviderTinaWrapper({
     return rawBooking?.addOns || content.addOns || []
   }, [rawBooking, content])
 
-  const previewOpen = Boolean(rawBooking?.previewOpen)
+  // previewOpen is a CMS editor toggle — never force-open from content data
+  const previewOpen = false
 
   return (
     <BookingDrawerCore

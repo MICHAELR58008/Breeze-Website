@@ -29,36 +29,8 @@
       "eyebrow": "",
       "heading": "Clean, your way.",
       "copy": "Professional cleaning tailored to you",
-      "disclaimer": "3-5 photos of kitchen and bathroom-this helps to ensure fair and accurate pricing",
+      "disclaimer": "3+ photos that include kitchens, bathrooms-this helps to ensure fair and accurate pricing",
       "_template": "services"
-    },
-    {
-      "eyebrow": "",
-      "heading": "It's a Breeze",
-      "copy": "",
-      "steps": [
-        {
-          "number": "01",
-          "title": "Choose your clean",
-          "description": "Deep, Regular or Commercial"
-        },
-        {
-          "number": "02",
-          "title": "Share the details",
-          "description": "Add extras and upload photos"
-        },
-        {
-          "number": "03",
-          "title": "Request a time",
-          "description": "Pick your preferred date and a morning, afternoon, or flexible time window."
-        },
-        {
-          "number": "04",
-          "title": "We confirm",
-          "description": "Breeze reviews your request confirms. "
-        }
-      ],
-      "_template": "process"
     },
     {
       "eyebrow": "Meet the owner",
@@ -67,6 +39,8 @@
       "tagline": "",
       "bioParagraph1": "Evelyn started Breeze because she believes a clean home shouldn't feel like a luxury. Based in Ventura County, she and her team treat every home like their own — with care, attention to detail, and a genuine pride in making spaces shine. When you book with Breeze, you book with the best, or your money back. ",
       "bioParagraph2": "",
+      "image": "/uploads/image.jpg",
+      "focalPoint": "53% 23%",
       "_template": "about"
     },
     {

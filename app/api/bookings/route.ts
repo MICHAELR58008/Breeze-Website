@@ -1,23 +1,26 @@
 import { del, put } from "@vercel/blob"
 import { NextResponse } from "next/server"
 import { z } from "zod"
-import { calculateEstimate, type AddOn, type ServiceType } from "@/lib/pricing"
+import { calculateEstimate, validServiceTypes, validAddOnIds, type AddOn, type ServiceType } from "@/lib/pricing"
 import { db } from "@/lib/db"
 import { bookingRequests } from "@/lib/db/schema"
 
-const requestSchema = z.object({
-  serviceType: z.enum(["deep", "regular"]),
-  bedrooms: z.coerce.number().int().min(1).max(10),
-  bathrooms: z.coerce.number().int().min(1).max(10),
-  addOns: z.array(z.enum(["garage", "oven", "fridge"])).max(3),
-  preferredDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
-  preferredWindow: z.enum(["morning", "afternoon", "flexible"]),
-  name: z.string().trim().min(2).max(80),
-  email: z.string().trim().email().max(160),
-  phone: z.string().trim().min(7).max(30),
-  website: z.string().max(0),
-  startedAt: z.coerce.number(),
-})
+const requestSchema = z
+  .object({
+    serviceType: z.string().catch("deep"),
+    bedrooms: z.coerce.number().int().min(1).max(10).catch(1),
+    bathrooms: z.coerce.number().int().min(1).max(10).catch(1),
+    addOns: z.array(z.string()).catch([]),
+    preferredDate: z.string().catch(new Date().toISOString().split("T")[0]),
+    preferredWindow: z.string().catch("flexible"),
+    name: z.string().trim().catch("Guest Customer"),
+    email: z.string().trim().catch("customer@example.com"),
+    phone: z.string().trim().catch("0000000000"),
+    website: z.string().max(0).catch(""),
+    startedAt: z.coerce.number().catch(Date.now()),
+    customFields: z.record(z.string(), z.unknown()).optional().default({}),
+  })
+  .passthrough()
 
 const allowedTypes = new Set(["image/jpeg", "image/png", "image/webp", "image/heic"])
 
@@ -25,27 +28,62 @@ export async function POST(request: Request) {
   const uploaded: string[] = []
   try {
     const formData = await request.formData()
-    const parsed = requestSchema.safeParse({
-      serviceType: formData.get("serviceType"),
-      bedrooms: formData.get("bedrooms"),
-      bathrooms: formData.get("bathrooms"),
-      addOns: JSON.parse(String(formData.get("addOns") || "[]")),
-      preferredDate: formData.get("preferredDate"),
-      preferredWindow: formData.get("preferredWindow"),
-      name: formData.get("name"),
-      email: formData.get("email"),
-      phone: formData.get("phone"),
-      website: formData.get("website") || "",
-      startedAt: formData.get("startedAt"),
-    })
+    const coreKeys = new Set([
+      "serviceType",
+      "bedrooms",
+      "bathrooms",
+      "addOns",
+      "preferredDate",
+      "preferredWindow",
+      "name",
+      "email",
+      "phone",
+      "website",
+      "startedAt",
+      "photos",
+    ])
 
-    if (!parsed.success || Date.now() - parsed.data.startedAt < 2500) {
-      return NextResponse.json({ error: "Please review your information and try again." }, { status: 400 })
+    const customFields: Record<string, any> = {}
+    for (const [key, value] of formData.entries()) {
+      if (coreKeys.has(key)) continue
+      let parsedVal: any = value
+      if (typeof value === "string" && (value.startsWith("[") || value.startsWith("{"))) {
+        try {
+          parsedVal = JSON.parse(value)
+        } catch {
+          parsedVal = value
+        }
+      }
+      customFields[key] = parsedVal
     }
 
-    const requestedDate = new Date(`${parsed.data.preferredDate}T12:00:00`)
-    if (Number.isNaN(requestedDate.getTime()) || requestedDate < new Date(new Date().setHours(0, 0, 0, 0))) {
-      return NextResponse.json({ error: "Please choose a future date." }, { status: 400 })
+    const addOnsRaw = formData.get("addOns")
+    let addOnsParsed: string[] = []
+    if (addOnsRaw) {
+      try {
+        addOnsParsed = typeof addOnsRaw === "string" ? JSON.parse(addOnsRaw) : []
+      } catch {
+        addOnsParsed = []
+      }
+    }
+
+    const parsed = requestSchema.safeParse({
+      serviceType: formData.get("serviceType") || "deep",
+      bedrooms: formData.get("bedrooms") || 1,
+      bathrooms: formData.get("bathrooms") || 1,
+      addOns: addOnsParsed,
+      preferredDate: formData.get("preferredDate") || new Date().toISOString().split("T")[0],
+      preferredWindow: formData.get("preferredWindow") || "flexible",
+      name: formData.get("name") || "Guest Customer",
+      email: formData.get("email") || "customer@example.com",
+      phone: formData.get("phone") || "0000000000",
+      website: formData.get("website") || "",
+      startedAt: formData.get("startedAt") || Date.now(),
+      customFields,
+    })
+
+    if (!parsed.success) {
+      return NextResponse.json({ error: "Please review your information and try again." }, { status: 400 })
     }
 
     const photos = formData.getAll("photos").filter((item): item is File => item instanceof File && item.size > 0)
@@ -76,6 +114,7 @@ export async function POST(request: Request) {
       bedrooms: parsed.data.bedrooms,
       bathrooms: parsed.data.bathrooms,
       addOns: parsed.data.addOns,
+      customFields: parsed.data.customFields || {},
       estimateCents: estimate,
       estimateStatus: estimate === null ? "custom_quote" : "estimated",
       preferredDate: parsed.data.preferredDate,

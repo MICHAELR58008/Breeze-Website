@@ -7,21 +7,16 @@ import { formatPrice } from "@/lib/pricing"
 import { useBooking } from "@/components/booking/booking-drawer"
 import { tinaField } from "tinacms/dist/tina-field"
 
-export interface PriceEntry {
-  key: string
-  bedrooms: string
-  bathrooms: string
-  cents: number
-}
-
 export interface ServiceItem {
-  _template: string
+  _template?: string
   id: string
   name: string
-  description: string
-  subtitle: string
-  features: string[]
-  prices: PriceEntry[]
+  description?: string
+  subtitle?: string
+  features?: string[]
+  basePriceCents?: number
+  pricePerBedroomCents?: number
+  pricePerBathroomCents?: number
 }
 
 export interface ServicesProps {
@@ -31,6 +26,7 @@ export interface ServicesProps {
   disclaimer?: string
   services?: ServiceItem[]
   addOnDetails?: Array<{ name: string; cents: number }>
+  [key: string]: any
 }
 
 const defaults: ServicesProps = {
@@ -41,14 +37,22 @@ const defaults: ServicesProps = {
 }
 
 export function Services(props: ServicesProps) {
-  const { openBooking } = useBooking()
-  const { eyebrow, heading, copy, disclaimer, services, addOnDetails } = { ...defaults, ...props }
+  const { openBooking, servicesList, addOnsList, rawPricing } = useBooking()
+  const { eyebrow, heading, copy, disclaimer } = { ...defaults, ...props }
+
+  // Use dynamic list if available from context, otherwise fallback to props/defaults
+  const services = servicesList && servicesList.length > 0 ? servicesList : props.services
+  const addOns = addOnsList && addOnsList.length > 0 
+    ? addOnsList.map(a => ({ name: a.name, cents: a.cents })) 
+    : props.addOnDetails
 
   const defaultAddOns = [
     { name: "Garage clean", cents: 4500 },
     { name: "Oven clean", cents: 3000 },
     { name: "Fridge clean", cents: 3000 },
   ]
+
+  const activeAddOns = addOns && addOns.length > 0 ? addOns : defaultAddOns
 
   return (
     <section id="services" className="mx-auto max-w-[1400px] border-x border-border px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
@@ -64,35 +68,40 @@ export function Services(props: ServicesProps) {
       />
       
       {services && services.length > 0 && (
-        <div className="grid gap-px border-x border-b border-border bg-border lg:grid-cols-2">
-          {services.map((item) => (
-            <article key={item.id} className="flex flex-col bg-card p-6 sm:p-10">
-              <span className="font-mono text-xs uppercase tracking-wider text-primary">
-                {item.subtitle}
+        <div className={`grid gap-px border-x border-b border-border bg-border grid-cols-1 ${
+          services.length === 3 ? "lg:grid-cols-3" : "lg:grid-cols-2"
+        }`}>
+          {services.map((item, index) => (
+            <article
+              key={item.id || `service-${index}`}
+              className="flex flex-col bg-card p-6 sm:p-8"
+              data-tina-field={rawPricing ? tinaField(rawPricing?.services?.[index]) : undefined}
+            >
+              <span
+                className="font-mono text-xs uppercase tracking-wider text-primary"
+                data-tina-field={rawPricing ? tinaField(rawPricing?.services?.[index], "subtitle") : undefined}
+              >
+                {item.subtitle || ""}
               </span>
-              <h3 className="mt-4 font-display text-5xl">{item.name}</h3>
+              <h3
+                className="mt-4 font-display text-5xl"
+                data-tina-field={rawPricing ? tinaField(rawPricing?.services?.[index], "name") : undefined}
+              >
+                {item.name || "New Service"}
+              </h3>
               <ul className="my-8 flex flex-col gap-3">
-                {item.features.map((feature: string) => (
-                  <li key={feature} className="flex gap-3 text-muted-foreground">
+                {item.features?.map((feature: string, featureIndex: number) => (
+                  <li
+                    key={feature || `feature-${featureIndex}`}
+                    className="flex gap-3 text-muted-foreground"
+                    data-tina-field={rawPricing ? tinaField(rawPricing?.services?.[index], `features.${featureIndex}`) : undefined}
+                  >
                     <Check className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
                     {feature}
                   </li>
                 ))}
               </ul>
-              <div className="mt-auto border-t border-border">
-                {item.prices.map((priceEntry) => {
-                  const [bed, bath] = priceEntry.key.split("-")
-                  return (
-                    <div key={priceEntry.key} className="flex items-center justify-between border-b border-border py-4">
-                      <span>{bed} bed / {bath} bath{bath !== "1" ? "s" : ""}</span>
-                      <strong className="font-display text-2xl font-normal text-primary">
-                        {formatPrice(priceEntry.cents)}
-                      </strong>
-                    </div>
-                  )
-                })}
-              </div>
-              <Button className="mt-6" variant="outline" onClick={() => openBooking(item.id)}>
+              <Button className="mt-auto" variant="outline" onClick={() => openBooking(item.id)}>
                 Quote this service <ArrowRight data-icon="inline-end" />
               </Button>
             </article>
@@ -100,16 +109,27 @@ export function Services(props: ServicesProps) {
         </div>
       )}
 
-      {(addOnDetails || defaultAddOns.length > 0) && (
-        <div className="grid gap-px border-x border-b border-border bg-border sm:grid-cols-3">
-          {(addOnDetails || defaultAddOns).map((addon) => (
-            <div key={addon.name} className="flex items-center justify-between bg-background p-5">
-              <span>{addon.name}</span>
-              <strong className="font-display text-2xl font-normal text-primary">
-                {formatPrice(addon.cents)}
-              </strong>
-            </div>
-          ))}
+      {activeAddOns.length > 0 && (
+        <div
+          className="border-x border-b border-border bg-card p-6 sm:p-8"
+          data-tina-field={rawPricing ? tinaField(rawPricing, "addOns") : undefined}
+        >
+          <h4 className="mb-6 font-mono text-xs uppercase tracking-[0.22em] text-primary">
+            Add-ons
+          </h4>
+          <div className="grid gap-6 sm:grid-cols-3">
+            {activeAddOns.map((addon, index) => (
+              <div
+                key={addon.name || `addon-${index}`}
+                className="flex items-center justify-between border-b border-border/60 pb-4 sm:border-b-0 sm:border-r sm:pb-0 sm:pr-6 last:border-0 last:pb-0 last:pr-0"
+              >
+                <span className="text-sm font-medium text-foreground">{addon.name || "New Add-on"}</span>
+                <strong className="font-display text-2xl font-normal text-primary">
+                  {formatPrice(addon.cents || 0)}
+                </strong>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 

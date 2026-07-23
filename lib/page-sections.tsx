@@ -5,7 +5,6 @@ import { About, type AboutProps } from "@/components/sections/about"
 import { Testimonials, type TestimonialsProps } from "@/components/sections/testimonials"
 import { Contact, type ContactProps } from "@/components/sections/contact"
 import { Footer, type FooterProps } from "@/components/sections/footer"
-import { serviceDetails, addOnDetails } from "@/lib/pricing"
 
 /* ── Tina block type discriminators ── */
 
@@ -36,17 +35,7 @@ export function renderBlock(block: Block, index: number) {
     case "hero":
       return <Hero key={`hero-${index}`} {...(block as HeroProps)} />
     case "services":
-      return (
-        <Services
-          key={`services-${index}`}
-          {...(block as ServicesProps)}
-          services={Object.values(serviceDetails)}
-          addOnDetails={Object.entries(addOnDetails).map(([, v]) => ({
-            name: v.name,
-            cents: v.price,
-          }))}
-        />
-      )
+      return <Services key={`services-${index}`} {...(block as ServicesProps)} />
     case "process":
       return <Process key={`process-${index}`} {...(block as ProcessProps)} />
     case "about":
@@ -123,18 +112,6 @@ export const defaultBlocks: Block[] = [
     copy: "Professional cleaning tailored to your home — because your time matters.",
     disclaimer: "either through an in-person visit or by sending 3–5 photos/videos. This ensures you receive a fair and accurate price.",
   } as ServicesProps & { _template: "services" },
-  {
-    _template: "process",
-    eyebrow: "02 / How it works",
-    heading: "Simple from start to shine.",
-    copy: "A compact quote flow designed around your home—not a generic one-price-fits-all form.",
-    steps: [
-      { number: "01", title: "Choose your clean", description: "Select deep or regular cleaning, then tell us about your bedrooms and bathrooms." },
-      { number: "02", title: "Share the details", description: "Add extras and, if you would like, securely upload photos for a more accurate quote." },
-      { number: "03", title: "Request a time", description: "Pick your preferred date and a morning, afternoon, or flexible time window." },
-      { number: "04", title: "We confirm", description: "Breeze reviews your request and gets back to you within 24 hours with availability and final pricing." },
-    ],
-  } as ProcessProps & { _template: "process" },
   {
     _template: "about",
     eyebrow: "03 / Meet the owner",

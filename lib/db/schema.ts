@@ -6,6 +6,7 @@ export const bookingRequests = pgTable("booking_requests", {
   bedrooms: integer("bedrooms").notNull(),
   bathrooms: integer("bathrooms").notNull(),
   addOns: jsonb("add_ons").$type<string[]>().notNull().default([]),
+  customFields: jsonb("custom_fields").$type<Record<string, any>>().notNull().default({}),
   estimateCents: integer("estimate_cents"),
   estimateStatus: text("estimate_status").notNull(),
   preferredDate: date("preferred_date").notNull(),

@@ -56,13 +56,13 @@ type Query {
   document(collection: String, relativePath: String): DocumentNode!
   page(relativePath: String): Page!
   pageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PageFilter): PageConnection!
-  pricing(relativePath: String): Pricing!
-  pricingConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PricingFilter): PricingConnection!
+  booking(relativePath: String): Booking!
+  bookingConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: BookingFilter): BookingConnection!
 }
 
 input DocumentFilter {
   page: PageFilter
-  pricing: PricingFilter
+  booking: BookingFilter
 }
 
 type DocumentConnectionEdges {
@@ -88,7 +88,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Page | Pricing | Folder
+union DocumentNode = Page | Booking | Folder
 
 type PageSectionsHeroProofs {
   value: String
@@ -119,6 +119,7 @@ type PageSectionsProcessSteps {
   number: String
   title: String
   description: String
+  image: String
 }
 
 type PageSectionsProcess {
@@ -135,6 +136,8 @@ type PageSectionsAbout {
   tagline: String
   bioParagraph1: String
   bioParagraph2: String
+  image: String
+  focalPoint: String
 }
 
 type PageSectionsTestimonialsReviews {
@@ -216,6 +219,7 @@ input PageSectionsProcessStepsFilter {
   number: StringFilter
   title: StringFilter
   description: StringFilter
+  image: ImageFilter
 }
 
 input PageSectionsProcessFilter {
@@ -232,6 +236,8 @@ input PageSectionsAboutFilter {
   tagline: StringFilter
   bioParagraph1: StringFilter
   bioParagraph2: StringFilter
+  image: ImageFilter
+  focalPoint: StringFilter
 }
 
 input PageSectionsTestimonialsReviewsFilter {
@@ -286,52 +292,212 @@ type PageConnection implements Connection {
   edges: [PageConnectionEdges]
 }
 
-type PricingServicesDeepPrices {
-  key: String
-  bedrooms: String
-  bathrooms: String
-  cents: Float
-}
-
-type PricingServicesDeep {
+type BookingServices {
   id: String!
   name: String!
   description: String
   subtitle: String
   features: [String]
-  prices: [PricingServicesDeepPrices]
+  basePriceCents: Float
+  pricePerBedroomCents: Float
+  pricePerBathroomCents: Float
 }
 
-type PricingServicesRegularPrices {
-  key: String
-  bedrooms: String
-  bathrooms: String
-  cents: Float
-}
-
-type PricingServicesRegular {
-  id: String!
-  name: String!
-  description: String
-  subtitle: String
-  features: [String]
-  prices: [PricingServicesRegularPrices]
-}
-
-union PricingServices = PricingServicesDeep | PricingServicesRegular
-
-type PricingAddOns {
+type BookingAddOns {
   id: String
   name: String
   cents: Float
 }
 
-type Pricing implements Node & Document {
-  services: [PricingServices]
-  addOns: [PricingAddOns]
+type BookingTheme {
+  fontFamily: String
+  primaryColor: String
+  backgroundColor: String
+  textColor: String
+  borderRadius: String
+}
+
+type BookingStepsFieldsTextInput {
+  name: String
+  label: String
+  placeholder: String
+  required: Boolean
+  validationType: String
+}
+
+type BookingStepsFieldsNumberInput {
+  name: String
+  label: String
+  min: Float
+  max: Float
+}
+
+type BookingStepsFieldsChoiceInputOptions {
+  id: String
+  label: String
+}
+
+type BookingStepsFieldsChoiceInput {
+  name: String
+  label: String
+  options: [BookingStepsFieldsChoiceInputOptions]
+}
+
+type BookingStepsFieldsDateInput {
+  name: String
+  label: String
+}
+
+type BookingStepsFieldsPhotoUpload {
+  label: String
+  prompt: String
+  hint: String
+  selectedText: String
+  emptyText: String
+}
+
+type BookingStepsFieldsRichTextHeading {
+  text: String
+}
+
+type BookingStepsFieldsServicesSelector {
+  question: String
+}
+
+type BookingStepsFieldsAddonsSelector {
+  question: String
+}
+
+type BookingStepsFieldsEstimateSummary {
+  disclaimer: String
+}
+
+type BookingStepsFieldsImageBlock {
+  src: String
+  alt: String
+  caption: String
+  aspect: String
+}
+
+type BookingStepsFieldsInfoCard {
+  title: String
+  description: String
+  icon: String
+  variant: String
+}
+
+type BookingStepsFieldsInfoBanner {
+  text: String
+  type: String
+  dismissible: Boolean
+}
+
+type BookingStepsFieldsTextareaInput {
+  name: String
+  label: String
+  placeholder: String
+  required: Boolean
+  rows: Float
+}
+
+type BookingStepsFieldsSelectInputOptions {
+  value: String
+  label: String
+}
+
+type BookingStepsFieldsSelectInput {
+  name: String
+  label: String
+  options: [BookingStepsFieldsSelectInputOptions]
+  required: Boolean
+  defaultValue: String
+}
+
+type BookingStepsFieldsCheckboxGroupOptions {
+  value: String
+  label: String
+  priceCents: Float
+}
+
+type BookingStepsFieldsCheckboxGroup {
+  name: String
+  label: String
+  options: [BookingStepsFieldsCheckboxGroupOptions]
+  required: Boolean
+}
+
+union BookingStepsFields = BookingStepsFieldsTextInput | BookingStepsFieldsNumberInput | BookingStepsFieldsChoiceInput | BookingStepsFieldsDateInput | BookingStepsFieldsPhotoUpload | BookingStepsFieldsRichTextHeading | BookingStepsFieldsServicesSelector | BookingStepsFieldsAddonsSelector | BookingStepsFieldsEstimateSummary | BookingStepsFieldsImageBlock | BookingStepsFieldsInfoCard | BookingStepsFieldsInfoBanner | BookingStepsFieldsTextareaInput | BookingStepsFieldsSelectInput | BookingStepsFieldsCheckboxGroup
+
+type BookingSteps {
+  title: String!
+  description: String
+  disabled: Boolean
+  showIfField: String
+  showIfOperator: String
+  showIfValue: String
+  fields: [BookingStepsFields]
+}
+
+type BookingHeader {
+  badge: String
+  title: String
+  description: String
+}
+
+type BookingTimeWindows {
+  id: String
+  label: String
+}
+
+type BookingReviewLabels {
+  heading: String
+  rowHome: String
+  rowDate: String
+  rowWindow: String
+  rowPhotos: String
+  disclaimer: String
+}
+
+type BookingNavigation {
+  back: String
+  continue: String
+  submit: String
+}
+
+type BookingSuccess {
+  title: String
+  message: String
+  buttonText: String
+}
+
+type BookingEstimate {
+  label: String
+  customQuote: String
+  disclaimer: String
+}
+
+type Booking implements Node & Document {
+  pricingHub: String
+  previewOpen: Boolean
+  services: [BookingServices]
+  addOns: [BookingAddOns]
+  theme: BookingTheme
+  steps: [BookingSteps]
+  header: BookingHeader
+  stepNames: [String]
+  timeWindows: [BookingTimeWindows]
+  reviewLabels: BookingReviewLabels
+  navigation: BookingNavigation
+  success: BookingSuccess
+  estimate: BookingEstimate
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
+}
+
+input BooleanFilter {
+  eq: Boolean
+  exists: Boolean
 }
 
 input NumberFilter {
@@ -344,63 +510,231 @@ input NumberFilter {
   in: [Float]
 }
 
-input PricingServicesDeepPricesFilter {
-  key: StringFilter
-  bedrooms: StringFilter
-  bathrooms: StringFilter
-  cents: NumberFilter
-}
-
-input PricingServicesDeepFilter {
+input BookingServicesFilter {
   id: StringFilter
   name: StringFilter
   description: StringFilter
   subtitle: StringFilter
   features: StringFilter
-  prices: PricingServicesDeepPricesFilter
+  basePriceCents: NumberFilter
+  pricePerBedroomCents: NumberFilter
+  pricePerBathroomCents: NumberFilter
 }
 
-input PricingServicesRegularPricesFilter {
-  key: StringFilter
-  bedrooms: StringFilter
-  bathrooms: StringFilter
+input BookingAddOnsFilter {
+  id: StringFilter
+  name: StringFilter
   cents: NumberFilter
 }
 
-input PricingServicesRegularFilter {
-  id: StringFilter
+input BookingThemeFilter {
+  fontFamily: StringFilter
+  primaryColor: StringFilter
+  backgroundColor: StringFilter
+  textColor: StringFilter
+  borderRadius: StringFilter
+}
+
+input BookingStepsFieldsTextInputFilter {
   name: StringFilter
+  label: StringFilter
+  placeholder: StringFilter
+  required: BooleanFilter
+  validationType: StringFilter
+}
+
+input BookingStepsFieldsNumberInputFilter {
+  name: StringFilter
+  label: StringFilter
+  min: NumberFilter
+  max: NumberFilter
+}
+
+input BookingStepsFieldsChoiceInputOptionsFilter {
+  id: StringFilter
+  label: StringFilter
+}
+
+input BookingStepsFieldsChoiceInputFilter {
+  name: StringFilter
+  label: StringFilter
+  options: BookingStepsFieldsChoiceInputOptionsFilter
+}
+
+input BookingStepsFieldsDateInputFilter {
+  name: StringFilter
+  label: StringFilter
+}
+
+input BookingStepsFieldsPhotoUploadFilter {
+  label: StringFilter
+  prompt: StringFilter
+  hint: StringFilter
+  selectedText: StringFilter
+  emptyText: StringFilter
+}
+
+input BookingStepsFieldsRichTextHeadingFilter {
+  text: StringFilter
+}
+
+input BookingStepsFieldsServicesSelectorFilter {
+  question: StringFilter
+}
+
+input BookingStepsFieldsAddonsSelectorFilter {
+  question: StringFilter
+}
+
+input BookingStepsFieldsEstimateSummaryFilter {
+  disclaimer: StringFilter
+}
+
+input BookingStepsFieldsImageBlockFilter {
+  src: ImageFilter
+  alt: StringFilter
+  caption: StringFilter
+  aspect: StringFilter
+}
+
+input BookingStepsFieldsInfoCardFilter {
+  title: StringFilter
   description: StringFilter
-  subtitle: StringFilter
-  features: StringFilter
-  prices: PricingServicesRegularPricesFilter
+  icon: StringFilter
+  variant: StringFilter
 }
 
-input PricingServicesFilter {
-  deep: PricingServicesDeepFilter
-  regular: PricingServicesRegularFilter
+input BookingStepsFieldsInfoBannerFilter {
+  text: StringFilter
+  type: StringFilter
+  dismissible: BooleanFilter
 }
 
-input PricingAddOnsFilter {
-  id: StringFilter
+input BookingStepsFieldsTextareaInputFilter {
   name: StringFilter
-  cents: NumberFilter
+  label: StringFilter
+  placeholder: StringFilter
+  required: BooleanFilter
+  rows: NumberFilter
 }
 
-input PricingFilter {
-  services: PricingServicesFilter
-  addOns: PricingAddOnsFilter
+input BookingStepsFieldsSelectInputOptionsFilter {
+  value: StringFilter
+  label: StringFilter
 }
 
-type PricingConnectionEdges {
+input BookingStepsFieldsSelectInputFilter {
+  name: StringFilter
+  label: StringFilter
+  options: BookingStepsFieldsSelectInputOptionsFilter
+  required: BooleanFilter
+  defaultValue: StringFilter
+}
+
+input BookingStepsFieldsCheckboxGroupOptionsFilter {
+  value: StringFilter
+  label: StringFilter
+  priceCents: NumberFilter
+}
+
+input BookingStepsFieldsCheckboxGroupFilter {
+  name: StringFilter
+  label: StringFilter
+  options: BookingStepsFieldsCheckboxGroupOptionsFilter
+  required: BooleanFilter
+}
+
+input BookingStepsFieldsFilter {
+  textInput: BookingStepsFieldsTextInputFilter
+  numberInput: BookingStepsFieldsNumberInputFilter
+  choiceInput: BookingStepsFieldsChoiceInputFilter
+  dateInput: BookingStepsFieldsDateInputFilter
+  photoUpload: BookingStepsFieldsPhotoUploadFilter
+  richTextHeading: BookingStepsFieldsRichTextHeadingFilter
+  servicesSelector: BookingStepsFieldsServicesSelectorFilter
+  addonsSelector: BookingStepsFieldsAddonsSelectorFilter
+  estimateSummary: BookingStepsFieldsEstimateSummaryFilter
+  imageBlock: BookingStepsFieldsImageBlockFilter
+  infoCard: BookingStepsFieldsInfoCardFilter
+  infoBanner: BookingStepsFieldsInfoBannerFilter
+  textareaInput: BookingStepsFieldsTextareaInputFilter
+  selectInput: BookingStepsFieldsSelectInputFilter
+  checkboxGroup: BookingStepsFieldsCheckboxGroupFilter
+}
+
+input BookingStepsFilter {
+  title: StringFilter
+  description: StringFilter
+  disabled: BooleanFilter
+  showIfField: StringFilter
+  showIfOperator: StringFilter
+  showIfValue: StringFilter
+  fields: BookingStepsFieldsFilter
+}
+
+input BookingHeaderFilter {
+  badge: StringFilter
+  title: StringFilter
+  description: StringFilter
+}
+
+input BookingTimeWindowsFilter {
+  id: StringFilter
+  label: StringFilter
+}
+
+input BookingReviewLabelsFilter {
+  heading: StringFilter
+  rowHome: StringFilter
+  rowDate: StringFilter
+  rowWindow: StringFilter
+  rowPhotos: StringFilter
+  disclaimer: StringFilter
+}
+
+input BookingNavigationFilter {
+  back: StringFilter
+  continue: StringFilter
+  submit: StringFilter
+}
+
+input BookingSuccessFilter {
+  title: StringFilter
+  message: StringFilter
+  buttonText: StringFilter
+}
+
+input BookingEstimateFilter {
+  label: StringFilter
+  customQuote: StringFilter
+  disclaimer: StringFilter
+}
+
+input BookingFilter {
+  pricingHub: StringFilter
+  previewOpen: BooleanFilter
+  services: BookingServicesFilter
+  addOns: BookingAddOnsFilter
+  theme: BookingThemeFilter
+  steps: BookingStepsFilter
+  header: BookingHeaderFilter
+  stepNames: StringFilter
+  timeWindows: BookingTimeWindowsFilter
+  reviewLabels: BookingReviewLabelsFilter
+  navigation: BookingNavigationFilter
+  success: BookingSuccessFilter
+  estimate: BookingEstimateFilter
+}
+
+type BookingConnectionEdges {
   cursor: String!
-  node: Pricing
+  node: Booking
 }
 
-type PricingConnection implements Connection {
+type BookingConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
-  edges: [PricingConnectionEdges]
+  edges: [BookingConnectionEdges]
 }
 
 type Mutation {
@@ -411,19 +745,19 @@ type Mutation {
   createFolder(collection: String, relativePath: String!): DocumentNode!
   updatePage(relativePath: String!, params: PageMutation!): Page!
   createPage(relativePath: String!, params: PageMutation!): Page!
-  updatePricing(relativePath: String!, params: PricingMutation!): Pricing!
-  createPricing(relativePath: String!, params: PricingMutation!): Pricing!
+  updateBooking(relativePath: String!, params: BookingMutation!): Booking!
+  createBooking(relativePath: String!, params: BookingMutation!): Booking!
 }
 
 input DocumentUpdateMutation {
   page: PageMutation
-  pricing: PricingMutation
+  booking: BookingMutation
   relativePath: String
 }
 
 input DocumentMutation {
   page: PageMutation
-  pricing: PricingMutation
+  booking: BookingMutation
 }
 
 input PageSectionsHeroProofsMutation {
@@ -455,6 +789,7 @@ input PageSectionsProcessStepsMutation {
   number: String
   title: String
   description: String
+  image: String
 }
 
 input PageSectionsProcessMutation {
@@ -471,6 +806,8 @@ input PageSectionsAboutMutation {
   tagline: String
   bioParagraph1: String
   bioParagraph2: String
+  image: String
+  focalPoint: String
 }
 
 input PageSectionsTestimonialsReviewsMutation {
@@ -514,52 +851,220 @@ input PageMutation {
   sections: [PageSectionsMutation]
 }
 
-input PricingServicesDeepPricesMutation {
-  key: String
-  bedrooms: String
-  bathrooms: String
-  cents: Float
-}
-
-input PricingServicesDeepMutation {
+input BookingServicesMutation {
   id: String
   name: String
   description: String
   subtitle: String
   features: [String]
-  prices: [PricingServicesDeepPricesMutation]
+  basePriceCents: Float
+  pricePerBedroomCents: Float
+  pricePerBathroomCents: Float
 }
 
-input PricingServicesRegularPricesMutation {
-  key: String
-  bedrooms: String
-  bathrooms: String
+input BookingAddOnsMutation {
+  id: String
+  name: String
   cents: Float
 }
 
-input PricingServicesRegularMutation {
-  id: String
+input BookingThemeMutation {
+  fontFamily: String
+  primaryColor: String
+  backgroundColor: String
+  textColor: String
+  borderRadius: String
+}
+
+input BookingStepsFieldsTextInputMutation {
   name: String
+  label: String
+  placeholder: String
+  required: Boolean
+  validationType: String
+}
+
+input BookingStepsFieldsNumberInputMutation {
+  name: String
+  label: String
+  min: Float
+  max: Float
+}
+
+input BookingStepsFieldsChoiceInputOptionsMutation {
+  id: String
+  label: String
+}
+
+input BookingStepsFieldsChoiceInputMutation {
+  name: String
+  label: String
+  options: [BookingStepsFieldsChoiceInputOptionsMutation]
+}
+
+input BookingStepsFieldsDateInputMutation {
+  name: String
+  label: String
+}
+
+input BookingStepsFieldsPhotoUploadMutation {
+  label: String
+  prompt: String
+  hint: String
+  selectedText: String
+  emptyText: String
+}
+
+input BookingStepsFieldsRichTextHeadingMutation {
+  text: String
+}
+
+input BookingStepsFieldsServicesSelectorMutation {
+  question: String
+}
+
+input BookingStepsFieldsAddonsSelectorMutation {
+  question: String
+}
+
+input BookingStepsFieldsEstimateSummaryMutation {
+  disclaimer: String
+}
+
+input BookingStepsFieldsImageBlockMutation {
+  src: String
+  alt: String
+  caption: String
+  aspect: String
+}
+
+input BookingStepsFieldsInfoCardMutation {
+  title: String
   description: String
-  subtitle: String
-  features: [String]
-  prices: [PricingServicesRegularPricesMutation]
+  icon: String
+  variant: String
 }
 
-input PricingServicesMutation {
-  deep: PricingServicesDeepMutation
-  regular: PricingServicesRegularMutation
+input BookingStepsFieldsInfoBannerMutation {
+  text: String
+  type: String
+  dismissible: Boolean
 }
 
-input PricingAddOnsMutation {
-  id: String
+input BookingStepsFieldsTextareaInputMutation {
   name: String
-  cents: Float
+  label: String
+  placeholder: String
+  required: Boolean
+  rows: Float
 }
 
-input PricingMutation {
-  services: [PricingServicesMutation]
-  addOns: [PricingAddOnsMutation]
+input BookingStepsFieldsSelectInputOptionsMutation {
+  value: String
+  label: String
+}
+
+input BookingStepsFieldsSelectInputMutation {
+  name: String
+  label: String
+  options: [BookingStepsFieldsSelectInputOptionsMutation]
+  required: Boolean
+  defaultValue: String
+}
+
+input BookingStepsFieldsCheckboxGroupOptionsMutation {
+  value: String
+  label: String
+  priceCents: Float
+}
+
+input BookingStepsFieldsCheckboxGroupMutation {
+  name: String
+  label: String
+  options: [BookingStepsFieldsCheckboxGroupOptionsMutation]
+  required: Boolean
+}
+
+input BookingStepsFieldsMutation {
+  textInput: BookingStepsFieldsTextInputMutation
+  numberInput: BookingStepsFieldsNumberInputMutation
+  choiceInput: BookingStepsFieldsChoiceInputMutation
+  dateInput: BookingStepsFieldsDateInputMutation
+  photoUpload: BookingStepsFieldsPhotoUploadMutation
+  richTextHeading: BookingStepsFieldsRichTextHeadingMutation
+  servicesSelector: BookingStepsFieldsServicesSelectorMutation
+  addonsSelector: BookingStepsFieldsAddonsSelectorMutation
+  estimateSummary: BookingStepsFieldsEstimateSummaryMutation
+  imageBlock: BookingStepsFieldsImageBlockMutation
+  infoCard: BookingStepsFieldsInfoCardMutation
+  infoBanner: BookingStepsFieldsInfoBannerMutation
+  textareaInput: BookingStepsFieldsTextareaInputMutation
+  selectInput: BookingStepsFieldsSelectInputMutation
+  checkboxGroup: BookingStepsFieldsCheckboxGroupMutation
+}
+
+input BookingStepsMutation {
+  title: String
+  description: String
+  disabled: Boolean
+  showIfField: String
+  showIfOperator: String
+  showIfValue: String
+  fields: [BookingStepsFieldsMutation]
+}
+
+input BookingHeaderMutation {
+  badge: String
+  title: String
+  description: String
+}
+
+input BookingTimeWindowsMutation {
+  id: String
+  label: String
+}
+
+input BookingReviewLabelsMutation {
+  heading: String
+  rowHome: String
+  rowDate: String
+  rowWindow: String
+  rowPhotos: String
+  disclaimer: String
+}
+
+input BookingNavigationMutation {
+  back: String
+  continue: String
+  submit: String
+}
+
+input BookingSuccessMutation {
+  title: String
+  message: String
+  buttonText: String
+}
+
+input BookingEstimateMutation {
+  label: String
+  customQuote: String
+  disclaimer: String
+}
+
+input BookingMutation {
+  pricingHub: String
+  previewOpen: Boolean
+  services: [BookingServicesMutation]
+  addOns: [BookingAddOnsMutation]
+  theme: BookingThemeMutation
+  steps: [BookingStepsMutation]
+  header: BookingHeaderMutation
+  stepNames: [String]
+  timeWindows: [BookingTimeWindowsMutation]
+  reviewLabels: BookingReviewLabelsMutation
+  navigation: BookingNavigationMutation
+  success: BookingSuccessMutation
+  estimate: BookingEstimateMutation
 }
 
 schema {

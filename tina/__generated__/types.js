@@ -41,6 +41,7 @@ export const PagePartsFragmentDoc = gql`
         number
         title
         description
+        image
       }
     }
     ... on PageSectionsAbout {
@@ -50,6 +51,8 @@ export const PagePartsFragmentDoc = gql`
       tagline
       bioParagraph1
       bioParagraph2
+      image
+      focalPoint
     }
     ... on PageSectionsTestimonials {
       eyebrow
@@ -77,45 +80,177 @@ export const PagePartsFragmentDoc = gql`
   }
 }
     `;
-export const PricingPartsFragmentDoc = gql`
-    fragment PricingParts on Pricing {
+export const BookingPartsFragmentDoc = gql`
+    fragment BookingParts on Booking {
   __typename
+  pricingHub
+  previewOpen
   services {
     __typename
-    ... on PricingServicesDeep {
-      id
-      name
-      description
-      subtitle
-      features
-      prices {
-        __typename
-        key
-        bedrooms
-        bathrooms
-        cents
-      }
-    }
-    ... on PricingServicesRegular {
-      id
-      name
-      description
-      subtitle
-      features
-      prices {
-        __typename
-        key
-        bedrooms
-        bathrooms
-        cents
-      }
-    }
+    id
+    name
+    description
+    subtitle
+    features
+    basePriceCents
+    pricePerBedroomCents
+    pricePerBathroomCents
   }
   addOns {
     __typename
     id
     name
     cents
+  }
+  theme {
+    __typename
+    fontFamily
+    primaryColor
+    backgroundColor
+    textColor
+    borderRadius
+  }
+  steps {
+    __typename
+    title
+    description
+    disabled
+    showIfField
+    showIfOperator
+    showIfValue
+    fields {
+      __typename
+      ... on BookingStepsFieldsTextInput {
+        name
+        label
+        placeholder
+        required
+        validationType
+      }
+      ... on BookingStepsFieldsNumberInput {
+        name
+        label
+        min
+        max
+      }
+      ... on BookingStepsFieldsChoiceInput {
+        name
+        label
+        options {
+          __typename
+          id
+          label
+        }
+      }
+      ... on BookingStepsFieldsDateInput {
+        name
+        label
+      }
+      ... on BookingStepsFieldsPhotoUpload {
+        label
+        prompt
+        hint
+        selectedText
+        emptyText
+      }
+      ... on BookingStepsFieldsRichTextHeading {
+        text
+      }
+      ... on BookingStepsFieldsServicesSelector {
+        question
+      }
+      ... on BookingStepsFieldsAddonsSelector {
+        question
+      }
+      ... on BookingStepsFieldsEstimateSummary {
+        disclaimer
+      }
+      ... on BookingStepsFieldsImageBlock {
+        src
+        alt
+        caption
+        aspect
+      }
+      ... on BookingStepsFieldsInfoCard {
+        title
+        description
+        icon
+        variant
+      }
+      ... on BookingStepsFieldsInfoBanner {
+        text
+        type
+        dismissible
+      }
+      ... on BookingStepsFieldsTextareaInput {
+        name
+        label
+        placeholder
+        required
+        rows
+      }
+      ... on BookingStepsFieldsSelectInput {
+        name
+        label
+        options {
+          __typename
+          value
+          label
+        }
+        required
+        defaultValue
+      }
+      ... on BookingStepsFieldsCheckboxGroup {
+        name
+        label
+        options {
+          __typename
+          value
+          label
+          priceCents
+        }
+        required
+      }
+    }
+  }
+  header {
+    __typename
+    badge
+    title
+    description
+  }
+  stepNames
+  timeWindows {
+    __typename
+    id
+    label
+  }
+  reviewLabels {
+    __typename
+    heading
+    rowHome
+    rowDate
+    rowWindow
+    rowPhotos
+    disclaimer
+  }
+  navigation {
+    __typename
+    back
+    continue
+    submit
+  }
+  success {
+    __typename
+    title
+    message
+    buttonText
+  }
+  estimate {
+    __typename
+    label
+    customQuote
+    disclaimer
   }
 }
     `;
@@ -176,9 +311,9 @@ export const PageConnectionDocument = gql`
   }
 }
     ${PagePartsFragmentDoc}`;
-export const PricingDocument = gql`
-    query pricing($relativePath: String!) {
-  pricing(relativePath: $relativePath) {
+export const BookingDocument = gql`
+    query booking($relativePath: String!) {
+  booking(relativePath: $relativePath) {
     ... on Document {
       _sys {
         filename
@@ -191,13 +326,13 @@ export const PricingDocument = gql`
       }
       id
     }
-    ...PricingParts
+    ...BookingParts
   }
 }
-    ${PricingPartsFragmentDoc}`;
-export const PricingConnectionDocument = gql`
-    query pricingConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PricingFilter) {
-  pricingConnection(
+    ${BookingPartsFragmentDoc}`;
+export const BookingConnectionDocument = gql`
+    query bookingConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: BookingFilter) {
+  bookingConnection(
     before: $before
     after: $after
     first: $first
@@ -227,12 +362,12 @@ export const PricingConnectionDocument = gql`
           }
           id
         }
-        ...PricingParts
+        ...BookingParts
       }
     }
   }
 }
-    ${PricingPartsFragmentDoc}`;
+    ${BookingPartsFragmentDoc}`;
 export function getSdk(requester) {
   return {
     page(variables, options) {
@@ -241,11 +376,11 @@ export function getSdk(requester) {
     pageConnection(variables, options) {
       return requester(PageConnectionDocument, variables, options);
     },
-    pricing(variables, options) {
-      return requester(PricingDocument, variables, options);
+    booking(variables, options) {
+      return requester(BookingDocument, variables, options);
     },
-    pricingConnection(variables, options) {
-      return requester(PricingConnectionDocument, variables, options);
+    bookingConnection(variables, options) {
+      return requester(BookingConnectionDocument, variables, options);
     }
   };
 }

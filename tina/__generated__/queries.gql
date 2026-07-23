@@ -53,8 +53,8 @@ query pageConnection($before: String, $after: String, $first: Float, $last: Floa
   }
 }
 
-query pricing($relativePath: String!) {
-  pricing(relativePath: $relativePath) {
+query booking($relativePath: String!) {
+  booking(relativePath: $relativePath) {
     ... on Document {
       _sys {
         filename
@@ -67,12 +67,12 @@ query pricing($relativePath: String!) {
       }
       id
     }
-    ...PricingParts
+    ...BookingParts
   }
 }
 
-query pricingConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PricingFilter) {
-  pricingConnection(
+query bookingConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: BookingFilter) {
+  bookingConnection(
     before: $before
     after: $after
     first: $first
@@ -102,7 +102,7 @@ query pricingConnection($before: String, $after: String, $first: Float, $last: F
           }
           id
         }
-        ...PricingParts
+        ...BookingParts
       }
     }
   }

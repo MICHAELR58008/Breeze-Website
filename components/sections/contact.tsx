@@ -20,6 +20,7 @@ export interface ContactProps {
   email?: string
   emailHref?: string
   hours?: string
+  [key: string]: any
 }
 
 const defaults: ContactProps = {

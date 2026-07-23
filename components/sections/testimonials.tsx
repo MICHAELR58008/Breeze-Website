@@ -13,6 +13,7 @@ export interface TestimonialsProps {
   heading?: string
   copy?: string
   reviews?: TestimonialReview[]
+  [key: string]: any
 }
 
 const defaults: TestimonialsProps = {

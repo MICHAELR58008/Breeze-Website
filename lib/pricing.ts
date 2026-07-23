@@ -1,36 +1,45 @@
-import sitePricing from "@/content/pricing/pricing.json"
+import siteBooking from "@/content/booking/booking.json"
 
-type PriceEntry = {
+export type PriceEntry = {
   key: string
   bedrooms: string
   bathrooms: string
   cents: number
 }
 
-type ServiceItemData = {
-  _template: string
+export type ServiceItemData = {
+  _template?: string
   id: string
   name: string
-  description: string
-  subtitle: string
-  features: string[]
-  prices: PriceEntry[]
+  description?: string
+  subtitle?: string
+  features?: string[]
+  basePriceCents?: number
+  pricePerBedroomCents?: number
+  pricePerBathroomCents?: number
 }
 
-type AddOnData = {
+export type AddOnData = {
   id: string
   name: string
   cents: number
 }
 
-type PricingData = {
+export type PricingData = {
   services: ServiceItemData[]
   addOns: AddOnData[]
 }
 
-const data = sitePricing as PricingData
+const data = (siteBooking as unknown) as PricingData
 
 export type AddOn = string
+export type ServiceType = string
+
+/** All valid service type IDs (dynamically derived from pricing data) */
+export const validServiceTypes = data.services.map((s) => s.id) as [string, ...string[]]
+
+/** All valid add-on IDs (dynamically derived from pricing data) */
+export const validAddOnIds = data.addOns.map((a) => a.id) as [string, ...string[]]
 
 /** Find a service by its unique id */
 export function findService(id: string): ServiceItemData | undefined {
@@ -65,18 +74,25 @@ export function calculateEstimate(
   bedrooms: number,
   bathrooms: number,
   selectedAddOns: string[],
+  customServices?: ServiceItemData[],
+  customAddOns?: AddOnData[],
 ): number | null {
-  const svc = findService(serviceId)
+  const activeServices = customServices || data.services || []
+  const activeAddOns = customAddOns || data.addOns || []
+  const svc = activeServices.find((s) => s.id === serviceId)
   if (!svc) return null
-  const key = `${bedrooms}-${bathrooms}`
-  const priceEntry = svc.prices.find((p: PriceEntry) => p.key === key)
-  if (!priceEntry) return null
-  const base = priceEntry.cents
-  const addOnTotal = selectedAddOns.reduce((sum, id) => {
-    const addon = data.addOns.find((a) => a.id === id)
+  if (!svc.basePriceCents || svc.basePriceCents === 0) return null
+
+  const base = svc.basePriceCents
+  const bedCost = (bedrooms || 0) * (svc.pricePerBedroomCents || 0)
+  const bathCost = (bathrooms || 0) * (svc.pricePerBathroomCents || 0)
+
+  const addOnsTotal = (selectedAddOns || []).reduce((sum, id) => {
+    const addon = activeAddOns.find((a) => a.id === id)
     return sum + (addon?.cents ?? 0)
   }, 0)
-  return base + addOnTotal
+
+  return base + bedCost + bathCost + addOnsTotal
 }
 
 export function formatPrice(cents: number) {

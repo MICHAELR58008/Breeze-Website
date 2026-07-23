@@ -1,6 +1,7 @@
 "use client"
 
-import { ArrowRight } from "lucide-react"
+import Image from "next/image"
+import { ArrowRight, ImagePlus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { SectionHeader } from "@/components/sections/shared"
 import { useBooking } from "@/components/booking/booking-drawer"
@@ -10,6 +11,8 @@ export interface ProcessStep {
   number: string
   title: string
   description: string
+  image?: string
+  [key: string]: any
 }
 
 export interface ProcessProps {
@@ -17,6 +20,7 @@ export interface ProcessProps {
   heading?: string
   copy?: string
   steps?: ProcessStep[]
+  [key: string]: any
 }
 
 const defaults: ProcessProps = {
@@ -49,12 +53,54 @@ export function Process(props: ProcessProps) {
           }}
         />
         <div data-tina-field={tinaField(props, "steps")} className="grid gap-px border-x border-b border-border bg-border md:grid-cols-2 lg:grid-cols-4">
-          {(steps || []).map((step) => (
-            <article key={step.number} className="flex min-h-72 flex-col bg-card p-6">
-              <span className="font-mono text-xs text-primary">{step.number}</span>
+          {(steps || []).map((step, index) => (
+            <article
+              key={step.number || `step-${index}`}
+              className="flex min-h-80 flex-col bg-card p-6"
+              data-tina-field={tinaField(step)}
+            >
+              <div className="flex items-center justify-between">
+                <span
+                  data-tina-field={tinaField(step, "number")}
+                  className="font-mono text-xs uppercase tracking-wider text-primary"
+                >
+                  {step.number}
+                </span>
+              </div>
+
+              {/* Image / Photo upload area for step */}
+              <div
+                className="relative my-4 flex h-36 w-full items-center justify-center overflow-hidden rounded-lg border border-border/50 bg-muted/20"
+                data-tina-field={tinaField(step, "image")}
+              >
+                {step.image ? (
+                  <Image
+                    src={step.image}
+                    alt={step.title || `Step ${step.number}`}
+                    fill
+                    className="object-cover transition-transform duration-300 hover:scale-105"
+                  />
+                ) : (
+                  <div className="flex flex-col items-center gap-1.5 p-3 text-center text-xs text-muted-foreground/60">
+                    <ImagePlus className="size-5 text-muted-foreground/40" />
+                    <span>Click to add photo</span>
+                  </div>
+                )}
+              </div>
+
               <div className="mt-auto">
-                <h3 className="mb-3 text-xl font-medium">{step.title}</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">{step.description}</p>
+                <h3
+                  data-tina-field={tinaField(step, "title")}
+                  className="mb-2 text-xl font-medium text-foreground"
+                >
+                  {step.title}
+                </h3>
+                <p
+                  data-tina-field={tinaField(step, "description")}
+                  className="text-sm leading-relaxed text-muted-foreground"
+                >
+                  {step.description}
+                </p>
               </div>
             </article>
           ))}

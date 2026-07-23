@@ -84,8 +84,8 @@ export type Query = {
   document: DocumentNode;
   page: Page;
   pageConnection: PageConnection;
-  pricing: Pricing;
-  pricingConnection: PricingConnection;
+  booking: Booking;
+  bookingConnection: BookingConnection;
 };
 
 
@@ -125,23 +125,23 @@ export type QueryPageConnectionArgs = {
 };
 
 
-export type QueryPricingArgs = {
+export type QueryBookingArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type QueryPricingConnectionArgs = {
+export type QueryBookingConnectionArgs = {
   before?: InputMaybe<Scalars['String']['input']>;
   after?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Float']['input']>;
   last?: InputMaybe<Scalars['Float']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<PricingFilter>;
+  filter?: InputMaybe<BookingFilter>;
 };
 
 export type DocumentFilter = {
   page?: InputMaybe<PageFilter>;
-  pricing?: InputMaybe<PricingFilter>;
+  booking?: InputMaybe<BookingFilter>;
 };
 
 export type DocumentConnectionEdges = {
@@ -181,7 +181,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Page | Pricing | Folder;
+export type DocumentNode = Page | Booking | Folder;
 
 export type PageSectionsHeroProofs = {
   __typename?: 'PageSectionsHeroProofs';
@@ -216,6 +216,7 @@ export type PageSectionsProcessSteps = {
   number?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
   description?: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
 };
 
 export type PageSectionsProcess = {
@@ -234,6 +235,8 @@ export type PageSectionsAbout = {
   tagline?: Maybe<Scalars['String']['output']>;
   bioParagraph1?: Maybe<Scalars['String']['output']>;
   bioParagraph2?: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+  focalPoint?: Maybe<Scalars['String']['output']>;
 };
 
 export type PageSectionsTestimonialsReviews = {
@@ -320,6 +323,7 @@ export type PageSectionsProcessStepsFilter = {
   number?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
   description?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
 };
 
 export type PageSectionsProcessFilter = {
@@ -336,6 +340,8 @@ export type PageSectionsAboutFilter = {
   tagline?: InputMaybe<StringFilter>;
   bioParagraph1?: InputMaybe<StringFilter>;
   bioParagraph2?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  focalPoint?: InputMaybe<StringFilter>;
 };
 
 export type PageSectionsTestimonialsReviewsFilter = {
@@ -392,58 +398,241 @@ export type PageConnection = Connection & {
   edges?: Maybe<Array<Maybe<PageConnectionEdges>>>;
 };
 
-export type PricingServicesDeepPrices = {
-  __typename?: 'PricingServicesDeepPrices';
-  key?: Maybe<Scalars['String']['output']>;
-  bedrooms?: Maybe<Scalars['String']['output']>;
-  bathrooms?: Maybe<Scalars['String']['output']>;
-  cents?: Maybe<Scalars['Float']['output']>;
-};
-
-export type PricingServicesDeep = {
-  __typename?: 'PricingServicesDeep';
+export type BookingServices = {
+  __typename?: 'BookingServices';
   id: Scalars['String']['output'];
   name: Scalars['String']['output'];
   description?: Maybe<Scalars['String']['output']>;
   subtitle?: Maybe<Scalars['String']['output']>;
   features?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  prices?: Maybe<Array<Maybe<PricingServicesDeepPrices>>>;
+  basePriceCents?: Maybe<Scalars['Float']['output']>;
+  pricePerBedroomCents?: Maybe<Scalars['Float']['output']>;
+  pricePerBathroomCents?: Maybe<Scalars['Float']['output']>;
 };
 
-export type PricingServicesRegularPrices = {
-  __typename?: 'PricingServicesRegularPrices';
-  key?: Maybe<Scalars['String']['output']>;
-  bedrooms?: Maybe<Scalars['String']['output']>;
-  bathrooms?: Maybe<Scalars['String']['output']>;
-  cents?: Maybe<Scalars['Float']['output']>;
-};
-
-export type PricingServicesRegular = {
-  __typename?: 'PricingServicesRegular';
-  id: Scalars['String']['output'];
-  name: Scalars['String']['output'];
-  description?: Maybe<Scalars['String']['output']>;
-  subtitle?: Maybe<Scalars['String']['output']>;
-  features?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  prices?: Maybe<Array<Maybe<PricingServicesRegularPrices>>>;
-};
-
-export type PricingServices = PricingServicesDeep | PricingServicesRegular;
-
-export type PricingAddOns = {
-  __typename?: 'PricingAddOns';
+export type BookingAddOns = {
+  __typename?: 'BookingAddOns';
   id?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   cents?: Maybe<Scalars['Float']['output']>;
 };
 
-export type Pricing = Node & Document & {
-  __typename?: 'Pricing';
-  services?: Maybe<Array<Maybe<PricingServices>>>;
-  addOns?: Maybe<Array<Maybe<PricingAddOns>>>;
+export type BookingTheme = {
+  __typename?: 'BookingTheme';
+  fontFamily?: Maybe<Scalars['String']['output']>;
+  primaryColor?: Maybe<Scalars['String']['output']>;
+  backgroundColor?: Maybe<Scalars['String']['output']>;
+  textColor?: Maybe<Scalars['String']['output']>;
+  borderRadius?: Maybe<Scalars['String']['output']>;
+};
+
+export type BookingStepsFieldsTextInput = {
+  __typename?: 'BookingStepsFieldsTextInput';
+  name?: Maybe<Scalars['String']['output']>;
+  label?: Maybe<Scalars['String']['output']>;
+  placeholder?: Maybe<Scalars['String']['output']>;
+  required?: Maybe<Scalars['Boolean']['output']>;
+  validationType?: Maybe<Scalars['String']['output']>;
+};
+
+export type BookingStepsFieldsNumberInput = {
+  __typename?: 'BookingStepsFieldsNumberInput';
+  name?: Maybe<Scalars['String']['output']>;
+  label?: Maybe<Scalars['String']['output']>;
+  min?: Maybe<Scalars['Float']['output']>;
+  max?: Maybe<Scalars['Float']['output']>;
+};
+
+export type BookingStepsFieldsChoiceInputOptions = {
+  __typename?: 'BookingStepsFieldsChoiceInputOptions';
+  id?: Maybe<Scalars['String']['output']>;
+  label?: Maybe<Scalars['String']['output']>;
+};
+
+export type BookingStepsFieldsChoiceInput = {
+  __typename?: 'BookingStepsFieldsChoiceInput';
+  name?: Maybe<Scalars['String']['output']>;
+  label?: Maybe<Scalars['String']['output']>;
+  options?: Maybe<Array<Maybe<BookingStepsFieldsChoiceInputOptions>>>;
+};
+
+export type BookingStepsFieldsDateInput = {
+  __typename?: 'BookingStepsFieldsDateInput';
+  name?: Maybe<Scalars['String']['output']>;
+  label?: Maybe<Scalars['String']['output']>;
+};
+
+export type BookingStepsFieldsPhotoUpload = {
+  __typename?: 'BookingStepsFieldsPhotoUpload';
+  label?: Maybe<Scalars['String']['output']>;
+  prompt?: Maybe<Scalars['String']['output']>;
+  hint?: Maybe<Scalars['String']['output']>;
+  selectedText?: Maybe<Scalars['String']['output']>;
+  emptyText?: Maybe<Scalars['String']['output']>;
+};
+
+export type BookingStepsFieldsRichTextHeading = {
+  __typename?: 'BookingStepsFieldsRichTextHeading';
+  text?: Maybe<Scalars['String']['output']>;
+};
+
+export type BookingStepsFieldsServicesSelector = {
+  __typename?: 'BookingStepsFieldsServicesSelector';
+  question?: Maybe<Scalars['String']['output']>;
+};
+
+export type BookingStepsFieldsAddonsSelector = {
+  __typename?: 'BookingStepsFieldsAddonsSelector';
+  question?: Maybe<Scalars['String']['output']>;
+};
+
+export type BookingStepsFieldsEstimateSummary = {
+  __typename?: 'BookingStepsFieldsEstimateSummary';
+  disclaimer?: Maybe<Scalars['String']['output']>;
+};
+
+export type BookingStepsFieldsImageBlock = {
+  __typename?: 'BookingStepsFieldsImageBlock';
+  src?: Maybe<Scalars['String']['output']>;
+  alt?: Maybe<Scalars['String']['output']>;
+  caption?: Maybe<Scalars['String']['output']>;
+  aspect?: Maybe<Scalars['String']['output']>;
+};
+
+export type BookingStepsFieldsInfoCard = {
+  __typename?: 'BookingStepsFieldsInfoCard';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<Scalars['String']['output']>;
+  variant?: Maybe<Scalars['String']['output']>;
+};
+
+export type BookingStepsFieldsInfoBanner = {
+  __typename?: 'BookingStepsFieldsInfoBanner';
+  text?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<Scalars['String']['output']>;
+  dismissible?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type BookingStepsFieldsTextareaInput = {
+  __typename?: 'BookingStepsFieldsTextareaInput';
+  name?: Maybe<Scalars['String']['output']>;
+  label?: Maybe<Scalars['String']['output']>;
+  placeholder?: Maybe<Scalars['String']['output']>;
+  required?: Maybe<Scalars['Boolean']['output']>;
+  rows?: Maybe<Scalars['Float']['output']>;
+};
+
+export type BookingStepsFieldsSelectInputOptions = {
+  __typename?: 'BookingStepsFieldsSelectInputOptions';
+  value?: Maybe<Scalars['String']['output']>;
+  label?: Maybe<Scalars['String']['output']>;
+};
+
+export type BookingStepsFieldsSelectInput = {
+  __typename?: 'BookingStepsFieldsSelectInput';
+  name?: Maybe<Scalars['String']['output']>;
+  label?: Maybe<Scalars['String']['output']>;
+  options?: Maybe<Array<Maybe<BookingStepsFieldsSelectInputOptions>>>;
+  required?: Maybe<Scalars['Boolean']['output']>;
+  defaultValue?: Maybe<Scalars['String']['output']>;
+};
+
+export type BookingStepsFieldsCheckboxGroupOptions = {
+  __typename?: 'BookingStepsFieldsCheckboxGroupOptions';
+  value?: Maybe<Scalars['String']['output']>;
+  label?: Maybe<Scalars['String']['output']>;
+  priceCents?: Maybe<Scalars['Float']['output']>;
+};
+
+export type BookingStepsFieldsCheckboxGroup = {
+  __typename?: 'BookingStepsFieldsCheckboxGroup';
+  name?: Maybe<Scalars['String']['output']>;
+  label?: Maybe<Scalars['String']['output']>;
+  options?: Maybe<Array<Maybe<BookingStepsFieldsCheckboxGroupOptions>>>;
+  required?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type BookingStepsFields = BookingStepsFieldsTextInput | BookingStepsFieldsNumberInput | BookingStepsFieldsChoiceInput | BookingStepsFieldsDateInput | BookingStepsFieldsPhotoUpload | BookingStepsFieldsRichTextHeading | BookingStepsFieldsServicesSelector | BookingStepsFieldsAddonsSelector | BookingStepsFieldsEstimateSummary | BookingStepsFieldsImageBlock | BookingStepsFieldsInfoCard | BookingStepsFieldsInfoBanner | BookingStepsFieldsTextareaInput | BookingStepsFieldsSelectInput | BookingStepsFieldsCheckboxGroup;
+
+export type BookingSteps = {
+  __typename?: 'BookingSteps';
+  title: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  disabled?: Maybe<Scalars['Boolean']['output']>;
+  showIfField?: Maybe<Scalars['String']['output']>;
+  showIfOperator?: Maybe<Scalars['String']['output']>;
+  showIfValue?: Maybe<Scalars['String']['output']>;
+  fields?: Maybe<Array<Maybe<BookingStepsFields>>>;
+};
+
+export type BookingHeader = {
+  __typename?: 'BookingHeader';
+  badge?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type BookingTimeWindows = {
+  __typename?: 'BookingTimeWindows';
+  id?: Maybe<Scalars['String']['output']>;
+  label?: Maybe<Scalars['String']['output']>;
+};
+
+export type BookingReviewLabels = {
+  __typename?: 'BookingReviewLabels';
+  heading?: Maybe<Scalars['String']['output']>;
+  rowHome?: Maybe<Scalars['String']['output']>;
+  rowDate?: Maybe<Scalars['String']['output']>;
+  rowWindow?: Maybe<Scalars['String']['output']>;
+  rowPhotos?: Maybe<Scalars['String']['output']>;
+  disclaimer?: Maybe<Scalars['String']['output']>;
+};
+
+export type BookingNavigation = {
+  __typename?: 'BookingNavigation';
+  back?: Maybe<Scalars['String']['output']>;
+  continue?: Maybe<Scalars['String']['output']>;
+  submit?: Maybe<Scalars['String']['output']>;
+};
+
+export type BookingSuccess = {
+  __typename?: 'BookingSuccess';
+  title?: Maybe<Scalars['String']['output']>;
+  message?: Maybe<Scalars['String']['output']>;
+  buttonText?: Maybe<Scalars['String']['output']>;
+};
+
+export type BookingEstimate = {
+  __typename?: 'BookingEstimate';
+  label?: Maybe<Scalars['String']['output']>;
+  customQuote?: Maybe<Scalars['String']['output']>;
+  disclaimer?: Maybe<Scalars['String']['output']>;
+};
+
+export type Booking = Node & Document & {
+  __typename?: 'Booking';
+  pricingHub?: Maybe<Scalars['String']['output']>;
+  previewOpen?: Maybe<Scalars['Boolean']['output']>;
+  services?: Maybe<Array<Maybe<BookingServices>>>;
+  addOns?: Maybe<Array<Maybe<BookingAddOns>>>;
+  theme?: Maybe<BookingTheme>;
+  steps?: Maybe<Array<Maybe<BookingSteps>>>;
+  header?: Maybe<BookingHeader>;
+  stepNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  timeWindows?: Maybe<Array<Maybe<BookingTimeWindows>>>;
+  reviewLabels?: Maybe<BookingReviewLabels>;
+  navigation?: Maybe<BookingNavigation>;
+  success?: Maybe<BookingSuccess>;
+  estimate?: Maybe<BookingEstimate>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
+};
+
+export type BooleanFilter = {
+  eq?: InputMaybe<Scalars['Boolean']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type NumberFilter = {
@@ -456,65 +645,233 @@ export type NumberFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
 };
 
-export type PricingServicesDeepPricesFilter = {
-  key?: InputMaybe<StringFilter>;
-  bedrooms?: InputMaybe<StringFilter>;
-  bathrooms?: InputMaybe<StringFilter>;
-  cents?: InputMaybe<NumberFilter>;
-};
-
-export type PricingServicesDeepFilter = {
+export type BookingServicesFilter = {
   id?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringFilter>;
   description?: InputMaybe<StringFilter>;
   subtitle?: InputMaybe<StringFilter>;
   features?: InputMaybe<StringFilter>;
-  prices?: InputMaybe<PricingServicesDeepPricesFilter>;
+  basePriceCents?: InputMaybe<NumberFilter>;
+  pricePerBedroomCents?: InputMaybe<NumberFilter>;
+  pricePerBathroomCents?: InputMaybe<NumberFilter>;
 };
 
-export type PricingServicesRegularPricesFilter = {
-  key?: InputMaybe<StringFilter>;
-  bedrooms?: InputMaybe<StringFilter>;
-  bathrooms?: InputMaybe<StringFilter>;
+export type BookingAddOnsFilter = {
+  id?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
   cents?: InputMaybe<NumberFilter>;
 };
 
-export type PricingServicesRegularFilter = {
-  id?: InputMaybe<StringFilter>;
+export type BookingThemeFilter = {
+  fontFamily?: InputMaybe<StringFilter>;
+  primaryColor?: InputMaybe<StringFilter>;
+  backgroundColor?: InputMaybe<StringFilter>;
+  textColor?: InputMaybe<StringFilter>;
+  borderRadius?: InputMaybe<StringFilter>;
+};
+
+export type BookingStepsFieldsTextInputFilter = {
   name?: InputMaybe<StringFilter>;
+  label?: InputMaybe<StringFilter>;
+  placeholder?: InputMaybe<StringFilter>;
+  required?: InputMaybe<BooleanFilter>;
+  validationType?: InputMaybe<StringFilter>;
+};
+
+export type BookingStepsFieldsNumberInputFilter = {
+  name?: InputMaybe<StringFilter>;
+  label?: InputMaybe<StringFilter>;
+  min?: InputMaybe<NumberFilter>;
+  max?: InputMaybe<NumberFilter>;
+};
+
+export type BookingStepsFieldsChoiceInputOptionsFilter = {
+  id?: InputMaybe<StringFilter>;
+  label?: InputMaybe<StringFilter>;
+};
+
+export type BookingStepsFieldsChoiceInputFilter = {
+  name?: InputMaybe<StringFilter>;
+  label?: InputMaybe<StringFilter>;
+  options?: InputMaybe<BookingStepsFieldsChoiceInputOptionsFilter>;
+};
+
+export type BookingStepsFieldsDateInputFilter = {
+  name?: InputMaybe<StringFilter>;
+  label?: InputMaybe<StringFilter>;
+};
+
+export type BookingStepsFieldsPhotoUploadFilter = {
+  label?: InputMaybe<StringFilter>;
+  prompt?: InputMaybe<StringFilter>;
+  hint?: InputMaybe<StringFilter>;
+  selectedText?: InputMaybe<StringFilter>;
+  emptyText?: InputMaybe<StringFilter>;
+};
+
+export type BookingStepsFieldsRichTextHeadingFilter = {
+  text?: InputMaybe<StringFilter>;
+};
+
+export type BookingStepsFieldsServicesSelectorFilter = {
+  question?: InputMaybe<StringFilter>;
+};
+
+export type BookingStepsFieldsAddonsSelectorFilter = {
+  question?: InputMaybe<StringFilter>;
+};
+
+export type BookingStepsFieldsEstimateSummaryFilter = {
+  disclaimer?: InputMaybe<StringFilter>;
+};
+
+export type BookingStepsFieldsImageBlockFilter = {
+  src?: InputMaybe<ImageFilter>;
+  alt?: InputMaybe<StringFilter>;
+  caption?: InputMaybe<StringFilter>;
+  aspect?: InputMaybe<StringFilter>;
+};
+
+export type BookingStepsFieldsInfoCardFilter = {
+  title?: InputMaybe<StringFilter>;
   description?: InputMaybe<StringFilter>;
-  subtitle?: InputMaybe<StringFilter>;
-  features?: InputMaybe<StringFilter>;
-  prices?: InputMaybe<PricingServicesRegularPricesFilter>;
+  icon?: InputMaybe<StringFilter>;
+  variant?: InputMaybe<StringFilter>;
 };
 
-export type PricingServicesFilter = {
-  deep?: InputMaybe<PricingServicesDeepFilter>;
-  regular?: InputMaybe<PricingServicesRegularFilter>;
+export type BookingStepsFieldsInfoBannerFilter = {
+  text?: InputMaybe<StringFilter>;
+  type?: InputMaybe<StringFilter>;
+  dismissible?: InputMaybe<BooleanFilter>;
 };
 
-export type PricingAddOnsFilter = {
-  id?: InputMaybe<StringFilter>;
+export type BookingStepsFieldsTextareaInputFilter = {
   name?: InputMaybe<StringFilter>;
-  cents?: InputMaybe<NumberFilter>;
+  label?: InputMaybe<StringFilter>;
+  placeholder?: InputMaybe<StringFilter>;
+  required?: InputMaybe<BooleanFilter>;
+  rows?: InputMaybe<NumberFilter>;
 };
 
-export type PricingFilter = {
-  services?: InputMaybe<PricingServicesFilter>;
-  addOns?: InputMaybe<PricingAddOnsFilter>;
+export type BookingStepsFieldsSelectInputOptionsFilter = {
+  value?: InputMaybe<StringFilter>;
+  label?: InputMaybe<StringFilter>;
 };
 
-export type PricingConnectionEdges = {
-  __typename?: 'PricingConnectionEdges';
+export type BookingStepsFieldsSelectInputFilter = {
+  name?: InputMaybe<StringFilter>;
+  label?: InputMaybe<StringFilter>;
+  options?: InputMaybe<BookingStepsFieldsSelectInputOptionsFilter>;
+  required?: InputMaybe<BooleanFilter>;
+  defaultValue?: InputMaybe<StringFilter>;
+};
+
+export type BookingStepsFieldsCheckboxGroupOptionsFilter = {
+  value?: InputMaybe<StringFilter>;
+  label?: InputMaybe<StringFilter>;
+  priceCents?: InputMaybe<NumberFilter>;
+};
+
+export type BookingStepsFieldsCheckboxGroupFilter = {
+  name?: InputMaybe<StringFilter>;
+  label?: InputMaybe<StringFilter>;
+  options?: InputMaybe<BookingStepsFieldsCheckboxGroupOptionsFilter>;
+  required?: InputMaybe<BooleanFilter>;
+};
+
+export type BookingStepsFieldsFilter = {
+  textInput?: InputMaybe<BookingStepsFieldsTextInputFilter>;
+  numberInput?: InputMaybe<BookingStepsFieldsNumberInputFilter>;
+  choiceInput?: InputMaybe<BookingStepsFieldsChoiceInputFilter>;
+  dateInput?: InputMaybe<BookingStepsFieldsDateInputFilter>;
+  photoUpload?: InputMaybe<BookingStepsFieldsPhotoUploadFilter>;
+  richTextHeading?: InputMaybe<BookingStepsFieldsRichTextHeadingFilter>;
+  servicesSelector?: InputMaybe<BookingStepsFieldsServicesSelectorFilter>;
+  addonsSelector?: InputMaybe<BookingStepsFieldsAddonsSelectorFilter>;
+  estimateSummary?: InputMaybe<BookingStepsFieldsEstimateSummaryFilter>;
+  imageBlock?: InputMaybe<BookingStepsFieldsImageBlockFilter>;
+  infoCard?: InputMaybe<BookingStepsFieldsInfoCardFilter>;
+  infoBanner?: InputMaybe<BookingStepsFieldsInfoBannerFilter>;
+  textareaInput?: InputMaybe<BookingStepsFieldsTextareaInputFilter>;
+  selectInput?: InputMaybe<BookingStepsFieldsSelectInputFilter>;
+  checkboxGroup?: InputMaybe<BookingStepsFieldsCheckboxGroupFilter>;
+};
+
+export type BookingStepsFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  disabled?: InputMaybe<BooleanFilter>;
+  showIfField?: InputMaybe<StringFilter>;
+  showIfOperator?: InputMaybe<StringFilter>;
+  showIfValue?: InputMaybe<StringFilter>;
+  fields?: InputMaybe<BookingStepsFieldsFilter>;
+};
+
+export type BookingHeaderFilter = {
+  badge?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type BookingTimeWindowsFilter = {
+  id?: InputMaybe<StringFilter>;
+  label?: InputMaybe<StringFilter>;
+};
+
+export type BookingReviewLabelsFilter = {
+  heading?: InputMaybe<StringFilter>;
+  rowHome?: InputMaybe<StringFilter>;
+  rowDate?: InputMaybe<StringFilter>;
+  rowWindow?: InputMaybe<StringFilter>;
+  rowPhotos?: InputMaybe<StringFilter>;
+  disclaimer?: InputMaybe<StringFilter>;
+};
+
+export type BookingNavigationFilter = {
+  back?: InputMaybe<StringFilter>;
+  continue?: InputMaybe<StringFilter>;
+  submit?: InputMaybe<StringFilter>;
+};
+
+export type BookingSuccessFilter = {
+  title?: InputMaybe<StringFilter>;
+  message?: InputMaybe<StringFilter>;
+  buttonText?: InputMaybe<StringFilter>;
+};
+
+export type BookingEstimateFilter = {
+  label?: InputMaybe<StringFilter>;
+  customQuote?: InputMaybe<StringFilter>;
+  disclaimer?: InputMaybe<StringFilter>;
+};
+
+export type BookingFilter = {
+  pricingHub?: InputMaybe<StringFilter>;
+  previewOpen?: InputMaybe<BooleanFilter>;
+  services?: InputMaybe<BookingServicesFilter>;
+  addOns?: InputMaybe<BookingAddOnsFilter>;
+  theme?: InputMaybe<BookingThemeFilter>;
+  steps?: InputMaybe<BookingStepsFilter>;
+  header?: InputMaybe<BookingHeaderFilter>;
+  stepNames?: InputMaybe<StringFilter>;
+  timeWindows?: InputMaybe<BookingTimeWindowsFilter>;
+  reviewLabels?: InputMaybe<BookingReviewLabelsFilter>;
+  navigation?: InputMaybe<BookingNavigationFilter>;
+  success?: InputMaybe<BookingSuccessFilter>;
+  estimate?: InputMaybe<BookingEstimateFilter>;
+};
+
+export type BookingConnectionEdges = {
+  __typename?: 'BookingConnectionEdges';
   cursor: Scalars['String']['output'];
-  node?: Maybe<Pricing>;
+  node?: Maybe<Booking>;
 };
 
-export type PricingConnection = Connection & {
-  __typename?: 'PricingConnection';
+export type BookingConnection = Connection & {
+  __typename?: 'BookingConnection';
   pageInfo: PageInfo;
   totalCount: Scalars['Float']['output'];
-  edges?: Maybe<Array<Maybe<PricingConnectionEdges>>>;
+  edges?: Maybe<Array<Maybe<BookingConnectionEdges>>>;
 };
 
 export type Mutation = {
@@ -526,8 +883,8 @@ export type Mutation = {
   createFolder: DocumentNode;
   updatePage: Page;
   createPage: Page;
-  updatePricing: Pricing;
-  createPricing: Pricing;
+  updateBooking: Booking;
+  createBooking: Booking;
 };
 
 
@@ -576,26 +933,26 @@ export type MutationCreatePageArgs = {
 };
 
 
-export type MutationUpdatePricingArgs = {
+export type MutationUpdateBookingArgs = {
   relativePath: Scalars['String']['input'];
-  params: PricingMutation;
+  params: BookingMutation;
 };
 
 
-export type MutationCreatePricingArgs = {
+export type MutationCreateBookingArgs = {
   relativePath: Scalars['String']['input'];
-  params: PricingMutation;
+  params: BookingMutation;
 };
 
 export type DocumentUpdateMutation = {
   page?: InputMaybe<PageMutation>;
-  pricing?: InputMaybe<PricingMutation>;
+  booking?: InputMaybe<BookingMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DocumentMutation = {
   page?: InputMaybe<PageMutation>;
-  pricing?: InputMaybe<PricingMutation>;
+  booking?: InputMaybe<BookingMutation>;
 };
 
 export type PageSectionsHeroProofsMutation = {
@@ -627,6 +984,7 @@ export type PageSectionsProcessStepsMutation = {
   number?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PageSectionsProcessMutation = {
@@ -643,6 +1001,8 @@ export type PageSectionsAboutMutation = {
   tagline?: InputMaybe<Scalars['String']['input']>;
   bioParagraph1?: InputMaybe<Scalars['String']['input']>;
   bioParagraph2?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  focalPoint?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PageSectionsTestimonialsReviewsMutation = {
@@ -686,64 +1046,232 @@ export type PageMutation = {
   sections?: InputMaybe<Array<InputMaybe<PageSectionsMutation>>>;
 };
 
-export type PricingServicesDeepPricesMutation = {
-  key?: InputMaybe<Scalars['String']['input']>;
-  bedrooms?: InputMaybe<Scalars['String']['input']>;
-  bathrooms?: InputMaybe<Scalars['String']['input']>;
-  cents?: InputMaybe<Scalars['Float']['input']>;
-};
-
-export type PricingServicesDeepMutation = {
+export type BookingServicesMutation = {
   id?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   subtitle?: InputMaybe<Scalars['String']['input']>;
   features?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  prices?: InputMaybe<Array<InputMaybe<PricingServicesDeepPricesMutation>>>;
+  basePriceCents?: InputMaybe<Scalars['Float']['input']>;
+  pricePerBedroomCents?: InputMaybe<Scalars['Float']['input']>;
+  pricePerBathroomCents?: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type PricingServicesRegularPricesMutation = {
-  key?: InputMaybe<Scalars['String']['input']>;
-  bedrooms?: InputMaybe<Scalars['String']['input']>;
-  bathrooms?: InputMaybe<Scalars['String']['input']>;
+export type BookingAddOnsMutation = {
+  id?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
   cents?: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type PricingServicesRegularMutation = {
-  id?: InputMaybe<Scalars['String']['input']>;
+export type BookingThemeMutation = {
+  fontFamily?: InputMaybe<Scalars['String']['input']>;
+  primaryColor?: InputMaybe<Scalars['String']['input']>;
+  backgroundColor?: InputMaybe<Scalars['String']['input']>;
+  textColor?: InputMaybe<Scalars['String']['input']>;
+  borderRadius?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type BookingStepsFieldsTextInputMutation = {
   name?: InputMaybe<Scalars['String']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  placeholder?: InputMaybe<Scalars['String']['input']>;
+  required?: InputMaybe<Scalars['Boolean']['input']>;
+  validationType?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type BookingStepsFieldsNumberInputMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  min?: InputMaybe<Scalars['Float']['input']>;
+  max?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type BookingStepsFieldsChoiceInputOptionsMutation = {
+  id?: InputMaybe<Scalars['String']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type BookingStepsFieldsChoiceInputMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  options?: InputMaybe<Array<InputMaybe<BookingStepsFieldsChoiceInputOptionsMutation>>>;
+};
+
+export type BookingStepsFieldsDateInputMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type BookingStepsFieldsPhotoUploadMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  prompt?: InputMaybe<Scalars['String']['input']>;
+  hint?: InputMaybe<Scalars['String']['input']>;
+  selectedText?: InputMaybe<Scalars['String']['input']>;
+  emptyText?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type BookingStepsFieldsRichTextHeadingMutation = {
+  text?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type BookingStepsFieldsServicesSelectorMutation = {
+  question?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type BookingStepsFieldsAddonsSelectorMutation = {
+  question?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type BookingStepsFieldsEstimateSummaryMutation = {
+  disclaimer?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type BookingStepsFieldsImageBlockMutation = {
+  src?: InputMaybe<Scalars['String']['input']>;
+  alt?: InputMaybe<Scalars['String']['input']>;
+  caption?: InputMaybe<Scalars['String']['input']>;
+  aspect?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type BookingStepsFieldsInfoCardMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
-  subtitle?: InputMaybe<Scalars['String']['input']>;
-  features?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  prices?: InputMaybe<Array<InputMaybe<PricingServicesRegularPricesMutation>>>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+  variant?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type PricingServicesMutation = {
-  deep?: InputMaybe<PricingServicesDeepMutation>;
-  regular?: InputMaybe<PricingServicesRegularMutation>;
+export type BookingStepsFieldsInfoBannerMutation = {
+  text?: InputMaybe<Scalars['String']['input']>;
+  type?: InputMaybe<Scalars['String']['input']>;
+  dismissible?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-export type PricingAddOnsMutation = {
-  id?: InputMaybe<Scalars['String']['input']>;
+export type BookingStepsFieldsTextareaInputMutation = {
   name?: InputMaybe<Scalars['String']['input']>;
-  cents?: InputMaybe<Scalars['Float']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  placeholder?: InputMaybe<Scalars['String']['input']>;
+  required?: InputMaybe<Scalars['Boolean']['input']>;
+  rows?: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type PricingMutation = {
-  services?: InputMaybe<Array<InputMaybe<PricingServicesMutation>>>;
-  addOns?: InputMaybe<Array<InputMaybe<PricingAddOnsMutation>>>;
+export type BookingStepsFieldsSelectInputOptionsMutation = {
+  value?: InputMaybe<Scalars['String']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type PagePartsFragment = { __typename: 'Page', sections?: Array<{ __typename: 'PageSectionsHero', location?: string | null, headingLine1?: string | null, headingLine2?: string | null, subheading?: string | null, phoneNumber?: string | null, calloutTitle?: string | null, calloutText?: string | null, imageSrc?: string | null, imageAlt?: string | null, proofs?: Array<{ __typename: 'PageSectionsHeroProofs', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageSectionsServices', eyebrow?: string | null, heading?: string | null, copy?: string | null, disclaimer?: string | null } | { __typename: 'PageSectionsProcess', eyebrow?: string | null, heading?: string | null, copy?: string | null, steps?: Array<{ __typename: 'PageSectionsProcessSteps', number?: string | null, title?: string | null, description?: string | null } | null> | null } | { __typename: 'PageSectionsAbout', eyebrow?: string | null, ownerName?: string | null, nameInitial?: string | null, tagline?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null } | { __typename: 'PageSectionsTestimonials', eyebrow?: string | null, heading?: string | null, copy?: string | null, reviews?: Array<{ __typename: 'PageSectionsTestimonialsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsContact', eyebrow?: string | null, heading?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null } | { __typename: 'PageSectionsFooter', tagline?: string | null } | null> | null };
+export type BookingStepsFieldsSelectInputMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  options?: InputMaybe<Array<InputMaybe<BookingStepsFieldsSelectInputOptionsMutation>>>;
+  required?: InputMaybe<Scalars['Boolean']['input']>;
+  defaultValue?: InputMaybe<Scalars['String']['input']>;
+};
 
-export type PricingPartsFragment = { __typename: 'Pricing', services?: Array<{ __typename: 'PricingServicesDeep', id: string, name: string, description?: string | null, subtitle?: string | null, features?: Array<string | null> | null, prices?: Array<{ __typename: 'PricingServicesDeepPrices', key?: string | null, bedrooms?: string | null, bathrooms?: string | null, cents?: number | null } | null> | null } | { __typename: 'PricingServicesRegular', id: string, name: string, description?: string | null, subtitle?: string | null, features?: Array<string | null> | null, prices?: Array<{ __typename: 'PricingServicesRegularPrices', key?: string | null, bedrooms?: string | null, bathrooms?: string | null, cents?: number | null } | null> | null } | null> | null, addOns?: Array<{ __typename: 'PricingAddOns', id?: string | null, name?: string | null, cents?: number | null } | null> | null };
+export type BookingStepsFieldsCheckboxGroupOptionsMutation = {
+  value?: InputMaybe<Scalars['String']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  priceCents?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type BookingStepsFieldsCheckboxGroupMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  options?: InputMaybe<Array<InputMaybe<BookingStepsFieldsCheckboxGroupOptionsMutation>>>;
+  required?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type BookingStepsFieldsMutation = {
+  textInput?: InputMaybe<BookingStepsFieldsTextInputMutation>;
+  numberInput?: InputMaybe<BookingStepsFieldsNumberInputMutation>;
+  choiceInput?: InputMaybe<BookingStepsFieldsChoiceInputMutation>;
+  dateInput?: InputMaybe<BookingStepsFieldsDateInputMutation>;
+  photoUpload?: InputMaybe<BookingStepsFieldsPhotoUploadMutation>;
+  richTextHeading?: InputMaybe<BookingStepsFieldsRichTextHeadingMutation>;
+  servicesSelector?: InputMaybe<BookingStepsFieldsServicesSelectorMutation>;
+  addonsSelector?: InputMaybe<BookingStepsFieldsAddonsSelectorMutation>;
+  estimateSummary?: InputMaybe<BookingStepsFieldsEstimateSummaryMutation>;
+  imageBlock?: InputMaybe<BookingStepsFieldsImageBlockMutation>;
+  infoCard?: InputMaybe<BookingStepsFieldsInfoCardMutation>;
+  infoBanner?: InputMaybe<BookingStepsFieldsInfoBannerMutation>;
+  textareaInput?: InputMaybe<BookingStepsFieldsTextareaInputMutation>;
+  selectInput?: InputMaybe<BookingStepsFieldsSelectInputMutation>;
+  checkboxGroup?: InputMaybe<BookingStepsFieldsCheckboxGroupMutation>;
+};
+
+export type BookingStepsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  disabled?: InputMaybe<Scalars['Boolean']['input']>;
+  showIfField?: InputMaybe<Scalars['String']['input']>;
+  showIfOperator?: InputMaybe<Scalars['String']['input']>;
+  showIfValue?: InputMaybe<Scalars['String']['input']>;
+  fields?: InputMaybe<Array<InputMaybe<BookingStepsFieldsMutation>>>;
+};
+
+export type BookingHeaderMutation = {
+  badge?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type BookingTimeWindowsMutation = {
+  id?: InputMaybe<Scalars['String']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type BookingReviewLabelsMutation = {
+  heading?: InputMaybe<Scalars['String']['input']>;
+  rowHome?: InputMaybe<Scalars['String']['input']>;
+  rowDate?: InputMaybe<Scalars['String']['input']>;
+  rowWindow?: InputMaybe<Scalars['String']['input']>;
+  rowPhotos?: InputMaybe<Scalars['String']['input']>;
+  disclaimer?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type BookingNavigationMutation = {
+  back?: InputMaybe<Scalars['String']['input']>;
+  continue?: InputMaybe<Scalars['String']['input']>;
+  submit?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type BookingSuccessMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  message?: InputMaybe<Scalars['String']['input']>;
+  buttonText?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type BookingEstimateMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  customQuote?: InputMaybe<Scalars['String']['input']>;
+  disclaimer?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type BookingMutation = {
+  pricingHub?: InputMaybe<Scalars['String']['input']>;
+  previewOpen?: InputMaybe<Scalars['Boolean']['input']>;
+  services?: InputMaybe<Array<InputMaybe<BookingServicesMutation>>>;
+  addOns?: InputMaybe<Array<InputMaybe<BookingAddOnsMutation>>>;
+  theme?: InputMaybe<BookingThemeMutation>;
+  steps?: InputMaybe<Array<InputMaybe<BookingStepsMutation>>>;
+  header?: InputMaybe<BookingHeaderMutation>;
+  stepNames?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  timeWindows?: InputMaybe<Array<InputMaybe<BookingTimeWindowsMutation>>>;
+  reviewLabels?: InputMaybe<BookingReviewLabelsMutation>;
+  navigation?: InputMaybe<BookingNavigationMutation>;
+  success?: InputMaybe<BookingSuccessMutation>;
+  estimate?: InputMaybe<BookingEstimateMutation>;
+};
+
+export type PagePartsFragment = { __typename: 'Page', sections?: Array<{ __typename: 'PageSectionsHero', location?: string | null, headingLine1?: string | null, headingLine2?: string | null, subheading?: string | null, phoneNumber?: string | null, calloutTitle?: string | null, calloutText?: string | null, imageSrc?: string | null, imageAlt?: string | null, proofs?: Array<{ __typename: 'PageSectionsHeroProofs', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageSectionsServices', eyebrow?: string | null, heading?: string | null, copy?: string | null, disclaimer?: string | null } | { __typename: 'PageSectionsProcess', eyebrow?: string | null, heading?: string | null, copy?: string | null, steps?: Array<{ __typename: 'PageSectionsProcessSteps', number?: string | null, title?: string | null, description?: string | null, image?: string | null } | null> | null } | { __typename: 'PageSectionsAbout', eyebrow?: string | null, ownerName?: string | null, nameInitial?: string | null, tagline?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null, image?: string | null, focalPoint?: string | null } | { __typename: 'PageSectionsTestimonials', eyebrow?: string | null, heading?: string | null, copy?: string | null, reviews?: Array<{ __typename: 'PageSectionsTestimonialsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsContact', eyebrow?: string | null, heading?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null } | { __typename: 'PageSectionsFooter', tagline?: string | null } | null> | null };
+
+export type BookingPartsFragment = { __typename: 'Booking', pricingHub?: string | null, previewOpen?: boolean | null, stepNames?: Array<string | null> | null, services?: Array<{ __typename: 'BookingServices', id: string, name: string, description?: string | null, subtitle?: string | null, features?: Array<string | null> | null, basePriceCents?: number | null, pricePerBedroomCents?: number | null, pricePerBathroomCents?: number | null } | null> | null, addOns?: Array<{ __typename: 'BookingAddOns', id?: string | null, name?: string | null, cents?: number | null } | null> | null, theme?: { __typename: 'BookingTheme', fontFamily?: string | null, primaryColor?: string | null, backgroundColor?: string | null, textColor?: string | null, borderRadius?: string | null } | null, steps?: Array<{ __typename: 'BookingSteps', title: string, description?: string | null, disabled?: boolean | null, showIfField?: string | null, showIfOperator?: string | null, showIfValue?: string | null, fields?: Array<{ __typename: 'BookingStepsFieldsTextInput', name?: string | null, label?: string | null, placeholder?: string | null, required?: boolean | null, validationType?: string | null } | { __typename: 'BookingStepsFieldsNumberInput', name?: string | null, label?: string | null, min?: number | null, max?: number | null } | { __typename: 'BookingStepsFieldsChoiceInput', name?: string | null, label?: string | null, options?: Array<{ __typename: 'BookingStepsFieldsChoiceInputOptions', id?: string | null, label?: string | null } | null> | null } | { __typename: 'BookingStepsFieldsDateInput', name?: string | null, label?: string | null } | { __typename: 'BookingStepsFieldsPhotoUpload', label?: string | null, prompt?: string | null, hint?: string | null, selectedText?: string | null, emptyText?: string | null } | { __typename: 'BookingStepsFieldsRichTextHeading', text?: string | null } | { __typename: 'BookingStepsFieldsServicesSelector', question?: string | null } | { __typename: 'BookingStepsFieldsAddonsSelector', question?: string | null } | { __typename: 'BookingStepsFieldsEstimateSummary', disclaimer?: string | null } | { __typename: 'BookingStepsFieldsImageBlock', src?: string | null, alt?: string | null, caption?: string | null, aspect?: string | null } | { __typename: 'BookingStepsFieldsInfoCard', title?: string | null, description?: string | null, icon?: string | null, variant?: string | null } | { __typename: 'BookingStepsFieldsInfoBanner', text?: string | null, type?: string | null, dismissible?: boolean | null } | { __typename: 'BookingStepsFieldsTextareaInput', name?: string | null, label?: string | null, placeholder?: string | null, required?: boolean | null, rows?: number | null } | { __typename: 'BookingStepsFieldsSelectInput', name?: string | null, label?: string | null, required?: boolean | null, defaultValue?: string | null, options?: Array<{ __typename: 'BookingStepsFieldsSelectInputOptions', value?: string | null, label?: string | null } | null> | null } | { __typename: 'BookingStepsFieldsCheckboxGroup', name?: string | null, label?: string | null, required?: boolean | null, options?: Array<{ __typename: 'BookingStepsFieldsCheckboxGroupOptions', value?: string | null, label?: string | null, priceCents?: number | null } | null> | null } | null> | null } | null> | null, header?: { __typename: 'BookingHeader', badge?: string | null, title?: string | null, description?: string | null } | null, timeWindows?: Array<{ __typename: 'BookingTimeWindows', id?: string | null, label?: string | null } | null> | null, reviewLabels?: { __typename: 'BookingReviewLabels', heading?: string | null, rowHome?: string | null, rowDate?: string | null, rowWindow?: string | null, rowPhotos?: string | null, disclaimer?: string | null } | null, navigation?: { __typename: 'BookingNavigation', back?: string | null, continue?: string | null, submit?: string | null } | null, success?: { __typename: 'BookingSuccess', title?: string | null, message?: string | null, buttonText?: string | null } | null, estimate?: { __typename: 'BookingEstimate', label?: string | null, customQuote?: string | null, disclaimer?: string | null } | null };
 
 export type PageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'PageSectionsHero', location?: string | null, headingLine1?: string | null, headingLine2?: string | null, subheading?: string | null, phoneNumber?: string | null, calloutTitle?: string | null, calloutText?: string | null, imageSrc?: string | null, imageAlt?: string | null, proofs?: Array<{ __typename: 'PageSectionsHeroProofs', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageSectionsServices', eyebrow?: string | null, heading?: string | null, copy?: string | null, disclaimer?: string | null } | { __typename: 'PageSectionsProcess', eyebrow?: string | null, heading?: string | null, copy?: string | null, steps?: Array<{ __typename: 'PageSectionsProcessSteps', number?: string | null, title?: string | null, description?: string | null } | null> | null } | { __typename: 'PageSectionsAbout', eyebrow?: string | null, ownerName?: string | null, nameInitial?: string | null, tagline?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null } | { __typename: 'PageSectionsTestimonials', eyebrow?: string | null, heading?: string | null, copy?: string | null, reviews?: Array<{ __typename: 'PageSectionsTestimonialsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsContact', eyebrow?: string | null, heading?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null } | { __typename: 'PageSectionsFooter', tagline?: string | null } | null> | null } };
+export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'PageSectionsHero', location?: string | null, headingLine1?: string | null, headingLine2?: string | null, subheading?: string | null, phoneNumber?: string | null, calloutTitle?: string | null, calloutText?: string | null, imageSrc?: string | null, imageAlt?: string | null, proofs?: Array<{ __typename: 'PageSectionsHeroProofs', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageSectionsServices', eyebrow?: string | null, heading?: string | null, copy?: string | null, disclaimer?: string | null } | { __typename: 'PageSectionsProcess', eyebrow?: string | null, heading?: string | null, copy?: string | null, steps?: Array<{ __typename: 'PageSectionsProcessSteps', number?: string | null, title?: string | null, description?: string | null, image?: string | null } | null> | null } | { __typename: 'PageSectionsAbout', eyebrow?: string | null, ownerName?: string | null, nameInitial?: string | null, tagline?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null, image?: string | null, focalPoint?: string | null } | { __typename: 'PageSectionsTestimonials', eyebrow?: string | null, heading?: string | null, copy?: string | null, reviews?: Array<{ __typename: 'PageSectionsTestimonialsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsContact', eyebrow?: string | null, heading?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null } | { __typename: 'PageSectionsFooter', tagline?: string | null } | null> | null } };
 
 export type PageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -755,26 +1283,26 @@ export type PageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'PageSectionsHero', location?: string | null, headingLine1?: string | null, headingLine2?: string | null, subheading?: string | null, phoneNumber?: string | null, calloutTitle?: string | null, calloutText?: string | null, imageSrc?: string | null, imageAlt?: string | null, proofs?: Array<{ __typename: 'PageSectionsHeroProofs', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageSectionsServices', eyebrow?: string | null, heading?: string | null, copy?: string | null, disclaimer?: string | null } | { __typename: 'PageSectionsProcess', eyebrow?: string | null, heading?: string | null, copy?: string | null, steps?: Array<{ __typename: 'PageSectionsProcessSteps', number?: string | null, title?: string | null, description?: string | null } | null> | null } | { __typename: 'PageSectionsAbout', eyebrow?: string | null, ownerName?: string | null, nameInitial?: string | null, tagline?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null } | { __typename: 'PageSectionsTestimonials', eyebrow?: string | null, heading?: string | null, copy?: string | null, reviews?: Array<{ __typename: 'PageSectionsTestimonialsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsContact', eyebrow?: string | null, heading?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null } | { __typename: 'PageSectionsFooter', tagline?: string | null } | null> | null } | null } | null> | null } };
+export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'PageSectionsHero', location?: string | null, headingLine1?: string | null, headingLine2?: string | null, subheading?: string | null, phoneNumber?: string | null, calloutTitle?: string | null, calloutText?: string | null, imageSrc?: string | null, imageAlt?: string | null, proofs?: Array<{ __typename: 'PageSectionsHeroProofs', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageSectionsServices', eyebrow?: string | null, heading?: string | null, copy?: string | null, disclaimer?: string | null } | { __typename: 'PageSectionsProcess', eyebrow?: string | null, heading?: string | null, copy?: string | null, steps?: Array<{ __typename: 'PageSectionsProcessSteps', number?: string | null, title?: string | null, description?: string | null, image?: string | null } | null> | null } | { __typename: 'PageSectionsAbout', eyebrow?: string | null, ownerName?: string | null, nameInitial?: string | null, tagline?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null, image?: string | null, focalPoint?: string | null } | { __typename: 'PageSectionsTestimonials', eyebrow?: string | null, heading?: string | null, copy?: string | null, reviews?: Array<{ __typename: 'PageSectionsTestimonialsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsContact', eyebrow?: string | null, heading?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null } | { __typename: 'PageSectionsFooter', tagline?: string | null } | null> | null } | null } | null> | null } };
 
-export type PricingQueryVariables = Exact<{
+export type BookingQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type PricingQuery = { __typename?: 'Query', pricing: { __typename: 'Pricing', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, services?: Array<{ __typename: 'PricingServicesDeep', id: string, name: string, description?: string | null, subtitle?: string | null, features?: Array<string | null> | null, prices?: Array<{ __typename: 'PricingServicesDeepPrices', key?: string | null, bedrooms?: string | null, bathrooms?: string | null, cents?: number | null } | null> | null } | { __typename: 'PricingServicesRegular', id: string, name: string, description?: string | null, subtitle?: string | null, features?: Array<string | null> | null, prices?: Array<{ __typename: 'PricingServicesRegularPrices', key?: string | null, bedrooms?: string | null, bathrooms?: string | null, cents?: number | null } | null> | null } | null> | null, addOns?: Array<{ __typename: 'PricingAddOns', id?: string | null, name?: string | null, cents?: number | null } | null> | null } };
+export type BookingQuery = { __typename?: 'Query', booking: { __typename: 'Booking', id: string, pricingHub?: string | null, previewOpen?: boolean | null, stepNames?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, services?: Array<{ __typename: 'BookingServices', id: string, name: string, description?: string | null, subtitle?: string | null, features?: Array<string | null> | null, basePriceCents?: number | null, pricePerBedroomCents?: number | null, pricePerBathroomCents?: number | null } | null> | null, addOns?: Array<{ __typename: 'BookingAddOns', id?: string | null, name?: string | null, cents?: number | null } | null> | null, theme?: { __typename: 'BookingTheme', fontFamily?: string | null, primaryColor?: string | null, backgroundColor?: string | null, textColor?: string | null, borderRadius?: string | null } | null, steps?: Array<{ __typename: 'BookingSteps', title: string, description?: string | null, disabled?: boolean | null, showIfField?: string | null, showIfOperator?: string | null, showIfValue?: string | null, fields?: Array<{ __typename: 'BookingStepsFieldsTextInput', name?: string | null, label?: string | null, placeholder?: string | null, required?: boolean | null, validationType?: string | null } | { __typename: 'BookingStepsFieldsNumberInput', name?: string | null, label?: string | null, min?: number | null, max?: number | null } | { __typename: 'BookingStepsFieldsChoiceInput', name?: string | null, label?: string | null, options?: Array<{ __typename: 'BookingStepsFieldsChoiceInputOptions', id?: string | null, label?: string | null } | null> | null } | { __typename: 'BookingStepsFieldsDateInput', name?: string | null, label?: string | null } | { __typename: 'BookingStepsFieldsPhotoUpload', label?: string | null, prompt?: string | null, hint?: string | null, selectedText?: string | null, emptyText?: string | null } | { __typename: 'BookingStepsFieldsRichTextHeading', text?: string | null } | { __typename: 'BookingStepsFieldsServicesSelector', question?: string | null } | { __typename: 'BookingStepsFieldsAddonsSelector', question?: string | null } | { __typename: 'BookingStepsFieldsEstimateSummary', disclaimer?: string | null } | { __typename: 'BookingStepsFieldsImageBlock', src?: string | null, alt?: string | null, caption?: string | null, aspect?: string | null } | { __typename: 'BookingStepsFieldsInfoCard', title?: string | null, description?: string | null, icon?: string | null, variant?: string | null } | { __typename: 'BookingStepsFieldsInfoBanner', text?: string | null, type?: string | null, dismissible?: boolean | null } | { __typename: 'BookingStepsFieldsTextareaInput', name?: string | null, label?: string | null, placeholder?: string | null, required?: boolean | null, rows?: number | null } | { __typename: 'BookingStepsFieldsSelectInput', name?: string | null, label?: string | null, required?: boolean | null, defaultValue?: string | null, options?: Array<{ __typename: 'BookingStepsFieldsSelectInputOptions', value?: string | null, label?: string | null } | null> | null } | { __typename: 'BookingStepsFieldsCheckboxGroup', name?: string | null, label?: string | null, required?: boolean | null, options?: Array<{ __typename: 'BookingStepsFieldsCheckboxGroupOptions', value?: string | null, label?: string | null, priceCents?: number | null } | null> | null } | null> | null } | null> | null, header?: { __typename: 'BookingHeader', badge?: string | null, title?: string | null, description?: string | null } | null, timeWindows?: Array<{ __typename: 'BookingTimeWindows', id?: string | null, label?: string | null } | null> | null, reviewLabels?: { __typename: 'BookingReviewLabels', heading?: string | null, rowHome?: string | null, rowDate?: string | null, rowWindow?: string | null, rowPhotos?: string | null, disclaimer?: string | null } | null, navigation?: { __typename: 'BookingNavigation', back?: string | null, continue?: string | null, submit?: string | null } | null, success?: { __typename: 'BookingSuccess', title?: string | null, message?: string | null, buttonText?: string | null } | null, estimate?: { __typename: 'BookingEstimate', label?: string | null, customQuote?: string | null, disclaimer?: string | null } | null } };
 
-export type PricingConnectionQueryVariables = Exact<{
+export type BookingConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
   after?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Float']['input']>;
   last?: InputMaybe<Scalars['Float']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<PricingFilter>;
+  filter?: InputMaybe<BookingFilter>;
 }>;
 
 
-export type PricingConnectionQuery = { __typename?: 'Query', pricingConnection: { __typename?: 'PricingConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PricingConnectionEdges', cursor: string, node?: { __typename: 'Pricing', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, services?: Array<{ __typename: 'PricingServicesDeep', id: string, name: string, description?: string | null, subtitle?: string | null, features?: Array<string | null> | null, prices?: Array<{ __typename: 'PricingServicesDeepPrices', key?: string | null, bedrooms?: string | null, bathrooms?: string | null, cents?: number | null } | null> | null } | { __typename: 'PricingServicesRegular', id: string, name: string, description?: string | null, subtitle?: string | null, features?: Array<string | null> | null, prices?: Array<{ __typename: 'PricingServicesRegularPrices', key?: string | null, bedrooms?: string | null, bathrooms?: string | null, cents?: number | null } | null> | null } | null> | null, addOns?: Array<{ __typename: 'PricingAddOns', id?: string | null, name?: string | null, cents?: number | null } | null> | null } | null } | null> | null } };
+export type BookingConnectionQuery = { __typename?: 'Query', bookingConnection: { __typename?: 'BookingConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'BookingConnectionEdges', cursor: string, node?: { __typename: 'Booking', id: string, pricingHub?: string | null, previewOpen?: boolean | null, stepNames?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, services?: Array<{ __typename: 'BookingServices', id: string, name: string, description?: string | null, subtitle?: string | null, features?: Array<string | null> | null, basePriceCents?: number | null, pricePerBedroomCents?: number | null, pricePerBathroomCents?: number | null } | null> | null, addOns?: Array<{ __typename: 'BookingAddOns', id?: string | null, name?: string | null, cents?: number | null } | null> | null, theme?: { __typename: 'BookingTheme', fontFamily?: string | null, primaryColor?: string | null, backgroundColor?: string | null, textColor?: string | null, borderRadius?: string | null } | null, steps?: Array<{ __typename: 'BookingSteps', title: string, description?: string | null, disabled?: boolean | null, showIfField?: string | null, showIfOperator?: string | null, showIfValue?: string | null, fields?: Array<{ __typename: 'BookingStepsFieldsTextInput', name?: string | null, label?: string | null, placeholder?: string | null, required?: boolean | null, validationType?: string | null } | { __typename: 'BookingStepsFieldsNumberInput', name?: string | null, label?: string | null, min?: number | null, max?: number | null } | { __typename: 'BookingStepsFieldsChoiceInput', name?: string | null, label?: string | null, options?: Array<{ __typename: 'BookingStepsFieldsChoiceInputOptions', id?: string | null, label?: string | null } | null> | null } | { __typename: 'BookingStepsFieldsDateInput', name?: string | null, label?: string | null } | { __typename: 'BookingStepsFieldsPhotoUpload', label?: string | null, prompt?: string | null, hint?: string | null, selectedText?: string | null, emptyText?: string | null } | { __typename: 'BookingStepsFieldsRichTextHeading', text?: string | null } | { __typename: 'BookingStepsFieldsServicesSelector', question?: string | null } | { __typename: 'BookingStepsFieldsAddonsSelector', question?: string | null } | { __typename: 'BookingStepsFieldsEstimateSummary', disclaimer?: string | null } | { __typename: 'BookingStepsFieldsImageBlock', src?: string | null, alt?: string | null, caption?: string | null, aspect?: string | null } | { __typename: 'BookingStepsFieldsInfoCard', title?: string | null, description?: string | null, icon?: string | null, variant?: string | null } | { __typename: 'BookingStepsFieldsInfoBanner', text?: string | null, type?: string | null, dismissible?: boolean | null } | { __typename: 'BookingStepsFieldsTextareaInput', name?: string | null, label?: string | null, placeholder?: string | null, required?: boolean | null, rows?: number | null } | { __typename: 'BookingStepsFieldsSelectInput', name?: string | null, label?: string | null, required?: boolean | null, defaultValue?: string | null, options?: Array<{ __typename: 'BookingStepsFieldsSelectInputOptions', value?: string | null, label?: string | null } | null> | null } | { __typename: 'BookingStepsFieldsCheckboxGroup', name?: string | null, label?: string | null, required?: boolean | null, options?: Array<{ __typename: 'BookingStepsFieldsCheckboxGroupOptions', value?: string | null, label?: string | null, priceCents?: number | null } | null> | null } | null> | null } | null> | null, header?: { __typename: 'BookingHeader', badge?: string | null, title?: string | null, description?: string | null } | null, timeWindows?: Array<{ __typename: 'BookingTimeWindows', id?: string | null, label?: string | null } | null> | null, reviewLabels?: { __typename: 'BookingReviewLabels', heading?: string | null, rowHome?: string | null, rowDate?: string | null, rowWindow?: string | null, rowPhotos?: string | null, disclaimer?: string | null } | null, navigation?: { __typename: 'BookingNavigation', back?: string | null, continue?: string | null, submit?: string | null } | null, success?: { __typename: 'BookingSuccess', title?: string | null, message?: string | null, buttonText?: string | null } | null, estimate?: { __typename: 'BookingEstimate', label?: string | null, customQuote?: string | null, disclaimer?: string | null } | null } | null } | null> | null } };
 
 export const PagePartsFragmentDoc = gql`
     fragment PageParts on Page {
@@ -812,6 +1340,7 @@ export const PagePartsFragmentDoc = gql`
         number
         title
         description
+        image
       }
     }
     ... on PageSectionsAbout {
@@ -821,6 +1350,8 @@ export const PagePartsFragmentDoc = gql`
       tagline
       bioParagraph1
       bioParagraph2
+      image
+      focalPoint
     }
     ... on PageSectionsTestimonials {
       eyebrow
@@ -848,45 +1379,177 @@ export const PagePartsFragmentDoc = gql`
   }
 }
     `;
-export const PricingPartsFragmentDoc = gql`
-    fragment PricingParts on Pricing {
+export const BookingPartsFragmentDoc = gql`
+    fragment BookingParts on Booking {
   __typename
+  pricingHub
+  previewOpen
   services {
     __typename
-    ... on PricingServicesDeep {
-      id
-      name
-      description
-      subtitle
-      features
-      prices {
-        __typename
-        key
-        bedrooms
-        bathrooms
-        cents
-      }
-    }
-    ... on PricingServicesRegular {
-      id
-      name
-      description
-      subtitle
-      features
-      prices {
-        __typename
-        key
-        bedrooms
-        bathrooms
-        cents
-      }
-    }
+    id
+    name
+    description
+    subtitle
+    features
+    basePriceCents
+    pricePerBedroomCents
+    pricePerBathroomCents
   }
   addOns {
     __typename
     id
     name
     cents
+  }
+  theme {
+    __typename
+    fontFamily
+    primaryColor
+    backgroundColor
+    textColor
+    borderRadius
+  }
+  steps {
+    __typename
+    title
+    description
+    disabled
+    showIfField
+    showIfOperator
+    showIfValue
+    fields {
+      __typename
+      ... on BookingStepsFieldsTextInput {
+        name
+        label
+        placeholder
+        required
+        validationType
+      }
+      ... on BookingStepsFieldsNumberInput {
+        name
+        label
+        min
+        max
+      }
+      ... on BookingStepsFieldsChoiceInput {
+        name
+        label
+        options {
+          __typename
+          id
+          label
+        }
+      }
+      ... on BookingStepsFieldsDateInput {
+        name
+        label
+      }
+      ... on BookingStepsFieldsPhotoUpload {
+        label
+        prompt
+        hint
+        selectedText
+        emptyText
+      }
+      ... on BookingStepsFieldsRichTextHeading {
+        text
+      }
+      ... on BookingStepsFieldsServicesSelector {
+        question
+      }
+      ... on BookingStepsFieldsAddonsSelector {
+        question
+      }
+      ... on BookingStepsFieldsEstimateSummary {
+        disclaimer
+      }
+      ... on BookingStepsFieldsImageBlock {
+        src
+        alt
+        caption
+        aspect
+      }
+      ... on BookingStepsFieldsInfoCard {
+        title
+        description
+        icon
+        variant
+      }
+      ... on BookingStepsFieldsInfoBanner {
+        text
+        type
+        dismissible
+      }
+      ... on BookingStepsFieldsTextareaInput {
+        name
+        label
+        placeholder
+        required
+        rows
+      }
+      ... on BookingStepsFieldsSelectInput {
+        name
+        label
+        options {
+          __typename
+          value
+          label
+        }
+        required
+        defaultValue
+      }
+      ... on BookingStepsFieldsCheckboxGroup {
+        name
+        label
+        options {
+          __typename
+          value
+          label
+          priceCents
+        }
+        required
+      }
+    }
+  }
+  header {
+    __typename
+    badge
+    title
+    description
+  }
+  stepNames
+  timeWindows {
+    __typename
+    id
+    label
+  }
+  reviewLabels {
+    __typename
+    heading
+    rowHome
+    rowDate
+    rowWindow
+    rowPhotos
+    disclaimer
+  }
+  navigation {
+    __typename
+    back
+    continue
+    submit
+  }
+  success {
+    __typename
+    title
+    message
+    buttonText
+  }
+  estimate {
+    __typename
+    label
+    customQuote
+    disclaimer
   }
 }
     `;
@@ -947,9 +1610,9 @@ export const PageConnectionDocument = gql`
   }
 }
     ${PagePartsFragmentDoc}`;
-export const PricingDocument = gql`
-    query pricing($relativePath: String!) {
-  pricing(relativePath: $relativePath) {
+export const BookingDocument = gql`
+    query booking($relativePath: String!) {
+  booking(relativePath: $relativePath) {
     ... on Document {
       _sys {
         filename
@@ -962,13 +1625,13 @@ export const PricingDocument = gql`
       }
       id
     }
-    ...PricingParts
+    ...BookingParts
   }
 }
-    ${PricingPartsFragmentDoc}`;
-export const PricingConnectionDocument = gql`
-    query pricingConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PricingFilter) {
-  pricingConnection(
+    ${BookingPartsFragmentDoc}`;
+export const BookingConnectionDocument = gql`
+    query bookingConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: BookingFilter) {
+  bookingConnection(
     before: $before
     after: $after
     first: $first
@@ -998,12 +1661,12 @@ export const PricingConnectionDocument = gql`
           }
           id
         }
-        ...PricingParts
+        ...BookingParts
       }
     }
   }
 }
-    ${PricingPartsFragmentDoc}`;
+    ${BookingPartsFragmentDoc}`;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
@@ -1013,11 +1676,11 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
     pageConnection(variables?: PageConnectionQueryVariables, options?: C): Promise<{data: PageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageConnectionQueryVariables, query: string}> {
         return requester<{data: PageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageConnectionQueryVariables, query: string}, PageConnectionQueryVariables>(PageConnectionDocument, variables, options);
       },
-    pricing(variables: PricingQueryVariables, options?: C): Promise<{data: PricingQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PricingQueryVariables, query: string}> {
-        return requester<{data: PricingQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PricingQueryVariables, query: string}, PricingQueryVariables>(PricingDocument, variables, options);
+    booking(variables: BookingQueryVariables, options?: C): Promise<{data: BookingQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: BookingQueryVariables, query: string}> {
+        return requester<{data: BookingQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: BookingQueryVariables, query: string}, BookingQueryVariables>(BookingDocument, variables, options);
       },
-    pricingConnection(variables?: PricingConnectionQueryVariables, options?: C): Promise<{data: PricingConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PricingConnectionQueryVariables, query: string}> {
-        return requester<{data: PricingConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PricingConnectionQueryVariables, query: string}, PricingConnectionQueryVariables>(PricingConnectionDocument, variables, options);
+    bookingConnection(variables?: BookingConnectionQueryVariables, options?: C): Promise<{data: BookingConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: BookingConnectionQueryVariables, query: string}> {
+        return requester<{data: BookingConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: BookingConnectionQueryVariables, query: string}, BookingConnectionQueryVariables>(BookingConnectionDocument, variables, options);
       }
     };
   }

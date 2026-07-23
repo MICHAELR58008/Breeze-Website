@@ -23,6 +23,7 @@ export interface HeroProps {
   imageSrc?: string
   imageAlt?: string
   proofs?: HeroProof[]
+  [key: string]: any
 }
 
 const defaults: HeroProps = {

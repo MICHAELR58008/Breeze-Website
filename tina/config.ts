@@ -1,4 +1,6 @@
 import { defineConfig } from "tinacms"
+import { PricingManagerModal } from "./components/PricingManagerModal"
+import { FocalPointPicker } from "./components/FocalPointPicker"
 
 const branch =
   process.env.GITHUB_BRANCH ||
@@ -139,6 +141,7 @@ export default defineConfig({
                       { type: "string", name: "number" },
                       { type: "string", name: "title" },
                       { type: "string", name: "description" },
+                      { type: "image", name: "image", label: "Image / Icon Photo" },
                     ],
                   },
                 ],
@@ -163,6 +166,15 @@ export default defineConfig({
                   { type: "string", name: "tagline" },
                   { type: "string", name: "bioParagraph1" },
                   { type: "string", name: "bioParagraph2" },
+                  { type: "image", name: "image", label: "Owner Photo" },
+                  {
+                    type: "string",
+                    name: "focalPoint",
+                    label: "Photo Crop Focal Point",
+                    ui: {
+                      component: FocalPointPicker,
+                    },
+                  },
                 ],
               },
               {
@@ -239,12 +251,12 @@ export default defineConfig({
         ],
       },
       {
-        name: "pricing",
-        label: "Pricing",
-        path: "content/pricing",
+        name: "booking",
+        label: "Booking & Pricing",
+        path: "content/booking",
         format: "json",
         ui: {
-          router: () => "/#services",
+          router: () => "/preview/booking",
           allowedActions: {
             create: false,
             delete: false,
@@ -252,95 +264,279 @@ export default defineConfig({
         },
         fields: [
           {
+            type: "string",
+            name: "pricingHub",
+            label: "Central Pricing Hub (Table & Calculator)",
+            ui: {
+              component: PricingManagerModal as any,
+            },
+          },
+          {
+            type: "boolean",
+            name: "previewOpen",
+            label: "Preview Drawer Open in Editor (turn on to visually edit)",
+          },
+          {
             type: "object",
             name: "services",
             label: "Services",
-            description: "Add, remove, and reorder services",
+            description: "Add, remove, and reorder services. (Tip: Use /admin/pricing for a dedicated table editor)",
             list: true,
             ui: {
-              visualSelector: true,
+              itemProps: (item) => ({
+                label: item?.name || "New Service",
+              }),
             },
-            templates: [
+            fields: [
+              { type: "string", name: "id", required: true },
+              { type: "string", name: "name", required: true },
+              { type: "string", name: "description" },
+              { type: "string", name: "subtitle" },
+              { type: "string", name: "features", list: true },
+              { type: "number", name: "basePriceCents", label: "Base Price in Cents (e.g. 13000 = $130)" },
+              { type: "number", name: "pricePerBedroomCents", label: "Price per Bedroom in Cents (e.g. 3000 = $30)" },
+              { type: "number", name: "pricePerBathroomCents", label: "Price per Bathroom in Cents (e.g. 3000 = $30)" },
+            ],
+          },
+          {
+            type: "object",
+            name: "addOns",
+            label: "Add-ons",
+            description: "Manage optional extras. (Tip: Use /admin/pricing for a dedicated table editor)",
+            list: true,
+            fields: [
+              { type: "string", name: "id" },
+              { type: "string", name: "name" },
+              { type: "number", name: "cents", label: "Price in Cents (e.g. 3000 = $30)" },
+            ],
+          },
+          {
+            type: "object",
+            name: "theme",
+            label: "Theme & Styling Customizer",
+            fields: [
+              { type: "string", name: "fontFamily", label: "Font Family", options: ["sans-serif", "serif", "monospace", "Instrument Sans", "Outfit", "Inter"] },
+              { type: "string", name: "primaryColor", label: "Primary Accent Color (Hex or CSS color)", ui: { component: "color" } },
+              { type: "string", name: "backgroundColor", label: "Drawer Background Color", ui: { component: "color" } },
+              { type: "string", name: "textColor", label: "Text Color", ui: { component: "color" } },
+              { type: "string", name: "borderRadius", label: "Border Radius", options: ["0px", "4px", "8px", "12px", "9999px"] },
+            ],
+          },
+          {
+            type: "object",
+            name: "steps",
+            label: "Form Steps & Custom Fields Builder",
+            list: true,
+            ui: {
+              itemProps: (item) => ({ label: item?.title || "New Step" }),
+            },
+            fields: [
+              { type: "string", name: "title", label: "Step Title", required: true },
+              { type: "string", name: "description", label: "Step Subtitle / Description" },
+              { type: "boolean", name: "disabled", label: "Disable / Hide this Step" },
+              { type: "string", name: "showIfField", label: "Conditional Visibility: Dependent Field Name (optional)" },
+              { type: "string", name: "showIfOperator", label: "Operator", options: ["equals", "not_equals", "contains"] },
+              { type: "string", name: "showIfValue", label: "Value to match" },
               {
-                name: "deep",
-                label: "Deep Cleaning",
-                ui: {
-                  defaultItem: {
-                    id: "deep",
-                    name: "Deep Cleaning",
-                    description: "A detailed reset for your entire home.",
-                    subtitle: "The complete reset",
-                    features: [
-                      "Full kitchen & bathroom sanitization",
-                      "Baseboards, light fixtures, ceiling fans",
-                      "Inside cabinets & appliances",
-                      "Window sills, door frames, blinds",
-                    ],
-                    prices: [
-                      { key: "1-1", bedrooms: "1", bathrooms: "1", cents: 18000 },
-                      { key: "2-2", bedrooms: "2", bathrooms: "2", cents: 22000 },
-                      { key: "3-3", bedrooms: "3", bathrooms: "3", cents: 29000 },
-                    ],
-                  },
-                },
-                fields: [
-                  { type: "string", name: "id", required: true },
-                  { type: "string", name: "name", required: true },
-                  { type: "string", name: "description" },
-                  { type: "string", name: "subtitle" },
-                  { type: "string", name: "features", list: true },
+                type: "object",
+                name: "fields",
+                label: "Step Inputs & Elements",
+                list: true,
+                templates: [
                   {
-                    type: "object",
-                    name: "prices",
-                    label: "Prices",
-                    list: true,
+                    name: "textInput",
+                    label: "Text Field",
                     fields: [
-                      { type: "string", name: "key" },
-                      { type: "string", name: "bedrooms" },
-                      { type: "string", name: "bathrooms" },
-                      { type: "number", name: "cents" },
+                      { type: "string", name: "name", label: "Field ID Key" },
+                      { type: "string", name: "label", label: "Label Text" },
+                      { type: "string", name: "placeholder", label: "Placeholder Text" },
+                      { type: "boolean", name: "required", label: "Required Field?" },
+                      { type: "string", name: "validationType", label: "Validation Rule", options: ["none", "email", "phone"] },
                     ],
                   },
-                ],
-              },
-              {
-                name: "regular",
-                label: "Regular Cleaning",
-                ui: {
-                  defaultItem: {
-                    id: "regular",
-                    name: "Regular Cleaning",
-                    description: "Consistent care that keeps your home feeling fresh.",
-                    subtitle: "The reliable rhythm",
-                    features: [
-                      "All living areas vacuumed & mopped",
-                      "Kitchen surfaces cleaned & sanitized",
-                      "Bathrooms scrubbed & disinfected",
-                      "General dusting & tidying",
-                    ],
-                    prices: [
-                      { key: "1-1", bedrooms: "1", bathrooms: "1", cents: 13500 },
-                      { key: "2-2", bedrooms: "2", bathrooms: "2", cents: 15000 },
-                      { key: "3-3", bedrooms: "3", bathrooms: "3", cents: 18000 },
-                    ],
-                  },
-                },
-                fields: [
-                  { type: "string", name: "id", required: true },
-                  { type: "string", name: "name", required: true },
-                  { type: "string", name: "description" },
-                  { type: "string", name: "subtitle" },
-                  { type: "string", name: "features", list: true },
                   {
-                    type: "object",
-                    name: "prices",
-                    label: "Prices",
-                    list: true,
+                    name: "numberInput",
+                    label: "Number Field",
                     fields: [
-                      { type: "string", name: "key" },
-                      { type: "string", name: "bedrooms" },
-                      { type: "string", name: "bathrooms" },
-                      { type: "number", name: "cents" },
+                      { type: "string", name: "name", label: "Field ID Key" },
+                      { type: "string", name: "label", label: "Label Text" },
+                      { type: "number", name: "min", label: "Min Value" },
+                      { type: "number", name: "max", label: "Max Value" },
+                    ],
+                  },
+                  {
+                    name: "choiceInput",
+                    label: "Choice Selection",
+                    fields: [
+                      { type: "string", name: "name", label: "Field ID Key" },
+                      { type: "string", name: "label", label: "Label Text" },
+                      {
+                        type: "object",
+                        name: "options",
+                        label: "Options",
+                        list: true,
+                        fields: [
+                          { type: "string", name: "id", label: "Option ID" },
+                          { type: "string", name: "label", label: "Option Label" },
+                        ],
+                      },
+                    ],
+                  },
+                  {
+                    name: "dateInput",
+                    label: "Date Picker",
+                    fields: [
+                      { type: "string", name: "name", label: "Field ID Key" },
+                      { type: "string", name: "label", label: "Label Text" },
+                    ],
+                  },
+                  {
+                    name: "photoUpload",
+                    label: "Photo Dropzone",
+                    fields: [
+                      { type: "string", name: "label", label: "Prompt Label" },
+                      { type: "string", name: "prompt", label: "Upload Button Text" },
+                      { type: "string", name: "hint", label: "Hint Text" },
+                      { type: "string", name: "selectedText", label: 'Selected Count Template (use {count} and {s})' },
+                      { type: "string", name: "emptyText", label: "Empty State Message" },
+                    ],
+                  },
+                  {
+                    name: "richTextHeading",
+                    label: "Rich Callout / Note",
+                    fields: [
+                      { type: "string", name: "text", label: "Text Message" },
+                    ],
+                  },
+                  {
+                    name: "servicesSelector",
+                    label: "[Special] Services Cards",
+                    fields: [
+                      { type: "string", name: "question", label: "Question Label" },
+                    ],
+                  },
+                  {
+                    name: "addonsSelector",
+                    label: "[Special] Add-ons Toggles",
+                    fields: [
+                      { type: "string", name: "question", label: "Question Label" },
+                    ],
+                  },
+                  {
+                    name: "estimateSummary",
+                    label: "[Special] Estimate & Review Summary",
+                    fields: [
+                      { type: "string", name: "disclaimer", label: "Disclaimer Note" },
+                    ],
+                  },
+                  {
+                    name: "imageBlock",
+                    label: "Image Block",
+                    ui: {
+                      itemProps: (item) => ({ label: item?.alt || item?.caption || "Image Block" }),
+                      defaultItem: { src: "", alt: "", caption: "", aspect: "auto" },
+                    },
+                    fields: [
+                      { type: "image", name: "src", label: "Image Source" },
+                      { type: "string", name: "alt", label: "Alt Text" },
+                      { type: "string", name: "caption", label: "Caption" },
+                      { type: "string", name: "aspect", label: "Aspect Ratio", options: ["auto", "16/9", "4/3", "1/1", "square", "video"] },
+                    ],
+                  },
+                  {
+                    name: "infoCard",
+                    label: "Info Card",
+                    ui: {
+                      itemProps: (item) => ({ label: item?.title || "Info Card" }),
+                      defaultItem: { title: "", description: "", icon: "info", variant: "default" },
+                    },
+                    fields: [
+                      { type: "string", name: "title", label: "Title" },
+                      { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+                      { type: "string", name: "icon", label: "Icon", options: ["info", "sparkles", "shield", "star", "check", "help"] },
+                      { type: "string", name: "variant", label: "Variant", options: ["default", "highlight", "outline"] },
+                    ],
+                  },
+                  {
+                    name: "infoBanner",
+                    label: "Info Banner",
+                    ui: {
+                      itemProps: (item) => ({ label: item?.text ? (item.text.length > 30 ? item.text.substring(0, 30) + "..." : item.text) : "Info Banner" }),
+                      defaultItem: { text: "", type: "info", dismissible: false },
+                    },
+                    fields: [
+                      { type: "string", name: "text", label: "Banner Text", ui: { component: "textarea" } },
+                      { type: "string", name: "type", label: "Banner Type", options: ["info", "warning", "success"] },
+                      { type: "boolean", name: "dismissible", label: "Dismissible?" },
+                    ],
+                  },
+                  {
+                    name: "textareaInput",
+                    label: "Textarea Field",
+                    ui: {
+                      itemProps: (item) => ({ label: item?.label || item?.name || "Textarea Field" }),
+                      defaultItem: { name: "", label: "", placeholder: "", required: false, rows: 3 },
+                    },
+                    fields: [
+                      { type: "string", name: "name", label: "Field ID Key" },
+                      { type: "string", name: "label", label: "Label Text" },
+                      { type: "string", name: "placeholder", label: "Placeholder Text" },
+                      { type: "boolean", name: "required", label: "Required Field?" },
+                      { type: "number", name: "rows", label: "Rows" },
+                    ],
+                  },
+                  {
+                    name: "selectInput",
+                    label: "Select Field",
+                    ui: {
+                      itemProps: (item) => ({ label: item?.label || item?.name || "Select Field" }),
+                      defaultItem: { name: "", label: "", options: [], required: false, defaultValue: "" },
+                    },
+                    fields: [
+                      { type: "string", name: "name", label: "Field ID Key" },
+                      { type: "string", name: "label", label: "Label Text" },
+                      {
+                        type: "object",
+                        name: "options",
+                        label: "Select Options",
+                        list: true,
+                        ui: {
+                          itemProps: (item) => ({ label: item?.label || item?.value || "Option" }),
+                        },
+                        fields: [
+                          { type: "string", name: "value", label: "Value" },
+                          { type: "string", name: "label", label: "Label" },
+                        ],
+                      },
+                      { type: "boolean", name: "required", label: "Required Field?" },
+                      { type: "string", name: "defaultValue", label: "Default Value" },
+                    ],
+                  },
+                  {
+                    name: "checkboxGroup",
+                    label: "Checkbox Group",
+                    ui: {
+                      itemProps: (item) => ({ label: item?.label || item?.name || "Checkbox Group" }),
+                      defaultItem: { name: "", label: "", options: [], required: false },
+                    },
+                    fields: [
+                      { type: "string", name: "name", label: "Field ID Key" },
+                      { type: "string", name: "label", label: "Label Text" },
+                      {
+                        type: "object",
+                        name: "options",
+                        label: "Checkbox Options",
+                        list: true,
+                        ui: {
+                          itemProps: (item) => ({ label: item?.label ? `${item.label}${item.priceCents ? ' (+$' + (item.priceCents/100) + ')' : ''}` : item?.value || "Option" }),
+                        },
+                        fields: [
+                          { type: "string", name: "value", label: "Value" },
+                          { type: "string", name: "label", label: "Label" },
+                          { type: "number", name: "priceCents", label: "Price (in Cents, optional)" },
+                        ],
+                      },
+                      { type: "boolean", name: "required", label: "Required Field?" },
                     ],
                   },
                 ],
@@ -349,13 +545,72 @@ export default defineConfig({
           },
           {
             type: "object",
-            name: "addOns",
-            label: "Add-ons",
+            name: "header",
+            label: "Sheet Header",
+            fields: [
+              { type: "string", name: "badge", label: "Badge Text" },
+              { type: "string", name: "title", label: "Sheet Title" },
+              { type: "string", name: "description", label: "Sheet Description" },
+            ],
+          },
+          {
+            type: "string",
+            name: "stepNames",
+            label: "Step Names (7 items — one per step)",
+            list: true,
+          },
+
+          {
+            type: "object",
+            name: "timeWindows",
+            label: "Time Window Options",
             list: true,
             fields: [
-              { type: "string", name: "id" },
-              { type: "string", name: "name" },
-              { type: "number", name: "cents" },
+              { type: "string", name: "id", label: "ID (morning/afternoon/flexible)" },
+              { type: "string", name: "label", label: "Display Label" },
+            ],
+          },
+          {
+            type: "object",
+            name: "reviewLabels",
+            label: "Review Step Labels",
+            fields: [
+              { type: "string", name: "heading", label: "Section Heading" },
+              { type: "string", name: "rowHome", label: "Home Row Label" },
+              { type: "string", name: "rowDate", label: "Date Row Label" },
+              { type: "string", name: "rowWindow", label: "Window Row Label" },
+              { type: "string", name: "rowPhotos", label: "Photos Row Label" },
+              { type: "string", name: "disclaimer", label: "Disclaimer Paragraph" },
+            ],
+          },
+          {
+            type: "object",
+            name: "navigation",
+            label: "Navigation Buttons",
+            fields: [
+              { type: "string", name: "back", label: "Back Button" },
+              { type: "string", name: "continue", label: "Continue Button" },
+              { type: "string", name: "submit", label: "Submit Button" },
+            ],
+          },
+          {
+            type: "object",
+            name: "success",
+            label: "Success Screen",
+            fields: [
+              { type: "string", name: "title", label: "Title" },
+              { type: "string", name: "message", label: "Message (use {name} for customer name)" },
+              { type: "string", name: "buttonText", label: "Button Text" },
+            ],
+          },
+          {
+            type: "object",
+            name: "estimate",
+            label: "Estimate Callout",
+            fields: [
+              { type: "string", name: "label", label: "Heading" },
+              { type: "string", name: "customQuote", label: "Text when no estimate available" },
+              { type: "string", name: "disclaimer", label: "Footer disclaimer" },
             ],
           },
         ],

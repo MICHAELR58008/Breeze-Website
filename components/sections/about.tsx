@@ -114,28 +114,6 @@ export function About(props: AboutProps) {
                       style={{ objectPosition: activePosition }}
                     />
                   </ErrorBoundary>
-                  {/* Subtle dark gradient overlay at bottom for text legibility — only rendered when there's visible text to protect */}
-                  {(eyebrow?.trim() || tagline?.trim()) && (
-                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent p-6 sm:p-8 lg:p-12 pt-12 z-10">
-                      {eyebrow?.trim() && (
-                        <StyledText
-                          as="p"
-                          visible={eyebrowVisible}
-                          size={eyebrowSize}
-                          color={eyebrowColor}
-                          className="font-mono text-xs uppercase tracking-widest text-white/90"
-                          data-tina-field={tinaField(props, "eyebrow")}
-                        >
-                          {eyebrow}
-                        </StyledText>
-                      )}
-                      {tagline?.trim() && (
-                        <p data-tina-field={tinaField(props, "tagline")} className="mt-1 text-sm font-medium text-white/90">
-                          {tagline}
-                        </p>
-                      )}
-                    </div>
-                  )}
                 </>
               ) : (
                 /* Fallback blue box styling when no image is uploaded */

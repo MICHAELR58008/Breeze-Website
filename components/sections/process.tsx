@@ -65,11 +65,11 @@ export function Process(props: ProcessProps) {
           copySize={copySize}
           copyColor={copyColor}
         />
-        <div data-tina-field={tinaField(props, "steps")} className="grid gap-px border-x border-b border-border bg-border md:grid-cols-2 lg:grid-cols-4">
+        <div data-tina-field={tinaField(props, "steps")} className="grid gap-px border-x border-border bg-border md:grid-cols-2 lg:grid-cols-4">
           {(steps || []).map((step, index) => (
             <article
               key={step.number || `step-${index}`}
-              className="flex min-h-80 flex-col bg-card p-6"
+              className="flex min-h-80 flex-col bg-card p-6 sm:p-8"
               data-tina-field={tinaField(step)}
             >
               <div className="flex items-center justify-between">

@@ -1,48 +1,36 @@
-# BRIEFING — 2026-07-22T07:57:35Z
+# BRIEFING — 2026-07-22T22:00:15Z
 
 ## Mission
-Empirically test and verify static typing, schema expansion, visual editing bindings (data-tina-field), and build stability for the TinaCMS Booking Drawer customization system.
+Empirically stress-test Proof Badges inline editing attributes and dynamic opacity styling in `components/sections/shared.tsx`, `components/sections/hero.tsx`, `tina/config.ts`, and `components/sections/hero.test.tsx`.
 
 ## 🔒 My Identity
 - Archetype: EMPIRICAL CHALLENGER
 - Roles: critic, specialist
-- Working directory: c:\Users\SOL\Desktop\Projet for Breeze\wesite\.agents\challenger_1
-- Original parent: 8125f8bb-5c98-4fcd-b9fb-380ba19a4bcb
-- Milestone: Verification & Testing
+- Working directory: c:/Users/SOL/Desktop/Projet for Breeze/wesite/.agents/challenger_1
+- Original parent: 0b759aa7-975d-4fa1-84ce-bcddacd158fb
+- Milestone: Proof Badges Inline Editing & Dynamic Opacity Verification
 - Instance: 1 of 1
 
 ## 🔒 Key Constraints
-- Review-only — do NOT modify implementation code (report findings as errors/issues)
-- Empirical verification mandatory — run tests/type-checks/builds directly
-- Record all test executions, build logs, and empirical evidence
+- Review-only — do NOT modify implementation code (only read/verify and run tests/type checks)
+- Empirical testing required — run verification code, execute `npm test` and `npx tsc --noEmit`
+- Write report.md and handoff.md in workspace
 
 ## Current Parent
-- Conversation ID: 8125f8bb-5c98-4fcd-b9fb-380ba19a4bcb
-- Updated: 2026-07-22T07:57:35Z
+- Conversation ID: 0b759aa7-975d-4fa1-84ce-bcddacd158fb
+- Updated: 2026-07-22T22:00:15Z
 
 ## Review Scope
-- **Files to review**: `tina/config.ts`, `lib/booking-content.ts`, `components/booking/booking-drawer.tsx`
-- **Verification goals**:
-  1. 6 block types (`imageBlock`, `infoCard`, `infoBanner`, `textareaInput`, `selectInput`, `checkboxGroup`) in schema and drawer with `data-tina-field`.
-  2. Run `npx tsc --noEmit` and `npm run build` to verify clean build with 0 type errors.
-  3. Generate adversarial/empirical test reports in `challenge.md` and `handoff.md`.
-
-## Attack Surface
-- **Hypotheses tested**: 6 block schema templates exist, `typenameToTemplate` mappings correct, `data-tina-field` visual editing markers bound, type check passes with 0 errors, build succeeds cleanly.
-- **Vulnerabilities found**: None. All 6 block types rendered and typed correctly.
-- **Untested angles**: Live cloud backend connection (out of CODE_ONLY scope).
-
-## Loaded Skills
-- None loaded.
+- **Files to review**: `components/sections/shared.tsx`, `components/sections/hero.tsx`, `tina/config.ts`, `components/sections/hero.test.tsx`
+- **Verification criteria**:
+  - `data-tina-field` presence on `strong` and `span` when `valueTinaField` and `labelTinaField` are passed vs omitted/undefined.
+  - `color-mix(in srgb, var(--background) ${opacityPct}%, transparent)` calculation across various opacity inputs (70, 0, 100, 0.5, undefined).
+  - Test suite (`npm test`) and TypeScript compilation (`npx tsc --noEmit`).
 
 ## Key Decisions Made
-- Executed `npx tsc --noEmit` (0 errors).
-- Executed `npm run build` (Next.js Turbopack build successful in 1807ms).
-- Generated full empirical report `challenge.md` and handoff report `handoff.md`.
+- [Pending empirical inspection]
 
 ## Artifact Index
-- `c:\Users\SOL\Desktop\Projet for Breeze\wesite\.agents\challenger_1\ORIGINAL_REQUEST.md` — Original request backup
-- `c:\Users\SOL\Desktop\Projet for Breeze\wesite\.agents\challenger_1\BRIEFING.md` — Agent briefing & state
-- `c:\Users\SOL\Desktop\Projet for Breeze\wesite\.agents\challenger_1\progress.md` — Liveness log
-- `c:\Users\SOL\Desktop\Projet for Breeze\wesite\.agents\challenger_1\challenge.md` — Adversarial & empirical verification report
-- `c:\Users\SOL\Desktop\Projet for Breeze\wesite\.agents\challenger_1\handoff.md` — Handoff report
+- `.agents/challenger_1/ORIGINAL_REQUEST.md` — Original request record
+- `.agents/challenger_1/BRIEFING.md` — Agent briefing and memory
+- `.agents/challenger_1/progress.md` — Liveness heartbeat

@@ -1,56 +1,53 @@
-# BRIEFING — 2026-07-22T00:54:20Z
+# BRIEFING — 2026-07-22T22:00:00Z
 
 ## Mission
-Implement Booking Sheet / Drawer customization system expansion in TinaCMS, including schema expansion for 6 new block types, rendering in booking drawer component, dynamic field API handling & database schema updates, and typecheck/build verification.
+Implement inline editing for Proof Badges text fields and add/apply Proof Background Opacity schema control.
 
 ## 🔒 My Identity
-- Archetype: implementer
+- Archetype: Worker 1
 - Roles: implementer, qa, specialist
 - Working directory: c:\Users\SOL\Desktop\Projet for Breeze\wesite\.agents\worker_1
-- Original parent: 8125f8bb-5c98-4fcd-b9fb-380ba19a4bcb
-- Milestone: Booking Sheet Customization System Expansion
+- Original parent: 0b759aa7-975d-4fa1-84ce-bcddacd158fb
+- Milestone: Proof Badges inline editing & proofBackgroundOpacity schema control
 
 ## 🔒 Key Constraints
-- Minimal code modifications, no unnecessary refactoring.
-- Maintain real state and behavior — no hardcoded test results or shortcuts.
-- Keep agent files inside `.agents/worker_1/`.
+- Follow minimal change principle.
+- No hardcoded test results, facade implementations, or cheating.
+- Code changes in `components/sections/shared.tsx`, `tina/config.ts`, `components/sections/hero.tsx`.
+- Must verify with `npx tsc --noEmit`, `npm run lint`, `npm run build`.
 
 ## Current Parent
-- Conversation ID: 8125f8bb-5c98-4fcd-b9fb-380ba19a4bcb
-- Updated: 2026-07-22T00:54:20Z
+- Conversation ID: 0b759aa7-975d-4fa1-84ce-bcddacd158fb
+- Updated: 2026-07-22T22:00:00Z
 
 ## Task Summary
-- **What to build**: Expand TinaCMS schema for 6 new block templates (imageBlock, infoCard, infoBanner, textareaInput, selectInput, checkboxGroup), update typenameToTemplate mapping & FormFieldBlock types, dynamically render all 6 block types in booking drawer with Tailwind CSS and tina attributes, handle dynamic custom fields in API route & schema, verify clean build/tsc.
-- **Success criteria**: Zero TypeScript errors (`npx tsc --noEmit`), clean `npm run build`, full functionality.
-- **Interface contracts**: USER_REQUEST / project schema.
-- **Code layout**: Next.js / TinaCMS project layout.
+- **What to build**: Proof Badges inline editing (`data-tina-field`) and `proofBackgroundOpacity` schema control and styling.
+- **Success criteria**: All instructions 1-6 completed, TypeScript check passes, lint checked, build passes, tests pass, handoff.md and changes.md documented.
+- **Interface contracts**: PROJECT.md / User specifications
+- **Code layout**: Next.js App Router project under `wesite/`
 
 ## Key Decisions Made
-- Implemented `imageBlock`, `infoCard`, `infoBanner`, `textareaInput`, `selectInput`, and `checkboxGroup` in `tina/config.ts` with `ui.itemProps` & `ui.defaultItem`.
-- Created `InfoBannerItem` helper component in `booking-drawer.tsx` to handle banner dismissal state smoothly.
-- Used Zod `.passthrough()` and dynamic `customFields` extraction in `app/api/bookings/route.ts` to store dynamic form fields into PostgreSQL `jsonb("custom_fields")`.
-
-## Artifact Index
-- ORIGINAL_REQUEST.md
-- BRIEFING.md
-- progress.md
-- changes.md
-- handoff.md
+- Added `valueTinaField`, `labelTinaField`, `style` props to `Proof` in `shared.tsx`.
+- Added `proofBackgroundOpacity` (number, default 70) to TinaCMS hero schema in `tina/config.ts`.
+- Bounded opacity calculation to `opacityPct` and applied `color-mix(in srgb, var(--background) ${opacityPct}%, transparent)` background style in `hero.tsx`.
+- Added unit tests in `hero.test.tsx` verifying opacity style computation and inline Tina fields.
 
 ## Change Tracker
-- **Files modified**:
-  - `tina/config.ts`: Expanded templates array for 6 new block types.
-  - `lib/booking-content.ts`: Updated `typenameToTemplate` mapping and `FormFieldBlock` type.
-  - `components/booking/booking-drawer.tsx`: Added rendering logic & state binding for 6 new block types.
-  - `lib/db/schema.ts`: Added `customFields` jsonb column to `bookingRequests` table.
-  - `app/api/bookings/route.ts`: Handled extraction and DB saving of dynamic custom fields.
-- **Build status**: PASS (`npx tsc --noEmit` 0 errors, `npm run build` pass)
+- **Files modified**: `components/sections/shared.tsx`, `tina/config.ts`, `components/sections/hero.tsx`, `components/sections/hero.test.tsx`
+- **Build status**: PASS
 - **Pending issues**: None
 
 ## Quality Status
-- **Build/test result**: PASS (0 errors, Next.js build clean)
-- **Lint status**: Clean
-- **Tests added/modified**: Verified via `tsc --noEmit` and `npm run build`
+- **Build/test result**: PASS (tsc clean, build clean, 51/51 vitest tests pass)
+- **Lint status**: PASS (tsc typecheck clean)
+- **Tests added/modified**: `components/sections/hero.test.tsx`
 
 ## Loaded Skills
 - None
+
+## Artifact Index
+- ORIGINAL_REQUEST.md — Original request log
+- BRIEFING.md — Worker briefing and state tracking
+- progress.md — Heartbeat progress log
+- changes.md — Summary of changes
+- handoff.md — 5-component handoff report

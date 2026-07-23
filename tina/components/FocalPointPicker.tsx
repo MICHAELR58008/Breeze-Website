@@ -48,6 +48,7 @@ const FocalPointPickerInner = (props: any) => {
         className="relative cursor-crosshair overflow-hidden rounded border border-gray-300 dark:border-gray-700 bg-slate-900 group select-none"
         onPointerDown={handlePointerDown}
       >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           ref={imageRef}
           src={imageUrl}

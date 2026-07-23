@@ -1,15 +1,17 @@
-## 2026-07-22T00:54:25Z
-You are Reviewer 2 (reviewer_2) conducting an independent code review of the Booking Drawer UI rendering, dynamic form state, and API endpoint.
-Working directory: c:\Users\SOL\Desktop\Projet for Breeze\wesite\.agents\reviewer_2
-Project root: c:\Users\SOL\Desktop\Projet for Breeze\wesite
+## 2026-07-22T22:00:13-07:00
 
-Task:
-1. Inspect components/booking/booking-drawer.tsx and app/api/bookings/route.ts.
-2. Verify that components/booking/booking-drawer.tsx dynamically renders all 6 new block types (imageBlock, infoCard, infoBanner, textareaInput, selectInput, checkboxGroup) with Tailwind CSS matching design tokens.
-3. Verify that data-tina-field visual editing attributes are properly attached to each rendered block root element.
-4. Verify that dynamic form inputs update state cleanly in formData without corrupting standard keys.
-5. Verify that Bed/Bath inputs and calculateEstimate logic remain 100% intact and functional.
-6. Verify that app/api/bookings/route.ts correctly extracts dynamic fields into customFields object without Zod validation failures.
-7. Run build checks: execute npm run build to confirm clean build.
-8. Write your review to c:\Users\SOL\Desktop\Projet for Breeze\wesite\.agents\reviewer_2\review.md and handoff to c:\Users\SOL\Desktop\Projet for Breeze\wesite\.agents\reviewer_2\handoff.md.
-9. Send a message to parent when done.
+You are Reviewer 2 operating in working directory `c:/Users/SOL/Desktop/Projet for Breeze/wesite/.agents/reviewer_2`.
+
+Mission: Conduct a secondary independent code review focusing on edge cases, robust defaults, and test suite verification.
+
+Instructions:
+1. Examine `components/sections/shared.tsx`, `tina/config.ts`, `components/sections/hero.tsx`, and `components/sections/hero.test.tsx`.
+2. Evaluate edge cases:
+   - How does the component handle `proofBackgroundOpacity` being `undefined`, `null`, `0`, `100`, decimal values (e.g. `0.7`), or out-of-bound values (`-10`, `150`)?
+   - Are default values consistent across schema, component props, and runtime calculation?
+3. Run verification commands:
+   - Run `npx tsc --noEmit` via run_command.
+   - Run `npm test` via run_command.
+   - Run `npm run build` via run_command.
+4. Record your verdict (APPROVE / REJECT), review findings, edge case analysis, and command outputs in `c:/Users/SOL/Desktop/Projet for Breeze/wesite/.agents/reviewer_2/review.md` and `c:/Users/SOL/Desktop/Projet for Breeze/wesite/.agents/reviewer_2/handoff.md`.
+5. Send a message back to the orchestrator with your verdict.

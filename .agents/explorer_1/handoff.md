@@ -1,38 +1,129 @@
-# Handoff Report: Consolidation of Pricing into Booking Collection
+# Handoff Report: Proof Badges Inline Editing Analysis
 
 ## 1. Observation
-- **`tina/config.ts`**:
-  - Lines 241–302 define collection `pricing` (`path: "content/pricing"`, `label: "Pricing"`) with fields `services` and `addOns`.
-  - Lines 304–532 define collection `booking` (`path: "content/booking"`, `label: "Booking Sheet"`) with fields `previewOpen`, `theme`, `steps`, `header`, `stepNames`, `stepLabels`, `timeWindows`, `reviewLabels`, `navigation`, `success`, `estimate`. `booking` does NOT define `services` or `addOns`.
-- **`content/pricing/pricing.json`**:
-  - Contains top-level keys `"services"` (3 entries) and `"addOns"` (3 entries).
-- **`content/booking/booking.json`**:
-  - Contains top-level keys `"previewOpen"`, `"header"`, `"stepNames"`, `"stepLabels"`, `"timeWindows"`, `"reviewLabels"`, `"navigation"`, `"success"`, `"estimate"`.
-- **`lib/pricing.ts`**:
-  - Imports `@/content/pricing/pricing.json` and issues query `(client.queries as any).pricing({ relativePath: "pricing.json" })`.
-- **`lib/booking-content.ts`**:
-  - Imports `@/content/booking/booking.json` and issues query `(client.queries as any).booking({ relativePath: "booking.json" })`.
-- **`app/page.tsx` & `components/booking/booking-drawer.tsx`**:
-  - Calls `fetchBookingContent()` and `fetchPricingContent()` separately and manages dual `useTina` hooks for visual editing context.
+
+### File & Line Observations:
+- **`components/sections/shared.tsx:17-24`**:
+  ```tsx
+  export function Proof({ value, label, className = "" }: { value: string; label: string; className?: string }) {
+    return (
+      <div className={`bg-background p-4 ${className}`}>
+        <strong className="block font-display text-2xl font-normal">{value}</strong>
+        <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{label}</span>
+      </div>
+    )
+  }
+  ```
+  *Observation*: `Proof` component takes only `value`, `label`, and `className`. Neither the container `<div>`, the `<strong>` element (`value`), nor the `<span>` element (`label`) contain `data-tina-field` attributes.
+
+- **`components/sections/hero.tsx:10-13` & `hero.tsx:177-186`**:
+  ```tsx
+  export interface HeroProof {
+    value: string
+    label: string
+  }
+  ```
+  ```tsx
+  <div data-tina-field={tinaField(props, "proofs")} className="grid grid-cols-2 gap-px border border-white/20 bg-white/20 sm:grid-cols-3">
+    {proofs?.map((p, i) => (
+      <Proof
+        key={p.label}
+        value={p.value}
+        label={p.label}
+        className={`${i === proofs.length - 1 ? "col-span-2 sm:col-span-1" : ""} bg-background/70 text-white backdrop-blur-sm`}
+      />
+    ))}
+  </div>
+  ```
+  *Observation*: `hero.tsx` applies `data-tina-field={tinaField(props, "proofs")}` on the wrapper container `<div>`, but does not pass individual proof metadata (`p` or `tinaField(p, "value")`/`tinaField(p, "label")`) down to `<Proof>`.
+
+- **`tina/config.ts:84-93`**:
+  ```ts
+  {
+    type: "object",
+    name: "proofs",
+    label: "Proof Badges",
+    list: true,
+    fields: [
+      { type: "string", name: "value" },
+      { type: "string", name: "label" },
+    ],
+  }
+  ```
+  *Observation*: TinaCMS schema configures `proofs` as an array of object items containing `value` and `label` string fields.
+
+- **`node_modules/@tinacms/bridge/dist/tina-field.js:1-12`**:
+  ```js
+  const tinaField = (object, property, index) => {
+    const contentSource = object == null ? void 0 : object._content_source;
+    if (!contentSource) {
+      return "";
+    }
+    const { queryId, path } = contentSource;
+    if (!property) {
+      return `${queryId}---${path.join(".")}`;
+    }
+    const fullPath = typeof index === "number" ? [...path, property, index] : [...path, property];
+    return `${queryId}---${fullPath.join(".")}`;
+  };
+  ```
+  *Observation*: `tinaField(p, "value")` constructs `<queryId>---<path.to.item>.value` when `p` contains `_content_source` metadata.
+
+- **Reference Pattern in `components/sections/process.tsx:70-117`**:
+  ```tsx
+  {(steps || []).map((step, index) => (
+    <article ... data-tina-field={tinaField(step)}>
+      <span data-tina-field={tinaField(step, "number")}>{step.number}</span>
+      <h3 data-tina-field={tinaField(step, "title")}>{step.title}</h3>
+      <p data-tina-field={tinaField(step, "description")}>{step.description}</p>
+    </article>
+  ))}
+  ```
+  *Observation*: Array list items in `process.tsx` use `tinaField(step, fieldName)` directly on item DOM elements.
+
+---
 
 ## 2. Logic Chain
-1. `pricing.json` and `booking.json` represent two separate single-file TinaCMS collections.
-2. In `tina/config.ts`, `pricing` defines `services` and `addOns` fields, whereas `booking` defines form copy and theme fields.
-3. Adding `services` and `addOns` to `booking`'s schema in `tina/config.ts`, changing `booking`'s label to `"Booking & Pricing"`, and copying the JSON content into `content/booking/booking.json` allows full removal of the `pricing` collection and `content/pricing/pricing.json`.
-4. Downstream app code (`lib/pricing.ts`, `lib/booking-content.ts`, `app/page.tsx`, `components/booking/booking-drawer.tsx`) can be simplified to query a single collection (`booking`), improving performance and CMS user experience.
+
+1. *From Observation in `tina-field.js` and `config.ts`*: TinaCMS visual editor relies on DOM elements having `data-tina-field` attributes matching `<queryId>---<path.to.field>` to highlight elements and trigger inline editing.
+2. *From Observation in `shared.tsx:17-24`*: Currently, `<strong className="...">` (`value`) and `<span className="...">` (`label`) in `shared.tsx` do not have `data-tina-field` attributes.
+3. *From Observation in `hero.tsx:177-186`*: `hero.tsx` places `data-tina-field` on the parent container `proofs`, but does not pass `proof={p}` or `tinaFields` to `<Proof>`.
+4. *Deduction*: Therefore, clicking directly on the proof badge `value` or `label` text in the visual editor iframe does not open or trigger field-level inline editing for `value` or `label`.
+5. *Solution*:
+   - Update `Proof` in `shared.tsx` to accept a `proof` object (or `tinaFields` mapping) and apply `data-tina-field` to the container `<div>`, `<strong>` (`value`), and `<span>` (`label`).
+   - Update `HeroProof` in `hero.tsx` to allow index signature `[key: string]: any`.
+   - Update `hero.tsx` proof mapping to pass `proof={p}` into `<Proof>`.
+
+---
 
 ## 3. Caveats
-- Downstream TypeScript definitions in `lib/pricing.ts` and `lib/booking-content.ts` will need to be updated to import `booking.json` instead of `pricing.json`.
-- TinaCMS auto-generated GraphQL client code (`tina/__generated__`) must be regenerated after schema modification (`tina/config.ts`).
-- Service id `"Commercial "` in `pricing.json` has trailing whitespace; implementer should decide whether to trim or preserve.
+
+- **Static/Fallback Rendering**: When rendering `<Hero />` with static default props (where `p` lacks `_content_source`), `tinaField(p, "value")` safely evaluates to `""`, resulting in `data-tina-field=""`. This is the standard behavior across all section components in this repository (e.g. `hero.tsx`, `process.tsx`, `about.tsx`).
+- **Scope Limit**: Investigation was strictly read-only per mission constraints. Source code modification is delegated to the Implementer agent.
+
+---
 
 ## 4. Conclusion
-Consolidation of `pricing` into `booking` is straightforward and fully feasible.
-- Modify `tina/config.ts`: rename `booking` collection label to `"Booking & Pricing"`, move `services` and `addOns` field definitions into `booking`, and delete `pricing` collection definition.
-- Merge JSON data: copy `"services"` and `"addOns"` arrays from `pricing.json` into `booking.json`, then delete `content/pricing/pricing.json`.
-- Refactor application consumption to fetch and use `booking.json` as the unified source of truth.
+
+To fully enable TinaCMS visual editor inline editing for Proof Badges:
+1. Modify `components/sections/shared.tsx`:
+   - Import `tinaField` from `tinacms/dist/tina-field`.
+   - Update `Proof` props type signature to accept `proof?: Record<string, any>` or `tinaFields?: { container?: string; value?: string; label?: string }`.
+   - Add `data-tina-field={tinaFields?.container ?? (proof ? tinaField(proof) : undefined)}` to outer `<div>`.
+   - Add `data-tina-field={tinaFields?.value ?? (proof ? tinaField(proof, "value") : undefined)}` to `<strong>`.
+   - Add `data-tina-field={tinaFields?.label ?? (proof ? tinaField(proof, "label") : undefined)}` to `<span>`.
+2. Modify `components/sections/hero.tsx`:
+   - Add `[key: string]: any` to `HeroProof` interface.
+   - Pass `proof={p}` prop into `<Proof>` inside the `proofs?.map` loop.
+
+---
 
 ## 5. Verification Method
-- **File inspection**: Check `tina/config.ts` for collection label `"Booking & Pricing"` and presence of `services` / `addOns` fields in `booking` collection; verify absence of `pricing` collection.
-- **Content inspection**: Check `content/booking/booking.json` contains `"services"` and `"addOns"` keys; verify `content/pricing/pricing.json` file is deleted.
-- **Type check / Build**: Run `npm run build` or `npx tsc --noEmit` to verify no broken imports or missing properties.
+
+1. **Static Type & Unit Test Verification**:
+   - Run `npx vitest run components/sections/hero.test.tsx` to verify component renders cleanly with and without TinaCMS metadata.
+2. **DOM Element Attribute Verification**:
+   - Inspect rendered DOM for `<Proof>` elements when passed mock `_content_source`:
+     - Container `<div>` has `data-tina-field="<queryId>---page.sections.0.proofs.0"`.
+     - `<strong>` element has `data-tina-field="<queryId>---page.sections.0.proofs.0.value"`.
+     - `<span>` element has `data-tina-field="<queryId>---page.sections.0.proofs.0.label"`.

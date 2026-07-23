@@ -1,7 +1,7 @@
-# BRIEFING — 2026-07-22T19:20:30-07:00
+# BRIEFING — 2026-07-22T22:07:00Z
 
 ## Mission
-Create a reusable Client Component Error Boundary (`components/ui/error-boundary.tsx`) that catches child component rendering errors and displays a fallback UI, wrap `<Image />` in `components/sections/about.tsx` with `<ErrorBoundary>`, and ensure `npm run build` succeeds cleanly without TypeScript or React errors.
+Fix Proof Badges inline editing in `components/sections/shared.tsx` and `components/sections/hero.tsx` by adding `data-tina-field` attributes, add "Proof Background Opacity" schema control in `tina/config.ts`, apply dynamic opacity styling in `components/sections/hero.tsx`, ensure `npm run lint` passes, and verify via `npx tsc --noEmit`, `npm run lint`, and `npm run build`.
 
 ## 🔒 My Identity
 - Archetype: teamwork_preview_orchestrator
@@ -13,18 +13,15 @@ Create a reusable Client Component Error Boundary (`components/ui/error-boundary
 ## 🔒 My Workflow
 - **Pattern**: Project
 - **Scope document**: c:\Users\SOL\Desktop\Projet for Breeze\wesite\.agents\orchestrator\PROJECT.md
-1. **Decompose**: Assessed scope (Error Boundary component creation, About section integration, build verification).
-2. **Dispatch & Execute**: Direct iteration loop (Explorer -> Worker -> Reviewers -> Auditor).
+1. **Decompose**: Decomposed task into Milestone 1 (Proof Badges inline editing + schema opacity control + dynamic styling + lint fix + verification).
+2. **Dispatch & Execute**: Direct iteration loop.
 3. **On failure**: Retry -> Replace -> Skip -> Redistribute -> Redesign
 4. **Succession**: Self-succeed at 16 spawns.
 - **Work items**:
-  1. Fix Booking Drawer auto-submit bug [done]
-  2. Clean up residual pricing.json per Victory Audit finding [done]
-  3. Milestone 2: Reusable Error Boundary (`components/ui/error-boundary.tsx`) [done]
-  4. Milestone 2: Wrap `<Image />` in `components/sections/about.tsx` with `<ErrorBoundary>` [done]
-  5. Milestone 2: Verification (`npm run build`, audit, verification) [done]
-- **Current phase**: 4
-- **Current focus**: Task Complete & Victory Claim
+  1. Milestone 1: Proof Badges Inline Editing & Opacity Control [done]
+  2. Iteration 2: Fix `npm run lint` failure & re-verify [done]
+- **Current phase**: 6
+- **Current focus**: Task Complete & Re-submitting Victory Claim
 
 ## 🔒 Key Constraints
 - Never write or modify source code directly as orchestrator.
@@ -38,29 +35,35 @@ Create a reusable Client Component Error Boundary (`components/ui/error-boundary
 
 ## Key Decisions Made
 - Use Project Orchestration pattern.
-- Milestone 1 completed & verified clean.
-- Milestone 2 completed & verified clean (Worker M2-1, Reviewers M2-1 & M2-2, Auditor M2-1 CLEAN).
+- Milestone 1 completed & verified clean (Worker 1, Reviewers 1 & 2, Challengers 1 & 2, Auditor 1 CLEAN).
+- Iteration 2 completed & verified clean: fixed `npm run lint` by adding `eslint` & `eslint-config-next` with ESLint 9 flat config (`eslint.config.mjs`) (Worker 2, Reviewer 3, Challenger 3, Auditor 2 CLEAN).
 
 ## Team Roster
 | Agent | Type | Work Item | Status | Conv ID |
 |-------|------|-----------|--------|---------|
-| Explorer M2-1 | teamwork_preview_explorer | Error Boundary Spec | COMPLETED | b8176920-a86e-4b5e-9dc6-bf6c3ce81659 |
-| Explorer M2-2 | teamwork_preview_explorer | About Image Protection | COMPLETED | 007e416e-5ccc-48b9-a14e-ec70b83ce660 |
-| Explorer M2-3 | teamwork_preview_explorer | Implementation Blueprint | COMPLETED | 3199acb1-8cae-48e3-b2da-80440e700ff4 |
-| Worker M2-1 | teamwork_preview_worker | Implementation & Build | COMPLETED | f855ec0e-a212-47d3-b93f-2f49884a112c |
-| Reviewer M2-1 | teamwork_preview_reviewer | Error Boundary Code Review | COMPLETED (PASS) | c70f6b09-7280-45a7-82a0-cbef0fe1fb66 |
-| Reviewer M2-2 | teamwork_preview_reviewer | About Section Integration Review | COMPLETED (PASS) | 80b0d292-e4fb-449b-b077-f40825f2f1bb |
-| Auditor M2-1 | teamwork_preview_auditor | Forensic Integrity Audit | COMPLETED (CLEAN) | af210ba1-3827-4d5b-bb6a-7a0a7c01d42e |
+| Explorer 1 | teamwork_preview_explorer | Proof Component Inline Editing Analysis | COMPLETED | e6f393df-3395-4bf7-8990-9c4211dfbe8f |
+| Explorer 2 | teamwork_preview_explorer | Schema Opacity Control Analysis | COMPLETED | 56fd3361-c1ad-480b-ad72-89d0353445a6 |
+| Explorer 3 | teamwork_preview_explorer | End-to-End Implementation Blueprint | COMPLETED | 2ad840d1-c785-455d-b676-67abe69c5466 |
+| Worker 1 | teamwork_preview_worker | Proof Badges & Schema Implementation | COMPLETED | 663edbbb-c772-470b-9b74-ca3d19f4d021 |
+| Reviewer 1 | teamwork_preview_reviewer | Code Review & Verification | COMPLETED (PASS) | 73c1c2b1-e005-45f5-b175-73945285fb05 |
+| Reviewer 2 | teamwork_preview_reviewer | Robustness & Test Suite Review | COMPLETED (PASS) | a6934f48-f83d-4c00-a893-1e872eeefa79 |
+| Challenger 1 | teamwork_preview_challenger | Empirical Correctness Verification | COMPLETED (PASS) | c90fdfa9-6d9d-4e33-9d10-d764a9e68687 |
+| Challenger 2 | teamwork_preview_challenger | Schema & Build Stress Testing | COMPLETED (PASS) | 8344ad2d-1346-42d5-92c9-9cd41be515df |
+| Auditor 1 | teamwork_preview_auditor | Forensic Integrity Audit | COMPLETED (CLEAN) | 909f216b-5a50-49c6-8721-6dfbaf7c0833 |
+| Worker 2 | teamwork_preview_worker | Fix npm run lint failure | COMPLETED | b4886abd-f70e-4197-b27c-6f098437d1d9 |
+| Reviewer 3 | teamwork_preview_reviewer | Verification & Lint Review | COMPLETED (PASS) | 5b9a9710-f56c-4559-abca-604ba7133884 |
+| Challenger 3 | teamwork_preview_challenger | Stress Testing & Build Verification | COMPLETED (PASS) | 813c6669-c499-41cb-8aad-779b4f8f6086 |
+| Auditor 2 | teamwork_preview_auditor | Integrity & Verification Audit | COMPLETED (CLEAN) | c2b381c4-360d-47ad-bffd-359a654f43ee |
 
 ## Succession Status
 - Succession required: no
-- Spawn count: 20 / 16
+- Spawn count: 13 / 16
 - Pending subagents: none
 - Predecessor: none
 - Successor: not yet spawned
 
 ## Active Timers
-- Heartbeat cron: task-27
+- Heartbeat cron: terminated
 - Safety timer: none
 
 ## Artifact Index

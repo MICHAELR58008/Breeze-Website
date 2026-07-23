@@ -1,37 +1,45 @@
-# Handoff Report — Explorer 3: Booking Drawer & Pricing `useTina` Consolidation
+# Handoff Report: Proof Badges Inline Editing & Dynamic Opacity Styling
 
 ## 1. Observation
-- File inspected: `c:\Users\SOL\Desktop\Projet for Breeze\wesite\components\booking\booking-drawer.tsx`
-  - In `BookingProviderTinaWrapper` (lines 103–156), two separate `useTina()` calls are currently invoked:
-    - Line 116: `const pricingTinaResult = useTina({ query: pricingTina?.query || "", variables: pricingTina?.variables || {}, data: pricingTina?.data || {} })`
-    - Line 122: `const tinaResult = useTina({ query: tina.query, variables: tina.variables, data: tina.data })`
-  - In `BookingDrawerCore` (lines 158–605), estimate calculations rely on `servicesList` and `addOnsList` passed from wrapper (lines 234–247):
-    - Service price matching: `svc.prices?.find((p) => p.key === `${bedrooms}-${bathrooms}`)`
-    - Add-on total: `selectedAddOns.reduce((sum, id) => sum + (addon?.cents ?? 0), 0)`
-  - Visual editing attributes: `data-tina-field={rawPricing ? tinaField(rawPricing?.services?.[index], "name") : undefined}` (lines 395, 420).
-- File inspected: `c:\Users\SOL\Desktop\Projet for Breeze\wesite\components\sections\services.tsx`
-  - Line 44: `const { openBooking, servicesList, addOnsList, rawPricing } = useBooking()`
-  - Line 80: `data-tina-field={rawPricing ? tinaField(rawPricing?.services?.[index]) : undefined}`
-- File inspected: `c:\Users\SOL\Desktop\Projet for Breeze\wesite\app\page.tsx`
-  - Line 14: `<BookingProvider content={bookingResult.content} tina={bookingResult.tina} pricingContent={pricingResult.content} pricingTina={pricingResult.tina}>`
+- **`components/sections/shared.tsx`**:
+  - `Proof` component currently signature is: `export function Proof({ value, label, className = "" }: { value: string; label: string; className?: string })`.
+  - Inner tags `<strong className="block font-display text-2xl font-normal">{value}</strong>` and `<span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{label}</span>` lack `data-tina-field` attributes.
+  - The component root `<div className={`bg-background p-4 ${className}`}>` does not accept an inline `style` prop.
+- **`components/sections/hero.tsx`**:
+  - Line 177: `<div data-tina-field={tinaField(props, "proofs")} className="grid grid-cols-2 gap-px border border-white/20 bg-white/20 sm:grid-cols-3">`.
+  - Lines 179-184: `Proof` components are rendered inside `.map()` with `className={`${i === proofs.length - 1 ? "col-span-2 sm:col-span-1" : ""} bg-background/70 text-white backdrop-blur-sm`}`.
+  - `HeroProps` and `defaults` do not declare `proofBackgroundOpacity`.
+  - Individual proof array elements `p` are not bound with `tinaField(p, "value")` or `tinaField(p, "label")`.
+- **`tina/config.ts`**:
+  - Hero template fields (lines 76-114) contain `proofs` list object with `value` and `label` fields, but do not contain `proofBackgroundOpacity` field.
+  - Hero template `defaultItem` (lines 59-75) does not include `proofBackgroundOpacity`.
 
 ## 2. Logic Chain
-1. *Observation*: `BookingProviderTinaWrapper` executes two `useTina()` calls because pricing content and booking content are queried from separate collections (`content/pricing/pricing.json` vs `content/booking/booking.json`).
-2. *Observation*: `services` and `addOns` schema fields and JSON content are being merged into `content/booking/booking.json` under the unified `booking` collection query.
-3. *Deduction*: When `fetchBookingContent()` returns `tina` containing the unified `booking` query result (including `services` and `addOns`), `pricingTina` becomes redundant.
-4. *Deduction*: `BookingProviderTinaWrapper` can eliminate `pricingTinaResult = useTina(...)` and execute **only a single `useTina()` hook** for `tina`.
-5. *Deduction*: By deriving `servicesList` and `addOnsList` from `rawBooking?.services` and `rawBooking?.addOns`, `estimate` recalculations in `booking-drawer.tsx` and service card renderings in `components/sections/services.tsx` will reactively update live in the TinaCMS visual editor.
-6. *Deduction*: Setting `rawPricing: rawBooking` in `BookingContext.Provider` maintains 100% backward compatibility for `components/sections/services.tsx` without needing breaking changes.
+1. To enable TinaCMS inline click-to-edit capability on individual proof values and labels, `data-tina-field` attributes must be attached to the `<strong ...>` and `<span ...>` DOM elements inside the `Proof` component in `components/sections/shared.tsx`.
+2. TinaCMS's `tinaField(p, "value")` helper evaluates the attribute string for element `p` in array `proofs`. Passing `valueTinaField={tinaField(p, "value")}` and `labelTinaField={tinaField(p, "label")}` from `hero.tsx` into `<Proof>` allows exact element editing.
+3. Adding `proofBackgroundOpacity` (number) to `tina/config.ts` hero schema allows CMS users to edit background opacity via admin UI.
+4. To replace hardcoded `bg-background/70` in `hero.tsx`, we compute `opacityPct` from `proofBackgroundOpacity` with fallbacks (`proofBackgroundOpacity ?? 70`), and apply inline style `backgroundColor: color-mix(in srgb, var(--background) ${opacityPct}%, transparent)` to `<Proof>`.
 
 ## 3. Caveats
-- No source code edits were performed (read-only investigation per role constraints).
-- Full end-to-end visual editor rendering verification requires running `npx tinacms dev` after schema and collection JSON files are updated by implementer.
+- If `proofBackgroundOpacity` is supplied as a decimal (e.g. `0.7`) instead of an integer percentage (e.g. `70`), the sanitization logic in `hero.tsx` must convert `0.7` to `70%` (`0.7 * 100`) so CSS `color-mix` receives valid percentage values.
+- `bg-background` class on `<Proof>` in `shared.tsx` sets `background-color: var(--background)`. Passing `style={{ backgroundColor: color-mix(...) }}` overrides `background-color` via CSS specificity on inline styles.
 
 ## 4. Conclusion
-`components/booking/booking-drawer.tsx` can be successfully refactored to use a **single `useTina()` hook**. The estimate calculation logic and type definitions for services and add-ons are fully preserved and will benefit from real-time visual editing updates.
-
-Detailed refactoring design and code snippets are documented in `analysis.md`.
+All required changes are fully scoped and documented:
+1. `components/sections/shared.tsx`:
+   - Extend `Proof` props to accept `style?: React.CSSProperties`, `valueTinaField?: string`, `labelTinaField?: string`.
+   - Add `data-tina-field` attributes to value and label elements and `style` to container div.
+2. `tina/config.ts`:
+   - Add `proofBackgroundOpacity: 70` to `defaultItem`.
+   - Add `proofBackgroundOpacity` field definition (type `number`) under `hero` section fields.
+3. `components/sections/hero.tsx`:
+   - Add `proofBackgroundOpacity?: number` to `HeroProps` and `defaults`.
+   - Compute `opacityPct` with fallback handling (`proofBackgroundOpacity ?? 70`).
+   - Remove hardcoded `bg-background/70` from card `className`.
+   - Pass `valueTinaField={tinaField(p, "value")}`, `labelTinaField={tinaField(p, "label")}`, and `style={{ backgroundColor: `color-mix(in srgb, var(--background) ${opacityPct}%, transparent)` }}` to `<Proof>`.
 
 ## 5. Verification Method
-1. Inspect `c:\Users\SOL\Desktop\Projet for Breeze\wesite\.agents\explorer_3\analysis.md` for complete code structure and proposed diff snippets.
-2. Invalidation Condition: If `useTina` in `BookingProviderTinaWrapper` still executes two separate hook calls or if `rawPricing` is omitted from `BookingContext`, visual editing in `components/sections/services.tsx` would break.
+- **Static Analysis / Type Check**: Run `npx tsc --noEmit` to verify type safety of `HeroProps` and `ProofProps`.
+- **Lint Check**: Run `npm run lint` to ensure no linting errors.
+- **Build Verification**: Run `npm run build` to confirm Next.js build passes.
+- **Visual / DOM Verification**: Check HTML output in browser/editor to confirm `data-tina-field` attributes are populated on `<strong>` and `<span>` elements and `style="background-color: color-mix(...)"` is applied on proof badge containers.

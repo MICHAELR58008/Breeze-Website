@@ -1,35 +1,42 @@
-# BRIEFING — 2026-07-21T18:47:00Z
+# BRIEFING — 2026-07-22T21:58:05Z
 
 ## Mission
-Analyze codebase integration and data loading functions for TinaCMS pricing and booking data, focusing on `lib/pricing.ts`, `lib/booking-content.ts`, and `app/page.tsx`.
+Analyze `tina/config.ts` and `components/sections/hero.tsx` to propose the exact schema addition and prop handling for "Proof Background Opacity" in the Hero section.
 
 ## 🔒 My Identity
-- Archetype: Teamwork Explorer (explorer_2)
-- Roles: Read-only investigator
-- Working directory: c:\Users\SOL\Desktop\Projet for Breeze\wesite\.agents\explorer_2
-- Original parent: 748ade00-494c-4957-9768-7694f6cdcd56
-- Milestone: Preview / Refactor Analysis for TinaCMS pricing and booking data
+- Archetype: Explorer
+- Roles: Explorer 2 (Read-only investigation & analysis)
+- Working directory: c:/Users/SOL/Desktop/Projet for Breeze/wesite/.agents/explorer_2
+- Original parent: 0b759aa7-975d-4fa1-84ce-bcddacd158fb
+- Milestone: Hero Proof Background Opacity Schema Control Analysis
 
 ## 🔒 Key Constraints
-- Read-only investigation — do NOT implement code changes in app source files
-- Write all findings to analysis.md and handoff.md in working directory
-- Communicate via send_message to parent
+- Read-only investigation — do NOT implement changes in source code (`tina/config.ts` or `components/sections/hero.tsx`)
+- Write reports and analysis to `.agents/explorer_2/` only
+- Network mode: CODE_ONLY
 
 ## Current Parent
-- Conversation ID: 748ade00-494c-4957-9768-7694f6cdcd56
-- Updated: 2026-07-21T18:47:00Z
+- Conversation ID: 0b759aa7-975d-4fa1-84ce-bcddacd158fb
+- Updated: 2026-07-22T21:58:38Z
 
 ## Investigation State
-- **Explored paths**: `lib/pricing.ts`, `lib/booking-content.ts`, `app/page.tsx`, `components/booking/booking-drawer.tsx`, `components/sections/services.tsx`, `lib/page-sections.tsx`, `tina/config.ts`, `app/api/bookings/route.ts`
-- **Key findings**: Identified 3 parallel queries in `app/page.tsx`, double `useTina` hook calls in `BookingProviderTinaWrapper`, obsolete static pricing JSON fallback in `lib/pricing.ts`'s `calculateEstimate`, and redundant static prop passing in `lib/page-sections.tsx`. Designed unified booking content query refactor.
-- **Unexplored areas**: None for this milestone.
+- **Explored paths**:
+  - `tina/config.ts` (Hero template schema definition, `defaultItem`, `fields` array)
+  - `components/sections/hero.tsx` (`HeroProps`, `defaults`, destructuring, JSX rendering of proofs grid)
+  - `components/sections/shared.tsx` (`Proof` component definition)
+  - `content/page/page.json` (Hero JSON section data)
+- **Key findings**:
+  - Defined exact schema object `{ type: "number", name: "proofBgOpacity", label: "Proof Background Opacity (%)" }`.
+  - Default value `70` selected for `ui.defaultItem` and `HeroProps` defaults to preserve existing 70% opacity (`bg-background/70`).
+  - Proposed inline style `backgroundColor: hsl(var(--background) / ${(proofBgOpacity ?? 70) / 100})` for `Proof` cards in `hero.tsx`.
+- **Unexplored areas**: None for this subtask scope.
 
 ## Key Decisions Made
-- Completed full analysis and detailed architectural refactor plan.
-- Generated `analysis.md` and `handoff.md`.
+- Use `type: "number"` with 0–100 integer range (%) matching existing numeric controls pattern in `tina/config.ts`.
+- Set default value to `70` for seamless backwards compatibility with baseline Tailwind styling (`bg-background/70`).
 
 ## Artifact Index
-- ORIGINAL_REQUEST.md — Original request instructions
-- BRIEFING.md — Mission tracking & persistent state
-- analysis.md — Detailed analysis report on TinaCMS pricing & booking integration
-- handoff.md — 5-component handoff summary report
+- c:/Users/SOL/Desktop/Projet for Breeze/wesite/.agents/explorer_2/ORIGINAL_REQUEST.md — Initial request log
+- c:/Users/SOL/Desktop/Projet for Breeze/wesite/.agents/explorer_2/BRIEFING.md — Working briefing context
+- c:/Users/SOL/Desktop/Projet for Breeze/wesite/.agents/explorer_2/analysis.md — Comprehensive analysis report
+- c:/Users/SOL/Desktop/Projet for Breeze/wesite/.agents/explorer_2/handoff.md — 5-Component Handoff Report

@@ -1,49 +1,36 @@
-# BRIEFING — 2026-07-21T18:47:15Z
+# BRIEFING — 2026-07-22T21:58:05Z
 
 ## Mission
-Analyze UI components and useTina hook usage in booking drawer and pricing views for visual editing unification.
+Synthesize implementation requirements for Proof Badges inline editing and dynamic opacity styling.
 
 ## 🔒 My Identity
 - Archetype: Teamwork explorer
-- Roles: explorer_3 (teamwork_preview_explorer)
-- Working directory: c:\Users\SOL\Desktop\Projet for Breeze\wesite\.agents\explorer_3
-- Original parent: 748ade00-494c-4957-9768-7694f6cdcd56
-- Milestone: Booking Drawer & Pricing TinaCMS Unification Analysis
+- Roles: Explorer 3
+- Working directory: c:/Users/SOL/Desktop/Projet for Breeze/wesite/.agents/explorer_3
+- Original parent: 0b759aa7-975d-4fa1-84ce-bcddacd158fb
+- Milestone: Proof Badges inline editing and dynamic opacity styling investigation
 
 ## 🔒 Key Constraints
-- Read-only investigation — do NOT implement source code changes directly.
-- Produce structured analysis report and proposed patch / snippet updates.
-- Output analysis to analysis.md and summary handoff.md.
+- Read-only investigation — do NOT implement source code changes
+- Write reports to working directory (`analysis.md` and `handoff.md`)
 
 ## Current Parent
-- Conversation ID: 748ade00-494c-4957-9768-7694f6cdcd56
-- Updated: 2026-07-21T18:47:15Z
+- Conversation ID: 0b759aa7-975d-4fa1-84ce-bcddacd158fb
+- Updated: 2026-07-22T21:58:46Z
 
 ## Investigation State
-- **Explored paths**:
-  - `components/booking/booking-drawer.tsx`
-  - `components/sections/services.tsx`
-  - `components/sections/hero.tsx`
-  - `components/sections/navigation.tsx`
-  - `components/breeze-site.tsx`
-  - `app/page.tsx`
-  - `app/page-client.tsx`
-  - `lib/pricing.ts`
-  - `lib/booking-content.ts`
-  - `tina/config.ts`
+- **Explored paths**: components/sections/shared.tsx, components/sections/hero.tsx, tina/config.ts, content/page/page.json, app/globals.css
 - **Key findings**:
-  - `BookingProviderTinaWrapper` currently calls `useTina()` twice (one for `pricingTina`, one for `tina`).
-  - Merging `pricing` into `booking` enables single `useTina()` hook execution in `BookingProviderTinaWrapper`.
-  - Aliasing `rawPricing: rawBooking` in `BookingContext.Provider` preserves visual editing in `components/sections/services.tsx`.
-  - Calculation logic (`estimate` useMemo) and type definitions (`ServiceItemData`, `AddOnData`) remain 100% intact and receive live visual editing updates.
-- **Unexplored areas**: None within scope.
+  - `Proof` component in `shared.tsx` needs `valueTinaField`, `labelTinaField`, and `style` props.
+  - `tina/config.ts` needs `proofBackgroundOpacity` number field in `hero` schema with default item value 70.
+  - `hero.tsx` needs prop update, sanitization logic (0-100% or 0-1 scale to percentage with default 70), replacement of `bg-background/70` with inline `style={{ backgroundColor: color-mix(in srgb, var(--background) ${opacityPct}%, transparent) }}`, and passing `tinaField(p, "value")` and `tinaField(p, "label")`.
+- **Unexplored areas**: None, blueprint complete.
 
 ## Key Decisions Made
-- Prepared detailed analysis in `analysis.md` and handoff report in `handoff.md`.
+- Selected CSS `color-mix(in srgb, var(--background) ${opacityPct}%, transparent)` for background opacity to preserve theme variable `--background` without affecting text opacity.
+- Designed triple-layer fallback mechanism (schema defaultItem -> prop defaults -> runtime sanitization).
 
 ## Artifact Index
-- ORIGINAL_REQUEST.md — Original request details
-- BRIEFING.md — Working state briefing
-- progress.md — Heartbeat progress tracking
-- analysis.md — Detailed analysis report
+- ORIGINAL_REQUEST.md — Initial user request
+- analysis.md — Detailed analysis blueprint report
 - handoff.md — 5-component handoff report

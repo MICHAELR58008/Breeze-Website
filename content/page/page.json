@@ -11,20 +11,36 @@
       "proofs": [
         {
           "value": "24 hr",
-          "label": "Response time"
+          "label": "Response time",
+          "valueSize": 0,
+          "valueColor": "#FFFFFF",
+          "labelSize": 12,
+          "labelColor": "#FFFFFF"
         },
         {
           "value": "Local",
-          "label": "Owner-led team"
+          "label": "Owner-led team",
+          "valueColor": "#FFFFFF",
+          "labelSize": 13,
+          "labelColor": "#FFFFFF"
         },
         {
           "value": "Free",
-          "label": "Personalized quote"
+          "label": "Personalized quote",
+          "labelSize": 13,
+          "labelColor": "#FFFFFF"
         }
       ],
+      "proofBackgroundOpacity": 0,
       "imageSrc": "/uploads/premium_photo-1676968002767-1f6a09891350.avif",
       "locationVisible": true,
       "headingLine1Visible": true,
+      "headingLine2Visible": true,
+      "headingLine2Size": -7,
+      "subheadingVisible": true,
+      "subheadingX": 0,
+      "subheadingSize": 40,
+      "subheadingColor": "#B6B6B6",
       "_template": "hero"
     },
     {
@@ -43,7 +59,38 @@
       "bioParagraph2": "",
       "image": "/uploads/image.jpg",
       "focalPoint": "53% 23%",
+      "eyebrowVisible": false,
+      "ownerNameVisible": true,
+      "bioParagraph1Visible": true,
       "_template": "about"
+    },
+    {
+      "eyebrow": "02 / How it works",
+      "heading": "Simple from start to shine.",
+      "copy": "A compact quote flow designed around your home—not a generic one-price-fits-all form.",
+      "steps": [
+        {
+          "number": "01",
+          "title": "Choose your clean",
+          "description": "Select deep or regular cleaning, then tell us about your bedrooms and bathrooms."
+        },
+        {
+          "number": "02",
+          "title": "Share the details",
+          "description": "Add extras and, if you would like, securely upload photos for a more accurate quote."
+        },
+        {
+          "number": "03",
+          "title": "Request a time",
+          "description": "Pick your preferred date and a morning, afternoon, or flexible time window."
+        },
+        {
+          "number": "04",
+          "title": "We confirm",
+          "description": "Breeze reviews your request and gets back to you within 24 hours with availability and final pricing."
+        }
+      ],
+      "_template": "process"
     },
     {
       "eyebrow": "",

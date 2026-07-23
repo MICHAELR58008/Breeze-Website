@@ -22,7 +22,12 @@ export const PagePartsFragmentDoc = gql`
         __typename
         value
         label
+        valueSize
+        valueColor
+        labelSize
+        labelColor
       }
+      proofBackgroundOpacity
       imageSrc
       imageAlt
       locationVisible

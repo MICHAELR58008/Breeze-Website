@@ -1,48 +1,27 @@
 # Original User Request
 
-## 2026-07-22T21:25:16Z
+## 2026-07-22T21:57:46Z
 
-You are the Project Orchestrator for the task defined in `c:\Users\SOL\Desktop\Projet for Breeze\wesite\.agents\ORIGINAL_REQUEST.md`.
-
-Your working directory for metadata/plans/progress is `c:\Users\SOL\Desktop\Projet for Breeze\wesite\.agents\orchestrator`.
-The project root directory is `c:\Users\SOL\Desktop\Projet for Breeze\wesite`.
-
-### Task Summary
-Fix the Booking Drawer form so that transitioning to the final Review step (Step 5 of 5 or Step 6 of 6) never automatically triggers form submission, requiring an explicit user click on the final Submit button.
-
-### Specific Requirements
-1. R1. Prevent DOM Node Reuse & Accidental Submissions: Update `components/booking/booking-drawer.tsx` to give separate, explicit React `key` props (`key="continue-btn"` and `key="submit-btn"`) to the navigation buttons. Ensure that reaching the final step never auto-fires submission.
-2. R2. Explicit Button Submission: Ensure that form submission is bound strictly to an explicit click on the final submit button, completely preventing keyboard Enter bubbling or DOM node reuse from triggering API requests prematurely.
-
-### Acceptance Criteria
-- Transitioning to the final Review step (on any service package, including Commercial Clean) keeps the drawer on the Review step without submitting automatically.
-- Clicking the "Submit request" button explicitly on the final step successfully submits the form.
-- `npx tsc --noEmit` passes with 0 errors.
-
-## 2026-07-22T23:59:05Z
-
-<USER_REQUEST>
-Implement a React Error Boundary around the image in the About section (`components/sections/about.tsx`) to prevent rendering/loading failures from crashing the page.
+Fix the "Proof Badges" in the Hero section so editors can click to edit the individual text fields inline and adjust their background opacity via TinaCMS.
 
 Working directory: c:/Users/SOL/Desktop/Projet for Breeze/wesite
 Integrity mode: development
 
 ## Requirements
 
-### R1. UI Error Boundary Component
-Create a reusable Client Component Error Boundary (`components/ui/error-boundary.tsx`) that catches rendering errors in child components and displays a clean fallback UI.
+### R1. Enable Inline Editing for Proof Text
+Update the `Proof` component (`components/sections/shared.tsx`) and the `Hero` component (`components/sections/hero.tsx`) to pass and apply `data-tina-field` attributes to the individual `value` (e.g., "24 hr") and `label` (e.g., "RESPONSE TIME") text elements so they are directly clickable in the TinaCMS visual editor.
 
-### R2. Protect Image in About Section
-Wrap the `<Image />` component inside `components/sections/about.tsx` with the newly created Error Boundary so image errors are safely isolated.
+### R2. Add Opacity Control for Proof Backgrounds
+Update the Hero section schema in `tina/config.ts` to include a new number field for "Proof Background Opacity". Update `components/sections/hero.tsx` to apply this opacity dynamically to the proof badges container or items, replacing the hardcoded `bg-background/70` / `bg-white/20` classes with the dynamic style.
 
 ## Acceptance Criteria
 
-### Component Implementation
-- [ ] `components/ui/error-boundary.tsx` exists and uses `"use client"`.
-- [ ] The Error Boundary catches child component render errors and displays a fallback UI instead of crashing the page.
+### Editing Capabilities
+- [ ] In the TinaCMS visual editor, clicking on the text of any proof badge (e.g., "24 hr" or "RESPONSE TIME") focuses that specific field for inline editing.
+- [ ] A new slider/number field exists in the TinaCMS sidebar to control the background opacity of the proof badges, and changing it updates the live preview immediately.
 
-### Integration
-- [ ] `components/sections/about.tsx` wraps the `<Image />` component with `<ErrorBoundary>`.
-- [ ] The app builds cleanly without TypeScript or React errors (`npm run build`).
-</USER_REQUEST>
-
+### Stack-Specific Verification Tests
+- [ ] `npx tsc --noEmit` completes with 0 type errors.
+- [ ] `npm run lint` passes without errors.
+- [ ] `npm run build` completes successfully.

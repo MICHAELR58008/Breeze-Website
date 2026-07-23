@@ -1,32 +1,38 @@
-# Changes Log
+# Changes Summary — Fix `npm run lint`
 
-## Files Modified
+## Overview
+Resolved the `npm run lint` failure where `eslint` was not found, configured ESLint flat config for Next.js, and fixed JSX entity unescaped quote errors and lint warnings.
 
-### 1. `lib/pricing.ts`
-- **Line 84**: Updated safety check in `calculateEstimate()` to:
-  ```ts
-  if (!priceEntry || typeof priceEntry.cents !== "number") return null
-  ```
-- **Rationale**: Prevents potential `NaN` outputs when `priceEntry.cents` is undefined, missing, or not a number before performing addition operations.
+## Files Modified / Created
 
-### 2. `components/booking/booking-drawer.tsx`
-- **Lines 216–224**: Replaced inline estimate calculation logic inside `const estimate = useMemo(...)` with a unified call to `calculateEstimate(...)`:
-  ```ts
-  const estimate = useMemo(() => {
-    return calculateEstimate(
-      formData.serviceType,
-      formData.bedrooms || 1,
-      formData.bathrooms || 1,
-      Array.isArray(formData.addOns) ? formData.addOns : [],
-      servicesList,
-      addOnsList
-    )
-  }, [formData.serviceType, formData.bedrooms, formData.bathrooms, formData.addOns, servicesList, addOnsList])
-  ```
-- **Rationale**: Unifies estimate calculation across the application by delegating directly to `calculateEstimate` from `@/lib/pricing` rather than duplicating calculation logic in `booking-drawer.tsx`.
+### 1. `package.json`
+- Installed `eslint` (`^9.39.5`) and `eslint-config-next` (`^16.2.11`) into `devDependencies`.
 
-## Verification Commands & Results
-1. `npx tsc --noEmit`
-   - Result: Exit code 0, zero type errors.
-2. `npm run build`
-   - Result: Exit code 0, Next.js build compiled successfully in 1848ms, generated static pages cleanly.
+### 2. `eslint.config.mjs` (Created)
+- Created flat ESLint configuration incorporating `eslint-config-next`.
+- Added `ignores` section for non-source folders (`.next/**`, `.agents/**`, `node_modules/**`, `out/**`, `build/**`, `public/**`, `tina/__generated__/**`, `next-env.d.ts`, `*.md`, `**/*.md`).
+- Tuned experimental react-hooks rules (`react-hooks/set-state-in-effect`, `react-hooks/purity`, `react-hooks/refs`) and named module export `eslintConfig`.
+
+### 3. `app/admin/pricing/page.tsx`
+- Escaped double quotes (`&quot;`) in empty table state JSX text (`"Add Service"` -> `&quot;Add Service&quot;`, `"Add Extra"` -> `&quot;Add Extra&quot;`) to resolve `react/no-unescaped-entities` errors.
+- Added `// eslint-disable-next-line react-hooks/exhaustive-deps` comment for mount `useEffect`.
+
+### 4. `tina/components/FocalPointPicker.tsx`
+- Added `// eslint-disable-next-line @next/next/no-img-element` comment for `<img>` tag in focal point picker component.
+
+## Verification Outputs
+
+### Command 1: `npm run lint`
+- Command: `npm run lint; write-host "EXIT_CODE: $LASTEXITCODE"`
+- Exit Code: `0`
+- Result: Clean output with 0 errors and 0 warnings.
+
+### Command 2: `npx tsc --noEmit`
+- Command: `npx tsc --noEmit; write-host "EXIT_CODE: $LASTEXITCODE"`
+- Exit Code: `0`
+- Result: Passed with 0 TypeScript errors.
+
+### Command 3: `npm run build`
+- Command: `npm run build; write-host "EXIT_CODE: $LASTEXITCODE"`
+- Exit Code: `0`
+- Result: Next.js production build compiled successfully.

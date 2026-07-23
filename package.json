@@ -81,6 +81,8 @@
     "@types/pg": "^8.20.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.2.11",
     "jsdom": "^29.1.1",
     "postcss": "^8.5",
     "tailwindcss": "^4.1.9",

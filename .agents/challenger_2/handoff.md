@@ -1,35 +1,34 @@
-# Handoff Report — challenger_2
+# Handoff Report — Challenger 2
 
 ## 1. Observation
-- **Files Inspected**:
-  - `components/booking/booking-drawer.tsx`
-  - `app/api/bookings/route.ts`
-  - `lib/pricing.ts`
-  - `lib/booking-content.ts`
-  - `content/booking/booking.json`
-- **Commands Executed**:
-  - `npx tsx .agents/challenger_2/stress-test.ts` -> 35 / 35 tests passed.
-  - `npx tsc --noEmit` -> 0 type errors.
-  - `npm run build` -> Compiled successfully in 1862ms.
-- **Empirical Findings**:
-  - Pricing engine calculates base price + add-on cents accurately for valid bed/bath combinations ($180 for deep 1-1, $250 for deep 2-2 + oven, $135 for regular 1-1). Returns `null` (Custom Quote) when bed/bath key is not found or when pricing array is absent (e.g., `Commercial ` service).
-  - Bed/Bath step conditional logic in `booking-drawer.tsx` filters out the "Home" step when `serviceType === "Commercial "` (`showIfOperator: "not_equals"`, `showIfValue: "Commercial "`).
-  - `app/api/bookings/route.ts` parses non-core fields into `customFields`: textarea strings, select option values, stringified JSON arrays (checkbox groups), and JSON objects are parsed into `customFields` without triggering Zod validation errors (`z.record(z.string(), z.unknown())`).
-  - Core fields utilize Zod `.catch()` fallbacks, preventing raw server exceptions on malformed input data.
+- `tina/config.ts` (lines 95-99): Field `proofBackgroundOpacity` is declared as `{ type: "number", name: "proofBackgroundOpacity", label: "Proof Background Opacity (%)" }` with `defaultItem` value `70`.
+- `components/sections/hero.tsx` (line 189): `proofs?.map((p, i) => (<Proof key={p.label} ... />))`. Using `key={p.label}` can cause React key collisions if labels are duplicated or empty.
+- `components/sections/shared.tsx` (lines 56-86): `StyledText` destructures `visible`, `x`, `y`, `size`, `color`, `as` from props so they are not passed to underlying DOM `<Tag>`, preventing invalid DOM property warnings.
+- Command `npx tsc --noEmit` completed with exit code 0 and 0 type errors.
+- Command `npm run build` completed with exit code 0 (`Compiled successfully in 2.2s`, static page generation 5/5).
 
 ## 2. Logic Chain
-- Step 1: `calculateEstimate` matches `${bedrooms}-${bathrooms}` against service `prices`. If matched, returns `base + addOnsTotal`. If unmatched or missing prices, returns `null`. This logic is identical between `lib/pricing.ts` and `components/booking/booking-drawer.tsx`.
-- Step 2: Step filtering in `booking-drawer.tsx` checks `showIfField`, `showIfOperator`, and `showIfValue`. For `Commercial `, `not_equals` evaluation returns `false`, gracefully hiding Bed/Bath controls.
-- Step 3: API route `POST` extracts form entries. Non-core keys are stored in `customFields`. String values starting with `[` or `{` are safely parsed into arrays/objects using `JSON.parse()`. `requestSchema.safeParse` validates `customFields` as `z.record(z.string(), z.unknown())`, accepting all dynamic form structures.
-- Step 4: `npx tsc --noEmit` and `npm run build` confirm zero syntax, typing, or compilation issues across the project.
+1. TinaCMS schema in `tina/config.ts` defines `proofBackgroundOpacity` with valid type `"number"`, valid field name, and valid default integer value `70`. The schema validates cleanly without syntax or type errors.
+2. In `hero.tsx`, `proofBackgroundOpacity` is safely parsed with fallback defaults:
+   `const rawOpacity = typeof proofBackgroundOpacity === "number" && !isNaN(proofBackgroundOpacity) ? proofBackgroundOpacity : 70`.
+3. In `hero.tsx`, `key={p.label}` in `proofs?.map()` is a potential edge-case bug if items share identical labels or blank labels in TinaCMS.
+4. In `shared.tsx`, `StyledText` strips out custom layout control props (`x`, `y`, `size`, `color`, `visible`) before spreading to native HTML elements, avoiding invalid React DOM prop warnings.
+5. Production build pipeline (`tsc` and `next build`) executes without errors or warnings.
 
 ## 3. Caveats
-- No caveats. All core requirements were empirically tested and confirmed without regressions.
+- Runtime browser console warnings for React duplicate keys were not captured during static build, but code analysis confirms `key={p.label}` could trigger React key collision warnings if dynamic CMS data contains duplicate `label` strings.
 
 ## 4. Conclusion
-- The pricing engine, Bed/Bath step logic, dynamic form parsing, and Zod validation in `app/api/bookings/route.ts` are fully verified, robust, and regression-free.
+- Production build integrity and TypeScript checks are **100% VERIFIED AND PASSING**.
+- TinaCMS schema declaration for `proofBackgroundOpacity` is clean and valid.
+- React DOM property hygiene in `shared.tsx` is clean.
+- Minor recommendation: change `key={p.label}` to `key={`${p.label}-${i}`}` in `hero.tsx` to prevent key collision warnings on duplicate proof labels.
 
 ## 5. Verification Method
-- Run `npx tsx .agents/challenger_2/stress-test.ts` to execute the full 35-point stress test matrix.
-- Run `npx tsc --noEmit` to verify TypeScript static types.
-- Run `npm run build` to verify full project production compilation.
+- Independent verification commands:
+  - `npx tsc --noEmit`
+  - `npm run build`
+- File inspection paths:
+  - `c:/Users/SOL/Desktop/Projet for Breeze/wesite/tina/config.ts`
+  - `c:/Users/SOL/Desktop/Projet for Breeze/wesite/components/sections/hero.tsx`
+  - `c:/Users/SOL/Desktop/Projet for Breeze/wesite/components/sections/shared.tsx`

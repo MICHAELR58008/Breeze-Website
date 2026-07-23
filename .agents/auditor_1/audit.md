@@ -1,125 +1,95 @@
 # Forensic Audit Report
 
-**Work Product**: Booking Sheet / Drawer Customization Expansion in TinaCMS
-**Profile**: General Project (Forensic Integrity Audit)
-**Auditor**: auditor_1
-**Date**: 2026-07-22
-**Verdict**: CLEAN
-
----
+**Work Product**: Proof Badges inline editing and opacity control implementation  
+**Profile**: General Project / Forensic Auditor  
+**Verdict**: CLEAN  
 
 ## Executive Summary
-
-A comprehensive forensic audit was conducted on the Booking Sheet and Drawer customization expansion in TinaCMS across all modified project files:
-- `tina/config.ts`
-- `lib/booking-content.ts`
-- `components/booking/booking-drawer.tsx`
-- `app/api/bookings/route.ts`
-- `lib/db/schema.ts`
-- `lib/pricing.ts`
-
-All systematic integrity checks, static type checks (`npx tsc --noEmit`), and production build checks (`npm run build`) passed with **0 errors**. No hardcoded test results, facade implementations, mock overrides, or dummy return values were found.
+A comprehensive forensic integrity audit was conducted on the Proof Badges inline editing and opacity control work product across `components/sections/shared.tsx`, `components/sections/hero.tsx`, and `tina/config.ts`. All implementations were found to be authentic, fully functional, dynamically bound, and strictly compliant with project standards. No hardcoded test outputs, facade implementations, or circumventing shortcuts were detected. All static analysis, TypeScript compilation checks, unit/integration tests, and production build checks passed with zero errors.
 
 ---
 
-## Detailed Check Verification Results
+## Forensic Integrity Analysis
 
-### Check 1: Absence of Hardcoded Results, Facades, or Mock Overrides
-- **Status**: PASS
-- **Findings**:
-  - `tina/config.ts`: Fully populated TinaCMS schema definitions for `page` and `booking` collections, template definitions, and ui options.
-  - `lib/booking-content.ts`: Functional fallback data structures, type definitions, normalization utilities (`normalizeBookingData`, `normalizeSteps`), template mapping table (`typenameToTemplate`), string interpolator (`t()`), and runtime Tina GraphQL fetcher (`fetchBookingContent()`).
-  - `components/booking/booking-drawer.tsx`: Authentic React state management (`BookingDrawerCore`), Tina visual editing hook (`useTina`), dynamic CSS property injection, step filtering by conditional rules (`showIfField`, `showIfOperator`, `showIfValue`), file upload validation/handling, and dynamic price calculations.
-  - `app/api/bookings/route.ts`: Production Next.js route handler enforcing Zod schema validation, multipart form parsing, dynamic custom field extraction, Vercel Blob file storage, price estimate calculation, and Drizzle DB insertion.
-  - `lib/db/schema.ts`: Drizzle ORM schema defining `booking_requests` table with `jsonb` custom fields column.
-  - `lib/pricing.ts`: Genuine pricing matrix calculation module (`calculateEstimate`) combining base matrix rates with selected add-on costs.
+### 1. Source Code & Architecture Inspection
+- **`components/sections/shared.tsx`**:
+  - `Proof` component accepts `value`, `label`, `valueTinaField`, `labelTinaField`, and `style` props.
+  - Dynamically binds `data-tina-field={valueTinaField}` on the `<strong />` element displaying the proof value.
+  - Dynamically binds `data-tina-field={labelTinaField}` on the `<span />` element displaying the proof label.
+  - Applies `style={style}` directly to the outer card `<div />` container.
+  - Authentic React functional component with zero hardcoding or shortcut mocks.
 
-### Check 2: All 6 Block Templates Declared & Rendered
-- **Status**: PASS
-- **Declarations in `tina/config.ts`**:
-  1. `imageBlock` (lines 426–438): Fields for `src`, `alt`, `caption`, `aspect`.
-  2. `infoCard` (lines 439–454): Fields for `title`, `description`, `icon`, `variant`.
-  3. `infoBanner` (lines 455–465): Fields for `text`, `type`, `dismissible`.
-  4. `textareaInput` (lines 466–480): Fields for `name`, `label`, `placeholder`, `required`, `rows`.
-  5. `selectInput` (lines 481–507): Fields for `name`, `label`, `options` list (`value`, `label`), `required`, `defaultValue`.
-  6. `checkboxGroup` (lines 508–534): Fields for `name`, `label`, `options` list (`value`, `label`, `priceCents`), `required`.
-- **Renderings in `components/booking/booking-drawer.tsx`**:
-  1. `imageBlock` (lines 540–570): Supports aspect ratio options (`16/9`, `4/3`, `1/1`, `square`, `video`, `auto`), image display, placeholder state, and caption.
-  2. `infoCard` (lines 572–605): Supports variants (`highlight`, `outline`, default), dynamic icons (`Sparkles`, `Shield`, `Star`, `CheckCircle2`, `HelpCircle`, `Info`), title, and description.
-  3. `infoBanner` (lines 607–629 & 759–789): Implements `InfoBannerItem` with type styles (`warning`, `success`, `info`), dynamic icons, and interactive dismiss functionality.
-  4. `textareaInput` (lines 631–645): Renders styled `<textarea>` element bound to form state.
-  5. `selectInput` (lines 647–668): Renders styled `<select>` element with options list bound to form state.
-  6. `checkboxGroup` (lines 670–709): Renders grouped `Checkbox` controls managing array selection state and displaying price additions (`+formatPrice(opt.priceCents)`).
+- **`components/sections/hero.tsx`**:
+  - Defines `HeroProps` interface including `proofs?: HeroProof[]` and `proofBackgroundOpacity?: number`.
+  - Calculates `rawOpacity` and `opacityPct` with robust fallback (defaults to 70%) and normalization for fractional (0.0–1.0) or percentage (0–100) values.
+  - Container element dynamically binds `data-tina-field={tinaField(props, "proofs")}`.
+  - Iterates over `proofs` list using `.map()`, dynamically generating `valueTinaField={tinaField(p, "value")}` and `labelTinaField={tinaField(p, "label")}` for each item `p`.
+  - Computes card background style: `style={{ backgroundColor: \`color-mix(in srgb, var(--background) \${opacityPct}%, transparent)\` }}`.
+  - Fully authentic dynamic rendering with no hardcoded test values or facade fallbacks.
 
-### Check 3: Authentic `data-tina-field` Visual Editing Bindings
-- **Status**: PASS
-- **Evidence**: Uses `import { tinaField } from "tinacms/dist/tina-field"`.
-- **Bindings Verified**:
-  - Header elements (`rawBooking.header.badge`, `title`, `description`)
-  - Step titles & descriptions (`rawBooking.steps?.[index]`)
-  - Field blocks (`rawBooking.steps?.[stepIndex]?.fields?.[fieldIndex]`)
-  - Pricing service names & add-on names (`rawPricing?.services?.[index]`, `rawPricing?.addOns?.[index]`)
-  - Estimate callouts (`rawBooking.estimate.label`, `customQuote`, `disclaimer`)
-  - Navigation buttons (`rawBooking.navigation.back`, `continue`, `submit`)
-  - Success screen (`rawBooking.success.title`, `message`, `buttonText`)
+- **`tina/config.ts`**:
+  - Defines `proofs` object array field under the `hero` section template with `value` (string) and `label` (string) fields.
+  - Defines `proofBackgroundOpacity` number field for CMS user opacity adjustments.
+  - Includes proper default items (`24 hr / Response time`, `Local / Owner-led team`, `Free / Personalized quote`) with default opacity `70`.
 
-### Check 4: Route Handler `customFields` Processing & Drizzle DB Storage
-- **Status**: PASS
-- **Evidence**:
-  - `app/api/bookings/route.ts`: Extracts all non-core form entries from `formData`, parses JSON strings for objects/arrays, validates via Zod (`customFields: z.record(z.string(), z.unknown())`), and saves via `db.insert(bookingRequests).values({ ..., customFields: parsed.data.customFields || {}, ... })`.
-  - `lib/db/schema.ts`: Table `bookingRequests` includes column `customFields: jsonb("custom_fields").$type<Record<string, any>>().notNull().default({})`.
-
-### Check 5: Bed/Bath Inputs and `calculateEstimate` Logic
-- **Status**: PASS
-- **Evidence**:
-  - `components/booking/booking-drawer.tsx`: State updates for `bedrooms` and `bathrooms` trigger recalculation via `calculateEstimate(formData.serviceType, formData.bedrooms, formData.bathrooms, formData.addOns, servicesList, addOnsList)`.
-  - `lib/pricing.ts`: `calculateEstimate` computes key `${bedrooms}-${bathrooms}`, checks matching price matrix entry, and adds sum of selected `addOns`.
+### 2. Prohibited Pattern Audit
+| # | Prohibited Pattern | Status | Observations |
+|---|--------------------|--------|--------------|
+| 1 | **Hardcoded test results** | CLEAN | No hardcoded test strings or pre-canned result fixtures in source |
+| 2 | **Facade implementations** | CLEAN | All methods and components perform full state/prop processing |
+| 3 | **Fabricated verification outputs** | CLEAN | No pre-existing `.log` or pre-populated verification artifacts |
+| 4 | **Self-certifying tests** | CLEAN | Tests verify actual DOM rendered output and TinaCMS attribute strings |
+| 5 | **Execution delegation** | CLEAN | Implementation built directly within project components |
 
 ---
 
-## Empirical Command Output Evidence
+## Verification Outputs
 
-### TypeScript Type Check (`npx tsc --noEmit`)
-```text
+### 1. TypeScript Compilation Check (`npx tsc --noEmit`)
+```
+Command: npx tsc --noEmit
 Exit Code: 0
-Stdout: (empty - 0 type errors)
-Stderr: (empty)
+Output: Clean compilation with 0 errors.
 ```
 
-### Production Build (`npm run build`)
-```text
+### 2. Test Suite Check (`npm test`)
+```
+Command: npm test (vitest run)
 Exit Code: 0
 Output:
-> my-v0-project@0.1.0 build
-> next build
+ RUN  v4.1.10 C:/Users/SOL/Desktop/Projet for Breeze/wesite
 
+ ✓ lib/navigation-config.test.ts (13 tests) 7ms
+ ✓ components/sections/hero.test.tsx (15 tests) 107ms
+ ✓ components/sections/navigation.test.tsx (16 tests) 180ms
+ ✓ lib/breeze-site-integration.test.tsx (7 tests) 224ms
+
+ Test Files  4 passed (4)
+      Tests  51 passed (51)
+   Start at  22:00:39
+   Duration  1.90s
+```
+
+### 3. Production Build Check (`npm run build`)
+```
+Command: npm run build (next build)
+Exit Code: 0
+Output:
 ▲ Next.js 16.2.0 (Turbopack)
 - Environments: .env.local
 
   Creating an optimized production build ...
-✓ Compiled successfully in 1763ms
+✓ Compiled successfully in 1712ms
   Skipping validation of types
-  Finished TypeScript config validation in 9ms ...
-  Collecting page data using 5 workers ...
-  Generating static pages using 5 workers (0/4) ...
-  Generating static pages using 5 workers (1/4) 
-  Generating static pages using 5 workers (2/4) 
-  Generating static pages using 5 workers (3/4) 
-✓ Generating static pages using 5 workers (4/4) in 411ms
+  Finished TypeScript config validation in 6ms ...
+  Collecting page data using 8 workers ...
+  Generating static pages using 8 workers (5/5) in 389ms
   Finalizing page optimization ...
-
-Route (app)
-┌ ○ /
-├ ○ /_not-found
-└ ƒ /api/bookings
-
-○  (Static)   prerendered as static content
-ƒ  (Dynamic)  server-rendered on demand
 ```
 
 ---
 
-## Final Verdict
+## Conclusion
+The work product for **Proof Badges inline editing and opacity control** passes all forensic integrity, dynamic binding, component structure, static analysis, type check, unit test, and production build checks.
 
-**Verdict**: **CLEAN**
-The TinaCMS Booking Sheet / Drawer customization expansion implementation is authentic, fully typed, functionally complete, and production-ready.
+**Final Verdict**: **CLEAN**

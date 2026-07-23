@@ -1,29 +1,38 @@
-# Plan — Milestone 2: Error Boundary & Image Protection
+# Task Execution Plan: Proof Badges Inline Editing & Opacity Control
 
-## Objective
-Fulfill user requirements:
-1. Create a reusable Client Component Error Boundary (`components/ui/error-boundary.tsx`).
-2. Wrap the `<Image />` component in `components/sections/about.tsx` with `<ErrorBoundary>`.
-3. Ensure `npm run build` succeeds cleanly without TypeScript or React errors.
+## Overview
+Enable inline editing for Proof Text fields and add background opacity control in TinaCMS for the Hero section.
 
-## Execution Steps
+## Milestones & Phases
 
-### Phase 1: Exploration & Architecture Analysis
-- Spawn 3 Explorers (`teamwork_preview_explorer_m2_1`, `teamwork_preview_explorer_m2_2`, `teamwork_preview_explorer_m2_3`).
-  - Explorer 1: Analyze React class component vs functional error boundary constraints in Next.js Client Components, standard Next.js / React fallback UI patterns, and `components/ui/` conventions.
-  - Explorer 2: Analyze `components/sections/about.tsx` image usage, layout, and how to cleanly wrap `<Image />` with `<ErrorBoundary>` without breaking styles or responsive layout.
-  - Explorer 3: Formulate exact code specifications for `components/ui/error-boundary.tsx` (props like `fallback`, `children`, `onReset`, state `hasError`, error details) and implementation plan for `about.tsx`.
+### Milestone 1: Proof Badges Inline Editing & Opacity Control
 
-### Phase 2: Implementation & Verification
-- Spawn Worker (`teamwork_preview_worker_m2_1`) with Explorer recommendations.
-  - Create `components/ui/error-boundary.tsx` with `"use client"`.
-  - Update `components/sections/about.tsx` to import and wrap `<Image />` with `<ErrorBoundary>`.
-  - Run `npx tsc --noEmit` and `npm run build`.
+#### Phase 1: Exploration & Blueprinting
+- Dispatch 3 Explorers in parallel (`teamwork_preview_explorer`):
+  - **Explorer 1** (`.agents/explorer_1`): Analyze `components/sections/shared.tsx` and `components/sections/hero.tsx` for proof component rendering, props, and existing `tinaField` / `data-tina-field` pattern usage.
+  - **Explorer 2** (`.agents/explorer_2`): Analyze `tina/config.ts` hero section schema and how opacity / style fields are defined in TinaCMS schemas in this codebase.
+  - **Explorer 3** (`.agents/explorer_3`): Synthesize exact file changes required across `components/sections/shared.tsx`, `components/sections/hero.tsx`, and `tina/config.ts`, including typescript interfaces and default opacity values.
 
-### Phase 3: Review & Empirical Testing
-- Spawn 2 Reviewers (`teamwork_preview_reviewer_m2_1`, `teamwork_preview_reviewer_m2_2`) to check code quality, edge cases, fallback UI design, and type correctness.
-- Spawn 2 Challengers (`teamwork_preview_challenger_m2_1`, `teamwork_preview_challenger_m2_2`) to empirically verify error boundary trapping (e.g., throwing synthetic rendering errors in children) and build clean state.
+#### Phase 2: Implementation & Verification
+- Dispatch Worker (`teamwork_preview_worker` in `.agents/worker_1`):
+  - Modify `components/sections/shared.tsx` to pass/apply `data-tina-field` attributes to value and label.
+  - Modify `tina/config.ts` to add Proof Background Opacity field to hero section schema.
+  - Modify `components/sections/hero.tsx` to pass tinaField metadata for value/label and apply dynamic opacity styling.
+  - Run verification tests: `npx tsc --noEmit`, `npm run lint`, `npm run build`.
 
-### Phase 4: Forensic Integrity Audit & Gate
-- Spawn Forensic Auditor (`teamwork_preview_auditor_m2_1`) to verify authentic implementation without cheating, hardcoding, or facade components.
-- If all pass: update `progress.md`, mark milestone DONE, and report victory to Sentinel.
+#### Phase 3: Independent Code Review
+- Dispatch 2 Reviewers (`teamwork_preview_reviewer` in `.agents/reviewer_1` and `.agents/reviewer_2`):
+  - Review code changes against requirements R1 and R2.
+  - Run `npx tsc --noEmit`, `npm run lint`, and `npm run build`.
+
+#### Phase 4: Adversarial Stress Testing
+- Dispatch 2 Challengers (`teamwork_preview_challenger` in `.agents/challenger_1` and `.agents/challenger_2`):
+  - Empirically verify correctness, type safety, dynamic styling fallback handling, and edge cases.
+
+#### Phase 5: Forensic Integrity Audit
+- Dispatch Forensic Auditor (`teamwork_preview_auditor` in `.agents/auditor_1`):
+  - Perform static analysis, git diff check, runtime build verification, and integrity check to ensure genuine non-hardcoded implementation.
+
+#### Phase 6: Final Synthesis & Victory Claim
+- Verify clean audit verdict.
+- Report completion and victory claim to parent.

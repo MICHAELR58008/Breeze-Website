@@ -1,22 +1,17 @@
-## 2026-07-22T00:59:13Z
-You are the Forensic Auditor (auditor_1) performing integrity verification for the Booking Sheet / Drawer customization expansion in TinaCMS.
-Working directory: c:\Users\SOL\Desktop\Projet for Breeze\wesite\.agents\auditor_1
-Project root: c:\Users\SOL\Desktop\Projet for Breeze\wesite
+## 2026-07-22T22:00:16Z
+You are Forensic Auditor 1 operating in working directory `c:/Users/SOL/Desktop/Projet for Breeze/wesite/.agents/auditor_1`.
 
-Task:
-1. Conduct a full forensic audit across modified files:
-   - tina/config.ts
-   - lib/booking-content.ts
-   - components/booking/booking-drawer.tsx
-   - app/api/bookings/route.ts
-   - lib/db/schema.ts
-   - lib/pricing.ts
-2. Perform systematic integrity checks:
-   - Verify that there are NO hardcoded test results, facade implementations, mock overrides, or dummy return values.
-   - Verify that all 6 block templates (imageBlock, infoCard, infoBanner, textareaInput, selectInput, checkboxGroup) are genuinely declared in tina/config.ts and genuinely rendered in components/booking/booking-drawer.tsx.
-   - Verify that data-tina-field attributes are authentic TinaCMS visual editing bindings.
-   - Verify that app/api/bookings/route.ts genuinely processes dynamic customFields and saves to Drizzle database schema (lib/db/schema.ts).
-   - Verify that Bed/Bath inputs and calculateEstimate logic are genuine calculations.
-3. Run npx tsc --noEmit and npm run build to confirm static type safety and production build.
-4. Record audit evidence and verdict in c:\Users\SOL\Desktop\Projet for Breeze\wesite\.agents\auditor_1\audit.md and handoff report in c:\Users\SOL\Desktop\Projet for Breeze\wesite\.agents\auditor_1\handoff.md.
-5. Send a message to parent with your final verdict (CLEAN or VIOLATION).
+Mission: Conduct a forensic integrity audit on the Proof Badges inline editing and opacity control work product.
+
+Instructions:
+1. Conduct forensic integrity checks:
+   - Verify that `components/sections/shared.tsx`, `components/sections/hero.tsx`, and `tina/config.ts` contain authentic, fully functional implementations.
+   - Verify there are NO hardcoded outputs, fake/facade implementations, or test shortcuts.
+   - Verify `data-tina-field` attributes dynamically bind to actual TinaCMS metadata (`valueTinaField` / `labelTinaField`).
+   - Verify `proofBackgroundOpacity` schema control dynamically adjusts CSS background opacity via `color-mix(in srgb, var(--background) ${opacityPct}%, transparent)`.
+2. Perform runtime & build verification:
+   - Run `npx tsc --noEmit` via run_command to verify TypeScript compilation clean.
+   - Run `npm test` via run_command to verify test suite clean.
+   - Run `npm run build` via run_command to verify production build succeeds cleanly.
+3. Record your audit verdict (CLEAN / INTEGRITY VIOLATION), detailed forensic evidence, static analysis findings, and verification outputs in `c:/Users/SOL/Desktop/Projet for Breeze/wesite/.agents/auditor_1/audit.md` and `c:/Users/SOL/Desktop/Projet for Breeze/wesite/.agents/auditor_1/handoff.md`.
+4. Send a message back to the orchestrator with your verdict.

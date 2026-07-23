@@ -1,36 +1,35 @@
-# BRIEFING — 2026-07-21T18:44:38Z
+# BRIEFING — 2026-07-22T21:58:48Z
 
 ## Mission
-Analyze TinaCMS schema and JSON content files to prepare for consolidating the `pricing` collection into the `booking` collection.
+Analyze `components/sections/shared.tsx` and `components/sections/hero.tsx` for inline editing of Proof Badges text fields (`value` and `label`).
 
 ## 🔒 My Identity
-- Archetype: explorer
-- Roles: investigator, analyzer
-- Working directory: c:\Users\SOL\Desktop\Projet for Breeze\wesite\.agents\explorer_1
-- Original parent: 748ade00-494c-4957-9768-7694f6cdcd56
-- Milestone: consolidation_analysis
+- Archetype: Explorer 1
+- Roles: Read-only investigator / analyzer
+- Working directory: c:/Users/SOL/Desktop/Projet for Breeze/wesite/.agents/explorer_1
+- Original parent: 0b759aa7-975d-4fa1-84ce-bcddacd158fb
+- Milestone: Proof Badges inline editing analysis
 
 ## 🔒 Key Constraints
-- Read-only investigation — do NOT implement
-- Inspect specified files: `tina/config.ts`, `content/pricing/pricing.json`, `content/booking/booking.json`
+- Read-only investigation — do NOT modify application source code directly
+- Write reports to `.agents/explorer_1/analysis.md` and `.agents/explorer_1/handoff.md`
 
 ## Current Parent
-- Conversation ID: 748ade00-494c-4957-9768-7694f6cdcd56
-- Updated: 2026-07-21T18:44:38Z
+- Conversation ID: 0b759aa7-975d-4fa1-84ce-bcddacd158fb
+- Updated: 2026-07-22T21:58:48Z
 
 ## Investigation State
-- **Explored paths**: `tina/config.ts`, `content/pricing/pricing.json`, `content/booking/booking.json`, `lib/pricing.ts`, `lib/booking-content.ts`, `app/page.tsx`, `components/booking/booking-drawer.tsx`, `components/sections/services.tsx`
-- **Key findings**: 
-  - `pricing` collection has `services` and `addOns` fields; `booking` collection currently lacks them.
-  - Merging `services` and `addOns` into `booking` schema, renaming label to "Booking & Pricing", and adding data to `booking.json` allows full removal of `pricing.json` and collection definition.
-  - Reduces TinaCMS GraphQL queries from 2 to 1 and simplifies `useTina` live editing context.
-- **Unexplored areas**: None (analysis completed).
+- **Explored paths**: `components/sections/shared.tsx`, `components/sections/hero.tsx`, `tina/config.ts`, `components/sections/process.tsx`, `components/sections/testimonials.tsx`, `components/sections/hero.test.tsx`, `node_modules/@tinacms/bridge/dist/tina-field.js`
+- **Key findings**:
+  - `Proof` component in `shared.tsx` lacks `data-tina-field` attribute bindings on its container `<div>`, `value` (`<strong>`), and `label` (`<span>`) elements.
+  - `Hero` component in `hero.tsx` maps `proofs` but does not pass item metadata (`p`) or `tinaField(p, "value")`/`tinaField(p, "label")` down to `<Proof>`.
+  - Adding `proof?: Record<string, any>` / `tinaFields` to `Proof` in `shared.tsx` and passing `proof={p}` in `hero.tsx` enables full TinaCMS inline editing.
+- **Unexplored areas**: None relevant to this scope.
 
 ## Key Decisions Made
-- Written detailed analysis in `analysis.md` and handoff report in `handoff.md`.
+- Prepared exact prop signature and JSX updates in `analysis.md` and `handoff.md`.
 
 ## Artifact Index
-- `ORIGINAL_REQUEST.md` — Record of request prompt
-- `BRIEFING.md` — Working memory index
-- `analysis.md` — Detailed analysis report on TinaCMS consolidation
-- `handoff.md` — 5-component handoff report for orchestrator / implementer
+- `ORIGINAL_REQUEST.md` — Original task prompt and constraints
+- `analysis.md` — Comprehensive analysis report
+- `handoff.md` — 5-component handoff report

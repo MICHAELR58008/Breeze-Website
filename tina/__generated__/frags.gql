@@ -14,7 +14,12 @@ fragment PageParts on Page {
         __typename
         value
         label
+        valueSize
+        valueColor
+        labelSize
+        labelColor
       }
+      proofBackgroundOpacity
       imageSrc
       imageAlt
       locationVisible

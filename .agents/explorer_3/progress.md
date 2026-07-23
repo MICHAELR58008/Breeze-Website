@@ -1,12 +1,12 @@
-# Explorer 3 Progress Log
+# Progress Log
 
-Last visited: 2026-07-21T18:47:35Z
+Last visited: 2026-07-22T21:58:48Z
 
-## Status
 - [x] Initialized workspace and briefing
-- [x] Inspect `components/booking/booking-drawer.tsx` and related components
-- [x] Search for all `useTina` calls in `components/booking/` and `components/pricing/` and `components/`
-- [x] Analyze `services` and `addOns` estimate calculator logic and UI step integration
-- [x] Formulate single `useTina()` integration plan and verify type definitions & calculation safety
-- [x] Generate `analysis.md` and `handoff.md`
-- [x] Notify orchestrator via `send_message`
+- [x] Inspect components/sections/shared.tsx
+- [x] Inspect components/sections/hero.tsx
+- [x] Inspect tina/config.ts
+- [x] Analyze dynamic opacity styling and fallback behavior
+- [x] Trace data flow from Tina CMS config through Hero to Proof component
+- [x] Produce comprehensive analysis.md and handoff.md
+- [x] Send summary message to orchestrator

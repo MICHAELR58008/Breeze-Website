@@ -538,6 +538,7 @@ var config_default = defineConfig({
                       { value: "Local", label: "Owner-led team" },
                       { value: "Free", label: "Personalized quote" }
                     ],
+                    proofBackgroundOpacity: 70,
                     imageSrc: "/images/breeze-clean-home.png",
                     imageAlt: "A bright, professionally cleaned modern home"
                   }
@@ -557,8 +558,17 @@ var config_default = defineConfig({
                     list: true,
                     fields: [
                       { type: "string", name: "value" },
-                      { type: "string", name: "label" }
+                      { type: "string", name: "label" },
+                      { type: "number", name: "valueSize", label: "Value Size (px)" },
+                      { type: "string", name: "valueColor", label: "Value Color", ui: { component: "color" } },
+                      { type: "number", name: "labelSize", label: "Label Size (px)" },
+                      { type: "string", name: "labelColor", label: "Label Color", ui: { component: "color" } }
                     ]
+                  },
+                  {
+                    type: "number",
+                    name: "proofBackgroundOpacity",
+                    label: "Proof Background Opacity (%)"
                   },
                   { type: "image", name: "imageSrc", label: "Hero Image" },
                   { type: "string", name: "imageAlt", label: "Image Alt Text" },

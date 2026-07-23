@@ -1,36 +1,33 @@
-# Handoff Report — Booking Sheet / Drawer Customization System Expansion
+# Handoff Report — Worker 1
 
 ## 1. Observation
-- `tina/config.ts`: Added 6 block templates (`imageBlock`, `infoCard`, `infoBanner`, `textareaInput`, `selectInput`, `checkboxGroup`) inside `booking.steps.fields.templates` with complete field definitions and UI item properties (`ui.itemProps` & `ui.defaultItem`).
-- `lib/booking-content.ts`: Added GraphQL `__typename` mappings to `typenameToTemplate` dictionary for all 6 new block types and expanded the `FormFieldBlock` TypeScript interface.
-- `components/booking/booking-drawer.tsx`: Expanded switch block for `field._template` to handle rendering for `imageBlock`, `infoCard`, `infoBanner`, `textareaInput`, `selectInput`, and `checkboxGroup`. Bound `data-tina-field={tinaAttr}` visual editing attribute to root elements of every block. Maintained form state for dynamic fields in flat `formData: Record<string, any>` via `updateField` and checkbox group toggling. Bed/Bath inputs and `calculateEstimate` logic remain completely intact.
-- `lib/db/schema.ts`: Added `customFields: jsonb("custom_fields").$type<Record<string, any>>().notNull().default({})` to `bookingRequests` pgTable.
-- `app/api/bookings/route.ts`: Configured Zod schema with `.passthrough()` and `customFields: z.record(z.string(), z.unknown()).optional().default({})`. Extracted dynamic non-core fields submitted in `FormData` into `customFields` object and stored them in `bookingRequests` table.
-- Terminal commands executed:
-  - `npx tsc --noEmit` -> Exit status 0 (0 errors).
-  - `npm run build` -> Compiled successfully in 1985ms, generated static and dynamic routes without errors.
+- **Modified files**:
+  - `components/sections/shared.tsx`: lines 17–38
+  - `tina/config.ts`: lines 72, 93–97
+  - `components/sections/hero.tsx`: lines 13, 25, 60, 72, 91–96, 178–181
+  - `components/sections/hero.test.tsx`: lines 139–159
+- **Command Executions & Verification Output**:
+  - `npx tsc --noEmit`: Executed successfully with zero errors.
+  - `npm run lint`: Script `eslint .` attempted; `eslint` is not installed as project dependency or config file present. `npx tsc --noEmit` and static type checks pass.
+  - `npm run build`: `next build` compiled successfully in 1.73s, generated static pages 5/5 without errors.
+  - `npm test`: `vitest run` executed 4 test files (51 total tests), all 51 passed.
 
 ## 2. Logic Chain
-- Schema expansion in `tina/config.ts` allows TinaCMS editor users to add and configure all 6 block types in the booking drawer steps.
-- Updating `typenameToTemplate` maps GraphQL typename strings returned by Tina query to block template names so `normalizeBookingData()` normalizes all blocks consistently.
-- Updating `FormFieldBlock` type signature ensures full type safety across components without TypeScript type casting.
-- Dynamic rendering in `booking-drawer.tsx` applies Tailwind CSS classes matching the project design system (`bg-card`, `border-border`, `bg-primary/10`, `text-muted-foreground`, etc.) and attaches `data-tina-field` for live visual editing in TinaCMS.
-- Extracting non-core FormData keys in `/api/bookings` route handler into `customFields` ensures dynamic input values (such as `textareaInput`, `selectInput`, or `checkboxGroup` responses) are captured cleanly in Postgres JSONB without failing core validation or discarding customer input.
+- Updated `Proof` component in `shared.tsx` to receive `valueTinaField`, `labelTinaField`, and container `style`, placing `data-tina-field` attributes on `<strong />` and `<span />` respectively, enabling inline text editing in TinaCMS visual editor.
+- Added `proofBackgroundOpacity` field (number, default 70) to TinaCMS hero collection schema in `tina/config.ts` so editors can control background opacity percentage from CMS settings.
+- Added `proofBackgroundOpacity` to `HeroProps` and `defaults` in `hero.tsx`.
+- Implemented opacity normalization logic in `hero.tsx` converting fractions (0 to 1) or percentages (0 to 100) into a bounded `opacityPct` integer (default 70).
+- Passed `color-mix(in srgb, var(--background) ${opacityPct}%, transparent)` as dynamic background style to `<Proof>` cards in `hero.tsx`, replacing static `bg-background/70`.
 
 ## 3. Caveats
-- Database migrations (`drizzle-kit push` or `drizzle-kit generate`) will be needed when deploying to production with live PostgreSQL database instances to add the `custom_fields` column.
+- `npm run lint` script in `package.json` relies on `eslint` which is not present in local dependencies (`node_modules`), but `npx tsc --noEmit`, full test suite, and Next.js build all run cleanly and confirm code validity.
 
 ## 4. Conclusion
-The Booking Sheet / Drawer customization system expansion in TinaCMS has been fully implemented, integrated, and verified with zero TypeScript errors and a clean production build.
+- Proof Badges inline editing and `proofBackgroundOpacity` schema control have been fully implemented, verified, and unit tested according to all instructions and specifications.
 
 ## 5. Verification Method
-1. Run `npx tsc --noEmit` at the project root `c:\Users\SOL\Desktop\Projet for Breeze\wesite` to verify 0 type errors:
-   Output: Exit Code 0, no errors reported.
-2. Run `npm run build` at the project root `c:\Users\SOL\Desktop\Projet for Breeze\wesite` to verify production build:
-   Output: Next.js compiled successfully with 0 errors.
-3. Inspect modified files:
-   - `tina/config.ts`
-   - `lib/booking-content.ts`
-   - `components/booking/booking-drawer.tsx`
-   - `lib/db/schema.ts`
-   - `app/api/bookings/route.ts`
+To independently verify the implementation:
+1. Run `npx tsc --noEmit` in `wesite` directory to confirm zero TypeScript compilation errors.
+2. Run `npm test` in `wesite` directory to confirm all 51 tests pass.
+3. Run `npm run build` in `wesite` directory to confirm Next.js build succeeds cleanly.
+4. Inspect `components/sections/shared.tsx`, `tina/config.ts`, and `components/sections/hero.tsx` to inspect `data-tina-field` and dynamic background opacity styling implementations.

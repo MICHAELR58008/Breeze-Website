@@ -14,11 +14,54 @@ export function Brand() {
   )
 }
 
-export function Proof({ value, label, className = "" }: { value: string; label: string; className?: string }) {
+export function Proof({
+  value,
+  label,
+  valueSize,
+  valueColor,
+  labelSize,
+  labelColor,
+  className = "",
+  valueTinaField,
+  labelTinaField,
+  style,
+}: {
+  value: string
+  label: string
+  valueSize?: number
+  valueColor?: string
+  labelSize?: number
+  labelColor?: string
+  className?: string
+  valueTinaField?: string
+  labelTinaField?: string
+  style?: React.CSSProperties
+}) {
+  const valueStyle: React.CSSProperties = {
+    ...(valueSize ? { fontSize: `${valueSize}px` } : {}),
+    ...(valueColor ? { color: valueColor } : {}),
+  }
+  const labelStyle: React.CSSProperties = {
+    ...(labelSize ? { fontSize: `${labelSize}px` } : {}),
+    ...(labelColor ? { color: labelColor } : {}),
+  }
+
   return (
-    <div className={`bg-background p-4 ${className}`}>
-      <strong className="block font-display text-2xl font-normal">{value}</strong>
-      <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{label}</span>
+    <div className={`bg-background p-4 ${className}`} style={style}>
+      <strong
+        className="block font-display text-2xl font-normal"
+        style={Object.keys(valueStyle).length > 0 ? valueStyle : undefined}
+        data-tina-field={valueTinaField}
+      >
+        {value}
+      </strong>
+      <span
+        className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground"
+        style={Object.keys(labelStyle).length > 0 ? labelStyle : undefined}
+        data-tina-field={labelTinaField}
+      >
+        {label}
+      </span>
     </div>
   )
 }

@@ -10,6 +10,11 @@ import { tinaField } from "tinacms/dist/tina-field"
 export interface HeroProof {
   value: string
   label: string
+  valueSize?: number
+  valueColor?: string
+  labelSize?: number
+  labelColor?: string
+  [key: string]: any
 }
 
 export interface HeroProps {
@@ -23,6 +28,7 @@ export interface HeroProps {
   imageSrc?: string
   imageAlt?: string
   proofs?: HeroProof[]
+  proofBackgroundOpacity?: number
   locationVisible?: boolean
   locationSize?: number
   locationColor?: string
@@ -59,6 +65,7 @@ const defaults: HeroProps = {
     { value: "Local", label: "Owner-led team" },
     { value: "Free", label: "Personalized quote" },
   ],
+  proofBackgroundOpacity: 70,
 }
 
 export function Hero(props: HeroProps) {
@@ -72,6 +79,7 @@ export function Hero(props: HeroProps) {
     imageSrc,
     imageAlt,
     proofs,
+    proofBackgroundOpacity,
     locationVisible,
     locationSize,
     locationColor,
@@ -91,6 +99,13 @@ export function Hero(props: HeroProps) {
     subheadingSize,
     subheadingColor,
   } = { ...defaults, ...props }
+
+  const rawOpacity = typeof proofBackgroundOpacity === "number" && !isNaN(proofBackgroundOpacity)
+    ? proofBackgroundOpacity
+    : 70
+  const opacityPct = rawOpacity <= 1 && rawOpacity > 0
+    ? Math.round(rawOpacity * 100)
+    : Math.min(100, Math.max(0, rawOpacity))
 
   const hasBgImage = Boolean(imageSrc && imageSrc.trim())
 
@@ -180,7 +195,14 @@ export function Hero(props: HeroProps) {
                 key={p.label}
                 value={p.value}
                 label={p.label}
-                className={`${i === proofs.length - 1 ? "col-span-2 sm:col-span-1" : ""} bg-background/70 text-white backdrop-blur-sm`}
+                valueSize={p.valueSize}
+                valueColor={p.valueColor}
+                labelSize={p.labelSize}
+                labelColor={p.labelColor}
+                valueTinaField={tinaField(p, "value")}
+                labelTinaField={tinaField(p, "label")}
+                style={{ backgroundColor: `color-mix(in srgb, var(--background) ${opacityPct}%, transparent)` }}
+                className={`${i === proofs.length - 1 ? "col-span-2 sm:col-span-1" : ""} text-white backdrop-blur-sm`}
               />
             ))}
           </div>

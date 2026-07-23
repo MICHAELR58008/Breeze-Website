@@ -92,6 +92,7 @@ export default function PricingHubPage() {
 
   useEffect(() => {
     fetchPricing()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const hasChanges = useMemo(() => {
@@ -437,7 +438,7 @@ export default function PricingHubPage() {
                   {services.length === 0 && (
                     <tr>
                       <td colSpan={5} className="p-8 text-center text-muted-foreground">
-                        No services defined. Click "Add Service" to create one.
+                        No services defined. Click &quot;Add Service&quot; to create one.
                       </td>
                     </tr>
                   )}
@@ -515,7 +516,7 @@ export default function PricingHubPage() {
                   {addOns.length === 0 && (
                     <tr>
                       <td colSpan={3} className="p-8 text-center text-muted-foreground">
-                        No add-ons defined. Click "Add Extra" to create one.
+                        No add-ons defined. Click &quot;Add Extra&quot; to create one.
                       </td>
                     </tr>
                   )}

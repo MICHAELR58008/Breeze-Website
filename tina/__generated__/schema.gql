@@ -93,6 +93,10 @@ union DocumentNode = Page | Booking | Folder
 type PageSectionsHeroProofs {
   value: String
   label: String
+  valueSize: Float
+  valueColor: String
+  labelSize: Float
+  labelColor: String
 }
 
 type PageSectionsHero {
@@ -104,6 +108,7 @@ type PageSectionsHero {
   calloutTitle: String
   calloutText: String
   proofs: [PageSectionsHeroProofs]
+  proofBackgroundOpacity: Float
   imageSrc: String
   imageAlt: String
   locationVisible: Boolean
@@ -310,9 +315,23 @@ input StringFilter {
   in: [String]
 }
 
+input NumberFilter {
+  lt: Float
+  lte: Float
+  gte: Float
+  gt: Float
+  eq: Float
+  exists: Boolean
+  in: [Float]
+}
+
 input PageSectionsHeroProofsFilter {
   value: StringFilter
   label: StringFilter
+  valueSize: NumberFilter
+  valueColor: StringFilter
+  labelSize: NumberFilter
+  labelColor: StringFilter
 }
 
 input ImageFilter {
@@ -327,16 +346,6 @@ input BooleanFilter {
   exists: Boolean
 }
 
-input NumberFilter {
-  lt: Float
-  lte: Float
-  gte: Float
-  gt: Float
-  eq: Float
-  exists: Boolean
-  in: [Float]
-}
-
 input PageSectionsHeroFilter {
   location: StringFilter
   headingLine1: StringFilter
@@ -346,6 +355,7 @@ input PageSectionsHeroFilter {
   calloutTitle: StringFilter
   calloutText: StringFilter
   proofs: PageSectionsHeroProofsFilter
+  proofBackgroundOpacity: NumberFilter
   imageSrc: ImageFilter
   imageAlt: StringFilter
   locationVisible: BooleanFilter
@@ -1017,6 +1027,10 @@ input DocumentMutation {
 input PageSectionsHeroProofsMutation {
   value: String
   label: String
+  valueSize: Float
+  valueColor: String
+  labelSize: Float
+  labelColor: String
 }
 
 input PageSectionsHeroMutation {
@@ -1028,6 +1042,7 @@ input PageSectionsHeroMutation {
   calloutTitle: String
   calloutText: String
   proofs: [PageSectionsHeroProofsMutation]
+  proofBackgroundOpacity: Float
   imageSrc: String
   imageAlt: String
   locationVisible: Boolean

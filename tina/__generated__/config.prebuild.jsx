@@ -544,14 +544,8 @@ var config_default = defineConfig({
                 fields: [
                   { type: "string", name: "location" },
                   { type: "string", name: "headingLine1" },
-                  { type: "number", name: "headingLine1X", ui: { component: "hidden" } },
-                  { type: "number", name: "headingLine1Y", ui: { component: "hidden" } },
                   { type: "string", name: "headingLine2" },
-                  { type: "number", name: "headingLine2X", ui: { component: "hidden" } },
-                  { type: "number", name: "headingLine2Y", ui: { component: "hidden" } },
                   { type: "string", name: "subheading" },
-                  { type: "number", name: "subheadingX", ui: { component: "hidden" } },
-                  { type: "number", name: "subheadingY", ui: { component: "hidden" } },
                   { type: "string", name: "phoneNumber" },
                   { type: "string", name: "calloutTitle" },
                   { type: "string", name: "calloutText" },
@@ -566,7 +560,25 @@ var config_default = defineConfig({
                     ]
                   },
                   { type: "image", name: "imageSrc", label: "Hero Image" },
-                  { type: "string", name: "imageAlt", label: "Image Alt Text" }
+                  { type: "string", name: "imageAlt", label: "Image Alt Text" },
+                  { type: "boolean", name: "locationVisible", label: "Show location" },
+                  { type: "number", name: "locationSize", label: "Location Size (px)" },
+                  { type: "string", name: "locationColor", label: "Location Color", ui: { component: "color" } },
+                  { type: "boolean", name: "headingLine1Visible", label: "Show heading line 1" },
+                  { type: "number", name: "headingLine1X", label: "Heading 1 \u2014 X" },
+                  { type: "number", name: "headingLine1Y", label: "Heading 1 \u2014 Y" },
+                  { type: "number", name: "headingLine1Size", label: "Heading 1 \u2014 Size (px)" },
+                  { type: "string", name: "headingLine1Color", label: "Heading 1 \u2014 Color", ui: { component: "color" } },
+                  { type: "boolean", name: "headingLine2Visible", label: "Show heading line 2" },
+                  { type: "number", name: "headingLine2X", label: "Heading 2 \u2014 X" },
+                  { type: "number", name: "headingLine2Y", label: "Heading 2 \u2014 Y" },
+                  { type: "number", name: "headingLine2Size", label: "Heading 2 \u2014 Size (px)" },
+                  { type: "string", name: "headingLine2Color", label: "Heading 2 \u2014 Color", ui: { component: "color" } },
+                  { type: "boolean", name: "subheadingVisible", label: "Show subheading" },
+                  { type: "number", name: "subheadingX", label: "Subheading \u2014 X" },
+                  { type: "number", name: "subheadingY", label: "Subheading \u2014 Y" },
+                  { type: "number", name: "subheadingSize", label: "Subheading \u2014 Size (px)" },
+                  { type: "string", name: "subheadingColor", label: "Subheading \u2014 Color", ui: { component: "color" } }
                 ]
               },
               {
@@ -584,7 +596,25 @@ var config_default = defineConfig({
                   { type: "string", name: "eyebrow" },
                   { type: "string", name: "heading" },
                   { type: "string", name: "copy" },
-                  { type: "string", name: "disclaimer" }
+                  { type: "string", name: "disclaimer" },
+                  { type: "boolean", name: "eyebrowVisible", label: "Show eyebrow" },
+                  { type: "number", name: "eyebrowSize", label: "Eyebrow Size (px)" },
+                  { type: "string", name: "eyebrowColor", label: "Eyebrow Color", ui: { component: "color" } },
+                  { type: "boolean", name: "headingVisible", label: "Show heading" },
+                  { type: "number", name: "headingX", label: "Heading \u2014 X" },
+                  { type: "number", name: "headingY", label: "Heading \u2014 Y" },
+                  { type: "number", name: "headingSize", label: "Heading \u2014 Size (px)" },
+                  { type: "string", name: "headingColor", label: "Heading \u2014 Color", ui: { component: "color" } },
+                  { type: "boolean", name: "copyVisible", label: "Show copy" },
+                  { type: "number", name: "copyX", label: "Copy \u2014 X" },
+                  { type: "number", name: "copyY", label: "Copy \u2014 Y" },
+                  { type: "number", name: "copySize", label: "Copy \u2014 Size (px)" },
+                  { type: "string", name: "copyColor", label: "Copy \u2014 Color", ui: { component: "color" } },
+                  { type: "boolean", name: "disclaimerVisible", label: "Show disclaimer" },
+                  { type: "number", name: "disclaimerX", label: "Disclaimer \u2014 X" },
+                  { type: "number", name: "disclaimerY", label: "Disclaimer \u2014 Y" },
+                  { type: "number", name: "disclaimerSize", label: "Disclaimer \u2014 Size (px)" },
+                  { type: "string", name: "disclaimerColor", label: "Disclaimer \u2014 Color", ui: { component: "color" } }
                 ]
               },
               {
@@ -618,7 +648,20 @@ var config_default = defineConfig({
                       { type: "string", name: "description" },
                       { type: "image", name: "image", label: "Image / Icon Photo" }
                     ]
-                  }
+                  },
+                  { type: "boolean", name: "eyebrowVisible", label: "Show eyebrow" },
+                  { type: "number", name: "eyebrowSize", label: "Eyebrow Size (px)" },
+                  { type: "string", name: "eyebrowColor", label: "Eyebrow Color", ui: { component: "color" } },
+                  { type: "boolean", name: "headingVisible", label: "Show heading" },
+                  { type: "number", name: "headingX", label: "Heading \u2014 X" },
+                  { type: "number", name: "headingY", label: "Heading \u2014 Y" },
+                  { type: "number", name: "headingSize", label: "Heading \u2014 Size (px)" },
+                  { type: "string", name: "headingColor", label: "Heading \u2014 Color", ui: { component: "color" } },
+                  { type: "boolean", name: "copyVisible", label: "Show copy" },
+                  { type: "number", name: "copyX", label: "Copy \u2014 X" },
+                  { type: "number", name: "copyY", label: "Copy \u2014 Y" },
+                  { type: "number", name: "copySize", label: "Copy \u2014 Size (px)" },
+                  { type: "string", name: "copyColor", label: "Copy \u2014 Color", ui: { component: "color" } }
                 ]
               },
               {
@@ -649,7 +692,25 @@ var config_default = defineConfig({
                     ui: {
                       component: FocalPointPicker
                     }
-                  }
+                  },
+                  { type: "boolean", name: "eyebrowVisible", label: "Show eyebrow" },
+                  { type: "number", name: "eyebrowSize", label: "Eyebrow Size (px)" },
+                  { type: "string", name: "eyebrowColor", label: "Eyebrow Color", ui: { component: "color" } },
+                  { type: "boolean", name: "ownerNameVisible", label: "Show owner name" },
+                  { type: "number", name: "ownerNameX", label: "Name \u2014 X" },
+                  { type: "number", name: "ownerNameY", label: "Name \u2014 Y" },
+                  { type: "number", name: "ownerNameSize", label: "Name \u2014 Size (px)" },
+                  { type: "string", name: "ownerNameColor", label: "Name \u2014 Color", ui: { component: "color" } },
+                  { type: "boolean", name: "bioParagraph1Visible", label: "Show bio paragraph 1" },
+                  { type: "number", name: "bioParagraph1X", label: "Bio 1 \u2014 X" },
+                  { type: "number", name: "bioParagraph1Y", label: "Bio 1 \u2014 Y" },
+                  { type: "number", name: "bioParagraph1Size", label: "Bio 1 \u2014 Size (px)" },
+                  { type: "string", name: "bioParagraph1Color", label: "Bio 1 \u2014 Color", ui: { component: "color" } },
+                  { type: "boolean", name: "bioParagraph2Visible", label: "Show bio paragraph 2" },
+                  { type: "number", name: "bioParagraph2X", label: "Bio 2 \u2014 X" },
+                  { type: "number", name: "bioParagraph2Y", label: "Bio 2 \u2014 Y" },
+                  { type: "number", name: "bioParagraph2Size", label: "Bio 2 \u2014 Size (px)" },
+                  { type: "string", name: "bioParagraph2Color", label: "Bio 2 \u2014 Color", ui: { component: "color" } }
                 ]
               },
               {
@@ -680,7 +741,20 @@ var config_default = defineConfig({
                       { type: "string", name: "quote" },
                       { type: "string", name: "byline" }
                     ]
-                  }
+                  },
+                  { type: "boolean", name: "eyebrowVisible", label: "Show eyebrow" },
+                  { type: "number", name: "eyebrowSize", label: "Eyebrow Size (px)" },
+                  { type: "string", name: "eyebrowColor", label: "Eyebrow Color", ui: { component: "color" } },
+                  { type: "boolean", name: "headingVisible", label: "Show heading" },
+                  { type: "number", name: "headingX", label: "Heading \u2014 X" },
+                  { type: "number", name: "headingY", label: "Heading \u2014 Y" },
+                  { type: "number", name: "headingSize", label: "Heading \u2014 Size (px)" },
+                  { type: "string", name: "headingColor", label: "Heading \u2014 Color", ui: { component: "color" } },
+                  { type: "boolean", name: "copyVisible", label: "Show copy" },
+                  { type: "number", name: "copyX", label: "Copy \u2014 X" },
+                  { type: "number", name: "copyY", label: "Copy \u2014 Y" },
+                  { type: "number", name: "copySize", label: "Copy \u2014 Size (px)" },
+                  { type: "string", name: "copyColor", label: "Copy \u2014 Color", ui: { component: "color" } }
                 ]
               },
               {
@@ -706,7 +780,27 @@ var config_default = defineConfig({
                   { type: "string", name: "phoneHref" },
                   { type: "string", name: "email" },
                   { type: "string", name: "emailHref" },
-                  { type: "string", name: "hours" }
+                  { type: "string", name: "hours" },
+                  { type: "boolean", name: "eyebrowVisible", label: "Show eyebrow" },
+                  { type: "number", name: "eyebrowSize", label: "Eyebrow Size (px)" },
+                  { type: "string", name: "eyebrowColor", label: "Eyebrow Color", ui: { component: "color" } },
+                  { type: "boolean", name: "headingVisible", label: "Show heading" },
+                  { type: "number", name: "headingX", label: "Heading \u2014 X" },
+                  { type: "number", name: "headingY", label: "Heading \u2014 Y" },
+                  { type: "number", name: "headingSize", label: "Heading \u2014 Size (px)" },
+                  { type: "string", name: "headingColor", label: "Heading \u2014 Color", ui: { component: "color" } },
+                  { type: "boolean", name: "addressVisible", label: "Show address" },
+                  { type: "number", name: "addressSize", label: "Address Size (px)" },
+                  { type: "string", name: "addressColor", label: "Address Color", ui: { component: "color" } },
+                  { type: "boolean", name: "phoneVisible", label: "Show phone" },
+                  { type: "number", name: "phoneSize", label: "Phone Size (px)" },
+                  { type: "string", name: "phoneColor", label: "Phone Color", ui: { component: "color" } },
+                  { type: "boolean", name: "emailVisible", label: "Show email" },
+                  { type: "number", name: "emailSize", label: "Email Size (px)" },
+                  { type: "string", name: "emailColor", label: "Email Color", ui: { component: "color" } },
+                  { type: "boolean", name: "hoursVisible", label: "Show hours" },
+                  { type: "number", name: "hoursSize", label: "Hours Size (px)" },
+                  { type: "string", name: "hoursColor", label: "Hours Color", ui: { component: "color" } }
                 ]
               },
               {
@@ -718,7 +812,12 @@ var config_default = defineConfig({
                   }
                 },
                 fields: [
-                  { type: "string", name: "tagline" }
+                  { type: "string", name: "tagline" },
+                  { type: "boolean", name: "taglineVisible", label: "Show tagline" },
+                  { type: "number", name: "taglineX", label: "Tagline \u2014 X" },
+                  { type: "number", name: "taglineY", label: "Tagline \u2014 Y" },
+                  { type: "number", name: "taglineSize", label: "Tagline \u2014 Size (px)" },
+                  { type: "string", name: "taglineColor", label: "Tagline \u2014 Color", ui: { component: "color" } }
                 ]
               }
             ]

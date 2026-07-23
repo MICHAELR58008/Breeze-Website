@@ -98,20 +98,32 @@ type PageSectionsHeroProofs {
 type PageSectionsHero {
   location: String
   headingLine1: String
-  headingLine1X: Float
-  headingLine1Y: Float
   headingLine2: String
-  headingLine2X: Float
-  headingLine2Y: Float
   subheading: String
-  subheadingX: Float
-  subheadingY: Float
   phoneNumber: String
   calloutTitle: String
   calloutText: String
   proofs: [PageSectionsHeroProofs]
   imageSrc: String
   imageAlt: String
+  locationVisible: Boolean
+  locationSize: Float
+  locationColor: String
+  headingLine1Visible: Boolean
+  headingLine1X: Float
+  headingLine1Y: Float
+  headingLine1Size: Float
+  headingLine1Color: String
+  headingLine2Visible: Boolean
+  headingLine2X: Float
+  headingLine2Y: Float
+  headingLine2Size: Float
+  headingLine2Color: String
+  subheadingVisible: Boolean
+  subheadingX: Float
+  subheadingY: Float
+  subheadingSize: Float
+  subheadingColor: String
 }
 
 type PageSectionsServices {
@@ -119,6 +131,24 @@ type PageSectionsServices {
   heading: String
   copy: String
   disclaimer: String
+  eyebrowVisible: Boolean
+  eyebrowSize: Float
+  eyebrowColor: String
+  headingVisible: Boolean
+  headingX: Float
+  headingY: Float
+  headingSize: Float
+  headingColor: String
+  copyVisible: Boolean
+  copyX: Float
+  copyY: Float
+  copySize: Float
+  copyColor: String
+  disclaimerVisible: Boolean
+  disclaimerX: Float
+  disclaimerY: Float
+  disclaimerSize: Float
+  disclaimerColor: String
 }
 
 type PageSectionsProcessSteps {
@@ -133,6 +163,19 @@ type PageSectionsProcess {
   heading: String
   copy: String
   steps: [PageSectionsProcessSteps]
+  eyebrowVisible: Boolean
+  eyebrowSize: Float
+  eyebrowColor: String
+  headingVisible: Boolean
+  headingX: Float
+  headingY: Float
+  headingSize: Float
+  headingColor: String
+  copyVisible: Boolean
+  copyX: Float
+  copyY: Float
+  copySize: Float
+  copyColor: String
 }
 
 type PageSectionsAbout {
@@ -144,6 +187,24 @@ type PageSectionsAbout {
   bioParagraph2: String
   image: String
   focalPoint: String
+  eyebrowVisible: Boolean
+  eyebrowSize: Float
+  eyebrowColor: String
+  ownerNameVisible: Boolean
+  ownerNameX: Float
+  ownerNameY: Float
+  ownerNameSize: Float
+  ownerNameColor: String
+  bioParagraph1Visible: Boolean
+  bioParagraph1X: Float
+  bioParagraph1Y: Float
+  bioParagraph1Size: Float
+  bioParagraph1Color: String
+  bioParagraph2Visible: Boolean
+  bioParagraph2X: Float
+  bioParagraph2Y: Float
+  bioParagraph2Size: Float
+  bioParagraph2Color: String
 }
 
 type PageSectionsTestimonialsReviews {
@@ -156,6 +217,19 @@ type PageSectionsTestimonials {
   heading: String
   copy: String
   reviews: [PageSectionsTestimonialsReviews]
+  eyebrowVisible: Boolean
+  eyebrowSize: Float
+  eyebrowColor: String
+  headingVisible: Boolean
+  headingX: Float
+  headingY: Float
+  headingSize: Float
+  headingColor: String
+  copyVisible: Boolean
+  copyX: Float
+  copyY: Float
+  copySize: Float
+  copyColor: String
 }
 
 type PageSectionsContact {
@@ -167,10 +241,35 @@ type PageSectionsContact {
   email: String
   emailHref: String
   hours: String
+  eyebrowVisible: Boolean
+  eyebrowSize: Float
+  eyebrowColor: String
+  headingVisible: Boolean
+  headingX: Float
+  headingY: Float
+  headingSize: Float
+  headingColor: String
+  addressVisible: Boolean
+  addressSize: Float
+  addressColor: String
+  phoneVisible: Boolean
+  phoneSize: Float
+  phoneColor: String
+  emailVisible: Boolean
+  emailSize: Float
+  emailColor: String
+  hoursVisible: Boolean
+  hoursSize: Float
+  hoursColor: String
 }
 
 type PageSectionsFooter {
   tagline: String
+  taglineVisible: Boolean
+  taglineX: Float
+  taglineY: Float
+  taglineSize: Float
+  taglineColor: String
 }
 
 union PageSections = PageSectionsHero | PageSectionsServices | PageSectionsProcess | PageSectionsAbout | PageSectionsTestimonials | PageSectionsContact | PageSectionsFooter
@@ -189,16 +288,6 @@ input StringFilter {
   in: [String]
 }
 
-input NumberFilter {
-  lt: Float
-  lte: Float
-  gte: Float
-  gt: Float
-  eq: Float
-  exists: Boolean
-  in: [Float]
-}
-
 input PageSectionsHeroProofsFilter {
   value: StringFilter
   label: StringFilter
@@ -211,23 +300,50 @@ input ImageFilter {
   in: [String]
 }
 
+input BooleanFilter {
+  eq: Boolean
+  exists: Boolean
+}
+
+input NumberFilter {
+  lt: Float
+  lte: Float
+  gte: Float
+  gt: Float
+  eq: Float
+  exists: Boolean
+  in: [Float]
+}
+
 input PageSectionsHeroFilter {
   location: StringFilter
   headingLine1: StringFilter
-  headingLine1X: NumberFilter
-  headingLine1Y: NumberFilter
   headingLine2: StringFilter
-  headingLine2X: NumberFilter
-  headingLine2Y: NumberFilter
   subheading: StringFilter
-  subheadingX: NumberFilter
-  subheadingY: NumberFilter
   phoneNumber: StringFilter
   calloutTitle: StringFilter
   calloutText: StringFilter
   proofs: PageSectionsHeroProofsFilter
   imageSrc: ImageFilter
   imageAlt: StringFilter
+  locationVisible: BooleanFilter
+  locationSize: NumberFilter
+  locationColor: StringFilter
+  headingLine1Visible: BooleanFilter
+  headingLine1X: NumberFilter
+  headingLine1Y: NumberFilter
+  headingLine1Size: NumberFilter
+  headingLine1Color: StringFilter
+  headingLine2Visible: BooleanFilter
+  headingLine2X: NumberFilter
+  headingLine2Y: NumberFilter
+  headingLine2Size: NumberFilter
+  headingLine2Color: StringFilter
+  subheadingVisible: BooleanFilter
+  subheadingX: NumberFilter
+  subheadingY: NumberFilter
+  subheadingSize: NumberFilter
+  subheadingColor: StringFilter
 }
 
 input PageSectionsServicesFilter {
@@ -235,6 +351,24 @@ input PageSectionsServicesFilter {
   heading: StringFilter
   copy: StringFilter
   disclaimer: StringFilter
+  eyebrowVisible: BooleanFilter
+  eyebrowSize: NumberFilter
+  eyebrowColor: StringFilter
+  headingVisible: BooleanFilter
+  headingX: NumberFilter
+  headingY: NumberFilter
+  headingSize: NumberFilter
+  headingColor: StringFilter
+  copyVisible: BooleanFilter
+  copyX: NumberFilter
+  copyY: NumberFilter
+  copySize: NumberFilter
+  copyColor: StringFilter
+  disclaimerVisible: BooleanFilter
+  disclaimerX: NumberFilter
+  disclaimerY: NumberFilter
+  disclaimerSize: NumberFilter
+  disclaimerColor: StringFilter
 }
 
 input PageSectionsProcessStepsFilter {
@@ -249,6 +383,19 @@ input PageSectionsProcessFilter {
   heading: StringFilter
   copy: StringFilter
   steps: PageSectionsProcessStepsFilter
+  eyebrowVisible: BooleanFilter
+  eyebrowSize: NumberFilter
+  eyebrowColor: StringFilter
+  headingVisible: BooleanFilter
+  headingX: NumberFilter
+  headingY: NumberFilter
+  headingSize: NumberFilter
+  headingColor: StringFilter
+  copyVisible: BooleanFilter
+  copyX: NumberFilter
+  copyY: NumberFilter
+  copySize: NumberFilter
+  copyColor: StringFilter
 }
 
 input PageSectionsAboutFilter {
@@ -260,6 +407,24 @@ input PageSectionsAboutFilter {
   bioParagraph2: StringFilter
   image: ImageFilter
   focalPoint: StringFilter
+  eyebrowVisible: BooleanFilter
+  eyebrowSize: NumberFilter
+  eyebrowColor: StringFilter
+  ownerNameVisible: BooleanFilter
+  ownerNameX: NumberFilter
+  ownerNameY: NumberFilter
+  ownerNameSize: NumberFilter
+  ownerNameColor: StringFilter
+  bioParagraph1Visible: BooleanFilter
+  bioParagraph1X: NumberFilter
+  bioParagraph1Y: NumberFilter
+  bioParagraph1Size: NumberFilter
+  bioParagraph1Color: StringFilter
+  bioParagraph2Visible: BooleanFilter
+  bioParagraph2X: NumberFilter
+  bioParagraph2Y: NumberFilter
+  bioParagraph2Size: NumberFilter
+  bioParagraph2Color: StringFilter
 }
 
 input PageSectionsTestimonialsReviewsFilter {
@@ -272,6 +437,19 @@ input PageSectionsTestimonialsFilter {
   heading: StringFilter
   copy: StringFilter
   reviews: PageSectionsTestimonialsReviewsFilter
+  eyebrowVisible: BooleanFilter
+  eyebrowSize: NumberFilter
+  eyebrowColor: StringFilter
+  headingVisible: BooleanFilter
+  headingX: NumberFilter
+  headingY: NumberFilter
+  headingSize: NumberFilter
+  headingColor: StringFilter
+  copyVisible: BooleanFilter
+  copyX: NumberFilter
+  copyY: NumberFilter
+  copySize: NumberFilter
+  copyColor: StringFilter
 }
 
 input PageSectionsContactFilter {
@@ -283,10 +461,35 @@ input PageSectionsContactFilter {
   email: StringFilter
   emailHref: StringFilter
   hours: StringFilter
+  eyebrowVisible: BooleanFilter
+  eyebrowSize: NumberFilter
+  eyebrowColor: StringFilter
+  headingVisible: BooleanFilter
+  headingX: NumberFilter
+  headingY: NumberFilter
+  headingSize: NumberFilter
+  headingColor: StringFilter
+  addressVisible: BooleanFilter
+  addressSize: NumberFilter
+  addressColor: StringFilter
+  phoneVisible: BooleanFilter
+  phoneSize: NumberFilter
+  phoneColor: StringFilter
+  emailVisible: BooleanFilter
+  emailSize: NumberFilter
+  emailColor: StringFilter
+  hoursVisible: BooleanFilter
+  hoursSize: NumberFilter
+  hoursColor: StringFilter
 }
 
 input PageSectionsFooterFilter {
   tagline: StringFilter
+  taglineVisible: BooleanFilter
+  taglineX: NumberFilter
+  taglineY: NumberFilter
+  taglineSize: NumberFilter
+  taglineColor: StringFilter
 }
 
 input PageSectionsFilter {
@@ -515,11 +718,6 @@ type Booking implements Node & Document {
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
-}
-
-input BooleanFilter {
-  eq: Boolean
-  exists: Boolean
 }
 
 input BookingServicesFilter {
@@ -780,20 +978,32 @@ input PageSectionsHeroProofsMutation {
 input PageSectionsHeroMutation {
   location: String
   headingLine1: String
-  headingLine1X: Float
-  headingLine1Y: Float
   headingLine2: String
-  headingLine2X: Float
-  headingLine2Y: Float
   subheading: String
-  subheadingX: Float
-  subheadingY: Float
   phoneNumber: String
   calloutTitle: String
   calloutText: String
   proofs: [PageSectionsHeroProofsMutation]
   imageSrc: String
   imageAlt: String
+  locationVisible: Boolean
+  locationSize: Float
+  locationColor: String
+  headingLine1Visible: Boolean
+  headingLine1X: Float
+  headingLine1Y: Float
+  headingLine1Size: Float
+  headingLine1Color: String
+  headingLine2Visible: Boolean
+  headingLine2X: Float
+  headingLine2Y: Float
+  headingLine2Size: Float
+  headingLine2Color: String
+  subheadingVisible: Boolean
+  subheadingX: Float
+  subheadingY: Float
+  subheadingSize: Float
+  subheadingColor: String
 }
 
 input PageSectionsServicesMutation {
@@ -801,6 +1011,24 @@ input PageSectionsServicesMutation {
   heading: String
   copy: String
   disclaimer: String
+  eyebrowVisible: Boolean
+  eyebrowSize: Float
+  eyebrowColor: String
+  headingVisible: Boolean
+  headingX: Float
+  headingY: Float
+  headingSize: Float
+  headingColor: String
+  copyVisible: Boolean
+  copyX: Float
+  copyY: Float
+  copySize: Float
+  copyColor: String
+  disclaimerVisible: Boolean
+  disclaimerX: Float
+  disclaimerY: Float
+  disclaimerSize: Float
+  disclaimerColor: String
 }
 
 input PageSectionsProcessStepsMutation {
@@ -815,6 +1043,19 @@ input PageSectionsProcessMutation {
   heading: String
   copy: String
   steps: [PageSectionsProcessStepsMutation]
+  eyebrowVisible: Boolean
+  eyebrowSize: Float
+  eyebrowColor: String
+  headingVisible: Boolean
+  headingX: Float
+  headingY: Float
+  headingSize: Float
+  headingColor: String
+  copyVisible: Boolean
+  copyX: Float
+  copyY: Float
+  copySize: Float
+  copyColor: String
 }
 
 input PageSectionsAboutMutation {
@@ -826,6 +1067,24 @@ input PageSectionsAboutMutation {
   bioParagraph2: String
   image: String
   focalPoint: String
+  eyebrowVisible: Boolean
+  eyebrowSize: Float
+  eyebrowColor: String
+  ownerNameVisible: Boolean
+  ownerNameX: Float
+  ownerNameY: Float
+  ownerNameSize: Float
+  ownerNameColor: String
+  bioParagraph1Visible: Boolean
+  bioParagraph1X: Float
+  bioParagraph1Y: Float
+  bioParagraph1Size: Float
+  bioParagraph1Color: String
+  bioParagraph2Visible: Boolean
+  bioParagraph2X: Float
+  bioParagraph2Y: Float
+  bioParagraph2Size: Float
+  bioParagraph2Color: String
 }
 
 input PageSectionsTestimonialsReviewsMutation {
@@ -838,6 +1097,19 @@ input PageSectionsTestimonialsMutation {
   heading: String
   copy: String
   reviews: [PageSectionsTestimonialsReviewsMutation]
+  eyebrowVisible: Boolean
+  eyebrowSize: Float
+  eyebrowColor: String
+  headingVisible: Boolean
+  headingX: Float
+  headingY: Float
+  headingSize: Float
+  headingColor: String
+  copyVisible: Boolean
+  copyX: Float
+  copyY: Float
+  copySize: Float
+  copyColor: String
 }
 
 input PageSectionsContactMutation {
@@ -849,10 +1121,35 @@ input PageSectionsContactMutation {
   email: String
   emailHref: String
   hours: String
+  eyebrowVisible: Boolean
+  eyebrowSize: Float
+  eyebrowColor: String
+  headingVisible: Boolean
+  headingX: Float
+  headingY: Float
+  headingSize: Float
+  headingColor: String
+  addressVisible: Boolean
+  addressSize: Float
+  addressColor: String
+  phoneVisible: Boolean
+  phoneSize: Float
+  phoneColor: String
+  emailVisible: Boolean
+  emailSize: Float
+  emailColor: String
+  hoursVisible: Boolean
+  hoursSize: Float
+  hoursColor: String
 }
 
 input PageSectionsFooterMutation {
   tagline: String
+  taglineVisible: Boolean
+  taglineX: Float
+  taglineY: Float
+  taglineSize: Float
+  taglineColor: String
 }
 
 input PageSectionsMutation {

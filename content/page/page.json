@@ -45,33 +45,35 @@
     },
     {
       "eyebrow": "",
-      "heading": "Hear from our clients",
+      "heading": "Testimonials",
       "copy": "",
       "reviews": [
         {
           "quote": "The house felt completely refreshed, and every detail was handled with care.",
-          "byline": "Sample review · Replace with customer name"
+          "byline": "Michael A Rivas"
         },
         {
           "quote": "Clear communication, thoughtful service, and a result we were proud to come home to.",
-          "byline": "Sample review · Replace with customer name"
+          "byline": "Briceida TObar"
         },
         {
           "quote": "Breeze made the whole process feel easy from the first quote to the final walkthrough.",
-          "byline": "Sample review · Replace with customer name"
+          "byline": "Enrique Sanchez"
         }
       ],
       "_template": "testimonials"
     },
     {
       "eyebrow": "",
-      "heading": "We'd love to hear from you.",
+      "heading": "Contact Us",
       "address": "Ventura, Oxnard, Thousand Oaks",
       "phone": "(805) 760-8765",
       "phoneHref": "tel:+18057608765",
       "email": "sacrementado27@gmail.com",
       "emailHref": "mailto:sacrementado27@gmail.com",
-      "hours": "We reply within 24 hours",
+      "hours": "24 hrs",
+      "eyebrowSize": 7,
+      "headingSize": 68,
       "_template": "contact"
     },
     {

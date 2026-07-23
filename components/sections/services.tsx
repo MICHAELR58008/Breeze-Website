@@ -2,7 +2,7 @@
 
 import { ArrowRight, Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { SectionHeader } from "@/components/sections/shared"
+import { SectionHeader, StyledText } from "@/components/sections/shared"
 import { formatPrice } from "@/lib/pricing"
 import { useBooking } from "@/components/booking/booking-drawer"
 import { tinaField } from "tinacms/dist/tina-field"
@@ -38,7 +38,7 @@ const defaults: ServicesProps = {
 
 export function Services(props: ServicesProps) {
   const { openBooking, servicesList, addOnsList, rawPricing } = useBooking()
-  const { eyebrow, heading, copy, disclaimer, eyebrowSize, eyebrowColor, headingSize, headingColor, bodySize, bodyColor } = { ...defaults, ...props }
+  const { eyebrow, heading, copy, disclaimer, eyebrowVisible, eyebrowSize, eyebrowColor, headingVisible, headingX, headingY, headingSize, headingColor, copyVisible, copyX, copyY, copySize, copyColor, disclaimerVisible, disclaimerX, disclaimerY, disclaimerSize, disclaimerColor } = { ...defaults, ...props }
 
   // Use dynamic list if available from context, otherwise fallback to props/defaults
   const services = servicesList && servicesList.length > 0 ? servicesList : props.services
@@ -65,12 +65,19 @@ export function Services(props: ServicesProps) {
           title: tinaField(props, "heading"),
           copy: tinaField(props, "copy"),
         }}
+        eyebrowVisible={eyebrowVisible}
         eyebrowSize={eyebrowSize}
         eyebrowColor={eyebrowColor}
-        headingSize={headingSize}
-        headingColor={headingColor}
-        bodySize={bodySize}
-        bodyColor={bodyColor}
+        titleVisible={headingVisible}
+        titleX={headingX}
+        titleY={headingY}
+        titleSize={headingSize}
+        titleColor={headingColor}
+        copyVisible={copyVisible}
+        copyX={copyX}
+        copyY={copyY}
+        copySize={copySize}
+        copyColor={copyColor}
       />
       
       {services && services.length > 0 && (
@@ -139,10 +146,18 @@ export function Services(props: ServicesProps) {
         </div>
       )}
 
-      <div data-tina-field={tinaField(props, "disclaimer")} className="mt-6 border-l-2 border-accent bg-accent/5 p-5 text-sm leading-relaxed text-muted-foreground"
-        style={{ fontSize: bodySize ? `${bodySize}px` : undefined, color: bodyColor || undefined }}>
+      <StyledText
+        as="div"
+        visible={disclaimerVisible}
+        x={disclaimerX}
+        y={disclaimerY}
+        size={disclaimerSize}
+        color={disclaimerColor}
+        data-tina-field={tinaField(props, "disclaimer")}
+        className="mt-6 border-l-2 border-accent bg-accent/5 p-5 text-sm leading-relaxed text-muted-foreground"
+      >
         <strong className="text-foreground">A free quote is required</strong> — {disclaimer}
-      </div>
+      </StyledText>
     </section>
   )
 }

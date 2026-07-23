@@ -1,6 +1,6 @@
 "use client"
 
-import { SectionHeader } from "@/components/sections/shared"
+import { SectionHeader, StyledText } from "@/components/sections/shared"
 import { tinaField } from "tinacms/dist/tina-field"
 
 export interface TestimonialReview {
@@ -28,7 +28,7 @@ const defaults: TestimonialsProps = {
 }
 
 export function Testimonials(props: TestimonialsProps) {
-  const { eyebrow, heading, copy, reviews, eyebrowSize, eyebrowColor, headingSize, headingColor, bodySize, bodyColor } = { ...defaults, ...props }
+  const { eyebrow, heading, copy, reviews, eyebrowVisible, eyebrowSize, eyebrowColor, headingVisible, headingX, headingY, headingSize, headingColor, copyVisible, copyX, copyY, copySize, copyColor } = { ...defaults, ...props }
 
   return (
     <section id="reviews" className="border-y border-border bg-card">
@@ -42,12 +42,19 @@ export function Testimonials(props: TestimonialsProps) {
             title: tinaField(props, "heading"),
             copy: tinaField(props, "copy"),
           }}
+          eyebrowVisible={eyebrowVisible}
           eyebrowSize={eyebrowSize}
           eyebrowColor={eyebrowColor}
-          headingSize={headingSize}
-          headingColor={headingColor}
-          bodySize={bodySize}
-          bodyColor={bodyColor}
+          titleVisible={headingVisible}
+          titleX={headingX}
+          titleY={headingY}
+          titleSize={headingSize}
+          titleColor={headingColor}
+          copyVisible={copyVisible}
+          copyX={copyX}
+          copyY={copyY}
+          copySize={copySize}
+          copyColor={copyColor}
         />
         <div data-tina-field={tinaField(props, "reviews")} className="grid gap-px border border-border bg-border lg:grid-cols-3">
           {(reviews || []).map((review) => (

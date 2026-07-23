@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { ArrowRight, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Proof } from "@/components/sections/shared"
+import { Proof, StyledText } from "@/components/sections/shared"
 import { useBooking } from "@/components/booking/booking-drawer"
 import { tinaField } from "tinacms/dist/tina-field"
 
@@ -15,39 +15,40 @@ export interface HeroProof {
 export interface HeroProps {
   location?: string
   headingLine1?: string
-  locationSize?: number
-  locationColor?: string
-  headingSize?: number
-  headingColor?: string
-  headingAccentColor?: string
-  subheadingSize?: number
-  subheadingColor?: string
   headingLine2?: string
-  headingLine2X?: number
-  headingLine2Y?: number
   subheading?: string
-  subheadingX?: number
-  subheadingY?: number
   phoneNumber?: string
   calloutTitle?: string
   calloutText?: string
   imageSrc?: string
   imageAlt?: string
   proofs?: HeroProof[]
+  locationVisible?: boolean
+  locationSize?: number
+  locationColor?: string
+  headingLine1Visible?: boolean
+  headingLine1X?: number
+  headingLine1Y?: number
+  headingLine1Size?: number
+  headingLine1Color?: string
+  headingLine2Visible?: boolean
+  headingLine2X?: number
+  headingLine2Y?: number
+  headingLine2Size?: number
+  headingLine2Color?: string
+  subheadingVisible?: boolean
+  subheadingX?: number
+  subheadingY?: number
+  subheadingSize?: number
+  subheadingColor?: string
   [key: string]: any
 }
 
 const defaults: HeroProps = {
   location: "Ventura County, CA",
   headingLine1: "A cleaner home.",
-  headingLine1X: 0,
-  headingLine1Y: 0,
   headingLine2: "A lighter life.",
-  headingLine2X: 0,
-  headingLine2Y: 0,
   subheading: "Professional Cleaning Services",
-  subheadingX: 0,
-  subheadingY: 0,
   phoneNumber: "(805) 760-8765",
   calloutTitle: "Care you can feel",
   calloutText: "Every surface considered. Every room treated like our own.",
@@ -65,25 +66,30 @@ export function Hero(props: HeroProps) {
   const {
     location,
     headingLine1,
-    locationSize,
-    locationColor,
-    headingLine1X,
-    headingLine1Y,
     headingLine2,
-    headingLine2X,
-    headingLine2Y,
-    headingSize,
-    headingColor,
-    headingAccentColor,
     subheading,
-    subheadingX,
-    subheadingY,
-    subheadingSize,
-    subheadingColor,
     phoneNumber,
     imageSrc,
     imageAlt,
     proofs,
+    locationVisible,
+    locationSize,
+    locationColor,
+    headingLine1Visible,
+    headingLine1X,
+    headingLine1Y,
+    headingLine1Size,
+    headingLine1Color,
+    headingLine2Visible,
+    headingLine2X,
+    headingLine2Y,
+    headingLine2Size,
+    headingLine2Color,
+    subheadingVisible,
+    subheadingX,
+    subheadingY,
+    subheadingSize,
+    subheadingColor,
   } = { ...defaults, ...props }
 
   const hasBgImage = Boolean(imageSrc && imageSrc.trim())
@@ -105,34 +111,56 @@ export function Hero(props: HeroProps) {
         <div className="flex flex-col justify-between px-5 py-16 sm:px-8 lg:px-12 lg:py-20">
           <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.22em] text-primary">
             <span className="size-2 rounded-full bg-accent" />
-            <span data-tina-field={tinaField(props, "location")} className="text-white/80" style={{ fontSize: locationSize ? `${locationSize}px` : undefined, color: locationColor || undefined }}>{location}</span>
+            <StyledText
+              visible={locationVisible}
+              size={locationSize}
+              color={locationColor}
+              className="text-white/80"
+              data-tina-field={tinaField(props, "location")}
+            >
+              {location}
+            </StyledText>
           </div>
 
           <div className="flex flex-col gap-8">
             <h1 className="max-w-4xl text-balance font-display text-6xl leading-[0.9] tracking-tight text-white sm:text-7xl lg:text-[7.5rem]">
-              <span
+              <StyledText
+                visible={headingLine1Visible}
+                x={headingLine1X}
+                y={headingLine1Y}
+                size={headingLine1Size}
+                color={headingLine1Color}
                 data-tina-field={tinaField(props, "headingLine1")}
-                style={{ transform: `translate(${headingLine1X ?? 0}px, ${headingLine1Y ?? 0}px)`, fontSize: headingSize ? `${headingSize}px` : undefined, color: headingColor || undefined }}
               >
                 {headingLine1}
-              </span>
+              </StyledText>
               <br />
-              <span
-                data-tina-field={tinaField(props, "headingLine2")}
+              <StyledText
+                as="span"
+                visible={headingLine2Visible}
+                x={headingLine2X}
+                y={headingLine2Y}
+                size={headingLine2Size}
+                color={headingLine2Color}
                 className="text-primary"
-                style={{ transform: `translate(${headingLine2X ?? 0}px, ${headingLine2Y ?? 0}px)`, fontSize: headingSize ? `${headingSize}px` : undefined, color: headingAccentColor || undefined }}
+                data-tina-field={tinaField(props, "headingLine2")}
               >
                 {headingLine2}
-              </span>
+              </StyledText>
             </h1>
 
-            <p
-              data-tina-field={tinaField(props, "subheading")}
+            <StyledText
+              as="p"
+              visible={subheadingVisible}
+              x={subheadingX}
+              y={subheadingY}
+              size={subheadingSize}
+              color={subheadingColor}
               className="max-w-xl text-pretty text-lg leading-relaxed text-white/70 sm:text-xl"
-              style={{ transform: `translate(${subheadingX ?? 0}px, ${subheadingY ?? 0}px)`, fontSize: subheadingSize ? `${subheadingSize}px` : undefined, color: subheadingColor || undefined }}
+              data-tina-field={tinaField(props, "subheading")}
             >
               {subheading}
-            </p>
+            </StyledText>
 
             <div className="flex flex-col gap-3 sm:flex-row">
               <Button size="lg" onClick={() => openBooking()}>

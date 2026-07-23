@@ -22,5 +22,6 @@ React / Next.js app components (`components/ui/error-boundary.tsx`, `components/
 | # | Name | Scope | Dependencies | Status |
 |---|------|-------|-------------|--------|
 | 1 | Navigation Button Keys & Submit Isolation | `components/booking/booking-drawer.tsx` | none | DONE |
-| 2 | Error Boundary Implementation & Image Protection | `components/ui/error-boundary.tsx`, `components/sections/about.tsx` | none | IN_PROGRESS |
+| 2 | Error Boundary Implementation & Image Protection | `components/ui/error-boundary.tsx`, `components/sections/about.tsx` | none | DONE |
+
 

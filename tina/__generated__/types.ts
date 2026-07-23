@@ -193,20 +193,32 @@ export type PageSectionsHero = {
   __typename?: 'PageSectionsHero';
   location?: Maybe<Scalars['String']['output']>;
   headingLine1?: Maybe<Scalars['String']['output']>;
-  headingLine1X?: Maybe<Scalars['Float']['output']>;
-  headingLine1Y?: Maybe<Scalars['Float']['output']>;
   headingLine2?: Maybe<Scalars['String']['output']>;
-  headingLine2X?: Maybe<Scalars['Float']['output']>;
-  headingLine2Y?: Maybe<Scalars['Float']['output']>;
   subheading?: Maybe<Scalars['String']['output']>;
-  subheadingX?: Maybe<Scalars['Float']['output']>;
-  subheadingY?: Maybe<Scalars['Float']['output']>;
   phoneNumber?: Maybe<Scalars['String']['output']>;
   calloutTitle?: Maybe<Scalars['String']['output']>;
   calloutText?: Maybe<Scalars['String']['output']>;
   proofs?: Maybe<Array<Maybe<PageSectionsHeroProofs>>>;
   imageSrc?: Maybe<Scalars['String']['output']>;
   imageAlt?: Maybe<Scalars['String']['output']>;
+  locationVisible?: Maybe<Scalars['Boolean']['output']>;
+  locationSize?: Maybe<Scalars['Float']['output']>;
+  locationColor?: Maybe<Scalars['String']['output']>;
+  headingLine1Visible?: Maybe<Scalars['Boolean']['output']>;
+  headingLine1X?: Maybe<Scalars['Float']['output']>;
+  headingLine1Y?: Maybe<Scalars['Float']['output']>;
+  headingLine1Size?: Maybe<Scalars['Float']['output']>;
+  headingLine1Color?: Maybe<Scalars['String']['output']>;
+  headingLine2Visible?: Maybe<Scalars['Boolean']['output']>;
+  headingLine2X?: Maybe<Scalars['Float']['output']>;
+  headingLine2Y?: Maybe<Scalars['Float']['output']>;
+  headingLine2Size?: Maybe<Scalars['Float']['output']>;
+  headingLine2Color?: Maybe<Scalars['String']['output']>;
+  subheadingVisible?: Maybe<Scalars['Boolean']['output']>;
+  subheadingX?: Maybe<Scalars['Float']['output']>;
+  subheadingY?: Maybe<Scalars['Float']['output']>;
+  subheadingSize?: Maybe<Scalars['Float']['output']>;
+  subheadingColor?: Maybe<Scalars['String']['output']>;
 };
 
 export type PageSectionsServices = {
@@ -215,6 +227,24 @@ export type PageSectionsServices = {
   heading?: Maybe<Scalars['String']['output']>;
   copy?: Maybe<Scalars['String']['output']>;
   disclaimer?: Maybe<Scalars['String']['output']>;
+  eyebrowVisible?: Maybe<Scalars['Boolean']['output']>;
+  eyebrowSize?: Maybe<Scalars['Float']['output']>;
+  eyebrowColor?: Maybe<Scalars['String']['output']>;
+  headingVisible?: Maybe<Scalars['Boolean']['output']>;
+  headingX?: Maybe<Scalars['Float']['output']>;
+  headingY?: Maybe<Scalars['Float']['output']>;
+  headingSize?: Maybe<Scalars['Float']['output']>;
+  headingColor?: Maybe<Scalars['String']['output']>;
+  copyVisible?: Maybe<Scalars['Boolean']['output']>;
+  copyX?: Maybe<Scalars['Float']['output']>;
+  copyY?: Maybe<Scalars['Float']['output']>;
+  copySize?: Maybe<Scalars['Float']['output']>;
+  copyColor?: Maybe<Scalars['String']['output']>;
+  disclaimerVisible?: Maybe<Scalars['Boolean']['output']>;
+  disclaimerX?: Maybe<Scalars['Float']['output']>;
+  disclaimerY?: Maybe<Scalars['Float']['output']>;
+  disclaimerSize?: Maybe<Scalars['Float']['output']>;
+  disclaimerColor?: Maybe<Scalars['String']['output']>;
 };
 
 export type PageSectionsProcessSteps = {
@@ -231,6 +261,19 @@ export type PageSectionsProcess = {
   heading?: Maybe<Scalars['String']['output']>;
   copy?: Maybe<Scalars['String']['output']>;
   steps?: Maybe<Array<Maybe<PageSectionsProcessSteps>>>;
+  eyebrowVisible?: Maybe<Scalars['Boolean']['output']>;
+  eyebrowSize?: Maybe<Scalars['Float']['output']>;
+  eyebrowColor?: Maybe<Scalars['String']['output']>;
+  headingVisible?: Maybe<Scalars['Boolean']['output']>;
+  headingX?: Maybe<Scalars['Float']['output']>;
+  headingY?: Maybe<Scalars['Float']['output']>;
+  headingSize?: Maybe<Scalars['Float']['output']>;
+  headingColor?: Maybe<Scalars['String']['output']>;
+  copyVisible?: Maybe<Scalars['Boolean']['output']>;
+  copyX?: Maybe<Scalars['Float']['output']>;
+  copyY?: Maybe<Scalars['Float']['output']>;
+  copySize?: Maybe<Scalars['Float']['output']>;
+  copyColor?: Maybe<Scalars['String']['output']>;
 };
 
 export type PageSectionsAbout = {
@@ -243,6 +286,24 @@ export type PageSectionsAbout = {
   bioParagraph2?: Maybe<Scalars['String']['output']>;
   image?: Maybe<Scalars['String']['output']>;
   focalPoint?: Maybe<Scalars['String']['output']>;
+  eyebrowVisible?: Maybe<Scalars['Boolean']['output']>;
+  eyebrowSize?: Maybe<Scalars['Float']['output']>;
+  eyebrowColor?: Maybe<Scalars['String']['output']>;
+  ownerNameVisible?: Maybe<Scalars['Boolean']['output']>;
+  ownerNameX?: Maybe<Scalars['Float']['output']>;
+  ownerNameY?: Maybe<Scalars['Float']['output']>;
+  ownerNameSize?: Maybe<Scalars['Float']['output']>;
+  ownerNameColor?: Maybe<Scalars['String']['output']>;
+  bioParagraph1Visible?: Maybe<Scalars['Boolean']['output']>;
+  bioParagraph1X?: Maybe<Scalars['Float']['output']>;
+  bioParagraph1Y?: Maybe<Scalars['Float']['output']>;
+  bioParagraph1Size?: Maybe<Scalars['Float']['output']>;
+  bioParagraph1Color?: Maybe<Scalars['String']['output']>;
+  bioParagraph2Visible?: Maybe<Scalars['Boolean']['output']>;
+  bioParagraph2X?: Maybe<Scalars['Float']['output']>;
+  bioParagraph2Y?: Maybe<Scalars['Float']['output']>;
+  bioParagraph2Size?: Maybe<Scalars['Float']['output']>;
+  bioParagraph2Color?: Maybe<Scalars['String']['output']>;
 };
 
 export type PageSectionsTestimonialsReviews = {
@@ -257,6 +318,19 @@ export type PageSectionsTestimonials = {
   heading?: Maybe<Scalars['String']['output']>;
   copy?: Maybe<Scalars['String']['output']>;
   reviews?: Maybe<Array<Maybe<PageSectionsTestimonialsReviews>>>;
+  eyebrowVisible?: Maybe<Scalars['Boolean']['output']>;
+  eyebrowSize?: Maybe<Scalars['Float']['output']>;
+  eyebrowColor?: Maybe<Scalars['String']['output']>;
+  headingVisible?: Maybe<Scalars['Boolean']['output']>;
+  headingX?: Maybe<Scalars['Float']['output']>;
+  headingY?: Maybe<Scalars['Float']['output']>;
+  headingSize?: Maybe<Scalars['Float']['output']>;
+  headingColor?: Maybe<Scalars['String']['output']>;
+  copyVisible?: Maybe<Scalars['Boolean']['output']>;
+  copyX?: Maybe<Scalars['Float']['output']>;
+  copyY?: Maybe<Scalars['Float']['output']>;
+  copySize?: Maybe<Scalars['Float']['output']>;
+  copyColor?: Maybe<Scalars['String']['output']>;
 };
 
 export type PageSectionsContact = {
@@ -269,11 +343,36 @@ export type PageSectionsContact = {
   email?: Maybe<Scalars['String']['output']>;
   emailHref?: Maybe<Scalars['String']['output']>;
   hours?: Maybe<Scalars['String']['output']>;
+  eyebrowVisible?: Maybe<Scalars['Boolean']['output']>;
+  eyebrowSize?: Maybe<Scalars['Float']['output']>;
+  eyebrowColor?: Maybe<Scalars['String']['output']>;
+  headingVisible?: Maybe<Scalars['Boolean']['output']>;
+  headingX?: Maybe<Scalars['Float']['output']>;
+  headingY?: Maybe<Scalars['Float']['output']>;
+  headingSize?: Maybe<Scalars['Float']['output']>;
+  headingColor?: Maybe<Scalars['String']['output']>;
+  addressVisible?: Maybe<Scalars['Boolean']['output']>;
+  addressSize?: Maybe<Scalars['Float']['output']>;
+  addressColor?: Maybe<Scalars['String']['output']>;
+  phoneVisible?: Maybe<Scalars['Boolean']['output']>;
+  phoneSize?: Maybe<Scalars['Float']['output']>;
+  phoneColor?: Maybe<Scalars['String']['output']>;
+  emailVisible?: Maybe<Scalars['Boolean']['output']>;
+  emailSize?: Maybe<Scalars['Float']['output']>;
+  emailColor?: Maybe<Scalars['String']['output']>;
+  hoursVisible?: Maybe<Scalars['Boolean']['output']>;
+  hoursSize?: Maybe<Scalars['Float']['output']>;
+  hoursColor?: Maybe<Scalars['String']['output']>;
 };
 
 export type PageSectionsFooter = {
   __typename?: 'PageSectionsFooter';
   tagline?: Maybe<Scalars['String']['output']>;
+  taglineVisible?: Maybe<Scalars['Boolean']['output']>;
+  taglineX?: Maybe<Scalars['Float']['output']>;
+  taglineY?: Maybe<Scalars['Float']['output']>;
+  taglineSize?: Maybe<Scalars['Float']['output']>;
+  taglineColor?: Maybe<Scalars['String']['output']>;
 };
 
 export type PageSections = PageSectionsHero | PageSectionsServices | PageSectionsProcess | PageSectionsAbout | PageSectionsTestimonials | PageSectionsContact | PageSectionsFooter;
@@ -293,16 +392,6 @@ export type StringFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type NumberFilter = {
-  lt?: InputMaybe<Scalars['Float']['input']>;
-  lte?: InputMaybe<Scalars['Float']['input']>;
-  gte?: InputMaybe<Scalars['Float']['input']>;
-  gt?: InputMaybe<Scalars['Float']['input']>;
-  eq?: InputMaybe<Scalars['Float']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
-};
-
 export type PageSectionsHeroProofsFilter = {
   value?: InputMaybe<StringFilter>;
   label?: InputMaybe<StringFilter>;
@@ -315,23 +404,50 @@ export type ImageFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+export type BooleanFilter = {
+  eq?: InputMaybe<Scalars['Boolean']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type NumberFilter = {
+  lt?: InputMaybe<Scalars['Float']['input']>;
+  lte?: InputMaybe<Scalars['Float']['input']>;
+  gte?: InputMaybe<Scalars['Float']['input']>;
+  gt?: InputMaybe<Scalars['Float']['input']>;
+  eq?: InputMaybe<Scalars['Float']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+};
+
 export type PageSectionsHeroFilter = {
   location?: InputMaybe<StringFilter>;
   headingLine1?: InputMaybe<StringFilter>;
-  headingLine1X?: InputMaybe<NumberFilter>;
-  headingLine1Y?: InputMaybe<NumberFilter>;
   headingLine2?: InputMaybe<StringFilter>;
-  headingLine2X?: InputMaybe<NumberFilter>;
-  headingLine2Y?: InputMaybe<NumberFilter>;
   subheading?: InputMaybe<StringFilter>;
-  subheadingX?: InputMaybe<NumberFilter>;
-  subheadingY?: InputMaybe<NumberFilter>;
   phoneNumber?: InputMaybe<StringFilter>;
   calloutTitle?: InputMaybe<StringFilter>;
   calloutText?: InputMaybe<StringFilter>;
   proofs?: InputMaybe<PageSectionsHeroProofsFilter>;
   imageSrc?: InputMaybe<ImageFilter>;
   imageAlt?: InputMaybe<StringFilter>;
+  locationVisible?: InputMaybe<BooleanFilter>;
+  locationSize?: InputMaybe<NumberFilter>;
+  locationColor?: InputMaybe<StringFilter>;
+  headingLine1Visible?: InputMaybe<BooleanFilter>;
+  headingLine1X?: InputMaybe<NumberFilter>;
+  headingLine1Y?: InputMaybe<NumberFilter>;
+  headingLine1Size?: InputMaybe<NumberFilter>;
+  headingLine1Color?: InputMaybe<StringFilter>;
+  headingLine2Visible?: InputMaybe<BooleanFilter>;
+  headingLine2X?: InputMaybe<NumberFilter>;
+  headingLine2Y?: InputMaybe<NumberFilter>;
+  headingLine2Size?: InputMaybe<NumberFilter>;
+  headingLine2Color?: InputMaybe<StringFilter>;
+  subheadingVisible?: InputMaybe<BooleanFilter>;
+  subheadingX?: InputMaybe<NumberFilter>;
+  subheadingY?: InputMaybe<NumberFilter>;
+  subheadingSize?: InputMaybe<NumberFilter>;
+  subheadingColor?: InputMaybe<StringFilter>;
 };
 
 export type PageSectionsServicesFilter = {
@@ -339,6 +455,24 @@ export type PageSectionsServicesFilter = {
   heading?: InputMaybe<StringFilter>;
   copy?: InputMaybe<StringFilter>;
   disclaimer?: InputMaybe<StringFilter>;
+  eyebrowVisible?: InputMaybe<BooleanFilter>;
+  eyebrowSize?: InputMaybe<NumberFilter>;
+  eyebrowColor?: InputMaybe<StringFilter>;
+  headingVisible?: InputMaybe<BooleanFilter>;
+  headingX?: InputMaybe<NumberFilter>;
+  headingY?: InputMaybe<NumberFilter>;
+  headingSize?: InputMaybe<NumberFilter>;
+  headingColor?: InputMaybe<StringFilter>;
+  copyVisible?: InputMaybe<BooleanFilter>;
+  copyX?: InputMaybe<NumberFilter>;
+  copyY?: InputMaybe<NumberFilter>;
+  copySize?: InputMaybe<NumberFilter>;
+  copyColor?: InputMaybe<StringFilter>;
+  disclaimerVisible?: InputMaybe<BooleanFilter>;
+  disclaimerX?: InputMaybe<NumberFilter>;
+  disclaimerY?: InputMaybe<NumberFilter>;
+  disclaimerSize?: InputMaybe<NumberFilter>;
+  disclaimerColor?: InputMaybe<StringFilter>;
 };
 
 export type PageSectionsProcessStepsFilter = {
@@ -353,6 +487,19 @@ export type PageSectionsProcessFilter = {
   heading?: InputMaybe<StringFilter>;
   copy?: InputMaybe<StringFilter>;
   steps?: InputMaybe<PageSectionsProcessStepsFilter>;
+  eyebrowVisible?: InputMaybe<BooleanFilter>;
+  eyebrowSize?: InputMaybe<NumberFilter>;
+  eyebrowColor?: InputMaybe<StringFilter>;
+  headingVisible?: InputMaybe<BooleanFilter>;
+  headingX?: InputMaybe<NumberFilter>;
+  headingY?: InputMaybe<NumberFilter>;
+  headingSize?: InputMaybe<NumberFilter>;
+  headingColor?: InputMaybe<StringFilter>;
+  copyVisible?: InputMaybe<BooleanFilter>;
+  copyX?: InputMaybe<NumberFilter>;
+  copyY?: InputMaybe<NumberFilter>;
+  copySize?: InputMaybe<NumberFilter>;
+  copyColor?: InputMaybe<StringFilter>;
 };
 
 export type PageSectionsAboutFilter = {
@@ -364,6 +511,24 @@ export type PageSectionsAboutFilter = {
   bioParagraph2?: InputMaybe<StringFilter>;
   image?: InputMaybe<ImageFilter>;
   focalPoint?: InputMaybe<StringFilter>;
+  eyebrowVisible?: InputMaybe<BooleanFilter>;
+  eyebrowSize?: InputMaybe<NumberFilter>;
+  eyebrowColor?: InputMaybe<StringFilter>;
+  ownerNameVisible?: InputMaybe<BooleanFilter>;
+  ownerNameX?: InputMaybe<NumberFilter>;
+  ownerNameY?: InputMaybe<NumberFilter>;
+  ownerNameSize?: InputMaybe<NumberFilter>;
+  ownerNameColor?: InputMaybe<StringFilter>;
+  bioParagraph1Visible?: InputMaybe<BooleanFilter>;
+  bioParagraph1X?: InputMaybe<NumberFilter>;
+  bioParagraph1Y?: InputMaybe<NumberFilter>;
+  bioParagraph1Size?: InputMaybe<NumberFilter>;
+  bioParagraph1Color?: InputMaybe<StringFilter>;
+  bioParagraph2Visible?: InputMaybe<BooleanFilter>;
+  bioParagraph2X?: InputMaybe<NumberFilter>;
+  bioParagraph2Y?: InputMaybe<NumberFilter>;
+  bioParagraph2Size?: InputMaybe<NumberFilter>;
+  bioParagraph2Color?: InputMaybe<StringFilter>;
 };
 
 export type PageSectionsTestimonialsReviewsFilter = {
@@ -376,6 +541,19 @@ export type PageSectionsTestimonialsFilter = {
   heading?: InputMaybe<StringFilter>;
   copy?: InputMaybe<StringFilter>;
   reviews?: InputMaybe<PageSectionsTestimonialsReviewsFilter>;
+  eyebrowVisible?: InputMaybe<BooleanFilter>;
+  eyebrowSize?: InputMaybe<NumberFilter>;
+  eyebrowColor?: InputMaybe<StringFilter>;
+  headingVisible?: InputMaybe<BooleanFilter>;
+  headingX?: InputMaybe<NumberFilter>;
+  headingY?: InputMaybe<NumberFilter>;
+  headingSize?: InputMaybe<NumberFilter>;
+  headingColor?: InputMaybe<StringFilter>;
+  copyVisible?: InputMaybe<BooleanFilter>;
+  copyX?: InputMaybe<NumberFilter>;
+  copyY?: InputMaybe<NumberFilter>;
+  copySize?: InputMaybe<NumberFilter>;
+  copyColor?: InputMaybe<StringFilter>;
 };
 
 export type PageSectionsContactFilter = {
@@ -387,10 +565,35 @@ export type PageSectionsContactFilter = {
   email?: InputMaybe<StringFilter>;
   emailHref?: InputMaybe<StringFilter>;
   hours?: InputMaybe<StringFilter>;
+  eyebrowVisible?: InputMaybe<BooleanFilter>;
+  eyebrowSize?: InputMaybe<NumberFilter>;
+  eyebrowColor?: InputMaybe<StringFilter>;
+  headingVisible?: InputMaybe<BooleanFilter>;
+  headingX?: InputMaybe<NumberFilter>;
+  headingY?: InputMaybe<NumberFilter>;
+  headingSize?: InputMaybe<NumberFilter>;
+  headingColor?: InputMaybe<StringFilter>;
+  addressVisible?: InputMaybe<BooleanFilter>;
+  addressSize?: InputMaybe<NumberFilter>;
+  addressColor?: InputMaybe<StringFilter>;
+  phoneVisible?: InputMaybe<BooleanFilter>;
+  phoneSize?: InputMaybe<NumberFilter>;
+  phoneColor?: InputMaybe<StringFilter>;
+  emailVisible?: InputMaybe<BooleanFilter>;
+  emailSize?: InputMaybe<NumberFilter>;
+  emailColor?: InputMaybe<StringFilter>;
+  hoursVisible?: InputMaybe<BooleanFilter>;
+  hoursSize?: InputMaybe<NumberFilter>;
+  hoursColor?: InputMaybe<StringFilter>;
 };
 
 export type PageSectionsFooterFilter = {
   tagline?: InputMaybe<StringFilter>;
+  taglineVisible?: InputMaybe<BooleanFilter>;
+  taglineX?: InputMaybe<NumberFilter>;
+  taglineY?: InputMaybe<NumberFilter>;
+  taglineSize?: InputMaybe<NumberFilter>;
+  taglineColor?: InputMaybe<StringFilter>;
 };
 
 export type PageSectionsFilter = {
@@ -650,11 +853,6 @@ export type Booking = Node & Document & {
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
-};
-
-export type BooleanFilter = {
-  eq?: InputMaybe<Scalars['Boolean']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type BookingServicesFilter = {
@@ -975,20 +1173,32 @@ export type PageSectionsHeroProofsMutation = {
 export type PageSectionsHeroMutation = {
   location?: InputMaybe<Scalars['String']['input']>;
   headingLine1?: InputMaybe<Scalars['String']['input']>;
-  headingLine1X?: InputMaybe<Scalars['Float']['input']>;
-  headingLine1Y?: InputMaybe<Scalars['Float']['input']>;
   headingLine2?: InputMaybe<Scalars['String']['input']>;
-  headingLine2X?: InputMaybe<Scalars['Float']['input']>;
-  headingLine2Y?: InputMaybe<Scalars['Float']['input']>;
   subheading?: InputMaybe<Scalars['String']['input']>;
-  subheadingX?: InputMaybe<Scalars['Float']['input']>;
-  subheadingY?: InputMaybe<Scalars['Float']['input']>;
   phoneNumber?: InputMaybe<Scalars['String']['input']>;
   calloutTitle?: InputMaybe<Scalars['String']['input']>;
   calloutText?: InputMaybe<Scalars['String']['input']>;
   proofs?: InputMaybe<Array<InputMaybe<PageSectionsHeroProofsMutation>>>;
   imageSrc?: InputMaybe<Scalars['String']['input']>;
   imageAlt?: InputMaybe<Scalars['String']['input']>;
+  locationVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  locationSize?: InputMaybe<Scalars['Float']['input']>;
+  locationColor?: InputMaybe<Scalars['String']['input']>;
+  headingLine1Visible?: InputMaybe<Scalars['Boolean']['input']>;
+  headingLine1X?: InputMaybe<Scalars['Float']['input']>;
+  headingLine1Y?: InputMaybe<Scalars['Float']['input']>;
+  headingLine1Size?: InputMaybe<Scalars['Float']['input']>;
+  headingLine1Color?: InputMaybe<Scalars['String']['input']>;
+  headingLine2Visible?: InputMaybe<Scalars['Boolean']['input']>;
+  headingLine2X?: InputMaybe<Scalars['Float']['input']>;
+  headingLine2Y?: InputMaybe<Scalars['Float']['input']>;
+  headingLine2Size?: InputMaybe<Scalars['Float']['input']>;
+  headingLine2Color?: InputMaybe<Scalars['String']['input']>;
+  subheadingVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  subheadingX?: InputMaybe<Scalars['Float']['input']>;
+  subheadingY?: InputMaybe<Scalars['Float']['input']>;
+  subheadingSize?: InputMaybe<Scalars['Float']['input']>;
+  subheadingColor?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PageSectionsServicesMutation = {
@@ -996,6 +1206,24 @@ export type PageSectionsServicesMutation = {
   heading?: InputMaybe<Scalars['String']['input']>;
   copy?: InputMaybe<Scalars['String']['input']>;
   disclaimer?: InputMaybe<Scalars['String']['input']>;
+  eyebrowVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  eyebrowSize?: InputMaybe<Scalars['Float']['input']>;
+  eyebrowColor?: InputMaybe<Scalars['String']['input']>;
+  headingVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  headingX?: InputMaybe<Scalars['Float']['input']>;
+  headingY?: InputMaybe<Scalars['Float']['input']>;
+  headingSize?: InputMaybe<Scalars['Float']['input']>;
+  headingColor?: InputMaybe<Scalars['String']['input']>;
+  copyVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  copyX?: InputMaybe<Scalars['Float']['input']>;
+  copyY?: InputMaybe<Scalars['Float']['input']>;
+  copySize?: InputMaybe<Scalars['Float']['input']>;
+  copyColor?: InputMaybe<Scalars['String']['input']>;
+  disclaimerVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  disclaimerX?: InputMaybe<Scalars['Float']['input']>;
+  disclaimerY?: InputMaybe<Scalars['Float']['input']>;
+  disclaimerSize?: InputMaybe<Scalars['Float']['input']>;
+  disclaimerColor?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PageSectionsProcessStepsMutation = {
@@ -1010,6 +1238,19 @@ export type PageSectionsProcessMutation = {
   heading?: InputMaybe<Scalars['String']['input']>;
   copy?: InputMaybe<Scalars['String']['input']>;
   steps?: InputMaybe<Array<InputMaybe<PageSectionsProcessStepsMutation>>>;
+  eyebrowVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  eyebrowSize?: InputMaybe<Scalars['Float']['input']>;
+  eyebrowColor?: InputMaybe<Scalars['String']['input']>;
+  headingVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  headingX?: InputMaybe<Scalars['Float']['input']>;
+  headingY?: InputMaybe<Scalars['Float']['input']>;
+  headingSize?: InputMaybe<Scalars['Float']['input']>;
+  headingColor?: InputMaybe<Scalars['String']['input']>;
+  copyVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  copyX?: InputMaybe<Scalars['Float']['input']>;
+  copyY?: InputMaybe<Scalars['Float']['input']>;
+  copySize?: InputMaybe<Scalars['Float']['input']>;
+  copyColor?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PageSectionsAboutMutation = {
@@ -1021,6 +1262,24 @@ export type PageSectionsAboutMutation = {
   bioParagraph2?: InputMaybe<Scalars['String']['input']>;
   image?: InputMaybe<Scalars['String']['input']>;
   focalPoint?: InputMaybe<Scalars['String']['input']>;
+  eyebrowVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  eyebrowSize?: InputMaybe<Scalars['Float']['input']>;
+  eyebrowColor?: InputMaybe<Scalars['String']['input']>;
+  ownerNameVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  ownerNameX?: InputMaybe<Scalars['Float']['input']>;
+  ownerNameY?: InputMaybe<Scalars['Float']['input']>;
+  ownerNameSize?: InputMaybe<Scalars['Float']['input']>;
+  ownerNameColor?: InputMaybe<Scalars['String']['input']>;
+  bioParagraph1Visible?: InputMaybe<Scalars['Boolean']['input']>;
+  bioParagraph1X?: InputMaybe<Scalars['Float']['input']>;
+  bioParagraph1Y?: InputMaybe<Scalars['Float']['input']>;
+  bioParagraph1Size?: InputMaybe<Scalars['Float']['input']>;
+  bioParagraph1Color?: InputMaybe<Scalars['String']['input']>;
+  bioParagraph2Visible?: InputMaybe<Scalars['Boolean']['input']>;
+  bioParagraph2X?: InputMaybe<Scalars['Float']['input']>;
+  bioParagraph2Y?: InputMaybe<Scalars['Float']['input']>;
+  bioParagraph2Size?: InputMaybe<Scalars['Float']['input']>;
+  bioParagraph2Color?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PageSectionsTestimonialsReviewsMutation = {
@@ -1033,6 +1292,19 @@ export type PageSectionsTestimonialsMutation = {
   heading?: InputMaybe<Scalars['String']['input']>;
   copy?: InputMaybe<Scalars['String']['input']>;
   reviews?: InputMaybe<Array<InputMaybe<PageSectionsTestimonialsReviewsMutation>>>;
+  eyebrowVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  eyebrowSize?: InputMaybe<Scalars['Float']['input']>;
+  eyebrowColor?: InputMaybe<Scalars['String']['input']>;
+  headingVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  headingX?: InputMaybe<Scalars['Float']['input']>;
+  headingY?: InputMaybe<Scalars['Float']['input']>;
+  headingSize?: InputMaybe<Scalars['Float']['input']>;
+  headingColor?: InputMaybe<Scalars['String']['input']>;
+  copyVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  copyX?: InputMaybe<Scalars['Float']['input']>;
+  copyY?: InputMaybe<Scalars['Float']['input']>;
+  copySize?: InputMaybe<Scalars['Float']['input']>;
+  copyColor?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PageSectionsContactMutation = {
@@ -1044,10 +1316,35 @@ export type PageSectionsContactMutation = {
   email?: InputMaybe<Scalars['String']['input']>;
   emailHref?: InputMaybe<Scalars['String']['input']>;
   hours?: InputMaybe<Scalars['String']['input']>;
+  eyebrowVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  eyebrowSize?: InputMaybe<Scalars['Float']['input']>;
+  eyebrowColor?: InputMaybe<Scalars['String']['input']>;
+  headingVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  headingX?: InputMaybe<Scalars['Float']['input']>;
+  headingY?: InputMaybe<Scalars['Float']['input']>;
+  headingSize?: InputMaybe<Scalars['Float']['input']>;
+  headingColor?: InputMaybe<Scalars['String']['input']>;
+  addressVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  addressSize?: InputMaybe<Scalars['Float']['input']>;
+  addressColor?: InputMaybe<Scalars['String']['input']>;
+  phoneVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  phoneSize?: InputMaybe<Scalars['Float']['input']>;
+  phoneColor?: InputMaybe<Scalars['String']['input']>;
+  emailVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  emailSize?: InputMaybe<Scalars['Float']['input']>;
+  emailColor?: InputMaybe<Scalars['String']['input']>;
+  hoursVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  hoursSize?: InputMaybe<Scalars['Float']['input']>;
+  hoursColor?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PageSectionsFooterMutation = {
   tagline?: InputMaybe<Scalars['String']['input']>;
+  taglineVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  taglineX?: InputMaybe<Scalars['Float']['input']>;
+  taglineY?: InputMaybe<Scalars['Float']['input']>;
+  taglineSize?: InputMaybe<Scalars['Float']['input']>;
+  taglineColor?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PageSectionsMutation = {
@@ -1280,7 +1577,7 @@ export type BookingMutation = {
   estimate?: InputMaybe<BookingEstimateMutation>;
 };
 
-export type PagePartsFragment = { __typename: 'Page', sections?: Array<{ __typename: 'PageSectionsHero', location?: string | null, headingLine1?: string | null, headingLine1X?: number | null, headingLine1Y?: number | null, headingLine2?: string | null, headingLine2X?: number | null, headingLine2Y?: number | null, subheading?: string | null, subheadingX?: number | null, subheadingY?: number | null, phoneNumber?: string | null, calloutTitle?: string | null, calloutText?: string | null, imageSrc?: string | null, imageAlt?: string | null, proofs?: Array<{ __typename: 'PageSectionsHeroProofs', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageSectionsServices', eyebrow?: string | null, heading?: string | null, copy?: string | null, disclaimer?: string | null } | { __typename: 'PageSectionsProcess', eyebrow?: string | null, heading?: string | null, copy?: string | null, steps?: Array<{ __typename: 'PageSectionsProcessSteps', number?: string | null, title?: string | null, description?: string | null, image?: string | null } | null> | null } | { __typename: 'PageSectionsAbout', eyebrow?: string | null, ownerName?: string | null, nameInitial?: string | null, tagline?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null, image?: string | null, focalPoint?: string | null } | { __typename: 'PageSectionsTestimonials', eyebrow?: string | null, heading?: string | null, copy?: string | null, reviews?: Array<{ __typename: 'PageSectionsTestimonialsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsContact', eyebrow?: string | null, heading?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null } | { __typename: 'PageSectionsFooter', tagline?: string | null } | null> | null };
+export type PagePartsFragment = { __typename: 'Page', sections?: Array<{ __typename: 'PageSectionsHero', location?: string | null, headingLine1?: string | null, headingLine2?: string | null, subheading?: string | null, phoneNumber?: string | null, calloutTitle?: string | null, calloutText?: string | null, imageSrc?: string | null, imageAlt?: string | null, locationVisible?: boolean | null, locationSize?: number | null, locationColor?: string | null, headingLine1Visible?: boolean | null, headingLine1X?: number | null, headingLine1Y?: number | null, headingLine1Size?: number | null, headingLine1Color?: string | null, headingLine2Visible?: boolean | null, headingLine2X?: number | null, headingLine2Y?: number | null, headingLine2Size?: number | null, headingLine2Color?: string | null, subheadingVisible?: boolean | null, subheadingX?: number | null, subheadingY?: number | null, subheadingSize?: number | null, subheadingColor?: string | null, proofs?: Array<{ __typename: 'PageSectionsHeroProofs', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageSectionsServices', eyebrow?: string | null, heading?: string | null, copy?: string | null, disclaimer?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, disclaimerVisible?: boolean | null, disclaimerX?: number | null, disclaimerY?: number | null, disclaimerSize?: number | null, disclaimerColor?: string | null } | { __typename: 'PageSectionsProcess', eyebrow?: string | null, heading?: string | null, copy?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, steps?: Array<{ __typename: 'PageSectionsProcessSteps', number?: string | null, title?: string | null, description?: string | null, image?: string | null } | null> | null } | { __typename: 'PageSectionsAbout', eyebrow?: string | null, ownerName?: string | null, nameInitial?: string | null, tagline?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null, image?: string | null, focalPoint?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, ownerNameVisible?: boolean | null, ownerNameX?: number | null, ownerNameY?: number | null, ownerNameSize?: number | null, ownerNameColor?: string | null, bioParagraph1Visible?: boolean | null, bioParagraph1X?: number | null, bioParagraph1Y?: number | null, bioParagraph1Size?: number | null, bioParagraph1Color?: string | null, bioParagraph2Visible?: boolean | null, bioParagraph2X?: number | null, bioParagraph2Y?: number | null, bioParagraph2Size?: number | null, bioParagraph2Color?: string | null } | { __typename: 'PageSectionsTestimonials', eyebrow?: string | null, heading?: string | null, copy?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, reviews?: Array<{ __typename: 'PageSectionsTestimonialsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsContact', eyebrow?: string | null, heading?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, addressVisible?: boolean | null, addressSize?: number | null, addressColor?: string | null, phoneVisible?: boolean | null, phoneSize?: number | null, phoneColor?: string | null, emailVisible?: boolean | null, emailSize?: number | null, emailColor?: string | null, hoursVisible?: boolean | null, hoursSize?: number | null, hoursColor?: string | null } | { __typename: 'PageSectionsFooter', tagline?: string | null, taglineVisible?: boolean | null, taglineX?: number | null, taglineY?: number | null, taglineSize?: number | null, taglineColor?: string | null } | null> | null };
 
 export type BookingPartsFragment = { __typename: 'Booking', pricingHub?: string | null, previewOpen?: boolean | null, stepNames?: Array<string | null> | null, services?: Array<{ __typename: 'BookingServices', id: string, name: string, description?: string | null, subtitle?: string | null, features?: Array<string | null> | null, basePriceCents?: number | null, pricePerBedroomCents?: number | null, pricePerBathroomCents?: number | null } | null> | null, addOns?: Array<{ __typename: 'BookingAddOns', id?: string | null, name?: string | null, cents?: number | null } | null> | null, theme?: { __typename: 'BookingTheme', fontFamily?: string | null, primaryColor?: string | null, backgroundColor?: string | null, textColor?: string | null, borderRadius?: string | null } | null, steps?: Array<{ __typename: 'BookingSteps', title: string, description?: string | null, disabled?: boolean | null, showIfField?: string | null, showIfOperator?: string | null, showIfValue?: string | null, fields?: Array<{ __typename: 'BookingStepsFieldsTextInput', name?: string | null, label?: string | null, placeholder?: string | null, required?: boolean | null, validationType?: string | null } | { __typename: 'BookingStepsFieldsNumberInput', name?: string | null, label?: string | null, min?: number | null, max?: number | null } | { __typename: 'BookingStepsFieldsChoiceInput', name?: string | null, label?: string | null, options?: Array<{ __typename: 'BookingStepsFieldsChoiceInputOptions', id?: string | null, label?: string | null } | null> | null } | { __typename: 'BookingStepsFieldsDateInput', name?: string | null, label?: string | null } | { __typename: 'BookingStepsFieldsPhotoUpload', label?: string | null, prompt?: string | null, hint?: string | null, selectedText?: string | null, emptyText?: string | null } | { __typename: 'BookingStepsFieldsRichTextHeading', text?: string | null } | { __typename: 'BookingStepsFieldsServicesSelector', question?: string | null } | { __typename: 'BookingStepsFieldsAddonsSelector', question?: string | null } | { __typename: 'BookingStepsFieldsEstimateSummary', disclaimer?: string | null } | { __typename: 'BookingStepsFieldsImageBlock', src?: string | null, alt?: string | null, caption?: string | null, aspect?: string | null } | { __typename: 'BookingStepsFieldsInfoCard', title?: string | null, description?: string | null, icon?: string | null, variant?: string | null } | { __typename: 'BookingStepsFieldsInfoBanner', text?: string | null, type?: string | null, dismissible?: boolean | null } | { __typename: 'BookingStepsFieldsTextareaInput', name?: string | null, label?: string | null, placeholder?: string | null, required?: boolean | null, rows?: number | null } | { __typename: 'BookingStepsFieldsSelectInput', name?: string | null, label?: string | null, required?: boolean | null, defaultValue?: string | null, options?: Array<{ __typename: 'BookingStepsFieldsSelectInputOptions', value?: string | null, label?: string | null } | null> | null } | { __typename: 'BookingStepsFieldsCheckboxGroup', name?: string | null, label?: string | null, required?: boolean | null, options?: Array<{ __typename: 'BookingStepsFieldsCheckboxGroupOptions', value?: string | null, label?: string | null, priceCents?: number | null } | null> | null } | null> | null } | null> | null, header?: { __typename: 'BookingHeader', badge?: string | null, title?: string | null, description?: string | null } | null, timeWindows?: Array<{ __typename: 'BookingTimeWindows', id?: string | null, label?: string | null } | null> | null, reviewLabels?: { __typename: 'BookingReviewLabels', heading?: string | null, rowHome?: string | null, rowDate?: string | null, rowWindow?: string | null, rowPhotos?: string | null, disclaimer?: string | null } | null, navigation?: { __typename: 'BookingNavigation', back?: string | null, continue?: string | null, submit?: string | null } | null, success?: { __typename: 'BookingSuccess', title?: string | null, message?: string | null, buttonText?: string | null } | null, estimate?: { __typename: 'BookingEstimate', label?: string | null, customQuote?: string | null, disclaimer?: string | null } | null };
 
@@ -1289,7 +1586,7 @@ export type PageQueryVariables = Exact<{
 }>;
 
 
-export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'PageSectionsHero', location?: string | null, headingLine1?: string | null, headingLine1X?: number | null, headingLine1Y?: number | null, headingLine2?: string | null, headingLine2X?: number | null, headingLine2Y?: number | null, subheading?: string | null, subheadingX?: number | null, subheadingY?: number | null, phoneNumber?: string | null, calloutTitle?: string | null, calloutText?: string | null, imageSrc?: string | null, imageAlt?: string | null, proofs?: Array<{ __typename: 'PageSectionsHeroProofs', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageSectionsServices', eyebrow?: string | null, heading?: string | null, copy?: string | null, disclaimer?: string | null } | { __typename: 'PageSectionsProcess', eyebrow?: string | null, heading?: string | null, copy?: string | null, steps?: Array<{ __typename: 'PageSectionsProcessSteps', number?: string | null, title?: string | null, description?: string | null, image?: string | null } | null> | null } | { __typename: 'PageSectionsAbout', eyebrow?: string | null, ownerName?: string | null, nameInitial?: string | null, tagline?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null, image?: string | null, focalPoint?: string | null } | { __typename: 'PageSectionsTestimonials', eyebrow?: string | null, heading?: string | null, copy?: string | null, reviews?: Array<{ __typename: 'PageSectionsTestimonialsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsContact', eyebrow?: string | null, heading?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null } | { __typename: 'PageSectionsFooter', tagline?: string | null } | null> | null } };
+export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'PageSectionsHero', location?: string | null, headingLine1?: string | null, headingLine2?: string | null, subheading?: string | null, phoneNumber?: string | null, calloutTitle?: string | null, calloutText?: string | null, imageSrc?: string | null, imageAlt?: string | null, locationVisible?: boolean | null, locationSize?: number | null, locationColor?: string | null, headingLine1Visible?: boolean | null, headingLine1X?: number | null, headingLine1Y?: number | null, headingLine1Size?: number | null, headingLine1Color?: string | null, headingLine2Visible?: boolean | null, headingLine2X?: number | null, headingLine2Y?: number | null, headingLine2Size?: number | null, headingLine2Color?: string | null, subheadingVisible?: boolean | null, subheadingX?: number | null, subheadingY?: number | null, subheadingSize?: number | null, subheadingColor?: string | null, proofs?: Array<{ __typename: 'PageSectionsHeroProofs', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageSectionsServices', eyebrow?: string | null, heading?: string | null, copy?: string | null, disclaimer?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, disclaimerVisible?: boolean | null, disclaimerX?: number | null, disclaimerY?: number | null, disclaimerSize?: number | null, disclaimerColor?: string | null } | { __typename: 'PageSectionsProcess', eyebrow?: string | null, heading?: string | null, copy?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, steps?: Array<{ __typename: 'PageSectionsProcessSteps', number?: string | null, title?: string | null, description?: string | null, image?: string | null } | null> | null } | { __typename: 'PageSectionsAbout', eyebrow?: string | null, ownerName?: string | null, nameInitial?: string | null, tagline?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null, image?: string | null, focalPoint?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, ownerNameVisible?: boolean | null, ownerNameX?: number | null, ownerNameY?: number | null, ownerNameSize?: number | null, ownerNameColor?: string | null, bioParagraph1Visible?: boolean | null, bioParagraph1X?: number | null, bioParagraph1Y?: number | null, bioParagraph1Size?: number | null, bioParagraph1Color?: string | null, bioParagraph2Visible?: boolean | null, bioParagraph2X?: number | null, bioParagraph2Y?: number | null, bioParagraph2Size?: number | null, bioParagraph2Color?: string | null } | { __typename: 'PageSectionsTestimonials', eyebrow?: string | null, heading?: string | null, copy?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, reviews?: Array<{ __typename: 'PageSectionsTestimonialsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsContact', eyebrow?: string | null, heading?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, addressVisible?: boolean | null, addressSize?: number | null, addressColor?: string | null, phoneVisible?: boolean | null, phoneSize?: number | null, phoneColor?: string | null, emailVisible?: boolean | null, emailSize?: number | null, emailColor?: string | null, hoursVisible?: boolean | null, hoursSize?: number | null, hoursColor?: string | null } | { __typename: 'PageSectionsFooter', tagline?: string | null, taglineVisible?: boolean | null, taglineX?: number | null, taglineY?: number | null, taglineSize?: number | null, taglineColor?: string | null } | null> | null } };
 
 export type PageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1301,7 +1598,7 @@ export type PageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'PageSectionsHero', location?: string | null, headingLine1?: string | null, headingLine1X?: number | null, headingLine1Y?: number | null, headingLine2?: string | null, headingLine2X?: number | null, headingLine2Y?: number | null, subheading?: string | null, subheadingX?: number | null, subheadingY?: number | null, phoneNumber?: string | null, calloutTitle?: string | null, calloutText?: string | null, imageSrc?: string | null, imageAlt?: string | null, proofs?: Array<{ __typename: 'PageSectionsHeroProofs', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageSectionsServices', eyebrow?: string | null, heading?: string | null, copy?: string | null, disclaimer?: string | null } | { __typename: 'PageSectionsProcess', eyebrow?: string | null, heading?: string | null, copy?: string | null, steps?: Array<{ __typename: 'PageSectionsProcessSteps', number?: string | null, title?: string | null, description?: string | null, image?: string | null } | null> | null } | { __typename: 'PageSectionsAbout', eyebrow?: string | null, ownerName?: string | null, nameInitial?: string | null, tagline?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null, image?: string | null, focalPoint?: string | null } | { __typename: 'PageSectionsTestimonials', eyebrow?: string | null, heading?: string | null, copy?: string | null, reviews?: Array<{ __typename: 'PageSectionsTestimonialsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsContact', eyebrow?: string | null, heading?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null } | { __typename: 'PageSectionsFooter', tagline?: string | null } | null> | null } | null } | null> | null } };
+export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'PageSectionsHero', location?: string | null, headingLine1?: string | null, headingLine2?: string | null, subheading?: string | null, phoneNumber?: string | null, calloutTitle?: string | null, calloutText?: string | null, imageSrc?: string | null, imageAlt?: string | null, locationVisible?: boolean | null, locationSize?: number | null, locationColor?: string | null, headingLine1Visible?: boolean | null, headingLine1X?: number | null, headingLine1Y?: number | null, headingLine1Size?: number | null, headingLine1Color?: string | null, headingLine2Visible?: boolean | null, headingLine2X?: number | null, headingLine2Y?: number | null, headingLine2Size?: number | null, headingLine2Color?: string | null, subheadingVisible?: boolean | null, subheadingX?: number | null, subheadingY?: number | null, subheadingSize?: number | null, subheadingColor?: string | null, proofs?: Array<{ __typename: 'PageSectionsHeroProofs', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageSectionsServices', eyebrow?: string | null, heading?: string | null, copy?: string | null, disclaimer?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, disclaimerVisible?: boolean | null, disclaimerX?: number | null, disclaimerY?: number | null, disclaimerSize?: number | null, disclaimerColor?: string | null } | { __typename: 'PageSectionsProcess', eyebrow?: string | null, heading?: string | null, copy?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, steps?: Array<{ __typename: 'PageSectionsProcessSteps', number?: string | null, title?: string | null, description?: string | null, image?: string | null } | null> | null } | { __typename: 'PageSectionsAbout', eyebrow?: string | null, ownerName?: string | null, nameInitial?: string | null, tagline?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null, image?: string | null, focalPoint?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, ownerNameVisible?: boolean | null, ownerNameX?: number | null, ownerNameY?: number | null, ownerNameSize?: number | null, ownerNameColor?: string | null, bioParagraph1Visible?: boolean | null, bioParagraph1X?: number | null, bioParagraph1Y?: number | null, bioParagraph1Size?: number | null, bioParagraph1Color?: string | null, bioParagraph2Visible?: boolean | null, bioParagraph2X?: number | null, bioParagraph2Y?: number | null, bioParagraph2Size?: number | null, bioParagraph2Color?: string | null } | { __typename: 'PageSectionsTestimonials', eyebrow?: string | null, heading?: string | null, copy?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, reviews?: Array<{ __typename: 'PageSectionsTestimonialsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsContact', eyebrow?: string | null, heading?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, addressVisible?: boolean | null, addressSize?: number | null, addressColor?: string | null, phoneVisible?: boolean | null, phoneSize?: number | null, phoneColor?: string | null, emailVisible?: boolean | null, emailSize?: number | null, emailColor?: string | null, hoursVisible?: boolean | null, hoursSize?: number | null, hoursColor?: string | null } | { __typename: 'PageSectionsFooter', tagline?: string | null, taglineVisible?: boolean | null, taglineX?: number | null, taglineY?: number | null, taglineSize?: number | null, taglineColor?: string | null } | null> | null } | null } | null> | null } };
 
 export type BookingQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1330,14 +1627,8 @@ export const PagePartsFragmentDoc = gql`
     ... on PageSectionsHero {
       location
       headingLine1
-      headingLine1X
-      headingLine1Y
       headingLine2
-      headingLine2X
-      headingLine2Y
       subheading
-      subheadingX
-      subheadingY
       phoneNumber
       calloutTitle
       calloutText
@@ -1348,12 +1639,48 @@ export const PagePartsFragmentDoc = gql`
       }
       imageSrc
       imageAlt
+      locationVisible
+      locationSize
+      locationColor
+      headingLine1Visible
+      headingLine1X
+      headingLine1Y
+      headingLine1Size
+      headingLine1Color
+      headingLine2Visible
+      headingLine2X
+      headingLine2Y
+      headingLine2Size
+      headingLine2Color
+      subheadingVisible
+      subheadingX
+      subheadingY
+      subheadingSize
+      subheadingColor
     }
     ... on PageSectionsServices {
       eyebrow
       heading
       copy
       disclaimer
+      eyebrowVisible
+      eyebrowSize
+      eyebrowColor
+      headingVisible
+      headingX
+      headingY
+      headingSize
+      headingColor
+      copyVisible
+      copyX
+      copyY
+      copySize
+      copyColor
+      disclaimerVisible
+      disclaimerX
+      disclaimerY
+      disclaimerSize
+      disclaimerColor
     }
     ... on PageSectionsProcess {
       eyebrow
@@ -1366,6 +1693,19 @@ export const PagePartsFragmentDoc = gql`
         description
         image
       }
+      eyebrowVisible
+      eyebrowSize
+      eyebrowColor
+      headingVisible
+      headingX
+      headingY
+      headingSize
+      headingColor
+      copyVisible
+      copyX
+      copyY
+      copySize
+      copyColor
     }
     ... on PageSectionsAbout {
       eyebrow
@@ -1376,6 +1716,24 @@ export const PagePartsFragmentDoc = gql`
       bioParagraph2
       image
       focalPoint
+      eyebrowVisible
+      eyebrowSize
+      eyebrowColor
+      ownerNameVisible
+      ownerNameX
+      ownerNameY
+      ownerNameSize
+      ownerNameColor
+      bioParagraph1Visible
+      bioParagraph1X
+      bioParagraph1Y
+      bioParagraph1Size
+      bioParagraph1Color
+      bioParagraph2Visible
+      bioParagraph2X
+      bioParagraph2Y
+      bioParagraph2Size
+      bioParagraph2Color
     }
     ... on PageSectionsTestimonials {
       eyebrow
@@ -1386,6 +1744,19 @@ export const PagePartsFragmentDoc = gql`
         quote
         byline
       }
+      eyebrowVisible
+      eyebrowSize
+      eyebrowColor
+      headingVisible
+      headingX
+      headingY
+      headingSize
+      headingColor
+      copyVisible
+      copyX
+      copyY
+      copySize
+      copyColor
     }
     ... on PageSectionsContact {
       eyebrow
@@ -1396,9 +1767,34 @@ export const PagePartsFragmentDoc = gql`
       email
       emailHref
       hours
+      eyebrowVisible
+      eyebrowSize
+      eyebrowColor
+      headingVisible
+      headingX
+      headingY
+      headingSize
+      headingColor
+      addressVisible
+      addressSize
+      addressColor
+      phoneVisible
+      phoneSize
+      phoneColor
+      emailVisible
+      emailSize
+      emailColor
+      hoursVisible
+      hoursSize
+      hoursColor
     }
     ... on PageSectionsFooter {
       tagline
+      taglineVisible
+      taglineX
+      taglineY
+      taglineSize
+      taglineColor
     }
   }
 }

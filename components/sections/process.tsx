@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { ArrowRight, ImagePlus } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { SectionHeader } from "@/components/sections/shared"
+import { SectionHeader, StyledText } from "@/components/sections/shared"
 import { useBooking } from "@/components/booking/booking-drawer"
 import { tinaField } from "tinacms/dist/tina-field"
 
@@ -37,7 +37,7 @@ const defaults: ProcessProps = {
 
 export function Process(props: ProcessProps) {
   const { openBooking } = useBooking()
-  const { eyebrow, heading, copy, steps, eyebrowSize, eyebrowColor, headingSize, headingColor, bodySize, bodyColor } = { ...defaults, ...props }
+  const { eyebrow, heading, copy, steps, eyebrowVisible, eyebrowSize, eyebrowColor, headingVisible, headingX, headingY, headingSize, headingColor, copyVisible, copyX, copyY, copySize, copyColor } = { ...defaults, ...props }
 
   return (
     <section id="process" className="border-y border-border bg-card">
@@ -51,12 +51,19 @@ export function Process(props: ProcessProps) {
             title: tinaField(props, "heading"),
             copy: tinaField(props, "copy"),
           }}
+          eyebrowVisible={eyebrowVisible}
           eyebrowSize={eyebrowSize}
           eyebrowColor={eyebrowColor}
-          headingSize={headingSize}
-          headingColor={headingColor}
-          bodySize={bodySize}
-          bodyColor={bodyColor}
+          titleVisible={headingVisible}
+          titleX={headingX}
+          titleY={headingY}
+          titleSize={headingSize}
+          titleColor={headingColor}
+          copyVisible={copyVisible}
+          copyX={copyX}
+          copyY={copyY}
+          copySize={copySize}
+          copyColor={copyColor}
         />
         <div data-tina-field={tinaField(props, "steps")} className="grid gap-px border-x border-b border-border bg-border md:grid-cols-2 lg:grid-cols-4">
           {(steps || []).map((step, index) => (

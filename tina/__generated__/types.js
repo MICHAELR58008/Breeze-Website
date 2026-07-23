@@ -13,14 +13,8 @@ export const PagePartsFragmentDoc = gql`
     ... on PageSectionsHero {
       location
       headingLine1
-      headingLine1X
-      headingLine1Y
       headingLine2
-      headingLine2X
-      headingLine2Y
       subheading
-      subheadingX
-      subheadingY
       phoneNumber
       calloutTitle
       calloutText
@@ -31,12 +25,48 @@ export const PagePartsFragmentDoc = gql`
       }
       imageSrc
       imageAlt
+      locationVisible
+      locationSize
+      locationColor
+      headingLine1Visible
+      headingLine1X
+      headingLine1Y
+      headingLine1Size
+      headingLine1Color
+      headingLine2Visible
+      headingLine2X
+      headingLine2Y
+      headingLine2Size
+      headingLine2Color
+      subheadingVisible
+      subheadingX
+      subheadingY
+      subheadingSize
+      subheadingColor
     }
     ... on PageSectionsServices {
       eyebrow
       heading
       copy
       disclaimer
+      eyebrowVisible
+      eyebrowSize
+      eyebrowColor
+      headingVisible
+      headingX
+      headingY
+      headingSize
+      headingColor
+      copyVisible
+      copyX
+      copyY
+      copySize
+      copyColor
+      disclaimerVisible
+      disclaimerX
+      disclaimerY
+      disclaimerSize
+      disclaimerColor
     }
     ... on PageSectionsProcess {
       eyebrow
@@ -49,6 +79,19 @@ export const PagePartsFragmentDoc = gql`
         description
         image
       }
+      eyebrowVisible
+      eyebrowSize
+      eyebrowColor
+      headingVisible
+      headingX
+      headingY
+      headingSize
+      headingColor
+      copyVisible
+      copyX
+      copyY
+      copySize
+      copyColor
     }
     ... on PageSectionsAbout {
       eyebrow
@@ -59,6 +102,24 @@ export const PagePartsFragmentDoc = gql`
       bioParagraph2
       image
       focalPoint
+      eyebrowVisible
+      eyebrowSize
+      eyebrowColor
+      ownerNameVisible
+      ownerNameX
+      ownerNameY
+      ownerNameSize
+      ownerNameColor
+      bioParagraph1Visible
+      bioParagraph1X
+      bioParagraph1Y
+      bioParagraph1Size
+      bioParagraph1Color
+      bioParagraph2Visible
+      bioParagraph2X
+      bioParagraph2Y
+      bioParagraph2Size
+      bioParagraph2Color
     }
     ... on PageSectionsTestimonials {
       eyebrow
@@ -69,6 +130,19 @@ export const PagePartsFragmentDoc = gql`
         quote
         byline
       }
+      eyebrowVisible
+      eyebrowSize
+      eyebrowColor
+      headingVisible
+      headingX
+      headingY
+      headingSize
+      headingColor
+      copyVisible
+      copyX
+      copyY
+      copySize
+      copyColor
     }
     ... on PageSectionsContact {
       eyebrow
@@ -79,9 +153,34 @@ export const PagePartsFragmentDoc = gql`
       email
       emailHref
       hours
+      eyebrowVisible
+      eyebrowSize
+      eyebrowColor
+      headingVisible
+      headingX
+      headingY
+      headingSize
+      headingColor
+      addressVisible
+      addressSize
+      addressColor
+      phoneVisible
+      phoneSize
+      phoneColor
+      emailVisible
+      emailSize
+      emailColor
+      hoursVisible
+      hoursSize
+      hoursColor
     }
     ... on PageSectionsFooter {
       tagline
+      taglineVisible
+      taglineX
+      taglineY
+      taglineSize
+      taglineColor
     }
   }
 }

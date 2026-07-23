@@ -2,6 +2,7 @@ import Image from "next/image"
 import { tinaField } from "tinacms/dist/tina-field"
 import { ErrorBoundary } from "@/components/ui/error-boundary"
 import { ImageOff } from "lucide-react"
+import { StyledText } from "@/components/sections/shared"
 
 export interface AboutProps {
   eyebrow?: string
@@ -27,7 +28,7 @@ const defaults: AboutProps = {
 }
 
 export function About(props: AboutProps) {
-  const { eyebrow, ownerName, nameInitial, tagline, bioParagraph1, bioParagraph2, image, focalPoint, eyebrowSize, eyebrowColor, headingSize, headingColor, bodySize, bodyColor } = {
+  const { eyebrow, ownerName, nameInitial, tagline, bioParagraph1, bioParagraph2, image, focalPoint, eyebrowVisible, eyebrowSize, eyebrowColor, ownerNameVisible, ownerNameX, ownerNameY, ownerNameSize, ownerNameColor, bioParagraph1Visible, bioParagraph1X, bioParagraph1Y, bioParagraph1Size, bioParagraph1Color, bioParagraph2Visible, bioParagraph2X, bioParagraph2Y, bioParagraph2Size, bioParagraph2Color } = {
     ...defaults,
     ...props,
   }
@@ -69,7 +70,16 @@ export function About(props: AboutProps) {
               {/* Subtle dark gradient overlay at bottom for text legibility */}
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent p-6 pt-12 z-10">
                 {eyebrow?.trim() && (
-                  <p data-tina-field={tinaField(props, "eyebrow")} className="font-mono text-xs uppercase tracking-widest text-white/90">{eyebrow}</p>
+                  <StyledText
+                    as="p"
+                    visible={eyebrowVisible}
+                    size={eyebrowSize}
+                    color={eyebrowColor}
+                    className="font-mono text-xs uppercase tracking-widest text-white/90"
+                    data-tina-field={tinaField(props, "eyebrow")}
+                  >
+                    {eyebrow}
+                  </StyledText>
                 )}
                 {tagline?.trim() && (
                   <p data-tina-field={tinaField(props, "tagline")} className="mt-1 text-sm font-medium text-white/90">{tagline}</p>
@@ -82,7 +92,16 @@ export function About(props: AboutProps) {
               <div className="grid-surface absolute inset-0 opacity-15" />
               <div className="relative flex h-full flex-col justify-between p-8 text-primary-foreground">
                 {eyebrow?.trim() && (
-                  <p data-tina-field={tinaField(props, "eyebrow")} className="font-mono text-xs uppercase tracking-widest">{eyebrow}</p>
+                  <StyledText
+                    as="p"
+                    visible={eyebrowVisible}
+                    size={eyebrowSize}
+                    color={eyebrowColor}
+                    className="font-mono text-xs uppercase tracking-widest"
+                    data-tina-field={tinaField(props, "eyebrow")}
+                  >
+                    {eyebrow}
+                  </StyledText>
                 )}
                 <div>
                   {nameInitial?.trim() && (
@@ -98,15 +117,42 @@ export function About(props: AboutProps) {
         </div>
       )}
       <div className={`flex flex-col justify-center gap-7 p-6 sm:p-10 lg:p-16 ${hasLeftContent ? "lg:col-span-7" : "lg:col-span-12"}`}>
-        {ownerName?.trim() && (
-          <h2 data-tina-field={tinaField(props, "ownerName")} className="font-display text-6xl sm:text-8xl" style={{ fontSize: headingSize ? `${headingSize}px` : undefined, color: headingColor || undefined }}>{ownerName}</h2>
-        )}
-        {bioParagraph1?.trim() && (
-          <p data-tina-field={tinaField(props, "bioParagraph1")} className="text-pretty text-lg leading-relaxed text-muted-foreground" style={{ fontSize: bodySize ? `${bodySize}px` : undefined, color: bodyColor || undefined }}>{bioParagraph1}</p>
-        )}
-        {bioParagraph2?.trim() && (
-          <p data-tina-field={tinaField(props, "bioParagraph2")} className="text-pretty text-lg leading-relaxed" style={{ fontSize: bodySize ? `${bodySize}px` : undefined, color: bodyColor || undefined }}>{bioParagraph2}</p>
-        )}
+        <StyledText
+          as="h2"
+          visible={ownerNameVisible}
+          x={ownerNameX}
+          y={ownerNameY}
+          size={ownerNameSize}
+          color={ownerNameColor}
+          className="font-display text-6xl sm:text-8xl"
+          data-tina-field={tinaField(props, "ownerName")}
+        >
+          {ownerName}
+        </StyledText>
+        <StyledText
+          as="p"
+          visible={bioParagraph1Visible}
+          x={bioParagraph1X}
+          y={bioParagraph1Y}
+          size={bioParagraph1Size}
+          color={bioParagraph1Color}
+          className="text-pretty text-lg leading-relaxed text-muted-foreground"
+          data-tina-field={tinaField(props, "bioParagraph1")}
+        >
+          {bioParagraph1}
+        </StyledText>
+        <StyledText
+          as="p"
+          visible={bioParagraph2Visible}
+          x={bioParagraph2X}
+          y={bioParagraph2Y}
+          size={bioParagraph2Size}
+          color={bioParagraph2Color}
+          className="text-pretty text-lg leading-relaxed"
+          data-tina-field={tinaField(props, "bioParagraph2")}
+        >
+          {bioParagraph2}
+        </StyledText>
       </div>
     </section>
   )

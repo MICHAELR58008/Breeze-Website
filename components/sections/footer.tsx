@@ -1,4 +1,4 @@
-import { Brand } from "@/components/sections/shared"
+import { Brand, StyledText } from "@/components/sections/shared"
 import { tinaField } from "tinacms/dist/tina-field"
 
 export interface FooterProps {
@@ -11,7 +11,7 @@ const defaults: FooterProps = {
 }
 
 export function Footer(props: FooterProps) {
-  const { tagline, bodySize, bodyColor } = { ...defaults, ...props }
+  const { tagline, taglineVisible, taglineX, taglineY, taglineSize, taglineColor } = { ...defaults, ...props }
 
   return (
     <footer className="border-t border-border">
@@ -19,7 +19,18 @@ export function Footer(props: FooterProps) {
         <div className="flex flex-col gap-3">
           <Brand />
           {tagline?.trim() && (
-            <p data-tina-field={tinaField(props, "tagline")} className="max-w-sm text-sm text-muted-foreground" style={{ fontSize: bodySize ? `${bodySize}px` : undefined, color: bodyColor || undefined }}>{tagline}</p>
+            <StyledText
+              as="p"
+              visible={taglineVisible}
+              x={taglineX}
+              y={taglineY}
+              size={taglineSize}
+              color={taglineColor}
+              className="max-w-sm text-sm text-muted-foreground"
+              data-tina-field={tinaField(props, "tagline")}
+            >
+              {tagline}
+            </StyledText>
           )}
         </div>
         <div className="flex flex-col gap-2 font-mono text-xs uppercase tracking-wider text-muted-foreground md:text-right">

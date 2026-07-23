@@ -193,8 +193,14 @@ export type PageSectionsHero = {
   __typename?: 'PageSectionsHero';
   location?: Maybe<Scalars['String']['output']>;
   headingLine1?: Maybe<Scalars['String']['output']>;
+  headingLine1X?: Maybe<Scalars['Float']['output']>;
+  headingLine1Y?: Maybe<Scalars['Float']['output']>;
   headingLine2?: Maybe<Scalars['String']['output']>;
+  headingLine2X?: Maybe<Scalars['Float']['output']>;
+  headingLine2Y?: Maybe<Scalars['Float']['output']>;
   subheading?: Maybe<Scalars['String']['output']>;
+  subheadingX?: Maybe<Scalars['Float']['output']>;
+  subheadingY?: Maybe<Scalars['Float']['output']>;
   phoneNumber?: Maybe<Scalars['String']['output']>;
   calloutTitle?: Maybe<Scalars['String']['output']>;
   calloutText?: Maybe<Scalars['String']['output']>;
@@ -287,6 +293,16 @@ export type StringFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+export type NumberFilter = {
+  lt?: InputMaybe<Scalars['Float']['input']>;
+  lte?: InputMaybe<Scalars['Float']['input']>;
+  gte?: InputMaybe<Scalars['Float']['input']>;
+  gt?: InputMaybe<Scalars['Float']['input']>;
+  eq?: InputMaybe<Scalars['Float']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+};
+
 export type PageSectionsHeroProofsFilter = {
   value?: InputMaybe<StringFilter>;
   label?: InputMaybe<StringFilter>;
@@ -302,8 +318,14 @@ export type ImageFilter = {
 export type PageSectionsHeroFilter = {
   location?: InputMaybe<StringFilter>;
   headingLine1?: InputMaybe<StringFilter>;
+  headingLine1X?: InputMaybe<NumberFilter>;
+  headingLine1Y?: InputMaybe<NumberFilter>;
   headingLine2?: InputMaybe<StringFilter>;
+  headingLine2X?: InputMaybe<NumberFilter>;
+  headingLine2Y?: InputMaybe<NumberFilter>;
   subheading?: InputMaybe<StringFilter>;
+  subheadingX?: InputMaybe<NumberFilter>;
+  subheadingY?: InputMaybe<NumberFilter>;
   phoneNumber?: InputMaybe<StringFilter>;
   calloutTitle?: InputMaybe<StringFilter>;
   calloutText?: InputMaybe<StringFilter>;
@@ -635,16 +657,6 @@ export type BooleanFilter = {
   exists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-export type NumberFilter = {
-  lt?: InputMaybe<Scalars['Float']['input']>;
-  lte?: InputMaybe<Scalars['Float']['input']>;
-  gte?: InputMaybe<Scalars['Float']['input']>;
-  gt?: InputMaybe<Scalars['Float']['input']>;
-  eq?: InputMaybe<Scalars['Float']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
-};
-
 export type BookingServicesFilter = {
   id?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringFilter>;
@@ -963,8 +975,14 @@ export type PageSectionsHeroProofsMutation = {
 export type PageSectionsHeroMutation = {
   location?: InputMaybe<Scalars['String']['input']>;
   headingLine1?: InputMaybe<Scalars['String']['input']>;
+  headingLine1X?: InputMaybe<Scalars['Float']['input']>;
+  headingLine1Y?: InputMaybe<Scalars['Float']['input']>;
   headingLine2?: InputMaybe<Scalars['String']['input']>;
+  headingLine2X?: InputMaybe<Scalars['Float']['input']>;
+  headingLine2Y?: InputMaybe<Scalars['Float']['input']>;
   subheading?: InputMaybe<Scalars['String']['input']>;
+  subheadingX?: InputMaybe<Scalars['Float']['input']>;
+  subheadingY?: InputMaybe<Scalars['Float']['input']>;
   phoneNumber?: InputMaybe<Scalars['String']['input']>;
   calloutTitle?: InputMaybe<Scalars['String']['input']>;
   calloutText?: InputMaybe<Scalars['String']['input']>;
@@ -1262,7 +1280,7 @@ export type BookingMutation = {
   estimate?: InputMaybe<BookingEstimateMutation>;
 };
 
-export type PagePartsFragment = { __typename: 'Page', sections?: Array<{ __typename: 'PageSectionsHero', location?: string | null, headingLine1?: string | null, headingLine2?: string | null, subheading?: string | null, phoneNumber?: string | null, calloutTitle?: string | null, calloutText?: string | null, imageSrc?: string | null, imageAlt?: string | null, proofs?: Array<{ __typename: 'PageSectionsHeroProofs', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageSectionsServices', eyebrow?: string | null, heading?: string | null, copy?: string | null, disclaimer?: string | null } | { __typename: 'PageSectionsProcess', eyebrow?: string | null, heading?: string | null, copy?: string | null, steps?: Array<{ __typename: 'PageSectionsProcessSteps', number?: string | null, title?: string | null, description?: string | null, image?: string | null } | null> | null } | { __typename: 'PageSectionsAbout', eyebrow?: string | null, ownerName?: string | null, nameInitial?: string | null, tagline?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null, image?: string | null, focalPoint?: string | null } | { __typename: 'PageSectionsTestimonials', eyebrow?: string | null, heading?: string | null, copy?: string | null, reviews?: Array<{ __typename: 'PageSectionsTestimonialsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsContact', eyebrow?: string | null, heading?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null } | { __typename: 'PageSectionsFooter', tagline?: string | null } | null> | null };
+export type PagePartsFragment = { __typename: 'Page', sections?: Array<{ __typename: 'PageSectionsHero', location?: string | null, headingLine1?: string | null, headingLine1X?: number | null, headingLine1Y?: number | null, headingLine2?: string | null, headingLine2X?: number | null, headingLine2Y?: number | null, subheading?: string | null, subheadingX?: number | null, subheadingY?: number | null, phoneNumber?: string | null, calloutTitle?: string | null, calloutText?: string | null, imageSrc?: string | null, imageAlt?: string | null, proofs?: Array<{ __typename: 'PageSectionsHeroProofs', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageSectionsServices', eyebrow?: string | null, heading?: string | null, copy?: string | null, disclaimer?: string | null } | { __typename: 'PageSectionsProcess', eyebrow?: string | null, heading?: string | null, copy?: string | null, steps?: Array<{ __typename: 'PageSectionsProcessSteps', number?: string | null, title?: string | null, description?: string | null, image?: string | null } | null> | null } | { __typename: 'PageSectionsAbout', eyebrow?: string | null, ownerName?: string | null, nameInitial?: string | null, tagline?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null, image?: string | null, focalPoint?: string | null } | { __typename: 'PageSectionsTestimonials', eyebrow?: string | null, heading?: string | null, copy?: string | null, reviews?: Array<{ __typename: 'PageSectionsTestimonialsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsContact', eyebrow?: string | null, heading?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null } | { __typename: 'PageSectionsFooter', tagline?: string | null } | null> | null };
 
 export type BookingPartsFragment = { __typename: 'Booking', pricingHub?: string | null, previewOpen?: boolean | null, stepNames?: Array<string | null> | null, services?: Array<{ __typename: 'BookingServices', id: string, name: string, description?: string | null, subtitle?: string | null, features?: Array<string | null> | null, basePriceCents?: number | null, pricePerBedroomCents?: number | null, pricePerBathroomCents?: number | null } | null> | null, addOns?: Array<{ __typename: 'BookingAddOns', id?: string | null, name?: string | null, cents?: number | null } | null> | null, theme?: { __typename: 'BookingTheme', fontFamily?: string | null, primaryColor?: string | null, backgroundColor?: string | null, textColor?: string | null, borderRadius?: string | null } | null, steps?: Array<{ __typename: 'BookingSteps', title: string, description?: string | null, disabled?: boolean | null, showIfField?: string | null, showIfOperator?: string | null, showIfValue?: string | null, fields?: Array<{ __typename: 'BookingStepsFieldsTextInput', name?: string | null, label?: string | null, placeholder?: string | null, required?: boolean | null, validationType?: string | null } | { __typename: 'BookingStepsFieldsNumberInput', name?: string | null, label?: string | null, min?: number | null, max?: number | null } | { __typename: 'BookingStepsFieldsChoiceInput', name?: string | null, label?: string | null, options?: Array<{ __typename: 'BookingStepsFieldsChoiceInputOptions', id?: string | null, label?: string | null } | null> | null } | { __typename: 'BookingStepsFieldsDateInput', name?: string | null, label?: string | null } | { __typename: 'BookingStepsFieldsPhotoUpload', label?: string | null, prompt?: string | null, hint?: string | null, selectedText?: string | null, emptyText?: string | null } | { __typename: 'BookingStepsFieldsRichTextHeading', text?: string | null } | { __typename: 'BookingStepsFieldsServicesSelector', question?: string | null } | { __typename: 'BookingStepsFieldsAddonsSelector', question?: string | null } | { __typename: 'BookingStepsFieldsEstimateSummary', disclaimer?: string | null } | { __typename: 'BookingStepsFieldsImageBlock', src?: string | null, alt?: string | null, caption?: string | null, aspect?: string | null } | { __typename: 'BookingStepsFieldsInfoCard', title?: string | null, description?: string | null, icon?: string | null, variant?: string | null } | { __typename: 'BookingStepsFieldsInfoBanner', text?: string | null, type?: string | null, dismissible?: boolean | null } | { __typename: 'BookingStepsFieldsTextareaInput', name?: string | null, label?: string | null, placeholder?: string | null, required?: boolean | null, rows?: number | null } | { __typename: 'BookingStepsFieldsSelectInput', name?: string | null, label?: string | null, required?: boolean | null, defaultValue?: string | null, options?: Array<{ __typename: 'BookingStepsFieldsSelectInputOptions', value?: string | null, label?: string | null } | null> | null } | { __typename: 'BookingStepsFieldsCheckboxGroup', name?: string | null, label?: string | null, required?: boolean | null, options?: Array<{ __typename: 'BookingStepsFieldsCheckboxGroupOptions', value?: string | null, label?: string | null, priceCents?: number | null } | null> | null } | null> | null } | null> | null, header?: { __typename: 'BookingHeader', badge?: string | null, title?: string | null, description?: string | null } | null, timeWindows?: Array<{ __typename: 'BookingTimeWindows', id?: string | null, label?: string | null } | null> | null, reviewLabels?: { __typename: 'BookingReviewLabels', heading?: string | null, rowHome?: string | null, rowDate?: string | null, rowWindow?: string | null, rowPhotos?: string | null, disclaimer?: string | null } | null, navigation?: { __typename: 'BookingNavigation', back?: string | null, continue?: string | null, submit?: string | null } | null, success?: { __typename: 'BookingSuccess', title?: string | null, message?: string | null, buttonText?: string | null } | null, estimate?: { __typename: 'BookingEstimate', label?: string | null, customQuote?: string | null, disclaimer?: string | null } | null };
 
@@ -1271,7 +1289,7 @@ export type PageQueryVariables = Exact<{
 }>;
 
 
-export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'PageSectionsHero', location?: string | null, headingLine1?: string | null, headingLine2?: string | null, subheading?: string | null, phoneNumber?: string | null, calloutTitle?: string | null, calloutText?: string | null, imageSrc?: string | null, imageAlt?: string | null, proofs?: Array<{ __typename: 'PageSectionsHeroProofs', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageSectionsServices', eyebrow?: string | null, heading?: string | null, copy?: string | null, disclaimer?: string | null } | { __typename: 'PageSectionsProcess', eyebrow?: string | null, heading?: string | null, copy?: string | null, steps?: Array<{ __typename: 'PageSectionsProcessSteps', number?: string | null, title?: string | null, description?: string | null, image?: string | null } | null> | null } | { __typename: 'PageSectionsAbout', eyebrow?: string | null, ownerName?: string | null, nameInitial?: string | null, tagline?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null, image?: string | null, focalPoint?: string | null } | { __typename: 'PageSectionsTestimonials', eyebrow?: string | null, heading?: string | null, copy?: string | null, reviews?: Array<{ __typename: 'PageSectionsTestimonialsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsContact', eyebrow?: string | null, heading?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null } | { __typename: 'PageSectionsFooter', tagline?: string | null } | null> | null } };
+export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'PageSectionsHero', location?: string | null, headingLine1?: string | null, headingLine1X?: number | null, headingLine1Y?: number | null, headingLine2?: string | null, headingLine2X?: number | null, headingLine2Y?: number | null, subheading?: string | null, subheadingX?: number | null, subheadingY?: number | null, phoneNumber?: string | null, calloutTitle?: string | null, calloutText?: string | null, imageSrc?: string | null, imageAlt?: string | null, proofs?: Array<{ __typename: 'PageSectionsHeroProofs', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageSectionsServices', eyebrow?: string | null, heading?: string | null, copy?: string | null, disclaimer?: string | null } | { __typename: 'PageSectionsProcess', eyebrow?: string | null, heading?: string | null, copy?: string | null, steps?: Array<{ __typename: 'PageSectionsProcessSteps', number?: string | null, title?: string | null, description?: string | null, image?: string | null } | null> | null } | { __typename: 'PageSectionsAbout', eyebrow?: string | null, ownerName?: string | null, nameInitial?: string | null, tagline?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null, image?: string | null, focalPoint?: string | null } | { __typename: 'PageSectionsTestimonials', eyebrow?: string | null, heading?: string | null, copy?: string | null, reviews?: Array<{ __typename: 'PageSectionsTestimonialsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsContact', eyebrow?: string | null, heading?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null } | { __typename: 'PageSectionsFooter', tagline?: string | null } | null> | null } };
 
 export type PageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1283,7 +1301,7 @@ export type PageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'PageSectionsHero', location?: string | null, headingLine1?: string | null, headingLine2?: string | null, subheading?: string | null, phoneNumber?: string | null, calloutTitle?: string | null, calloutText?: string | null, imageSrc?: string | null, imageAlt?: string | null, proofs?: Array<{ __typename: 'PageSectionsHeroProofs', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageSectionsServices', eyebrow?: string | null, heading?: string | null, copy?: string | null, disclaimer?: string | null } | { __typename: 'PageSectionsProcess', eyebrow?: string | null, heading?: string | null, copy?: string | null, steps?: Array<{ __typename: 'PageSectionsProcessSteps', number?: string | null, title?: string | null, description?: string | null, image?: string | null } | null> | null } | { __typename: 'PageSectionsAbout', eyebrow?: string | null, ownerName?: string | null, nameInitial?: string | null, tagline?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null, image?: string | null, focalPoint?: string | null } | { __typename: 'PageSectionsTestimonials', eyebrow?: string | null, heading?: string | null, copy?: string | null, reviews?: Array<{ __typename: 'PageSectionsTestimonialsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsContact', eyebrow?: string | null, heading?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null } | { __typename: 'PageSectionsFooter', tagline?: string | null } | null> | null } | null } | null> | null } };
+export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'PageSectionsHero', location?: string | null, headingLine1?: string | null, headingLine1X?: number | null, headingLine1Y?: number | null, headingLine2?: string | null, headingLine2X?: number | null, headingLine2Y?: number | null, subheading?: string | null, subheadingX?: number | null, subheadingY?: number | null, phoneNumber?: string | null, calloutTitle?: string | null, calloutText?: string | null, imageSrc?: string | null, imageAlt?: string | null, proofs?: Array<{ __typename: 'PageSectionsHeroProofs', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageSectionsServices', eyebrow?: string | null, heading?: string | null, copy?: string | null, disclaimer?: string | null } | { __typename: 'PageSectionsProcess', eyebrow?: string | null, heading?: string | null, copy?: string | null, steps?: Array<{ __typename: 'PageSectionsProcessSteps', number?: string | null, title?: string | null, description?: string | null, image?: string | null } | null> | null } | { __typename: 'PageSectionsAbout', eyebrow?: string | null, ownerName?: string | null, nameInitial?: string | null, tagline?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null, image?: string | null, focalPoint?: string | null } | { __typename: 'PageSectionsTestimonials', eyebrow?: string | null, heading?: string | null, copy?: string | null, reviews?: Array<{ __typename: 'PageSectionsTestimonialsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsContact', eyebrow?: string | null, heading?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null } | { __typename: 'PageSectionsFooter', tagline?: string | null } | null> | null } | null } | null> | null } };
 
 export type BookingQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1312,8 +1330,14 @@ export const PagePartsFragmentDoc = gql`
     ... on PageSectionsHero {
       location
       headingLine1
+      headingLine1X
+      headingLine1Y
       headingLine2
+      headingLine2X
+      headingLine2Y
       subheading
+      subheadingX
+      subheadingY
       phoneNumber
       calloutTitle
       calloutText

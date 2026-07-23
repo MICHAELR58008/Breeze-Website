@@ -98,8 +98,14 @@ type PageSectionsHeroProofs {
 type PageSectionsHero {
   location: String
   headingLine1: String
+  headingLine1X: Float
+  headingLine1Y: Float
   headingLine2: String
+  headingLine2X: Float
+  headingLine2Y: Float
   subheading: String
+  subheadingX: Float
+  subheadingY: Float
   phoneNumber: String
   calloutTitle: String
   calloutText: String
@@ -183,6 +189,16 @@ input StringFilter {
   in: [String]
 }
 
+input NumberFilter {
+  lt: Float
+  lte: Float
+  gte: Float
+  gt: Float
+  eq: Float
+  exists: Boolean
+  in: [Float]
+}
+
 input PageSectionsHeroProofsFilter {
   value: StringFilter
   label: StringFilter
@@ -198,8 +214,14 @@ input ImageFilter {
 input PageSectionsHeroFilter {
   location: StringFilter
   headingLine1: StringFilter
+  headingLine1X: NumberFilter
+  headingLine1Y: NumberFilter
   headingLine2: StringFilter
+  headingLine2X: NumberFilter
+  headingLine2Y: NumberFilter
   subheading: StringFilter
+  subheadingX: NumberFilter
+  subheadingY: NumberFilter
   phoneNumber: StringFilter
   calloutTitle: StringFilter
   calloutText: StringFilter
@@ -500,16 +522,6 @@ input BooleanFilter {
   exists: Boolean
 }
 
-input NumberFilter {
-  lt: Float
-  lte: Float
-  gte: Float
-  gt: Float
-  eq: Float
-  exists: Boolean
-  in: [Float]
-}
-
 input BookingServicesFilter {
   id: StringFilter
   name: StringFilter
@@ -768,8 +780,14 @@ input PageSectionsHeroProofsMutation {
 input PageSectionsHeroMutation {
   location: String
   headingLine1: String
+  headingLine1X: Float
+  headingLine1Y: Float
   headingLine2: String
+  headingLine2X: Float
+  headingLine2Y: Float
   subheading: String
+  subheadingX: Float
+  subheadingY: Float
   phoneNumber: String
   calloutTitle: String
   calloutText: String

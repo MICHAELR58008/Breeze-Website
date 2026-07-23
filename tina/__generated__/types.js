@@ -13,8 +13,14 @@ export const PagePartsFragmentDoc = gql`
     ... on PageSectionsHero {
       location
       headingLine1
+      headingLine1X
+      headingLine1Y
       headingLine2
+      headingLine2X
+      headingLine2Y
       subheading
+      subheadingX
+      subheadingY
       phoneNumber
       calloutTitle
       calloutText

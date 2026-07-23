@@ -87,7 +87,7 @@ export function About(props: AboutProps) {
 
         <div className="grid gap-6 grid-cols-1 lg:grid-cols-12">
           {/* Media Card */}
-          <div className="bg-card lg:col-span-5 flex flex-col">
+          <div className="bg-card p-6 sm:p-8 lg:col-span-5 flex flex-col">
             <div
               className={`relative w-full h-full min-h-[440px] overflow-hidden ${
                 hasImage ? "bg-slate-900" : "bg-primary"

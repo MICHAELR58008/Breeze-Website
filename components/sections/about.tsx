@@ -85,11 +85,11 @@ export function About(props: AboutProps) {
           titleColor={ownerNameColor}
         />
 
-        <div className="grid gap-px border-x border-b border-border bg-border grid-cols-1 lg:grid-cols-12">
+        <div className="grid gap-6 grid-cols-1 lg:grid-cols-12">
           {/* Media Card */}
-          <div className="bg-card p-6 sm:p-8 lg:col-span-5 flex flex-col">
+          <div className="bg-card lg:col-span-5 flex flex-col">
             <div
-              className={`relative w-full h-full min-h-[440px] overflow-hidden rounded-2xl ${
+              className={`relative w-full h-full min-h-[440px] overflow-hidden ${
                 hasImage ? "bg-slate-900" : "bg-primary"
               }`}
               data-tina-field={hasImage ? tinaField(props, "image") : undefined}
@@ -114,32 +114,34 @@ export function About(props: AboutProps) {
                       style={{ objectPosition: activePosition }}
                     />
                   </ErrorBoundary>
-                  {/* Subtle dark gradient overlay at bottom for text legibility */}
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent p-6 pt-12 z-10 rounded-b-2xl">
-                    {eyebrow?.trim() && (
-                      <StyledText
-                        as="p"
-                        visible={eyebrowVisible}
-                        size={eyebrowSize}
-                        color={eyebrowColor}
-                        className="font-mono text-xs uppercase tracking-widest text-white/90"
-                        data-tina-field={tinaField(props, "eyebrow")}
-                      >
-                        {eyebrow}
-                      </StyledText>
-                    )}
-                    {tagline?.trim() && (
-                      <p data-tina-field={tinaField(props, "tagline")} className="mt-1 text-sm font-medium text-white/90">
-                        {tagline}
-                      </p>
-                    )}
-                  </div>
+                  {/* Subtle dark gradient overlay at bottom for text legibility — only rendered when there's visible text to protect */}
+                  {(eyebrow?.trim() || tagline?.trim()) && (
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent p-6 sm:p-8 lg:p-12 pt-12 z-10">
+                      {eyebrow?.trim() && (
+                        <StyledText
+                          as="p"
+                          visible={eyebrowVisible}
+                          size={eyebrowSize}
+                          color={eyebrowColor}
+                          className="font-mono text-xs uppercase tracking-widest text-white/90"
+                          data-tina-field={tinaField(props, "eyebrow")}
+                        >
+                          {eyebrow}
+                        </StyledText>
+                      )}
+                      {tagline?.trim() && (
+                        <p data-tina-field={tinaField(props, "tagline")} className="mt-1 text-sm font-medium text-white/90">
+                          {tagline}
+                        </p>
+                      )}
+                    </div>
+                  )}
                 </>
               ) : (
                 /* Fallback blue box styling when no image is uploaded */
                 <>
                   <div className="grid-surface absolute inset-0 opacity-15" />
-                  <div className="relative flex h-full flex-col justify-between p-8 text-primary-foreground">
+                  <div className="relative flex h-full flex-col justify-between p-6 sm:p-8 lg:p-12 text-primary-foreground">
                     {eyebrow?.trim() && (
                       <StyledText
                         as="p"
@@ -171,7 +173,7 @@ export function About(props: AboutProps) {
           </div>
 
           {/* Bio Content Card */}
-          <div className="bg-card p-6 sm:p-10 lg:p-12 flex flex-col justify-center gap-7 lg:col-span-7">
+          <div className="bg-card p-6 sm:p-8 lg:p-12 flex flex-col justify-center gap-7 lg:col-span-7">
             <StyledText
               as="h2"
               visible={ownerNameVisible}

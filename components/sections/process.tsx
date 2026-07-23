@@ -41,7 +41,7 @@ export function Process(props: ProcessProps) {
 
   return (
     <section id="process" className="border-y border-border bg-card">
-      <div className="mx-auto max-w-[1400px] border-x border-border px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
+      <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
         <SectionHeader
           eyebrow={eyebrow || ""}
           title={heading || ""}

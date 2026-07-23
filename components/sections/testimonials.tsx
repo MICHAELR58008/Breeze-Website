@@ -32,7 +32,7 @@ export function Testimonials(props: TestimonialsProps) {
 
   return (
     <section id="reviews" className="border-y border-border bg-card">
-      <div className="mx-auto max-w-[1400px] border-x border-border px-5 py-24 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:px-12">
         <SectionHeader
           eyebrow={eyebrow || ""}
           title={heading || ""}

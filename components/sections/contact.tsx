@@ -49,7 +49,7 @@ export function Contact(props: ContactProps) {
   ]
 
   return (
-    <section id="contact" className="mx-auto max-w-[1400px] border-x border-border px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
+    <section id="contact" className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
       <div className="grid gap-12 lg:grid-cols-12">
         <div className="lg:col-span-7">
           <p data-tina-field={tinaField(props, "eyebrow")} className="mb-5 font-mono text-xs uppercase tracking-widest text-primary">{eyebrow}</p>

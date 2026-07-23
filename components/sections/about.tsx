@@ -38,7 +38,7 @@ export function About(props: AboutProps) {
   const activePosition = focalPoint || "50% 0%"
 
   return (
-    <section id="about" className="mx-auto grid max-w-[1400px] border-x border-border lg:grid-cols-12">
+    <section id="about" className="mx-auto grid max-w-[1400px] lg:grid-cols-12">
       {hasLeftContent && (
         <div
           className={`relative min-h-[440px] overflow-hidden border-b border-border lg:col-span-5 lg:border-b-0 lg:border-r ${

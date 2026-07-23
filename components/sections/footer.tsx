@@ -15,7 +15,7 @@ export function Footer(props: FooterProps) {
 
   return (
     <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-[1400px] flex-col gap-8 border-x border-border px-5 py-10 sm:px-8 md:flex-row md:items-end md:justify-between lg:px-12">
+      <div className="mx-auto flex max-w-[1400px] flex-col gap-8 px-5 py-10 sm:px-8 md:flex-row md:items-end md:justify-between lg:px-12">
         <div className="flex flex-col gap-3">
           <Brand />
           {tagline?.trim() && (

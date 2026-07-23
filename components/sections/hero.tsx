@@ -90,7 +90,7 @@ export function Hero(props: HeroProps) {
       <div className="absolute inset-0 bg-black/50" />
 
       <div className="relative mx-auto grid min-h-[88vh] max-w-[1400px]">
-        <div className="flex flex-col justify-between border-x border-border px-5 py-16 sm:px-8 lg:px-12 lg:py-20">
+        <div className="flex flex-col justify-between px-5 py-16 sm:px-8 lg:px-12 lg:py-20">
           <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.22em] text-primary">
             <span className="size-2 rounded-full bg-accent" />
             <span data-tina-field={tinaField(props, "location")} className="text-white/80">{location}</span>

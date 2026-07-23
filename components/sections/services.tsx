@@ -55,7 +55,7 @@ export function Services(props: ServicesProps) {
   const activeAddOns = addOns && addOns.length > 0 ? addOns : defaultAddOns
 
   return (
-    <section id="services" className="mx-auto max-w-[1400px] border-x border-border px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
+    <section id="services" className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
       <SectionHeader
         eyebrow={eyebrow || ""}
         title={heading || ""}

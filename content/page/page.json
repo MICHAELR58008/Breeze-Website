@@ -56,6 +56,38 @@
         {
           "src": "/uploads/CLEAN-STOVE.jpg",
           "alt": ""
+        },
+        {
+          "src": "/uploads/dirty-floor.jpg",
+          "alt": ""
+        },
+        {
+          "src": "/uploads/clean-floor.jpg",
+          "alt": ""
+        },
+        {
+          "src": "/uploads/dirty-bath.jpg",
+          "alt": ""
+        },
+        {
+          "src": "/uploads/clean-floor-abth.jpg",
+          "alt": ""
+        },
+        {
+          "src": "/uploads/dirty-oven.jpg",
+          "alt": ""
+        },
+        {
+          "src": "/uploads/clean-oven.jpg",
+          "alt": ""
+        },
+        {
+          "src": "/uploads/dirty-micro.jpg",
+          "alt": ""
+        },
+        {
+          "src": "/uploads/clean-micro.jpg",
+          "alt": ""
         }
       ],
       "headingVisible": true,

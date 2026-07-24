@@ -130,11 +130,17 @@ export const defaultBlocks: Block[] = [
     disclaimer: "either through an in-person visit or by sending 3–5 photos/videos. This ensures you receive a fair and accurate price.",
   } as ServicesProps & { _template: "services" },
   {
+    _template: "process",
+    heading: "Simple from start to shine.",
+    galleryImages: [],
+  } as ProcessProps & { _template: "process" },
+  {
     _template: "about",
     eyebrow: "03 / Meet the owner",
+    heading: "Meet the Owner",
     ownerName: "Evelyn Rivas",
     nameInitial: "E",
-    tagline: "Owner-led care in Ventura County.",
+    copy: "Owner-led care in Ventura County.",
     bioParagraph1: "Evelyn started Breeze because she believes a clean home shouldn't feel like a luxury. Based in Ventura County, she and her team treat every home like their own — with care, attention to detail, and a genuine pride in making spaces shine.",
     bioParagraph2: "When you book with Breeze, you're not just getting a clean home — you're getting someone who truly cares about getting it right.",
   } as AboutProps & { _template: "about" },

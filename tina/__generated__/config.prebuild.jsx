@@ -633,46 +633,31 @@ var config_default = defineConfig({
                 label: "Process",
                 ui: {
                   defaultItem: {
-                    eyebrow: "02 / How it works",
                     heading: "Simple from start to shine.",
-                    copy: "A compact quote flow designed around your home\u2014not a generic one-price-fits-all form.",
-                    steps: [
-                      { number: "01", title: "Choose your clean", description: "Select deep or regular cleaning, then tell us about your bedrooms and bathrooms." },
-                      { number: "02", title: "Share the details", description: "Add extras and, if you would like, securely upload photos for a more accurate quote." },
-                      { number: "03", title: "Request a time", description: "Pick your preferred date and a morning, afternoon, or flexible time window." },
-                      { number: "04", title: "We confirm", description: "Breeze reviews your request and gets back to you within 24 hours with availability and final pricing." }
-                    ]
+                    galleryImages: [{ src: "", alt: "" }]
                   }
                 },
                 fields: [
-                  { type: "string", name: "eyebrow" },
                   { type: "string", name: "heading" },
-                  { type: "string", name: "copy" },
                   {
                     type: "object",
-                    name: "steps",
-                    label: "Steps",
+                    name: "galleryImages",
+                    label: "Gallery Images",
                     list: true,
+                    ui: {
+                      itemProps: (item) => ({ label: item?.alt || item?.src || "Gallery Image" }),
+                      defaultItem: { src: "", alt: "" }
+                    },
                     fields: [
-                      { type: "string", name: "number" },
-                      { type: "string", name: "title" },
-                      { type: "string", name: "description" },
-                      { type: "image", name: "image", label: "Image / Icon Photo" }
+                      { type: "image", name: "src", label: "Image" },
+                      { type: "string", name: "alt", label: "Alt Text" }
                     ]
                   },
-                  { type: "boolean", name: "eyebrowVisible", label: "Show eyebrow" },
-                  { type: "number", name: "eyebrowSize", label: "Eyebrow Size (px)" },
-                  { type: "string", name: "eyebrowColor", label: "Eyebrow Color", ui: { component: "color" } },
                   { type: "boolean", name: "headingVisible", label: "Show heading" },
                   { type: "number", name: "headingX", label: "Heading \u2014 X" },
                   { type: "number", name: "headingY", label: "Heading \u2014 Y" },
                   { type: "number", name: "headingSize", label: "Heading \u2014 Size (px)" },
-                  { type: "string", name: "headingColor", label: "Heading \u2014 Color", ui: { component: "color" } },
-                  { type: "boolean", name: "copyVisible", label: "Show copy" },
-                  { type: "number", name: "copyX", label: "Copy \u2014 X" },
-                  { type: "number", name: "copyY", label: "Copy \u2014 Y" },
-                  { type: "number", name: "copySize", label: "Copy \u2014 Size (px)" },
-                  { type: "string", name: "copyColor", label: "Copy \u2014 Color", ui: { component: "color" } }
+                  { type: "string", name: "headingColor", label: "Heading \u2014 Color", ui: { component: "color" } }
                 ]
               },
               {
@@ -681,21 +666,37 @@ var config_default = defineConfig({
                 ui: {
                   defaultItem: {
                     eyebrow: "03 / Meet the owner",
+                    heading: "Meet the Owner",
                     ownerName: "Evelyn Rivas",
                     nameInitial: "E",
-                    tagline: "Owner-led care in Ventura County.",
+                    copy: "Owner-led care in Ventura County.",
                     bioParagraph1: "Evelyn started Breeze because she believes a clean home shouldn't feel like a luxury. Based in Ventura County, she and her team treat every home like their own \u2014 with care, attention to detail, and a genuine pride in making spaces shine.",
-                    bioParagraph2: "When you book with Breeze, you're not just getting a clean home \u2014 you're getting someone who truly cares about getting it right."
+                    bioParagraph2: "When you book with Breeze, you're not just getting a clean home \u2014 you're getting someone who truly cares about getting it right.",
+                    galleryImages: [{ src: "/uploads/image.jpg", alt: "Evelyn Rivas" }]
                   }
                 },
                 fields: [
                   { type: "string", name: "eyebrow" },
+                  { type: "string", name: "heading" },
                   { type: "string", name: "ownerName" },
                   { type: "string", name: "nameInitial" },
-                  { type: "string", name: "tagline" },
+                  { type: "string", name: "copy" },
                   { type: "string", name: "bioParagraph1" },
                   { type: "string", name: "bioParagraph2" },
-                  { type: "image", name: "image", label: "Owner Photo" },
+                  {
+                    type: "object",
+                    name: "galleryImages",
+                    label: "Owner Photos",
+                    list: true,
+                    ui: {
+                      itemProps: (item) => ({ label: item?.alt || item?.src || "Owner Photo" }),
+                      defaultItem: { src: "", alt: "" }
+                    },
+                    fields: [
+                      { type: "image", name: "src", label: "Image" },
+                      { type: "string", name: "alt", label: "Alt Text" }
+                    ]
+                  },
                   {
                     type: "string",
                     name: "focalPoint",
@@ -704,9 +705,17 @@ var config_default = defineConfig({
                       component: FocalPointPicker
                     }
                   },
+                  { type: "boolean", name: "nameInitialVisible", label: "Show name initial" },
+                  { type: "number", name: "nameInitialSize", label: "Initial Size (px)" },
+                  { type: "string", name: "nameInitialColor", label: "Initial Color", ui: { component: "color" } },
                   { type: "boolean", name: "eyebrowVisible", label: "Show eyebrow" },
                   { type: "number", name: "eyebrowSize", label: "Eyebrow Size (px)" },
                   { type: "string", name: "eyebrowColor", label: "Eyebrow Color", ui: { component: "color" } },
+                  { type: "boolean", name: "headingVisible", label: "Show heading" },
+                  { type: "number", name: "headingX", label: "Heading \u2014 X" },
+                  { type: "number", name: "headingY", label: "Heading \u2014 Y" },
+                  { type: "number", name: "headingSize", label: "Heading \u2014 Size (px)" },
+                  { type: "string", name: "headingColor", label: "Heading \u2014 Color", ui: { component: "color" } },
                   { type: "boolean", name: "ownerNameVisible", label: "Show owner name" },
                   { type: "number", name: "ownerNameX", label: "Name \u2014 X" },
                   { type: "number", name: "ownerNameY", label: "Name \u2014 Y" },
@@ -721,7 +730,12 @@ var config_default = defineConfig({
                   { type: "number", name: "bioParagraph2X", label: "Bio 2 \u2014 X" },
                   { type: "number", name: "bioParagraph2Y", label: "Bio 2 \u2014 Y" },
                   { type: "number", name: "bioParagraph2Size", label: "Bio 2 \u2014 Size (px)" },
-                  { type: "string", name: "bioParagraph2Color", label: "Bio 2 \u2014 Color", ui: { component: "color" } }
+                  { type: "string", name: "bioParagraph2Color", label: "Bio 2 \u2014 Color", ui: { component: "color" } },
+                  { type: "boolean", name: "copyVisible", label: "Show copy" },
+                  { type: "number", name: "copyX", label: "Copy \u2014 X" },
+                  { type: "number", name: "copyY", label: "Copy \u2014 Y" },
+                  { type: "number", name: "copySize", label: "Copy \u2014 Size (px)" },
+                  { type: "string", name: "copyColor", label: "Copy \u2014 Color", ui: { component: "color" } }
                 ]
               },
               {

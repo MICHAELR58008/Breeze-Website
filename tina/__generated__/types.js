@@ -74,16 +74,35 @@ export const PagePartsFragmentDoc = gql`
       disclaimerColor
     }
     ... on PageSectionsProcess {
+      heading
+      galleryImages {
+        __typename
+        src
+        alt
+      }
+      headingVisible
+      headingX
+      headingY
+      headingSize
+      headingColor
+    }
+    ... on PageSectionsAbout {
       eyebrow
       heading
+      ownerName
+      nameInitial
       copy
-      steps {
+      bioParagraph1
+      bioParagraph2
+      galleryImages {
         __typename
-        number
-        title
-        description
-        image
+        src
+        alt
       }
+      focalPoint
+      nameInitialVisible
+      nameInitialSize
+      nameInitialColor
       eyebrowVisible
       eyebrowSize
       eyebrowColor
@@ -92,24 +111,6 @@ export const PagePartsFragmentDoc = gql`
       headingY
       headingSize
       headingColor
-      copyVisible
-      copyX
-      copyY
-      copySize
-      copyColor
-    }
-    ... on PageSectionsAbout {
-      eyebrow
-      ownerName
-      nameInitial
-      tagline
-      bioParagraph1
-      bioParagraph2
-      image
-      focalPoint
-      eyebrowVisible
-      eyebrowSize
-      eyebrowColor
       ownerNameVisible
       ownerNameX
       ownerNameY
@@ -125,6 +126,11 @@ export const PagePartsFragmentDoc = gql`
       bioParagraph2Y
       bioParagraph2Size
       bioParagraph2Color
+      copyVisible
+      copyX
+      copyY
+      copySize
+      copyColor
     }
     ... on PageSectionsTestimonials {
       eyebrow

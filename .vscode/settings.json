@@ -1,0 +1,13 @@
+{
+  "tailwindCSS.experimental.configFile": ".globals.css",
+  "tailwindCSS.classAttributes": ["class", "className", "class:.*", "tw"],
+  "editor.quickSuggestions": { "strings": "on" },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.semi": false,
+  "prettier.trailingComma": "all",
+  "prettier.tabWidth": 2,
+  "files.associations": {
+    "*.css": "postcss"
+  }
+}

@@ -35,13 +35,45 @@
       "_template": "services"
     },
     {
+      "heading": "Gallery ",
+      "galleryImages": [
+        {
+          "src": "/uploads/drity-room.jpg",
+          "alt": ""
+        },
+        {
+          "src": "/uploads/clean-room.jpg",
+          "alt": ""
+        },
+        {
+          "src": "/uploads/dirty-stove-1.jpg",
+          "alt": ""
+        },
+        {
+          "src": "/uploads/dirty-stove-2.jpg",
+          "alt": ""
+        },
+        {
+          "src": "/uploads/CLEAN-STOVE.jpg",
+          "alt": ""
+        }
+      ],
+      "headingVisible": true,
+      "headingX": 418,
+      "headingY": 10,
+      "_template": "process"
+    },
+    {
       "eyebrow": "ceo",
+      "heading": "Meet the Owner",
       "ownerName": "Evelyn Rivas",
-      "nameInitial": "",
-      "tagline": "",
       "bioParagraph1": "Evelyn started Breeze because she believes a clean home shouldn't feel like a luxury. Based in Ventura County, she and her team treat every home like their own — with care, attention to detail, and a genuine pride in making spaces shine. When you book with Breeze, you book with the best, or your money back. ",
-      "bioParagraph2": "",
-      "image": "/uploads/image.jpg",
+      "galleryImages": [
+        {
+          "src": "/uploads/image.jpg",
+          "alt": ""
+        }
+      ],
       "focalPoint": "53% 23%",
       "eyebrowVisible": true,
       "eyebrowSize": 26,
@@ -78,8 +110,14 @@
       "email": "sacrementado27@gmail.com",
       "emailHref": "mailto:sacrementado27@gmail.com",
       "hours": "24 hrs",
+      "eyebrowVisible": true,
       "eyebrowSize": 7,
+      "headingVisible": true,
       "headingSize": 68,
+      "addressVisible": true,
+      "phoneVisible": true,
+      "emailVisible": true,
+      "hoursVisible": true,
       "_template": "contact"
     },
     {

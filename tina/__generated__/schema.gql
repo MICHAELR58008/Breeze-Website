@@ -156,18 +156,39 @@ type PageSectionsServices {
   disclaimerColor: String
 }
 
-type PageSectionsProcessSteps {
-  number: String
-  title: String
-  description: String
-  image: String
+type PageSectionsProcessGalleryImages {
+  src: String
+  alt: String
 }
 
 type PageSectionsProcess {
+  heading: String
+  galleryImages: [PageSectionsProcessGalleryImages]
+  headingVisible: Boolean
+  headingX: Float
+  headingY: Float
+  headingSize: Float
+  headingColor: String
+}
+
+type PageSectionsAboutGalleryImages {
+  src: String
+  alt: String
+}
+
+type PageSectionsAbout {
   eyebrow: String
   heading: String
+  ownerName: String
+  nameInitial: String
   copy: String
-  steps: [PageSectionsProcessSteps]
+  bioParagraph1: String
+  bioParagraph2: String
+  galleryImages: [PageSectionsAboutGalleryImages]
+  focalPoint: String
+  nameInitialVisible: Boolean
+  nameInitialSize: Float
+  nameInitialColor: String
   eyebrowVisible: Boolean
   eyebrowSize: Float
   eyebrowColor: String
@@ -176,25 +197,6 @@ type PageSectionsProcess {
   headingY: Float
   headingSize: Float
   headingColor: String
-  copyVisible: Boolean
-  copyX: Float
-  copyY: Float
-  copySize: Float
-  copyColor: String
-}
-
-type PageSectionsAbout {
-  eyebrow: String
-  ownerName: String
-  nameInitial: String
-  tagline: String
-  bioParagraph1: String
-  bioParagraph2: String
-  image: String
-  focalPoint: String
-  eyebrowVisible: Boolean
-  eyebrowSize: Float
-  eyebrowColor: String
   ownerNameVisible: Boolean
   ownerNameX: Float
   ownerNameY: Float
@@ -210,6 +212,11 @@ type PageSectionsAbout {
   bioParagraph2Y: Float
   bioParagraph2Size: Float
   bioParagraph2Color: String
+  copyVisible: Boolean
+  copyX: Float
+  copyY: Float
+  copySize: Float
+  copyColor: String
 }
 
 type PageSectionsTestimonialsReviews {
@@ -403,18 +410,39 @@ input PageSectionsServicesFilter {
   disclaimerColor: StringFilter
 }
 
-input PageSectionsProcessStepsFilter {
-  number: StringFilter
-  title: StringFilter
-  description: StringFilter
-  image: ImageFilter
+input PageSectionsProcessGalleryImagesFilter {
+  src: ImageFilter
+  alt: StringFilter
 }
 
 input PageSectionsProcessFilter {
+  heading: StringFilter
+  galleryImages: PageSectionsProcessGalleryImagesFilter
+  headingVisible: BooleanFilter
+  headingX: NumberFilter
+  headingY: NumberFilter
+  headingSize: NumberFilter
+  headingColor: StringFilter
+}
+
+input PageSectionsAboutGalleryImagesFilter {
+  src: ImageFilter
+  alt: StringFilter
+}
+
+input PageSectionsAboutFilter {
   eyebrow: StringFilter
   heading: StringFilter
+  ownerName: StringFilter
+  nameInitial: StringFilter
   copy: StringFilter
-  steps: PageSectionsProcessStepsFilter
+  bioParagraph1: StringFilter
+  bioParagraph2: StringFilter
+  galleryImages: PageSectionsAboutGalleryImagesFilter
+  focalPoint: StringFilter
+  nameInitialVisible: BooleanFilter
+  nameInitialSize: NumberFilter
+  nameInitialColor: StringFilter
   eyebrowVisible: BooleanFilter
   eyebrowSize: NumberFilter
   eyebrowColor: StringFilter
@@ -423,25 +451,6 @@ input PageSectionsProcessFilter {
   headingY: NumberFilter
   headingSize: NumberFilter
   headingColor: StringFilter
-  copyVisible: BooleanFilter
-  copyX: NumberFilter
-  copyY: NumberFilter
-  copySize: NumberFilter
-  copyColor: StringFilter
-}
-
-input PageSectionsAboutFilter {
-  eyebrow: StringFilter
-  ownerName: StringFilter
-  nameInitial: StringFilter
-  tagline: StringFilter
-  bioParagraph1: StringFilter
-  bioParagraph2: StringFilter
-  image: ImageFilter
-  focalPoint: StringFilter
-  eyebrowVisible: BooleanFilter
-  eyebrowSize: NumberFilter
-  eyebrowColor: StringFilter
   ownerNameVisible: BooleanFilter
   ownerNameX: NumberFilter
   ownerNameY: NumberFilter
@@ -457,6 +466,11 @@ input PageSectionsAboutFilter {
   bioParagraph2Y: NumberFilter
   bioParagraph2Size: NumberFilter
   bioParagraph2Color: StringFilter
+  copyVisible: BooleanFilter
+  copyX: NumberFilter
+  copyY: NumberFilter
+  copySize: NumberFilter
+  copyColor: StringFilter
 }
 
 input PageSectionsTestimonialsReviewsFilter {
@@ -1090,18 +1104,39 @@ input PageSectionsServicesMutation {
   disclaimerColor: String
 }
 
-input PageSectionsProcessStepsMutation {
-  number: String
-  title: String
-  description: String
-  image: String
+input PageSectionsProcessGalleryImagesMutation {
+  src: String
+  alt: String
 }
 
 input PageSectionsProcessMutation {
+  heading: String
+  galleryImages: [PageSectionsProcessGalleryImagesMutation]
+  headingVisible: Boolean
+  headingX: Float
+  headingY: Float
+  headingSize: Float
+  headingColor: String
+}
+
+input PageSectionsAboutGalleryImagesMutation {
+  src: String
+  alt: String
+}
+
+input PageSectionsAboutMutation {
   eyebrow: String
   heading: String
+  ownerName: String
+  nameInitial: String
   copy: String
-  steps: [PageSectionsProcessStepsMutation]
+  bioParagraph1: String
+  bioParagraph2: String
+  galleryImages: [PageSectionsAboutGalleryImagesMutation]
+  focalPoint: String
+  nameInitialVisible: Boolean
+  nameInitialSize: Float
+  nameInitialColor: String
   eyebrowVisible: Boolean
   eyebrowSize: Float
   eyebrowColor: String
@@ -1110,25 +1145,6 @@ input PageSectionsProcessMutation {
   headingY: Float
   headingSize: Float
   headingColor: String
-  copyVisible: Boolean
-  copyX: Float
-  copyY: Float
-  copySize: Float
-  copyColor: String
-}
-
-input PageSectionsAboutMutation {
-  eyebrow: String
-  ownerName: String
-  nameInitial: String
-  tagline: String
-  bioParagraph1: String
-  bioParagraph2: String
-  image: String
-  focalPoint: String
-  eyebrowVisible: Boolean
-  eyebrowSize: Float
-  eyebrowColor: String
   ownerNameVisible: Boolean
   ownerNameX: Float
   ownerNameY: Float
@@ -1144,6 +1160,11 @@ input PageSectionsAboutMutation {
   bioParagraph2Y: Float
   bioParagraph2Size: Float
   bioParagraph2Color: String
+  copyVisible: Boolean
+  copyX: Float
+  copyY: Float
+  copySize: Float
+  copyColor: String
 }
 
 input PageSectionsTestimonialsReviewsMutation {

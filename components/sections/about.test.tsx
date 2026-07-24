@@ -9,8 +9,8 @@ describe("About Component - Edge Cases & Empirical Stress Tests", () => {
 
       // Eyebrow renders in both SectionHeader and fallback media box when image is unset
       expect(screen.getAllByText("03 / Meet the owner").length).toBe(2)
-      // Owner name renders in both SectionHeader title and Bio card h2
-      expect(screen.getAllByText("Evelyn Rivas").length).toBe(2)
+      // Owner name renders once in Bio card h2
+      expect(screen.getAllByText("Evelyn Rivas").length).toBe(1)
       // Tagline renders in both SectionHeader copy and fallback media box
       expect(screen.getAllByText("Owner-led care in Ventura County.").length).toBe(2)
 
@@ -32,14 +32,14 @@ describe("About Component - Edge Cases & Empirical Stress Tests", () => {
       const { container } = render(<About {...{}} />)
 
       expect(screen.getAllByText("03 / Meet the owner").length).toBe(2)
-      expect(screen.getAllByText("Evelyn Rivas").length).toBe(2)
+      expect(screen.getAllByText("Evelyn Rivas").length).toBe(1)
       expect(screen.getByText("E")).toBeInTheDocument()
     })
   })
 
   describe("2. Undefined Image & Focal Point Handling", () => {
-    it("renders fallback initial box when image is explicitly undefined", () => {
-      const { container } = render(<About image={undefined} nameInitial="J" />)
+    it("renders fallback initial box when no gallery images are provided", () => {
+      const { container } = render(<About nameInitial="J" />)
 
       expect(screen.getByText("J")).toBeInTheDocument()
       expect(container.querySelector("img")).not.toBeInTheDocument()
@@ -47,9 +47,9 @@ describe("About Component - Edge Cases & Empirical Stress Tests", () => {
       expect(fallbackBox).toBeInTheDocument()
     })
 
-    it("renders image container when valid image path is provided", () => {
+    it("renders gallery images when valid images are provided", () => {
       const { container } = render(
-        <About image="/images/owner.jpg" focalPoint="30% 40%" ownerName="Sarah" />
+        <About galleryImages={[{ src: "/images/owner.jpg" }]} focalPoint="30% 40%" ownerName="Sarah" />
       )
 
       const imageEl = container.querySelector("img")
@@ -58,8 +58,8 @@ describe("About Component - Edge Cases & Empirical Stress Tests", () => {
       expect(imageEl?.style.objectPosition).toBe("30% 40%")
     })
 
-    it("defaults focalPoint to '50% 0%' when image is present but focalPoint is undefined", () => {
-      const { container } = render(<About image="/images/owner.jpg" focalPoint={undefined} />)
+    it("defaults focalPoint to '50% 0%' when images are present but focalPoint is undefined", () => {
+      const { container } = render(<About galleryImages={[{ src: "/images/owner.jpg" }]} focalPoint={undefined} />)
 
       const imageEl = container.querySelector("img")
       expect(imageEl).toBeInTheDocument()
@@ -67,15 +67,15 @@ describe("About Component - Edge Cases & Empirical Stress Tests", () => {
     })
 
     it("defaults focalPoint to '50% 0%' when focalPoint is empty string", () => {
-      const { container } = render(<About image="/images/owner.jpg" focalPoint="" />)
+      const { container } = render(<About galleryImages={[{ src: "/images/owner.jpg" }]} focalPoint="" />)
 
       const imageEl = container.querySelector("img")
       expect(imageEl).toBeInTheDocument()
       expect(imageEl?.style.objectPosition).toBe("50% 0%")
     })
 
-    it("treats whitespace-only image string as falsy and renders fallback box", () => {
-      const { container } = render(<About image="   " nameInitial="W" />)
+    it("treats whitespace-only image src as falsy and renders fallback box", () => {
+      const { container } = render(<About galleryImages={[{ src: "   " }]} nameInitial="W" />)
 
       expect(screen.getByText("W")).toBeInTheDocument()
       expect(container.querySelector("img")).not.toBeInTheDocument()
@@ -103,6 +103,7 @@ describe("About Component - Edge Cases & Empirical Stress Tests", () => {
       const { container } = render(
         <About
           eyebrow=""
+          heading=""
           ownerName=""
           tagline=""
           bioParagraph1=""
@@ -113,7 +114,7 @@ describe("About Component - Edge Cases & Empirical Stress Tests", () => {
 
       expect(container).toBeInTheDocument()
       const h2Elements = container.querySelectorAll("h2")
-      expect(h2Elements.length).toBeGreaterThan(0)
+      expect(h2Elements.length).toBe(0)
     })
 
     it("handles whitespace-only text props gracefully without rendering blank blocks", () => {
@@ -161,7 +162,7 @@ describe("About Component - Edge Cases & Empirical Stress Tests", () => {
       )
 
       const ownerH2s = screen.getAllByText("Offset Name")
-      expect(ownerH2s.length).toBe(2)
+      expect(ownerH2s.length).toBe(1)
       ownerH2s.forEach((el) => {
         expect(el.style.transform).toBe("translate(25px, -15px)")
       })
@@ -184,7 +185,7 @@ describe("About Component - Edge Cases & Empirical Stress Tests", () => {
       )
 
       const ownerH2s = screen.getAllByText("Styled Name")
-      expect(ownerH2s.length).toBe(2)
+      expect(ownerH2s.length).toBe(1)
       ownerH2s.forEach((el) => {
         expect(el.style.fontSize).toBe("42px")
         expect(el.style.color).toBe("rgb(255, 0, 0)")
@@ -217,7 +218,7 @@ describe("About Component - Edge Cases & Empirical Stress Tests", () => {
       render(<About {...props} />)
 
       const ownerH2s = screen.getAllByText("Custom Owner")
-      expect(ownerH2s.length).toBe(2)
+      expect(ownerH2s.length).toBe(1)
       ownerH2s.forEach((el) => {
         expect(el.getAttribute("data-tina-field")).toBe("about_query_id---about.ownerName")
       })
@@ -240,7 +241,7 @@ describe("About Component - Edge Cases & Empirical Stress Tests", () => {
       )
 
       expect(container).toBeInTheDocument()
-      expect(screen.getAllByText(longName).length).toBe(2)
+      expect(screen.getAllByText(longName).length).toBe(1)
       expect(screen.getByText(longBio)).toBeInTheDocument()
     })
 
@@ -283,8 +284,8 @@ describe("About Component - Edge Cases & Empirical Stress Tests", () => {
       expect(fallbackContent?.className).toContain("lg:p-12")
     })
 
-    it("renders image directly without gradient overlay when image is provided", () => {
-      const { container } = render(<About image="/images/owner.jpg" />)
+    it("renders gallery images without gradient overlay when images are provided", () => {
+      const { container } = render(<About galleryImages={[{ src: "/images/owner.jpg" }]} />)
 
       const image = container.querySelector("img")
       expect(image).toBeInTheDocument()

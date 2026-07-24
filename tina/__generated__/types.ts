@@ -346,6 +346,51 @@ export type PageSectionsTestimonials = {
   copyColor?: Maybe<Scalars['String']['output']>;
 };
 
+export type PageSectionsReviewsReviews = {
+  __typename?: 'PageSectionsReviewsReviews';
+  quote?: Maybe<Scalars['String']['output']>;
+  byline?: Maybe<Scalars['String']['output']>;
+};
+
+export type PageSectionsReviews = {
+  __typename?: 'PageSectionsReviews';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  heading?: Maybe<Scalars['String']['output']>;
+  copy?: Maybe<Scalars['String']['output']>;
+  reviews?: Maybe<Array<Maybe<PageSectionsReviewsReviews>>>;
+  address?: Maybe<Scalars['String']['output']>;
+  phone?: Maybe<Scalars['String']['output']>;
+  phoneHref?: Maybe<Scalars['String']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  emailHref?: Maybe<Scalars['String']['output']>;
+  hours?: Maybe<Scalars['String']['output']>;
+  eyebrowVisible?: Maybe<Scalars['Boolean']['output']>;
+  eyebrowSize?: Maybe<Scalars['Float']['output']>;
+  eyebrowColor?: Maybe<Scalars['String']['output']>;
+  headingVisible?: Maybe<Scalars['Boolean']['output']>;
+  headingX?: Maybe<Scalars['Float']['output']>;
+  headingY?: Maybe<Scalars['Float']['output']>;
+  headingSize?: Maybe<Scalars['Float']['output']>;
+  headingColor?: Maybe<Scalars['String']['output']>;
+  copyVisible?: Maybe<Scalars['Boolean']['output']>;
+  copyX?: Maybe<Scalars['Float']['output']>;
+  copyY?: Maybe<Scalars['Float']['output']>;
+  copySize?: Maybe<Scalars['Float']['output']>;
+  copyColor?: Maybe<Scalars['String']['output']>;
+  addressVisible?: Maybe<Scalars['Boolean']['output']>;
+  addressSize?: Maybe<Scalars['Float']['output']>;
+  addressColor?: Maybe<Scalars['String']['output']>;
+  phoneVisible?: Maybe<Scalars['Boolean']['output']>;
+  phoneSize?: Maybe<Scalars['Float']['output']>;
+  phoneColor?: Maybe<Scalars['String']['output']>;
+  emailVisible?: Maybe<Scalars['Boolean']['output']>;
+  emailSize?: Maybe<Scalars['Float']['output']>;
+  emailColor?: Maybe<Scalars['String']['output']>;
+  hoursVisible?: Maybe<Scalars['Boolean']['output']>;
+  hoursSize?: Maybe<Scalars['Float']['output']>;
+  hoursColor?: Maybe<Scalars['String']['output']>;
+};
+
 export type PageSectionsContact = {
   __typename?: 'PageSectionsContact';
   eyebrow?: Maybe<Scalars['String']['output']>;
@@ -388,7 +433,7 @@ export type PageSectionsFooter = {
   taglineColor?: Maybe<Scalars['String']['output']>;
 };
 
-export type PageSections = PageSectionsHero | PageSectionsServices | PageSectionsProcess | PageSectionsAbout | PageSectionsTestimonials | PageSectionsContact | PageSectionsFooter;
+export type PageSections = PageSectionsHero | PageSectionsServices | PageSectionsProcess | PageSectionsAbout | PageSectionsTestimonials | PageSectionsReviews | PageSectionsContact | PageSectionsFooter;
 
 export type PageNavigationNavLinks = {
   __typename?: 'PageNavigationNavLinks';
@@ -410,6 +455,7 @@ export type PageNavigation = {
   barBackground?: Maybe<Scalars['String']['output']>;
   barBorderColor?: Maybe<Scalars['String']['output']>;
   barHeight?: Maybe<Scalars['Float']['output']>;
+  barWidth?: Maybe<Scalars['Float']['output']>;
   barBlur?: Maybe<Scalars['Boolean']['output']>;
 };
 
@@ -605,6 +651,49 @@ export type PageSectionsTestimonialsFilter = {
   copyColor?: InputMaybe<StringFilter>;
 };
 
+export type PageSectionsReviewsReviewsFilter = {
+  quote?: InputMaybe<StringFilter>;
+  byline?: InputMaybe<StringFilter>;
+};
+
+export type PageSectionsReviewsFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  heading?: InputMaybe<StringFilter>;
+  copy?: InputMaybe<StringFilter>;
+  reviews?: InputMaybe<PageSectionsReviewsReviewsFilter>;
+  address?: InputMaybe<StringFilter>;
+  phone?: InputMaybe<StringFilter>;
+  phoneHref?: InputMaybe<StringFilter>;
+  email?: InputMaybe<StringFilter>;
+  emailHref?: InputMaybe<StringFilter>;
+  hours?: InputMaybe<StringFilter>;
+  eyebrowVisible?: InputMaybe<BooleanFilter>;
+  eyebrowSize?: InputMaybe<NumberFilter>;
+  eyebrowColor?: InputMaybe<StringFilter>;
+  headingVisible?: InputMaybe<BooleanFilter>;
+  headingX?: InputMaybe<NumberFilter>;
+  headingY?: InputMaybe<NumberFilter>;
+  headingSize?: InputMaybe<NumberFilter>;
+  headingColor?: InputMaybe<StringFilter>;
+  copyVisible?: InputMaybe<BooleanFilter>;
+  copyX?: InputMaybe<NumberFilter>;
+  copyY?: InputMaybe<NumberFilter>;
+  copySize?: InputMaybe<NumberFilter>;
+  copyColor?: InputMaybe<StringFilter>;
+  addressVisible?: InputMaybe<BooleanFilter>;
+  addressSize?: InputMaybe<NumberFilter>;
+  addressColor?: InputMaybe<StringFilter>;
+  phoneVisible?: InputMaybe<BooleanFilter>;
+  phoneSize?: InputMaybe<NumberFilter>;
+  phoneColor?: InputMaybe<StringFilter>;
+  emailVisible?: InputMaybe<BooleanFilter>;
+  emailSize?: InputMaybe<NumberFilter>;
+  emailColor?: InputMaybe<StringFilter>;
+  hoursVisible?: InputMaybe<BooleanFilter>;
+  hoursSize?: InputMaybe<NumberFilter>;
+  hoursColor?: InputMaybe<StringFilter>;
+};
+
 export type PageSectionsContactFilter = {
   eyebrow?: InputMaybe<StringFilter>;
   heading?: InputMaybe<StringFilter>;
@@ -651,6 +740,7 @@ export type PageSectionsFilter = {
   process?: InputMaybe<PageSectionsProcessFilter>;
   about?: InputMaybe<PageSectionsAboutFilter>;
   testimonials?: InputMaybe<PageSectionsTestimonialsFilter>;
+  reviews?: InputMaybe<PageSectionsReviewsFilter>;
   contact?: InputMaybe<PageSectionsContactFilter>;
   footer?: InputMaybe<PageSectionsFooterFilter>;
 };
@@ -673,6 +763,7 @@ export type PageNavigationFilter = {
   barBackground?: InputMaybe<StringFilter>;
   barBorderColor?: InputMaybe<StringFilter>;
   barHeight?: InputMaybe<NumberFilter>;
+  barWidth?: InputMaybe<NumberFilter>;
   barBlur?: InputMaybe<BooleanFilter>;
 };
 
@@ -1390,6 +1481,49 @@ export type PageSectionsTestimonialsMutation = {
   copyColor?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type PageSectionsReviewsReviewsMutation = {
+  quote?: InputMaybe<Scalars['String']['input']>;
+  byline?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PageSectionsReviewsMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  heading?: InputMaybe<Scalars['String']['input']>;
+  copy?: InputMaybe<Scalars['String']['input']>;
+  reviews?: InputMaybe<Array<InputMaybe<PageSectionsReviewsReviewsMutation>>>;
+  address?: InputMaybe<Scalars['String']['input']>;
+  phone?: InputMaybe<Scalars['String']['input']>;
+  phoneHref?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  emailHref?: InputMaybe<Scalars['String']['input']>;
+  hours?: InputMaybe<Scalars['String']['input']>;
+  eyebrowVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  eyebrowSize?: InputMaybe<Scalars['Float']['input']>;
+  eyebrowColor?: InputMaybe<Scalars['String']['input']>;
+  headingVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  headingX?: InputMaybe<Scalars['Float']['input']>;
+  headingY?: InputMaybe<Scalars['Float']['input']>;
+  headingSize?: InputMaybe<Scalars['Float']['input']>;
+  headingColor?: InputMaybe<Scalars['String']['input']>;
+  copyVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  copyX?: InputMaybe<Scalars['Float']['input']>;
+  copyY?: InputMaybe<Scalars['Float']['input']>;
+  copySize?: InputMaybe<Scalars['Float']['input']>;
+  copyColor?: InputMaybe<Scalars['String']['input']>;
+  addressVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  addressSize?: InputMaybe<Scalars['Float']['input']>;
+  addressColor?: InputMaybe<Scalars['String']['input']>;
+  phoneVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  phoneSize?: InputMaybe<Scalars['Float']['input']>;
+  phoneColor?: InputMaybe<Scalars['String']['input']>;
+  emailVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  emailSize?: InputMaybe<Scalars['Float']['input']>;
+  emailColor?: InputMaybe<Scalars['String']['input']>;
+  hoursVisible?: InputMaybe<Scalars['Boolean']['input']>;
+  hoursSize?: InputMaybe<Scalars['Float']['input']>;
+  hoursColor?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type PageSectionsContactMutation = {
   eyebrow?: InputMaybe<Scalars['String']['input']>;
   heading?: InputMaybe<Scalars['String']['input']>;
@@ -1436,6 +1570,7 @@ export type PageSectionsMutation = {
   process?: InputMaybe<PageSectionsProcessMutation>;
   about?: InputMaybe<PageSectionsAboutMutation>;
   testimonials?: InputMaybe<PageSectionsTestimonialsMutation>;
+  reviews?: InputMaybe<PageSectionsReviewsMutation>;
   contact?: InputMaybe<PageSectionsContactMutation>;
   footer?: InputMaybe<PageSectionsFooterMutation>;
 };
@@ -1458,6 +1593,7 @@ export type PageNavigationMutation = {
   barBackground?: InputMaybe<Scalars['String']['input']>;
   barBorderColor?: InputMaybe<Scalars['String']['input']>;
   barHeight?: InputMaybe<Scalars['Float']['input']>;
+  barWidth?: InputMaybe<Scalars['Float']['input']>;
   barBlur?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
@@ -1682,7 +1818,7 @@ export type BookingMutation = {
   estimate?: InputMaybe<BookingEstimateMutation>;
 };
 
-export type PagePartsFragment = { __typename: 'Page', sections?: Array<{ __typename: 'PageSectionsHero', location?: string | null, headingLine1?: string | null, headingLine2?: string | null, subheading?: string | null, phoneNumber?: string | null, calloutTitle?: string | null, calloutText?: string | null, proofBackgroundOpacity?: number | null, imageSrc?: string | null, imageAlt?: string | null, locationVisible?: boolean | null, locationSize?: number | null, locationColor?: string | null, headingLine1Visible?: boolean | null, headingLine1X?: number | null, headingLine1Y?: number | null, headingLine1Size?: number | null, headingLine1Color?: string | null, headingLine2Visible?: boolean | null, headingLine2X?: number | null, headingLine2Y?: number | null, headingLine2Size?: number | null, headingLine2Color?: string | null, subheadingVisible?: boolean | null, subheadingX?: number | null, subheadingY?: number | null, subheadingSize?: number | null, subheadingColor?: string | null, proofs?: Array<{ __typename: 'PageSectionsHeroProofs', value?: string | null, label?: string | null, valueSize?: number | null, valueColor?: string | null, labelSize?: number | null, labelColor?: string | null } | null> | null } | { __typename: 'PageSectionsServices', eyebrow?: string | null, heading?: string | null, copy?: string | null, disclaimer?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, disclaimerVisible?: boolean | null, disclaimerX?: number | null, disclaimerY?: number | null, disclaimerSize?: number | null, disclaimerColor?: string | null } | { __typename: 'PageSectionsProcess', heading?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, galleryImages?: Array<{ __typename: 'PageSectionsProcessGalleryImages', src?: string | null, alt?: string | null } | null> | null } | { __typename: 'PageSectionsAbout', eyebrow?: string | null, heading?: string | null, ownerName?: string | null, nameInitial?: string | null, copy?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null, focalPoint?: string | null, nameInitialVisible?: boolean | null, nameInitialSize?: number | null, nameInitialColor?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, ownerNameVisible?: boolean | null, ownerNameX?: number | null, ownerNameY?: number | null, ownerNameSize?: number | null, ownerNameColor?: string | null, bioParagraph1Visible?: boolean | null, bioParagraph1X?: number | null, bioParagraph1Y?: number | null, bioParagraph1Size?: number | null, bioParagraph1Color?: string | null, bioParagraph2Visible?: boolean | null, bioParagraph2X?: number | null, bioParagraph2Y?: number | null, bioParagraph2Size?: number | null, bioParagraph2Color?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, galleryImages?: Array<{ __typename: 'PageSectionsAboutGalleryImages', src?: string | null, alt?: string | null } | null> | null } | { __typename: 'PageSectionsTestimonials', eyebrow?: string | null, heading?: string | null, copy?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, reviews?: Array<{ __typename: 'PageSectionsTestimonialsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsContact', eyebrow?: string | null, heading?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, addressVisible?: boolean | null, addressSize?: number | null, addressColor?: string | null, phoneVisible?: boolean | null, phoneSize?: number | null, phoneColor?: string | null, emailVisible?: boolean | null, emailSize?: number | null, emailColor?: string | null, hoursVisible?: boolean | null, hoursSize?: number | null, hoursColor?: string | null } | { __typename: 'PageSectionsFooter', tagline?: string | null, taglineVisible?: boolean | null, taglineX?: number | null, taglineY?: number | null, taglineSize?: number | null, taglineColor?: string | null } | null> | null, navigation?: { __typename: 'PageNavigation', ctaVisible?: boolean | null, ctaText?: string | null, linkFontSize?: number | null, linkColor?: string | null, linkHoverColor?: string | null, linkActiveColor?: string | null, linkUppercase?: boolean | null, barBackground?: string | null, barBorderColor?: string | null, barHeight?: number | null, barBlur?: boolean | null, navLinks?: Array<{ __typename: 'PageNavigationNavLinks', sectionId: string, label: string, visible?: boolean | null } | null> | null } | null };
+export type PagePartsFragment = { __typename: 'Page', sections?: Array<{ __typename: 'PageSectionsHero', location?: string | null, headingLine1?: string | null, headingLine2?: string | null, subheading?: string | null, phoneNumber?: string | null, calloutTitle?: string | null, calloutText?: string | null, proofBackgroundOpacity?: number | null, imageSrc?: string | null, imageAlt?: string | null, locationVisible?: boolean | null, locationSize?: number | null, locationColor?: string | null, headingLine1Visible?: boolean | null, headingLine1X?: number | null, headingLine1Y?: number | null, headingLine1Size?: number | null, headingLine1Color?: string | null, headingLine2Visible?: boolean | null, headingLine2X?: number | null, headingLine2Y?: number | null, headingLine2Size?: number | null, headingLine2Color?: string | null, subheadingVisible?: boolean | null, subheadingX?: number | null, subheadingY?: number | null, subheadingSize?: number | null, subheadingColor?: string | null, proofs?: Array<{ __typename: 'PageSectionsHeroProofs', value?: string | null, label?: string | null, valueSize?: number | null, valueColor?: string | null, labelSize?: number | null, labelColor?: string | null } | null> | null } | { __typename: 'PageSectionsServices', eyebrow?: string | null, heading?: string | null, copy?: string | null, disclaimer?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, disclaimerVisible?: boolean | null, disclaimerX?: number | null, disclaimerY?: number | null, disclaimerSize?: number | null, disclaimerColor?: string | null } | { __typename: 'PageSectionsProcess', heading?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, galleryImages?: Array<{ __typename: 'PageSectionsProcessGalleryImages', src?: string | null, alt?: string | null } | null> | null } | { __typename: 'PageSectionsAbout', eyebrow?: string | null, heading?: string | null, ownerName?: string | null, nameInitial?: string | null, copy?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null, focalPoint?: string | null, nameInitialVisible?: boolean | null, nameInitialSize?: number | null, nameInitialColor?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, ownerNameVisible?: boolean | null, ownerNameX?: number | null, ownerNameY?: number | null, ownerNameSize?: number | null, ownerNameColor?: string | null, bioParagraph1Visible?: boolean | null, bioParagraph1X?: number | null, bioParagraph1Y?: number | null, bioParagraph1Size?: number | null, bioParagraph1Color?: string | null, bioParagraph2Visible?: boolean | null, bioParagraph2X?: number | null, bioParagraph2Y?: number | null, bioParagraph2Size?: number | null, bioParagraph2Color?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, galleryImages?: Array<{ __typename: 'PageSectionsAboutGalleryImages', src?: string | null, alt?: string | null } | null> | null } | { __typename: 'PageSectionsTestimonials', eyebrow?: string | null, heading?: string | null, copy?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, reviews?: Array<{ __typename: 'PageSectionsTestimonialsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsReviews', eyebrow?: string | null, heading?: string | null, copy?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, addressVisible?: boolean | null, addressSize?: number | null, addressColor?: string | null, phoneVisible?: boolean | null, phoneSize?: number | null, phoneColor?: string | null, emailVisible?: boolean | null, emailSize?: number | null, emailColor?: string | null, hoursVisible?: boolean | null, hoursSize?: number | null, hoursColor?: string | null, reviews?: Array<{ __typename: 'PageSectionsReviewsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsContact', eyebrow?: string | null, heading?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, addressVisible?: boolean | null, addressSize?: number | null, addressColor?: string | null, phoneVisible?: boolean | null, phoneSize?: number | null, phoneColor?: string | null, emailVisible?: boolean | null, emailSize?: number | null, emailColor?: string | null, hoursVisible?: boolean | null, hoursSize?: number | null, hoursColor?: string | null } | { __typename: 'PageSectionsFooter', tagline?: string | null, taglineVisible?: boolean | null, taglineX?: number | null, taglineY?: number | null, taglineSize?: number | null, taglineColor?: string | null } | null> | null, navigation?: { __typename: 'PageNavigation', ctaVisible?: boolean | null, ctaText?: string | null, linkFontSize?: number | null, linkColor?: string | null, linkHoverColor?: string | null, linkActiveColor?: string | null, linkUppercase?: boolean | null, barBackground?: string | null, barBorderColor?: string | null, barHeight?: number | null, barWidth?: number | null, barBlur?: boolean | null, navLinks?: Array<{ __typename: 'PageNavigationNavLinks', sectionId: string, label: string, visible?: boolean | null } | null> | null } | null };
 
 export type BookingPartsFragment = { __typename: 'Booking', pricingHub?: string | null, previewOpen?: boolean | null, stepNames?: Array<string | null> | null, services?: Array<{ __typename: 'BookingServices', id: string, name: string, description?: string | null, subtitle?: string | null, features?: Array<string | null> | null, basePriceCents?: number | null, pricePerBedroomCents?: number | null, pricePerBathroomCents?: number | null } | null> | null, addOns?: Array<{ __typename: 'BookingAddOns', id?: string | null, name?: string | null, cents?: number | null } | null> | null, theme?: { __typename: 'BookingTheme', fontFamily?: string | null, primaryColor?: string | null, backgroundColor?: string | null, textColor?: string | null, borderRadius?: string | null } | null, steps?: Array<{ __typename: 'BookingSteps', title: string, description?: string | null, disabled?: boolean | null, showIfField?: string | null, showIfOperator?: string | null, showIfValue?: string | null, fields?: Array<{ __typename: 'BookingStepsFieldsTextInput', name?: string | null, label?: string | null, placeholder?: string | null, required?: boolean | null, validationType?: string | null } | { __typename: 'BookingStepsFieldsNumberInput', name?: string | null, label?: string | null, min?: number | null, max?: number | null } | { __typename: 'BookingStepsFieldsChoiceInput', name?: string | null, label?: string | null, options?: Array<{ __typename: 'BookingStepsFieldsChoiceInputOptions', id?: string | null, label?: string | null } | null> | null } | { __typename: 'BookingStepsFieldsDateInput', name?: string | null, label?: string | null } | { __typename: 'BookingStepsFieldsPhotoUpload', label?: string | null, prompt?: string | null, hint?: string | null, selectedText?: string | null, emptyText?: string | null } | { __typename: 'BookingStepsFieldsRichTextHeading', text?: string | null } | { __typename: 'BookingStepsFieldsServicesSelector', question?: string | null } | { __typename: 'BookingStepsFieldsAddonsSelector', question?: string | null } | { __typename: 'BookingStepsFieldsEstimateSummary', disclaimer?: string | null } | { __typename: 'BookingStepsFieldsImageBlock', src?: string | null, alt?: string | null, caption?: string | null, aspect?: string | null } | { __typename: 'BookingStepsFieldsInfoCard', title?: string | null, description?: string | null, icon?: string | null, variant?: string | null } | { __typename: 'BookingStepsFieldsInfoBanner', text?: string | null, type?: string | null, dismissible?: boolean | null } | { __typename: 'BookingStepsFieldsTextareaInput', name?: string | null, label?: string | null, placeholder?: string | null, required?: boolean | null, rows?: number | null } | { __typename: 'BookingStepsFieldsSelectInput', name?: string | null, label?: string | null, required?: boolean | null, defaultValue?: string | null, options?: Array<{ __typename: 'BookingStepsFieldsSelectInputOptions', value?: string | null, label?: string | null } | null> | null } | { __typename: 'BookingStepsFieldsCheckboxGroup', name?: string | null, label?: string | null, required?: boolean | null, options?: Array<{ __typename: 'BookingStepsFieldsCheckboxGroupOptions', value?: string | null, label?: string | null, priceCents?: number | null } | null> | null } | null> | null } | null> | null, header?: { __typename: 'BookingHeader', badge?: string | null, title?: string | null, description?: string | null } | null, timeWindows?: Array<{ __typename: 'BookingTimeWindows', id?: string | null, label?: string | null } | null> | null, reviewLabels?: { __typename: 'BookingReviewLabels', heading?: string | null, rowHome?: string | null, rowDate?: string | null, rowWindow?: string | null, rowPhotos?: string | null, disclaimer?: string | null } | null, navigation?: { __typename: 'BookingNavigation', back?: string | null, continue?: string | null, submit?: string | null } | null, success?: { __typename: 'BookingSuccess', title?: string | null, message?: string | null, buttonText?: string | null } | null, estimate?: { __typename: 'BookingEstimate', label?: string | null, customQuote?: string | null, disclaimer?: string | null } | null };
 
@@ -1691,7 +1827,7 @@ export type PageQueryVariables = Exact<{
 }>;
 
 
-export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'PageSectionsHero', location?: string | null, headingLine1?: string | null, headingLine2?: string | null, subheading?: string | null, phoneNumber?: string | null, calloutTitle?: string | null, calloutText?: string | null, proofBackgroundOpacity?: number | null, imageSrc?: string | null, imageAlt?: string | null, locationVisible?: boolean | null, locationSize?: number | null, locationColor?: string | null, headingLine1Visible?: boolean | null, headingLine1X?: number | null, headingLine1Y?: number | null, headingLine1Size?: number | null, headingLine1Color?: string | null, headingLine2Visible?: boolean | null, headingLine2X?: number | null, headingLine2Y?: number | null, headingLine2Size?: number | null, headingLine2Color?: string | null, subheadingVisible?: boolean | null, subheadingX?: number | null, subheadingY?: number | null, subheadingSize?: number | null, subheadingColor?: string | null, proofs?: Array<{ __typename: 'PageSectionsHeroProofs', value?: string | null, label?: string | null, valueSize?: number | null, valueColor?: string | null, labelSize?: number | null, labelColor?: string | null } | null> | null } | { __typename: 'PageSectionsServices', eyebrow?: string | null, heading?: string | null, copy?: string | null, disclaimer?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, disclaimerVisible?: boolean | null, disclaimerX?: number | null, disclaimerY?: number | null, disclaimerSize?: number | null, disclaimerColor?: string | null } | { __typename: 'PageSectionsProcess', heading?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, galleryImages?: Array<{ __typename: 'PageSectionsProcessGalleryImages', src?: string | null, alt?: string | null } | null> | null } | { __typename: 'PageSectionsAbout', eyebrow?: string | null, heading?: string | null, ownerName?: string | null, nameInitial?: string | null, copy?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null, focalPoint?: string | null, nameInitialVisible?: boolean | null, nameInitialSize?: number | null, nameInitialColor?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, ownerNameVisible?: boolean | null, ownerNameX?: number | null, ownerNameY?: number | null, ownerNameSize?: number | null, ownerNameColor?: string | null, bioParagraph1Visible?: boolean | null, bioParagraph1X?: number | null, bioParagraph1Y?: number | null, bioParagraph1Size?: number | null, bioParagraph1Color?: string | null, bioParagraph2Visible?: boolean | null, bioParagraph2X?: number | null, bioParagraph2Y?: number | null, bioParagraph2Size?: number | null, bioParagraph2Color?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, galleryImages?: Array<{ __typename: 'PageSectionsAboutGalleryImages', src?: string | null, alt?: string | null } | null> | null } | { __typename: 'PageSectionsTestimonials', eyebrow?: string | null, heading?: string | null, copy?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, reviews?: Array<{ __typename: 'PageSectionsTestimonialsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsContact', eyebrow?: string | null, heading?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, addressVisible?: boolean | null, addressSize?: number | null, addressColor?: string | null, phoneVisible?: boolean | null, phoneSize?: number | null, phoneColor?: string | null, emailVisible?: boolean | null, emailSize?: number | null, emailColor?: string | null, hoursVisible?: boolean | null, hoursSize?: number | null, hoursColor?: string | null } | { __typename: 'PageSectionsFooter', tagline?: string | null, taglineVisible?: boolean | null, taglineX?: number | null, taglineY?: number | null, taglineSize?: number | null, taglineColor?: string | null } | null> | null, navigation?: { __typename: 'PageNavigation', ctaVisible?: boolean | null, ctaText?: string | null, linkFontSize?: number | null, linkColor?: string | null, linkHoverColor?: string | null, linkActiveColor?: string | null, linkUppercase?: boolean | null, barBackground?: string | null, barBorderColor?: string | null, barHeight?: number | null, barBlur?: boolean | null, navLinks?: Array<{ __typename: 'PageNavigationNavLinks', sectionId: string, label: string, visible?: boolean | null } | null> | null } | null } };
+export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'PageSectionsHero', location?: string | null, headingLine1?: string | null, headingLine2?: string | null, subheading?: string | null, phoneNumber?: string | null, calloutTitle?: string | null, calloutText?: string | null, proofBackgroundOpacity?: number | null, imageSrc?: string | null, imageAlt?: string | null, locationVisible?: boolean | null, locationSize?: number | null, locationColor?: string | null, headingLine1Visible?: boolean | null, headingLine1X?: number | null, headingLine1Y?: number | null, headingLine1Size?: number | null, headingLine1Color?: string | null, headingLine2Visible?: boolean | null, headingLine2X?: number | null, headingLine2Y?: number | null, headingLine2Size?: number | null, headingLine2Color?: string | null, subheadingVisible?: boolean | null, subheadingX?: number | null, subheadingY?: number | null, subheadingSize?: number | null, subheadingColor?: string | null, proofs?: Array<{ __typename: 'PageSectionsHeroProofs', value?: string | null, label?: string | null, valueSize?: number | null, valueColor?: string | null, labelSize?: number | null, labelColor?: string | null } | null> | null } | { __typename: 'PageSectionsServices', eyebrow?: string | null, heading?: string | null, copy?: string | null, disclaimer?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, disclaimerVisible?: boolean | null, disclaimerX?: number | null, disclaimerY?: number | null, disclaimerSize?: number | null, disclaimerColor?: string | null } | { __typename: 'PageSectionsProcess', heading?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, galleryImages?: Array<{ __typename: 'PageSectionsProcessGalleryImages', src?: string | null, alt?: string | null } | null> | null } | { __typename: 'PageSectionsAbout', eyebrow?: string | null, heading?: string | null, ownerName?: string | null, nameInitial?: string | null, copy?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null, focalPoint?: string | null, nameInitialVisible?: boolean | null, nameInitialSize?: number | null, nameInitialColor?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, ownerNameVisible?: boolean | null, ownerNameX?: number | null, ownerNameY?: number | null, ownerNameSize?: number | null, ownerNameColor?: string | null, bioParagraph1Visible?: boolean | null, bioParagraph1X?: number | null, bioParagraph1Y?: number | null, bioParagraph1Size?: number | null, bioParagraph1Color?: string | null, bioParagraph2Visible?: boolean | null, bioParagraph2X?: number | null, bioParagraph2Y?: number | null, bioParagraph2Size?: number | null, bioParagraph2Color?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, galleryImages?: Array<{ __typename: 'PageSectionsAboutGalleryImages', src?: string | null, alt?: string | null } | null> | null } | { __typename: 'PageSectionsTestimonials', eyebrow?: string | null, heading?: string | null, copy?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, reviews?: Array<{ __typename: 'PageSectionsTestimonialsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsReviews', eyebrow?: string | null, heading?: string | null, copy?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, addressVisible?: boolean | null, addressSize?: number | null, addressColor?: string | null, phoneVisible?: boolean | null, phoneSize?: number | null, phoneColor?: string | null, emailVisible?: boolean | null, emailSize?: number | null, emailColor?: string | null, hoursVisible?: boolean | null, hoursSize?: number | null, hoursColor?: string | null, reviews?: Array<{ __typename: 'PageSectionsReviewsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsContact', eyebrow?: string | null, heading?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, addressVisible?: boolean | null, addressSize?: number | null, addressColor?: string | null, phoneVisible?: boolean | null, phoneSize?: number | null, phoneColor?: string | null, emailVisible?: boolean | null, emailSize?: number | null, emailColor?: string | null, hoursVisible?: boolean | null, hoursSize?: number | null, hoursColor?: string | null } | { __typename: 'PageSectionsFooter', tagline?: string | null, taglineVisible?: boolean | null, taglineX?: number | null, taglineY?: number | null, taglineSize?: number | null, taglineColor?: string | null } | null> | null, navigation?: { __typename: 'PageNavigation', ctaVisible?: boolean | null, ctaText?: string | null, linkFontSize?: number | null, linkColor?: string | null, linkHoverColor?: string | null, linkActiveColor?: string | null, linkUppercase?: boolean | null, barBackground?: string | null, barBorderColor?: string | null, barHeight?: number | null, barWidth?: number | null, barBlur?: boolean | null, navLinks?: Array<{ __typename: 'PageNavigationNavLinks', sectionId: string, label: string, visible?: boolean | null } | null> | null } | null } };
 
 export type PageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1703,7 +1839,7 @@ export type PageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'PageSectionsHero', location?: string | null, headingLine1?: string | null, headingLine2?: string | null, subheading?: string | null, phoneNumber?: string | null, calloutTitle?: string | null, calloutText?: string | null, proofBackgroundOpacity?: number | null, imageSrc?: string | null, imageAlt?: string | null, locationVisible?: boolean | null, locationSize?: number | null, locationColor?: string | null, headingLine1Visible?: boolean | null, headingLine1X?: number | null, headingLine1Y?: number | null, headingLine1Size?: number | null, headingLine1Color?: string | null, headingLine2Visible?: boolean | null, headingLine2X?: number | null, headingLine2Y?: number | null, headingLine2Size?: number | null, headingLine2Color?: string | null, subheadingVisible?: boolean | null, subheadingX?: number | null, subheadingY?: number | null, subheadingSize?: number | null, subheadingColor?: string | null, proofs?: Array<{ __typename: 'PageSectionsHeroProofs', value?: string | null, label?: string | null, valueSize?: number | null, valueColor?: string | null, labelSize?: number | null, labelColor?: string | null } | null> | null } | { __typename: 'PageSectionsServices', eyebrow?: string | null, heading?: string | null, copy?: string | null, disclaimer?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, disclaimerVisible?: boolean | null, disclaimerX?: number | null, disclaimerY?: number | null, disclaimerSize?: number | null, disclaimerColor?: string | null } | { __typename: 'PageSectionsProcess', heading?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, galleryImages?: Array<{ __typename: 'PageSectionsProcessGalleryImages', src?: string | null, alt?: string | null } | null> | null } | { __typename: 'PageSectionsAbout', eyebrow?: string | null, heading?: string | null, ownerName?: string | null, nameInitial?: string | null, copy?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null, focalPoint?: string | null, nameInitialVisible?: boolean | null, nameInitialSize?: number | null, nameInitialColor?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, ownerNameVisible?: boolean | null, ownerNameX?: number | null, ownerNameY?: number | null, ownerNameSize?: number | null, ownerNameColor?: string | null, bioParagraph1Visible?: boolean | null, bioParagraph1X?: number | null, bioParagraph1Y?: number | null, bioParagraph1Size?: number | null, bioParagraph1Color?: string | null, bioParagraph2Visible?: boolean | null, bioParagraph2X?: number | null, bioParagraph2Y?: number | null, bioParagraph2Size?: number | null, bioParagraph2Color?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, galleryImages?: Array<{ __typename: 'PageSectionsAboutGalleryImages', src?: string | null, alt?: string | null } | null> | null } | { __typename: 'PageSectionsTestimonials', eyebrow?: string | null, heading?: string | null, copy?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, reviews?: Array<{ __typename: 'PageSectionsTestimonialsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsContact', eyebrow?: string | null, heading?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, addressVisible?: boolean | null, addressSize?: number | null, addressColor?: string | null, phoneVisible?: boolean | null, phoneSize?: number | null, phoneColor?: string | null, emailVisible?: boolean | null, emailSize?: number | null, emailColor?: string | null, hoursVisible?: boolean | null, hoursSize?: number | null, hoursColor?: string | null } | { __typename: 'PageSectionsFooter', tagline?: string | null, taglineVisible?: boolean | null, taglineX?: number | null, taglineY?: number | null, taglineSize?: number | null, taglineColor?: string | null } | null> | null, navigation?: { __typename: 'PageNavigation', ctaVisible?: boolean | null, ctaText?: string | null, linkFontSize?: number | null, linkColor?: string | null, linkHoverColor?: string | null, linkActiveColor?: string | null, linkUppercase?: boolean | null, barBackground?: string | null, barBorderColor?: string | null, barHeight?: number | null, barBlur?: boolean | null, navLinks?: Array<{ __typename: 'PageNavigationNavLinks', sectionId: string, label: string, visible?: boolean | null } | null> | null } | null } | null } | null> | null } };
+export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'PageSectionsHero', location?: string | null, headingLine1?: string | null, headingLine2?: string | null, subheading?: string | null, phoneNumber?: string | null, calloutTitle?: string | null, calloutText?: string | null, proofBackgroundOpacity?: number | null, imageSrc?: string | null, imageAlt?: string | null, locationVisible?: boolean | null, locationSize?: number | null, locationColor?: string | null, headingLine1Visible?: boolean | null, headingLine1X?: number | null, headingLine1Y?: number | null, headingLine1Size?: number | null, headingLine1Color?: string | null, headingLine2Visible?: boolean | null, headingLine2X?: number | null, headingLine2Y?: number | null, headingLine2Size?: number | null, headingLine2Color?: string | null, subheadingVisible?: boolean | null, subheadingX?: number | null, subheadingY?: number | null, subheadingSize?: number | null, subheadingColor?: string | null, proofs?: Array<{ __typename: 'PageSectionsHeroProofs', value?: string | null, label?: string | null, valueSize?: number | null, valueColor?: string | null, labelSize?: number | null, labelColor?: string | null } | null> | null } | { __typename: 'PageSectionsServices', eyebrow?: string | null, heading?: string | null, copy?: string | null, disclaimer?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, disclaimerVisible?: boolean | null, disclaimerX?: number | null, disclaimerY?: number | null, disclaimerSize?: number | null, disclaimerColor?: string | null } | { __typename: 'PageSectionsProcess', heading?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, galleryImages?: Array<{ __typename: 'PageSectionsProcessGalleryImages', src?: string | null, alt?: string | null } | null> | null } | { __typename: 'PageSectionsAbout', eyebrow?: string | null, heading?: string | null, ownerName?: string | null, nameInitial?: string | null, copy?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null, focalPoint?: string | null, nameInitialVisible?: boolean | null, nameInitialSize?: number | null, nameInitialColor?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, ownerNameVisible?: boolean | null, ownerNameX?: number | null, ownerNameY?: number | null, ownerNameSize?: number | null, ownerNameColor?: string | null, bioParagraph1Visible?: boolean | null, bioParagraph1X?: number | null, bioParagraph1Y?: number | null, bioParagraph1Size?: number | null, bioParagraph1Color?: string | null, bioParagraph2Visible?: boolean | null, bioParagraph2X?: number | null, bioParagraph2Y?: number | null, bioParagraph2Size?: number | null, bioParagraph2Color?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, galleryImages?: Array<{ __typename: 'PageSectionsAboutGalleryImages', src?: string | null, alt?: string | null } | null> | null } | { __typename: 'PageSectionsTestimonials', eyebrow?: string | null, heading?: string | null, copy?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, reviews?: Array<{ __typename: 'PageSectionsTestimonialsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsReviews', eyebrow?: string | null, heading?: string | null, copy?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, copyVisible?: boolean | null, copyX?: number | null, copyY?: number | null, copySize?: number | null, copyColor?: string | null, addressVisible?: boolean | null, addressSize?: number | null, addressColor?: string | null, phoneVisible?: boolean | null, phoneSize?: number | null, phoneColor?: string | null, emailVisible?: boolean | null, emailSize?: number | null, emailColor?: string | null, hoursVisible?: boolean | null, hoursSize?: number | null, hoursColor?: string | null, reviews?: Array<{ __typename: 'PageSectionsReviewsReviews', quote?: string | null, byline?: string | null } | null> | null } | { __typename: 'PageSectionsContact', eyebrow?: string | null, heading?: string | null, address?: string | null, phone?: string | null, phoneHref?: string | null, email?: string | null, emailHref?: string | null, hours?: string | null, eyebrowVisible?: boolean | null, eyebrowSize?: number | null, eyebrowColor?: string | null, headingVisible?: boolean | null, headingX?: number | null, headingY?: number | null, headingSize?: number | null, headingColor?: string | null, addressVisible?: boolean | null, addressSize?: number | null, addressColor?: string | null, phoneVisible?: boolean | null, phoneSize?: number | null, phoneColor?: string | null, emailVisible?: boolean | null, emailSize?: number | null, emailColor?: string | null, hoursVisible?: boolean | null, hoursSize?: number | null, hoursColor?: string | null } | { __typename: 'PageSectionsFooter', tagline?: string | null, taglineVisible?: boolean | null, taglineX?: number | null, taglineY?: number | null, taglineSize?: number | null, taglineColor?: string | null } | null> | null, navigation?: { __typename: 'PageNavigation', ctaVisible?: boolean | null, ctaText?: string | null, linkFontSize?: number | null, linkColor?: string | null, linkHoverColor?: string | null, linkActiveColor?: string | null, linkUppercase?: boolean | null, barBackground?: string | null, barBorderColor?: string | null, barHeight?: number | null, barWidth?: number | null, barBlur?: boolean | null, navLinks?: Array<{ __typename: 'PageNavigationNavLinks', sectionId: string, label: string, visible?: boolean | null } | null> | null } | null } | null } | null> | null } };
 
 export type BookingQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1874,6 +2010,47 @@ export const PagePartsFragmentDoc = gql`
       copySize
       copyColor
     }
+    ... on PageSectionsReviews {
+      eyebrow
+      heading
+      copy
+      reviews {
+        __typename
+        quote
+        byline
+      }
+      address
+      phone
+      phoneHref
+      email
+      emailHref
+      hours
+      eyebrowVisible
+      eyebrowSize
+      eyebrowColor
+      headingVisible
+      headingX
+      headingY
+      headingSize
+      headingColor
+      copyVisible
+      copyX
+      copyY
+      copySize
+      copyColor
+      addressVisible
+      addressSize
+      addressColor
+      phoneVisible
+      phoneSize
+      phoneColor
+      emailVisible
+      emailSize
+      emailColor
+      hoursVisible
+      hoursSize
+      hoursColor
+    }
     ... on PageSectionsContact {
       eyebrow
       heading
@@ -1931,6 +2108,7 @@ export const PagePartsFragmentDoc = gql`
     barBackground
     barBorderColor
     barHeight
+    barWidth
     barBlur
   }
 }

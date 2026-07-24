@@ -131,11 +131,14 @@
           "byline": "Enrique Sanchez"
         }
       ],
+      "eyebrowVisible": false,
+      "headingVisible": true,
+      "copyVisible": false,
       "_template": "testimonials"
     },
     {
-      "eyebrow": "",
-      "heading": "Contact Us",
+      "eyebrow": "make it a breeze",
+      "heading": "",
       "address": "Ventura, Oxnard, Thousand Oaks",
       "phone": "(805) 760-8765",
       "phoneHref": "tel:+18057608765",
@@ -143,7 +146,7 @@
       "emailHref": "mailto:sacrementado27@gmail.com",
       "hours": "24 hrs",
       "eyebrowVisible": true,
-      "eyebrowSize": 7,
+      "eyebrowSize": 70,
       "headingVisible": true,
       "headingSize": 68,
       "addressVisible": true,
@@ -165,6 +168,11 @@
         "visible": true
       },
       {
+        "sectionId": "process",
+        "label": "Gallery",
+        "visible": true
+      },
+      {
         "sectionId": "about",
         "label": "About",
         "visible": true
@@ -177,13 +185,15 @@
       {
         "sectionId": "contact",
         "label": "Contact",
-        "visible": true
+        "visible": false
       }
     ],
     "ctaVisible": true,
     "ctaText": "Get a free quote",
     "linkColor": "#000000",
-    "linkUppercase": false,
-    "barBackground": "#E2E2E2"
+    "linkUppercase": true,
+    "barBackground": "#E2E2E2",
+    "barHeight": 64,
+    "barBlur": false
   }
 }

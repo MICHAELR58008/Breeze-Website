@@ -31,7 +31,7 @@ export function Testimonials(props: TestimonialsProps) {
   const { eyebrow, heading, copy, reviews, eyebrowVisible, eyebrowSize, eyebrowColor, headingVisible, headingX, headingY, headingSize, headingColor, copyVisible, copyX, copyY, copySize, copyColor } = { ...defaults, ...props }
 
   return (
-    <section id="reviews" className="border-y border-border bg-card">
+    <section id="testimonials" className="min-h-[60vh] border-y border-border bg-card">
       <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:px-12">
         <SectionHeader
           eyebrow={eyebrow || ""}

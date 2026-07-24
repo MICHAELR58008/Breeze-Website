@@ -50,7 +50,7 @@ export function Contact(props: ContactProps) {
   ]
 
   return (
-    <section id="contact" className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
+    <section id="contact" className="mx-auto min-h-[60vh] max-w-[1400px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
       <div className="grid gap-12 lg:grid-cols-12">
         <div className="lg:col-span-7">
           <StyledText

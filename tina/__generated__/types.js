@@ -155,6 +155,47 @@ export const PagePartsFragmentDoc = gql`
       copySize
       copyColor
     }
+    ... on PageSectionsReviews {
+      eyebrow
+      heading
+      copy
+      reviews {
+        __typename
+        quote
+        byline
+      }
+      address
+      phone
+      phoneHref
+      email
+      emailHref
+      hours
+      eyebrowVisible
+      eyebrowSize
+      eyebrowColor
+      headingVisible
+      headingX
+      headingY
+      headingSize
+      headingColor
+      copyVisible
+      copyX
+      copyY
+      copySize
+      copyColor
+      addressVisible
+      addressSize
+      addressColor
+      phoneVisible
+      phoneSize
+      phoneColor
+      emailVisible
+      emailSize
+      emailColor
+      hoursVisible
+      hoursSize
+      hoursColor
+    }
     ... on PageSectionsContact {
       eyebrow
       heading
@@ -212,6 +253,7 @@ export const PagePartsFragmentDoc = gql`
     barBackground
     barBorderColor
     barHeight
+    barWidth
     barBlur
   }
 }

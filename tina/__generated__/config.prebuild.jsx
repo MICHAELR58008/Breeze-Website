@@ -783,6 +783,74 @@ var config_default = defineConfig({
                 ]
               },
               {
+                name: "reviews",
+                label: "Reviews & Contact",
+                ui: {
+                  defaultItem: {
+                    eyebrow: "04 / Testimonials",
+                    heading: "What our clients say.",
+                    copy: "",
+                    reviews: [
+                      { quote: "The house felt completely refreshed, and every detail was handled with care.", byline: "Sample review" },
+                      { quote: "Clear communication, thoughtful service, and a result we were proud to come home to.", byline: "Sample review" },
+                      { quote: "Breeze made the whole process feel easy from the first quote to the final walkthrough.", byline: "Sample review" }
+                    ],
+                    address: "Ventura County, CA",
+                    phone: "(805) 760-8765",
+                    phoneHref: "tel:+18057608765",
+                    email: "sacrementado27@gmail.com",
+                    emailHref: "mailto:sacrementado27@gmail.com",
+                    hours: "We reply within 24 hours"
+                  }
+                },
+                fields: [
+                  { type: "string", name: "eyebrow" },
+                  { type: "string", name: "heading" },
+                  { type: "string", name: "copy" },
+                  {
+                    type: "object",
+                    name: "reviews",
+                    label: "Reviews",
+                    list: true,
+                    fields: [
+                      { type: "string", name: "quote" },
+                      { type: "string", name: "byline" }
+                    ]
+                  },
+                  { type: "string", name: "address" },
+                  { type: "string", name: "phone" },
+                  { type: "string", name: "phoneHref" },
+                  { type: "string", name: "email" },
+                  { type: "string", name: "emailHref" },
+                  { type: "string", name: "hours" },
+                  { type: "boolean", name: "eyebrowVisible", label: "Show eyebrow" },
+                  { type: "number", name: "eyebrowSize", label: "Eyebrow Size (px)" },
+                  { type: "string", name: "eyebrowColor", label: "Eyebrow Color", ui: { component: "color" } },
+                  { type: "boolean", name: "headingVisible", label: "Show heading" },
+                  { type: "number", name: "headingX", label: "Heading \u2014 X" },
+                  { type: "number", name: "headingY", label: "Heading \u2014 Y" },
+                  { type: "number", name: "headingSize", label: "Heading \u2014 Size (px)" },
+                  { type: "string", name: "headingColor", label: "Heading \u2014 Color", ui: { component: "color" } },
+                  { type: "boolean", name: "copyVisible", label: "Show copy" },
+                  { type: "number", name: "copyX", label: "Copy \u2014 X" },
+                  { type: "number", name: "copyY", label: "Copy \u2014 Y" },
+                  { type: "number", name: "copySize", label: "Copy \u2014 Size (px)" },
+                  { type: "string", name: "copyColor", label: "Copy \u2014 Color", ui: { component: "color" } },
+                  { type: "boolean", name: "addressVisible", label: "Show address" },
+                  { type: "number", name: "addressSize", label: "Address Size (px)" },
+                  { type: "string", name: "addressColor", label: "Address Color", ui: { component: "color" } },
+                  { type: "boolean", name: "phoneVisible", label: "Show phone" },
+                  { type: "number", name: "phoneSize", label: "Phone Size (px)" },
+                  { type: "string", name: "phoneColor", label: "Phone Color", ui: { component: "color" } },
+                  { type: "boolean", name: "emailVisible", label: "Show email" },
+                  { type: "number", name: "emailSize", label: "Email Size (px)" },
+                  { type: "string", name: "emailColor", label: "Email Color", ui: { component: "color" } },
+                  { type: "boolean", name: "hoursVisible", label: "Show hours" },
+                  { type: "number", name: "hoursSize", label: "Hours Size (px)" },
+                  { type: "string", name: "hoursColor", label: "Hours Color", ui: { component: "color" } }
+                ]
+              },
+              {
                 name: "contact",
                 label: "Contact",
                 ui: {
@@ -874,7 +942,7 @@ var config_default = defineConfig({
                     name: "sectionId",
                     label: "Section",
                     required: true,
-                    options: ["services", "process", "about", "testimonials", "contact"]
+                    options: ["services", "process", "about", "testimonials", "reviews", "contact"]
                   },
                   { type: "string", name: "label", label: "Label", required: true },
                   { type: "boolean", name: "visible", label: "Show in nav" }
@@ -890,6 +958,7 @@ var config_default = defineConfig({
               { type: "string", name: "barBackground", label: "Bar Background", ui: { component: "color" } },
               { type: "string", name: "barBorderColor", label: "Bar Border Color", ui: { component: "color" } },
               { type: "number", name: "barHeight", label: "Bar Height (px)" },
+              { type: "number", name: "barWidth", label: "Bar Max Width (px)" },
               { type: "boolean", name: "barBlur", label: "Backdrop blur" }
             ]
           }

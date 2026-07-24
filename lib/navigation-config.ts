@@ -30,6 +30,7 @@ export interface NavigationConfig {
   barBackground?: string
   barBorderColor?: string
   barHeight?: number
+  barWidth?: number
   barBlur?: boolean
 }
 

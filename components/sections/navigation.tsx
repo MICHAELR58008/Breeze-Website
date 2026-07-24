@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { ArrowRight, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Brand } from "@/components/sections/shared"
@@ -17,7 +17,6 @@ interface NavigationProps {
   config?: NavigationConfig
 }
 
-// Default links used when no CMS data is available
 const defaultLinks: NavLink[] = [
   ["Services", "#services"],
   ["Process", "#process"],
@@ -28,65 +27,101 @@ const defaultLinks: NavLink[] = [
 
 export function Navigation({ links = defaultLinks, config = navDefaults }: NavigationProps) {
   const [open, setOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState("")
   const { openBooking } = useBooking()
 
-  // ── Resolve config with defaults ──
   const ctaVisible = config.ctaVisible ?? true
   const ctaText = config.ctaText || "Get a free quote"
   const linkUppercase = config.linkUppercase ?? true
+
+  // ── Active section detection ──
+  useEffect(() => {
+    const sectionIds = links.map((l) => l.href.replace("#", ""))
+    const NAV_OFFSET = 80
+
+    const update = () => {
+      let bestId = sectionIds[0] || ""
+      for (const id of sectionIds) {
+        const el = document.getElementById(id)
+        if (!el) continue
+        if (el.getBoundingClientRect().top <= NAV_OFFSET) bestId = id
+      }
+      setActiveSection(bestId)
+    }
+
+    update()
+    window.addEventListener("scroll", update, { passive: true })
+    return () => window.removeEventListener("scroll", update)
+  }, [links])
 
   // ── Header inline styles ──
   const headerStyle: React.CSSProperties = {}
   if (config.barBackground) headerStyle.backgroundColor = config.barBackground
   if (config.barBorderColor) headerStyle.borderBottomColor = config.barBorderColor
   if (config.barHeight) headerStyle.height = `${config.barHeight}px`
+  if (config.barWidth) headerStyle.maxWidth = `${config.barWidth}px`
 
   const headerClasses = [
-    "fixed inset-x-0 top-0 z-40 border-b border-border/70",
+    "fixed top-0 left-1/2 -translate-x-1/2 z-40 w-full border-b border-border/70",
     config.barBlur !== false ? "backdrop-blur-xl" : "",
   ]
     .filter(Boolean)
     .join(" ")
 
-  // ── Link inline styles ──
-  const linkStyle: React.CSSProperties = {}
-  if (config.linkFontSize) linkStyle.fontSize = `${config.linkFontSize}px`
-  if (config.linkColor) linkStyle.color = config.linkColor
+  // ── Tab inline styles ──
+  const tabStyle: React.CSSProperties = {}
+  if (config.linkFontSize) tabStyle.fontSize = `${config.linkFontSize}px`
+  if (config.linkColor) tabStyle.color = config.linkColor
 
-  const linkClasses = [
-    "font-mono text-xs tracking-wider text-muted-foreground transition-colors",
-    linkUppercase ? "uppercase" : "",
-  ]
-    .filter(Boolean)
-    .join(" ")
+  const isActive = (id: string) => id && activeSection === id
 
-  // ── Hover / active pseudo-class <style> tag ──
-  const hoverCss = useMemo(() => {
+  const tabClasses = (id: string) =>
+    [
+      "relative px-4 py-1.5 rounded-full text-sm font-medium transition-colors",
+      "hover:bg-accent hover:text-accent-foreground",
+      linkUppercase ? "uppercase tracking-wide" : "",
+      isActive(id)
+        ? "bg-foreground text-background"
+        : "text-muted-foreground",
+    ]
+      .filter(Boolean)
+      .join(" ")
+
+  // ── CMS color overrides via <style> ──
+  const overrideCss = useMemo(() => {
     const parts: string[] = []
     if (config.linkHoverColor) {
-      parts.push(`#nav-links a:hover{color:${config.linkHoverColor}!important}`)
+      parts.push(`#nav-links a:not(.active-tab):hover{color:${config.linkHoverColor}!important}`)
     }
     if (config.linkActiveColor) {
-      parts.push(`#nav-links a:active{color:${config.linkActiveColor}!important}`)
+      parts.push(`#nav-links a.active-tab{background-color:${config.linkActiveColor}!important}`)
     }
     return parts.join("")
   }, [config.linkHoverColor, config.linkActiveColor])
 
   return (
     <header className={headerClasses} style={headerStyle}>
-      {hoverCss && <style>{hoverCss}</style>}
-      <div className="mx-auto flex h-full max-w-[1400px] items-center justify-between px-5 lg:px-10">
+      {overrideCss && <style>{overrideCss}</style>}
+      <div className="flex h-full items-center justify-between px-5 lg:px-10">
         <Brand />
         <nav
           id="nav-links"
-          className="hidden items-center gap-8 md:flex"
+          className="hidden items-center gap-1 md:flex"
           aria-label="Main navigation"
         >
-          {links.map(({ label, href }) => (
-            <a key={href} href={href} className={linkClasses} style={linkStyle}>
-              {label}
-            </a>
-          ))}
+          {links.map(({ label, href }) => {
+            const id = href.replace("#", "")
+            return (
+              <a
+                key={href}
+                href={href}
+                className={`${tabClasses(id)} ${isActive(id) ? "active-tab" : ""}`}
+                style={tabStyle}
+              >
+                {label}
+              </a>
+            )
+          })}
         </nav>
         <div className="hidden md:block">
           {ctaVisible && (
@@ -106,17 +141,28 @@ export function Navigation({ links = defaultLinks, config = navDefaults }: Navig
       </div>
       {open && (
         <nav className="flex flex-col gap-1 border-t border-border bg-background p-5 md:hidden">
-          {links.map(({ label, href }) => (
-            <a
-              key={href}
-              href={href}
-              onClick={() => setOpen(false)}
-              className="border-b border-border py-4 text-xl"
-              style={linkStyle}
-            >
-              {label}
-            </a>
-          ))}
+          {links.map(({ label, href }) => {
+            const id = href.replace("#", "")
+            return (
+              <a
+                key={href}
+                href={href}
+                onClick={() => setOpen(false)}
+                className={[
+                  "rounded-lg px-4 py-3 font-medium transition-colors",
+                  "hover:bg-accent hover:text-accent-foreground",
+                  isActive(id)
+                    ? "bg-foreground text-background"
+                    : "text-foreground",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+                style={tabStyle}
+              >
+                {label}
+              </a>
+            )
+          })}
           {ctaVisible && (
             <Button className="mt-4" onClick={() => { setOpen(false); openBooking() }}>
               {ctaText}

@@ -4,6 +4,7 @@ import { Process, type ProcessProps } from "@/components/sections/process"
 import { About, type AboutProps } from "@/components/sections/about"
 import { Testimonials, type TestimonialsProps } from "@/components/sections/testimonials"
 import { Contact, type ContactProps } from "@/components/sections/contact"
+import { Reviews, type ReviewsProps } from "@/components/sections/reviews"
 import { Footer, type FooterProps } from "@/components/sections/footer"
 import type { NavLinkOverride } from "@/lib/navigation-config"
 
@@ -15,6 +16,7 @@ export type Block =
   | ({ _template: "process" } & ProcessProps)
   | ({ _template: "about" } & AboutProps)
   | ({ _template: "testimonials" } & TestimonialsProps)
+  | ({ _template: "reviews" } & ReviewsProps)
   | ({ _template: "contact" } & ContactProps)
   | ({ _template: "footer" } & FooterProps)
 
@@ -43,6 +45,8 @@ export function renderBlock(block: Block, index: number) {
       return <About key={`about-${index}`} {...(block as AboutProps)} />
     case "testimonials":
       return <Testimonials key={`testimonials-${index}`} {...(block as TestimonialsProps)} />
+    case "reviews":
+      return <Reviews key={`reviews-${index}`} {...(block as ReviewsProps)} />
     case "contact":
       return <Contact key={`contact-${index}`} {...(block as ContactProps)} />
     case "footer":
@@ -66,6 +70,7 @@ const sectionLabels: Record<string, string> = {
   process: "Process",
   about: "About",
   testimonials: "Reviews",
+  reviews: "Reviews",
   contact: "Contact",
   footer: "",
 }
@@ -99,6 +104,19 @@ export function buildNavLinks(sections: Block[], overrides?: NavLinkOverride[]):
       label: override?.label || entry.label,
     })
   }
+
+  // 4. Add nav entries from overrides that don't match a detected section
+  const detectedIds = new Set(detected.map((e) => e.id))
+  for (const o of overrides) {
+    if (o.visible === false) continue
+    if (detectedIds.has(o.sectionId)) continue
+    result.push({
+      id: o.sectionId,
+      label: o.label || o.sectionId,
+      href: `#${o.sectionId}`,
+    })
+  }
+
   return result
 }
 
@@ -155,6 +173,23 @@ export const defaultBlocks: Block[] = [
       { quote: "Breeze made the whole process feel easy from the first quote to the final walkthrough.", byline: "Sample review · Replace with customer name" },
     ],
   } as TestimonialsProps & { _template: "testimonials" },
+  {
+    _template: "reviews",
+    eyebrow: "04 / Testimonials",
+    heading: "What our clients say.",
+    copy: "",
+    reviews: [
+      { quote: "The house felt completely refreshed, and every detail was handled with care.", byline: "Sample review" },
+      { quote: "Clear communication, thoughtful service, and a result we were proud to come home to.", byline: "Sample review" },
+      { quote: "Breeze made the whole process feel easy from the first quote to the final walkthrough.", byline: "Sample review" },
+    ],
+    address: "Ventura County, CA",
+    phone: "(805) 760-8765",
+    phoneHref: "tel:+18057608765",
+    email: "sacrementado27@gmail.com",
+    emailHref: "mailto:sacrementado27@gmail.com",
+    hours: "We reply within 24 hours",
+  } as ReviewsProps & { _template: "reviews" },
   {
     _template: "contact",
     eyebrow: "05 / Get in touch",

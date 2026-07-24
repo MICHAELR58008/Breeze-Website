@@ -244,6 +244,49 @@ type PageSectionsTestimonials {
   copyColor: String
 }
 
+type PageSectionsReviewsReviews {
+  quote: String
+  byline: String
+}
+
+type PageSectionsReviews {
+  eyebrow: String
+  heading: String
+  copy: String
+  reviews: [PageSectionsReviewsReviews]
+  address: String
+  phone: String
+  phoneHref: String
+  email: String
+  emailHref: String
+  hours: String
+  eyebrowVisible: Boolean
+  eyebrowSize: Float
+  eyebrowColor: String
+  headingVisible: Boolean
+  headingX: Float
+  headingY: Float
+  headingSize: Float
+  headingColor: String
+  copyVisible: Boolean
+  copyX: Float
+  copyY: Float
+  copySize: Float
+  copyColor: String
+  addressVisible: Boolean
+  addressSize: Float
+  addressColor: String
+  phoneVisible: Boolean
+  phoneSize: Float
+  phoneColor: String
+  emailVisible: Boolean
+  emailSize: Float
+  emailColor: String
+  hoursVisible: Boolean
+  hoursSize: Float
+  hoursColor: String
+}
+
 type PageSectionsContact {
   eyebrow: String
   heading: String
@@ -284,7 +327,7 @@ type PageSectionsFooter {
   taglineColor: String
 }
 
-union PageSections = PageSectionsHero | PageSectionsServices | PageSectionsProcess | PageSectionsAbout | PageSectionsTestimonials | PageSectionsContact | PageSectionsFooter
+union PageSections = PageSectionsHero | PageSectionsServices | PageSectionsProcess | PageSectionsAbout | PageSectionsTestimonials | PageSectionsReviews | PageSectionsContact | PageSectionsFooter
 
 type PageNavigationNavLinks {
   sectionId: String!
@@ -304,6 +347,7 @@ type PageNavigation {
   barBackground: String
   barBorderColor: String
   barHeight: Float
+  barWidth: Float
   barBlur: Boolean
 }
 
@@ -498,6 +542,49 @@ input PageSectionsTestimonialsFilter {
   copyColor: StringFilter
 }
 
+input PageSectionsReviewsReviewsFilter {
+  quote: StringFilter
+  byline: StringFilter
+}
+
+input PageSectionsReviewsFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  copy: StringFilter
+  reviews: PageSectionsReviewsReviewsFilter
+  address: StringFilter
+  phone: StringFilter
+  phoneHref: StringFilter
+  email: StringFilter
+  emailHref: StringFilter
+  hours: StringFilter
+  eyebrowVisible: BooleanFilter
+  eyebrowSize: NumberFilter
+  eyebrowColor: StringFilter
+  headingVisible: BooleanFilter
+  headingX: NumberFilter
+  headingY: NumberFilter
+  headingSize: NumberFilter
+  headingColor: StringFilter
+  copyVisible: BooleanFilter
+  copyX: NumberFilter
+  copyY: NumberFilter
+  copySize: NumberFilter
+  copyColor: StringFilter
+  addressVisible: BooleanFilter
+  addressSize: NumberFilter
+  addressColor: StringFilter
+  phoneVisible: BooleanFilter
+  phoneSize: NumberFilter
+  phoneColor: StringFilter
+  emailVisible: BooleanFilter
+  emailSize: NumberFilter
+  emailColor: StringFilter
+  hoursVisible: BooleanFilter
+  hoursSize: NumberFilter
+  hoursColor: StringFilter
+}
+
 input PageSectionsContactFilter {
   eyebrow: StringFilter
   heading: StringFilter
@@ -544,6 +631,7 @@ input PageSectionsFilter {
   process: PageSectionsProcessFilter
   about: PageSectionsAboutFilter
   testimonials: PageSectionsTestimonialsFilter
+  reviews: PageSectionsReviewsFilter
   contact: PageSectionsContactFilter
   footer: PageSectionsFooterFilter
 }
@@ -566,6 +654,7 @@ input PageNavigationFilter {
   barBackground: StringFilter
   barBorderColor: StringFilter
   barHeight: NumberFilter
+  barWidth: NumberFilter
   barBlur: BooleanFilter
 }
 
@@ -1192,6 +1281,49 @@ input PageSectionsTestimonialsMutation {
   copyColor: String
 }
 
+input PageSectionsReviewsReviewsMutation {
+  quote: String
+  byline: String
+}
+
+input PageSectionsReviewsMutation {
+  eyebrow: String
+  heading: String
+  copy: String
+  reviews: [PageSectionsReviewsReviewsMutation]
+  address: String
+  phone: String
+  phoneHref: String
+  email: String
+  emailHref: String
+  hours: String
+  eyebrowVisible: Boolean
+  eyebrowSize: Float
+  eyebrowColor: String
+  headingVisible: Boolean
+  headingX: Float
+  headingY: Float
+  headingSize: Float
+  headingColor: String
+  copyVisible: Boolean
+  copyX: Float
+  copyY: Float
+  copySize: Float
+  copyColor: String
+  addressVisible: Boolean
+  addressSize: Float
+  addressColor: String
+  phoneVisible: Boolean
+  phoneSize: Float
+  phoneColor: String
+  emailVisible: Boolean
+  emailSize: Float
+  emailColor: String
+  hoursVisible: Boolean
+  hoursSize: Float
+  hoursColor: String
+}
+
 input PageSectionsContactMutation {
   eyebrow: String
   heading: String
@@ -1238,6 +1370,7 @@ input PageSectionsMutation {
   process: PageSectionsProcessMutation
   about: PageSectionsAboutMutation
   testimonials: PageSectionsTestimonialsMutation
+  reviews: PageSectionsReviewsMutation
   contact: PageSectionsContactMutation
   footer: PageSectionsFooterMutation
 }
@@ -1260,6 +1393,7 @@ input PageNavigationMutation {
   barBackground: String
   barBorderColor: String
   barHeight: Float
+  barWidth: Float
   barBlur: Boolean
 }
 

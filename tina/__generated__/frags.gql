@@ -147,6 +147,47 @@ fragment PageParts on Page {
       copySize
       copyColor
     }
+    ... on PageSectionsReviews {
+      eyebrow
+      heading
+      copy
+      reviews {
+        __typename
+        quote
+        byline
+      }
+      address
+      phone
+      phoneHref
+      email
+      emailHref
+      hours
+      eyebrowVisible
+      eyebrowSize
+      eyebrowColor
+      headingVisible
+      headingX
+      headingY
+      headingSize
+      headingColor
+      copyVisible
+      copyX
+      copyY
+      copySize
+      copyColor
+      addressVisible
+      addressSize
+      addressColor
+      phoneVisible
+      phoneSize
+      phoneColor
+      emailVisible
+      emailSize
+      emailColor
+      hoursVisible
+      hoursSize
+      hoursColor
+    }
     ... on PageSectionsContact {
       eyebrow
       heading
@@ -204,6 +245,7 @@ fragment PageParts on Page {
     barBackground
     barBorderColor
     barHeight
+    barWidth
     barBlur
   }
 }

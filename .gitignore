@@ -9,9 +9,6 @@ __v0_jsx-dev-runtime.ts
 # Environment variables
 .env*.local
 
-# Tina CMS auto-generated files (may contain tokens)
-tina/__generated__/
-
 # Common ignores
 node_modules
 .next/

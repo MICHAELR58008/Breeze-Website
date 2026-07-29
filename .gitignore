@@ -21,3 +21,11 @@ node_modules
 .env.development
 .env.production
 .agents/
+
+# Dev logs & security reports
+tina-dev*.log
+gitleaks-report.json
+semgrep-*.json
+trivy-*.json
+sbom.spdx.json
+tsconfig.tsbuildinfo

@@ -16,7 +16,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  if (pathname.startsWith("/admin/")) {
+  if (pathname.startsWith("/admin/bookings") || pathname.startsWith("/admin/pricing")) {
     if (!session) {
       const loginUrl = new URL("/admin/login", request.url)
       return NextResponse.redirect(loginUrl)

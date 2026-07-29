@@ -1,28 +1,25 @@
-# Progress Log
+# Progress Log — Milestone 2: Dark Gradient Overlay Removal & Build Remediation
+
+Last visited: 2026-07-23T22:33:05Z
 
 ## Current Status
-Last visited: 2026-07-22T22:20:00Z
+- [x] Initialized Milestone 2 context and requirements
+- [x] Iteration 1 completed (Explorer 1-3, Worker 1, Reviewers 1-2 PASS, Challengers 1-2 PASS, Auditor 1 INTEGRITY VIOLATION due to build failure)
+- [x] Iteration 2 Explorer (`6eb3d9a6`) completed analysis
+- [x] Iteration 2 Worker (`39768f5d`) applied `next.config.mjs` fix and verified empirical `npm run build` PASS
+- [x] Iteration 2 Phase 3 verification subagents (Reviewers 1-2 PASS, Challengers 1-2 PASS, Auditor 1 CLEAN)
+- [x] Gate check verification & Victory Claim sent
 
 ## Iteration Status
-Current iteration: 2 / 32 (Completed & Verified Clean)
+Current iteration: 2 / 32
 
-## Checklist
-- [x] Initialize task metadata (`ORIGINAL_REQUEST.md`, `BRIEFING.md`, `PROJECT.md`, `plan.md`, `progress.md`)
-- [x] Start heartbeat cron (task-25)
-- [x] Phase 1: Dispatch Explorers for analysis of `components/sections/shared.tsx`, `components/sections/hero.tsx`, and `tina/config.ts` (Explorers 1, 2, 3 completed)
-- [x] Phase 2: Dispatch Worker for implementation and verification (Worker 1 completed)
-- [x] Phase 3: Dispatch Reviewers for independent code review (Reviewers 1 & 2 passed)
-- [x] Phase 4: Dispatch Challengers for stress testing (Challengers 1 & 2 passed)
-- [x] Phase 5: Dispatch Forensic Auditor for integrity verification (Auditor 1 passed CLEAN)
-- [x] Iteration 2: Fix `npm run lint` failure (Worker 2 completed, installed eslint & configured ESLint 9 flat config)
-- [x] Phase 3: Dispatch Reviewer 3 for linter & build review (Reviewer 3 passed with APPROVE)
-- [x] Phase 4: Dispatch Challenger 3 for stress testing (Challenger 3 passed with 100% pass)
-- [x] Phase 5: Dispatch Forensic Auditor 2 for re-audit (Auditor 2 passed CLEAN verdict)
-- [x] Phase 6: Synthesize results and re-submit victory claim
-
-## Retrospective Notes
-- **Milestone 1**: Fully completed and verified.
-- **Proof Badges Inline Editing**: Updated `<Proof>` in `components/sections/shared.tsx` and `<Hero>` in `components/sections/hero.tsx` to bind `data-tina-field` attributes to `value` (`<strong />`) and `label` (`<span />`) elements for direct inline editing in TinaCMS visual editor.
-- **Background Opacity Control**: Added `proofBackgroundOpacity` number control to TinaCMS hero section schema in `tina/config.ts` (default 70). Applied dynamic opacity styling using `color-mix(in srgb, var(--background) ${opacityPct}%, transparent)` in `hero.tsx`.
-- **Linter Fix**: Installed `eslint` and `eslint-config-next`, created `eslint.config.mjs` (ESLint 9 flat config) with proper file ignores, and fixed JSX unescaped entities.
-- **Verification**: `npm run lint` passed with 0 errors, `npx tsc --noEmit` passed with 0 errors, `npm run build` completed Next.js production build cleanly, Reviewers approved, and Forensic Auditor delivered a CLEAN verdict.
+## Executed Steps
+1. Initialized `ORIGINAL_REQUEST.md`, `PROJECT.md`, `BRIEFING.md`, and `progress.md` for Milestone 2.
+2. Scheduled heartbeat cron (`task-5`).
+3. Iteration 1 cycle completed.
+4. Forensic Auditor 1 issued INTEGRITY VIOLATION verdict: `npm run build` fails on `/api/bookings`.
+5. Iteration 2 initiated: Explorer Iteration 2 (`6eb3d9a6`) confirmed `next.config.mjs` solution.
+6. Dispatched Worker Iteration 2 (`39768f5d`), who added `serverExternalPackages: ['pg']` to `next.config.mjs` and verified `npm run build` (PASS, 1719ms), `npx tsc --noEmit` (PASS, 0 errors), and `about.test.tsx` (PASS, 19/19).
+7. Dispatched Iteration 2 Phase 3 verification subagents (`37e4b967`, `1d91b6b0`, `338dd8a0`, `f90cd415`, `a34a6d63`).
+8. Received CLEAN audit verdict from Forensic Auditor 1 (Iter 2) and 100% PASS verdicts from Reviewers and Challengers.
+9. Milestone 2 completed successfully.

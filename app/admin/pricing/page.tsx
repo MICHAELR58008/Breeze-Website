@@ -171,7 +171,9 @@ export default function PricingHubPage() {
 
       const res = await fetch("/api/admin/pricing", {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(payload),
       })
 
@@ -240,6 +242,10 @@ export default function PricingHubPage() {
               <span className="text-muted-foreground/40">•</span>
               <Link href="/admin" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
                 Tina CMS Dashboard
+              </Link>
+              <span className="text-muted-foreground/40">•</span>
+              <Link href="/admin/bookings" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
+                Bookings
               </Link>
             </div>
             <h1 className="mt-2 font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">

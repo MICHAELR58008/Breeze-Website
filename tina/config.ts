@@ -3,8 +3,8 @@ import { PricingManagerModal } from "./components/PricingManagerModal"
 import { FocalPointPicker } from "./components/FocalPointPicker"
 
 const branch =
-  process.env.GITHUB_BRANCH ||
-  process.env.VERCEL_GIT_COMMIT_REF ||
+  process.env.NEXT_PUBLIC_TINA_BRANCH ||
+  process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF ||
   process.env.HEAD ||
   "main"
 

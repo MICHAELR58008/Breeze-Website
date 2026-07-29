@@ -1,4 +1,5 @@
-import { client } from "@/tina/__generated__/client"
+import fs from "fs/promises"
+import path from "path"
 import { type Block, defaultBlocks } from "@/lib/page-sections"
 import { navDefaults, type NavigationConfig } from "@/lib/navigation-config"
 
@@ -21,6 +22,7 @@ export interface PageData {
  */
 export async function fetchPageData(): Promise<PageData> {
   try {
+    const { client } = await import("@/tina/__generated__/client")
     const result = await client.queries.page({ relativePath: "page.json" })
     const data = result.data as any
     return {
@@ -36,10 +38,17 @@ export async function fetchPageData(): Promise<PageData> {
       navigation: (data.page?.navigation as NavigationConfig) || navDefaults,
     }
   } catch {
-    return {
-      tina: null,
-      sections: defaultBlocks,
-      navigation: navDefaults,
+    try {
+      const pagePath = path.join(process.cwd(), "content", "page", "page.json")
+      const raw = await fs.readFile(pagePath, "utf-8")
+      const data = JSON.parse(raw)
+      return {
+        tina: null,
+        sections: (data.sections || []) as Block[],
+        navigation: (data.navigation as NavigationConfig) || navDefaults,
+      }
+    } catch {
+      return { tina: null, sections: defaultBlocks, navigation: navDefaults }
     }
   }
 }

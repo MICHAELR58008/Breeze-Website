@@ -1,6 +1,7 @@
 "use client"
 
 import { createContext, useContext, useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react"
+import { useRouter } from "next/navigation"
 import { AlertTriangle, ArrowLeft, ArrowRight, CalendarDays, Check, CheckCircle2, HelpCircle, ImagePlus, Info, Loader2, Shield, Sparkles, Star, X } from "lucide-react"
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
@@ -154,6 +155,7 @@ function BookingDrawerCore({
   previewOpen: boolean
   children: ReactNode
 }) {
+  const router = useRouter()
   const [open, setOpen] = useState(previewOpen)
   const [stepIndex, setStepIndex] = useState(0)
   const [formData, setFormData] = useState<Record<string, any>>(initialState)
@@ -256,7 +258,7 @@ function BookingDrawerCore({
       const response = await fetch("/api/bookings", { method: "POST", body })
       const result = await response.json()
       if (!response.ok) throw new Error(result.error)
-      setComplete(true)
+      router.push(`/thank-you?name=${encodeURIComponent(formData.name || "")}`)
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Unable to submit your request.")
     } finally {

@@ -1,28 +1,20 @@
-# Project: Proof Badges Inline Editing & Opacity Control
+# Project: About Section Styling & Overlay Cleanup
 
-## Scope
-1. Enable inline editing for Proof Text (`value` and `label`) by passing and applying `data-tina-field` attributes in `components/sections/shared.tsx` and `components/sections/hero.tsx`.
-2. Add "Proof Background Opacity" schema control to the Hero section in `tina/config.ts` and apply dynamic opacity styling to proof badges in `components/sections/hero.tsx`.
-3. Verify changes with `npx tsc --noEmit`, `npm run lint`, and `npm run build`.
+## Mission
+Remove the dark gradient overlay on the About section image block (`components/sections/about.tsx`) so the CEO photo renders 100% clean without dark gradient shadows or lines, while ensuring zero type errors (`npx tsc --noEmit`) and successful build (`npm run build`).
 
-## Architecture
-- `components/sections/shared.tsx`: Contains shared UI components including `Proof` badge component.
-- `components/sections/hero.tsx`: Hero section component rendering `Proof` badges with Tina CMS annotations.
-- `tina/config.ts`: TinaCMS schema configuration.
-
-## Requirements
-- R1: Update `Proof` component (`components/sections/shared.tsx`) and `Hero` component (`components/sections/hero.tsx`) to pass/apply `data-tina-field` attributes to `value` and `label` elements for inline TinaCMS editing.
-- R2: Update `tina/config.ts` (hero section schema) to add a number control for proof background opacity, and update `components/sections/hero.tsx` to dynamically apply opacity.
-- R3: Complete build and type checks: `npx tsc --noEmit`, `npm run lint`, `npm run build`.
-
-## Acceptance Criteria
-- [x] In TinaCMS visual editor, clicking on "value" or "label" text of proof badges focuses the field for inline editing.
-- [x] TinaCMS sidebar includes background opacity control for proof badges that dynamically updates live preview.
-- [x] `npx tsc --noEmit` completes with 0 errors.
-- [x] `npm run lint` completes with 0 errors.
-- [x] `npm run build` completes cleanly.
+## Architecture & Code Layout
+- Component under edit: `components/sections/about.tsx`
+- Build config: `next.config.mjs`
+- Layout & styling: Tailwind CSS, Next.js Image container wrapper
 
 ## Milestones
 | # | Name | Scope | Dependencies | Status |
 |---|------|-------|-------------|--------|
-| 1 | Proof Badges Inline Editing & Opacity Control | `components/sections/shared.tsx`, `components/sections/hero.tsx`, `tina/config.ts` | none | DONE |
+| 1 | About Section Layout Alignment Fix | Root cause analysis & padding alignment | None | DONE |
+| 2 | Remove Dark Gradient Overlay & Build Fix | Remove bottom gradient overlay elements/classes in `components/sections/about.tsx` and configure `serverExternalPackages: ['pg']` in `next.config.mjs` | M1 | DONE |
+
+## Interface Contracts & Requirements
+- R1: Remove the bottom gradient overlay (`bg-gradient-to-t from-black/80...` or similar overlay elements) and dark slate backdrop bleeding from the image block in `components/sections/about.tsx`.
+- R2: Ensure the CEO image renders clearly from top to bottom with full container coverage, preserved focal point cropping, and zero dark overlay artifacts.
+- Verification: `npx tsc --noEmit` returns 0 type errors, `npm run build` succeeds, `about.test.tsx` 19/19 tests pass, Forensic Auditor verdict is CLEAN.

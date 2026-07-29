@@ -22,6 +22,8 @@
 | `pnpm dev:tina` | TinaCMS local dev (wraps `next dev`) |
 | `pnpm build` | `next build` (typescript errors ignored) |
 | `pnpm build:tina` | TinaCMS build + next build |
+| `pnpm db:generate` | Generate Drizzle migration from schema changes |
+| `pnpm db:migrate` | Apply pending Drizzle migrations to the database |
 | `pnpm test` | `vitest run` (excludes pricing.test.ts and *-verification.test.ts) |
 | `pnpm test:watch` | `vitest` in watch mode |
 | `pnpm lint` | ESLint (flat config) |
@@ -160,6 +162,8 @@ Every text element in sections receives per-element CMS controls:
 | `NEXT_PUBLIC_TINA_CLIENT_ID` | TinaCMS client ID (defaults to `"local-dev"`) |
 | `TINA_TOKEN` | TinaCMS API token (defaults to `"local-dev-token"`) |
 | `BLOB_READ_WRITE_TOKEN` | Vercel Blob token for photo uploads |
+| `ADMIN_API_KEY` | Shared secret for `/api/admin/pricing` route authentication (server-side) |
+| `NEXT_PUBLIC_ADMIN_API_KEY` | Same key, exposed to client for admin dashboard auth header |
 
 ## Related Files
 

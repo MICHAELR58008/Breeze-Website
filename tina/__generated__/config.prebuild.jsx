@@ -479,7 +479,7 @@ var FocalPointPickerInner = (props) => {
 var FocalPointPicker = wrapFieldsWithMeta2((props) => jsx3(ErrorBoundary, { children: jsx3(FocalPointPickerInner, { ...props }) }));
 
 // tina/config.ts
-var branch = process.env.GITHUB_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || process.env.HEAD || "main";
+var branch = process.env.NEXT_PUBLIC_TINA_BRANCH || process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF || process.env.HEAD || "main";
 var config_default = defineConfig({
   branch,
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || "local-dev",

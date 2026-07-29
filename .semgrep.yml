@@ -1,0 +1,47 @@
+rules:
+  - id: no-dangerouslySetInnerHTML
+    pattern: dangerouslySetInnerHTML
+    message: "dangerouslySetInnerHTML found. This can lead to XSS."
+    severity: ERROR
+    languages: [ts]
+    paths:
+      exclude:
+        - "*.test.ts"
+        - "*.test.tsx"
+        - "**/ui/*"
+
+  - id: unescaped-html-email
+    patterns:
+      - pattern-either:
+          - pattern-inside: |
+              <td>...$X...</td>
+          - pattern-inside: |
+              <strong>...$X...</strong>
+    message: "Unescaped user data in HTML email. Use he.encode() to prevent XSS in email clients."
+    severity: ERROR
+    languages: [ts]
+    paths:
+      include:
+        - "lib/notifications.ts"
+
+  - id: next-public-admin-key
+    pattern-regex: NEXT_PUBLIC_ADMIN_API_KEY
+    message: "NEXT_PUBLIC_ADMIN_API_KEY exposes admin key in client JS bundle."
+    severity: ERROR
+    languages: [ts,tsx]
+
+  - id: hardcoded-pii-email
+    patterns:
+      - pattern-either:
+          - pattern: 'email: "..."'
+          - pattern: 'phone: "..."'
+      - pattern-not: 'email: process.env...'
+    message: "Hardcoded contact info. Should use Tina CMS content or env vars."
+    severity: INFO
+    languages: [ts,tsx]
+
+  - id: no-innerhtml
+    pattern-regex: "\.innerHTML\s*="
+    message: "Direct DOM with unescaped data. Use safe methods or sanitize."
+    severity: ERROR
+    languages: [ts,tsx]

@@ -4,6 +4,7 @@ import { z } from "zod"
 import { calculateEstimate, validServiceTypes, validAddOnIds, type AddOn, type ServiceType } from "@/lib/pricing"
 import { db } from "@/lib/db"
 import { bookingRequests } from "@/lib/db/schema"
+import { sendBookingEmail, syncToAirtable } from "@/lib/notifications"
 
 const requestSchema = z
   .object({
@@ -108,8 +109,8 @@ export async function POST(request: Request) {
       parsed.data.addOns as AddOn[],
     )
 
-    await db.insert(bookingRequests).values({
-      id: requestId,
+    const bookingData = {
+      requestId,
       serviceType: parsed.data.serviceType,
       bedrooms: parsed.data.bedrooms,
       bathrooms: parsed.data.bathrooms,
@@ -123,7 +124,12 @@ export async function POST(request: Request) {
       customerEmail: parsed.data.email,
       customerPhone: parsed.data.phone,
       photoPathnames: uploaded,
-    })
+    }
+
+    await db.insert(bookingRequests).values(bookingData)
+
+    sendBookingEmail(bookingData)
+    syncToAirtable(bookingData)
 
     return NextResponse.json({ success: true, requestId })
   } catch (error) {

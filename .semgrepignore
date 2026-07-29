@@ -1,0 +1,12 @@
+.next/
+node_modules/
+tina/__generated__/
+.v0-trash/
+__v0_*
+public/uploads/
+.agents/
+dist/
+.next/
+*.min.js
+*.bundle.js
+pnpm-lock.yaml

@@ -101,7 +101,7 @@
     {
       "title": "Extras",
       "description": "Select any add-on services",
-      "disabled": true,
+      "disabled": false,
       "fields": [
         {
           "question": "Would you like any extras?",
@@ -112,9 +112,6 @@
     {
       "title": "Photos",
       "description": "",
-      "showIfField": "fdasfasd",
-      "showIfOperator": "",
-      "showIfValue": "",
       "fields": [
         {
           "label": "Add 1\u00e2\u20ac\u201c2 photos of kitchen, bathroom, and general areas",

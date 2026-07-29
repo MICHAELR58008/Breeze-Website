@@ -1,27 +1,31 @@
-# BRIEFING — 2026-07-22T22:07:00Z
+# BRIEFING — 2026-07-23T22:33:00Z
 
 ## Mission
-Fix Proof Badges inline editing in `components/sections/shared.tsx` and `components/sections/hero.tsx` by adding `data-tina-field` attributes, add "Proof Background Opacity" schema control in `tina/config.ts`, apply dynamic opacity styling in `components/sections/hero.tsx`, ensure `npm run lint` passes, and verify via `npx tsc --noEmit`, `npm run lint`, and `npm run build`.
+Remove the dark gradient overlay on the About section image block (`components/sections/about.tsx`) so the CEO photo renders 100% clean without dark gradient shadows or lines. Verify `npx tsc --noEmit` and `npm run build`.
 
 ## 🔒 My Identity
 - Archetype: teamwork_preview_orchestrator
 - Roles: orchestrator, user_liaison, human_reporter, successor
 - Working directory: c:\Users\SOL\Desktop\Projet for Breeze\wesite\.agents\orchestrator
-- Original parent: top-level
-- Original parent conversation ID: top-level
+- Original parent: 19518591-9592-4177-958b-a83402345ce0
+- Original parent conversation ID: 19518591-9592-4177-958b-a83402345ce0
 
 ## 🔒 My Workflow
 - **Pattern**: Project
 - **Scope document**: c:\Users\SOL\Desktop\Projet for Breeze\wesite\.agents\orchestrator\PROJECT.md
-1. **Decompose**: Decomposed task into Milestone 1 (Proof Badges inline editing + schema opacity control + dynamic styling + lint fix + verification).
-2. **Dispatch & Execute**: Direct iteration loop.
+1. **Decompose**:
+   - Milestone 2: Remove Dark Gradient Overlay & Remediate Build Failure [DONE]
+2. **Dispatch & Execute**:
+   - Step 1: Dispatch Explorer Iteration 2 (`explorer_m2_it2_1`) [COMPLETED]
+   - Step 2: Dispatch Worker Iteration 2 (`39768f5d`) [COMPLETED]
+   - Step 3: Dispatch Reviewers (2), Challengers (2), and Forensic Auditor (1) [COMPLETED - CLEAN VERDICT]
+   - Step 4: Gate check and victory claim [COMPLETED]
 3. **On failure**: Retry -> Replace -> Skip -> Redistribute -> Redesign
 4. **Succession**: Self-succeed at 16 spawns.
 - **Work items**:
-  1. Milestone 1: Proof Badges Inline Editing & Opacity Control [done]
-  2. Iteration 2: Fix `npm run lint` failure & re-verify [done]
-- **Current phase**: 6
-- **Current focus**: Task Complete & Re-submitting Victory Claim
+  1. Milestone 2: Remove Dark Gradient Overlay & Remediate Build Failure [DONE]
+- **Current phase**: 4 (Victory Claim & Handoff)
+- **Current focus**: Sending victory claim to parent and writing handoff report
 
 ## 🔒 Key Constraints
 - Never write or modify source code directly as orchestrator.
@@ -30,40 +34,36 @@ Fix Proof Badges inline editing in `components/sections/shared.tsx` and `compone
 - Never reuse a subagent after handoff.
 
 ## Current Parent
-- Conversation ID: top-level
-- Updated: not yet
+- Conversation ID: 19518591-9592-4177-958b-a83402345ce0
+- Updated: 2026-07-23T22:33:00Z
 
 ## Key Decisions Made
-- Use Project Orchestration pattern.
-- Milestone 1 completed & verified clean (Worker 1, Reviewers 1 & 2, Challengers 1 & 2, Auditor 1 CLEAN).
-- Iteration 2 completed & verified clean: fixed `npm run lint` by adding `eslint` & `eslint-config-next` with ESLint 9 flat config (`eslint.config.mjs`) (Worker 2, Reviewer 3, Challenger 3, Auditor 2 CLEAN).
+- Milestone 2 complete and verified.
+- `next.config.mjs` configured with `serverExternalPackages: ['pg']`.
+- `components/sections/about.tsx` cell padding `p-6 sm:p-8` removed and backdrop set to `bg-transparent`.
+- All checks passed: `npx tsc --noEmit` (0 errors), `npm run build` (success, 2.1s, 5/5 static pages), `about.test.tsx` (19/19 pass).
+- Forensic Auditor verdict: **CLEAN**.
 
 ## Team Roster
 | Agent | Type | Work Item | Status | Conv ID |
 |-------|------|-----------|--------|---------|
-| Explorer 1 | teamwork_preview_explorer | Proof Component Inline Editing Analysis | COMPLETED | e6f393df-3395-4bf7-8990-9c4211dfbe8f |
-| Explorer 2 | teamwork_preview_explorer | Schema Opacity Control Analysis | COMPLETED | 56fd3361-c1ad-480b-ad72-89d0353445a6 |
-| Explorer 3 | teamwork_preview_explorer | End-to-End Implementation Blueprint | COMPLETED | 2ad840d1-c785-455d-b676-67abe69c5466 |
-| Worker 1 | teamwork_preview_worker | Proof Badges & Schema Implementation | COMPLETED | 663edbbb-c772-470b-9b74-ca3d19f4d021 |
-| Reviewer 1 | teamwork_preview_reviewer | Code Review & Verification | COMPLETED (PASS) | 73c1c2b1-e005-45f5-b175-73945285fb05 |
-| Reviewer 2 | teamwork_preview_reviewer | Robustness & Test Suite Review | COMPLETED (PASS) | a6934f48-f83d-4c00-a893-1e872eeefa79 |
-| Challenger 1 | teamwork_preview_challenger | Empirical Correctness Verification | COMPLETED (PASS) | c90fdfa9-6d9d-4e33-9d10-d764a9e68687 |
-| Challenger 2 | teamwork_preview_challenger | Schema & Build Stress Testing | COMPLETED (PASS) | 8344ad2d-1346-42d5-92c9-9cd41be515df |
-| Auditor 1 | teamwork_preview_auditor | Forensic Integrity Audit | COMPLETED (CLEAN) | 909f216b-5a50-49c6-8721-6dfbaf7c0833 |
-| Worker 2 | teamwork_preview_worker | Fix npm run lint failure | COMPLETED | b4886abd-f70e-4197-b27c-6f098437d1d9 |
-| Reviewer 3 | teamwork_preview_reviewer | Verification & Lint Review | COMPLETED (PASS) | 5b9a9710-f56c-4559-abca-604ba7133884 |
-| Challenger 3 | teamwork_preview_challenger | Stress Testing & Build Verification | COMPLETED (PASS) | 813c6669-c499-41cb-8aad-779b4f8f6086 |
-| Auditor 2 | teamwork_preview_auditor | Integrity & Verification Audit | COMPLETED (CLEAN) | c2b381c4-360d-47ad-bffd-359a654f43ee |
+| Explorer (Iter 2) | teamwork_preview_explorer | Audit Remediation Explorer | COMPLETED | 6eb3d9a6-f7ce-482c-8747-772888395108 |
+| Worker (Iter 2) | teamwork_preview_worker | Build Fix & Verification Worker | COMPLETED | 39768f5d-df31-4e4c-9e52-54be441046c9 |
+| Reviewer 1 (Iter 2) | teamwork_preview_reviewer | Code & Overlay Reviewer | COMPLETED | 37e4b967-e354-4055-bb64-70680a3dabef |
+| Reviewer 2 (Iter 2) | teamwork_preview_reviewer | Build & Config Reviewer | COMPLETED | 1d91b6b0-7270-4cfd-b118-ce852d4d788d |
+| Challenger 1 (Iter 2) | teamwork_preview_challenger | Build & Harness Challenger | COMPLETED | 338dd8a0-581f-4c3d-8e83-ee9bee17d2ae |
+| Challenger 2 (Iter 2) | teamwork_preview_challenger | Stress Check Challenger | COMPLETED | f90cd415-4cf1-4510-ace4-f8f8b5632a01 |
+| Auditor 1 (Iter 2) | teamwork_preview_auditor | Forensic Integrity Auditor | COMPLETED (CLEAN) | a34a6d63-9c78-4f79-bac9-4ade7a7d3ec5 |
 
 ## Succession Status
 - Succession required: no
-- Spawn count: 13 / 16
+- Spawn count: 16 / 16
 - Pending subagents: none
 - Predecessor: none
 - Successor: not yet spawned
 
 ## Active Timers
-- Heartbeat cron: terminated
+- Heartbeat cron: task-5 (will be cleaned up on completion)
 - Safety timer: none
 
 ## Artifact Index
@@ -71,5 +71,4 @@ Fix Proof Badges inline editing in `components/sections/shared.tsx` and `compone
 - BRIEFING.md — Context index
 - progress.md — Execution progress tracking
 - PROJECT.md — Scope and requirements index
-- plan.md — Task plan
 - handoff.md — Final handoff report

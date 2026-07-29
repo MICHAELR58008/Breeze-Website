@@ -1,0 +1,37 @@
+title = "Breeze Cleaning Website Gitleaks Config"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Tina dev defaults"
+paths = [
+    '''tina/__generated__/_graphql\.json''',
+    '''tina/__generated__/_lookup\.json''',
+    '''tina/__generated__/_schema\.json''',
+]
+
+[[allowlists]]
+description = "Tina dev defaults"
+regexTarget = "line"
+regexes = [
+    '''"local-dev"''',
+    '''"local-dev-token"''',
+]
+
+[[allowlists]]
+description = "Next.js build cache and env files (not git-tracked)"
+paths = [
+    '''^\.next/''',
+    '''^\.env\.local''',
+]
+
+[[allowlists]]
+description = "Lock files and vendor"
+paths = [
+    '''pnpm-lock\.yaml''',
+    '''package-lock\.json''',
+    '''yarn\.lock''',
+    '''go\.mod''',
+    '''go\.sum''',
+]

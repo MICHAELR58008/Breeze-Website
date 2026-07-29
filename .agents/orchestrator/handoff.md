@@ -1,57 +1,73 @@
-# Orchestrator Handoff Report
+# Orchestrator Hard Handoff Report: Milestone 2 — Dark Gradient Overlay Removal & Build Verification
 
-## Milestone State
-- **Milestone 1**: Proof Badges Inline Editing & Opacity Control — **COMPLETED & VERIFIED CLEAN**
-- **Iteration 2**: Linter Configuration & Build Verification — **COMPLETED & VERIFIED CLEAN**
-
-## Active Subagents
-- All subagents completed and retired (Explorers 1, 2, 3; Workers 1, 2; Reviewers 1, 2, 3; Challengers 1, 2, 3; Auditors 1, 2).
-
-## Pending Decisions
-- None.
-
-## Remaining Work
-- None. All requirements (R1, R2, R3) and acceptance criteria met and verified.
-
-## Key Artifacts
-- `c:/Users/SOL/Desktop/Projet for Breeze/wesite/.agents/orchestrator/PROJECT.md`
-- `c:/Users/SOL/Desktop/Projet for Breeze/wesite/.agents/orchestrator/BRIEFING.md`
-- `c:/Users/SOL/Desktop/Projet for Breeze/wesite/.agents/orchestrator/plan.md`
-- `c:/Users/SOL/Desktop/Projet for Breeze/wesite/.agents/orchestrator/progress.md`
-- `components/sections/shared.tsx`
-- `components/sections/hero.tsx`
-- `tina/config.ts`
-- `eslint.config.mjs`
-- `package.json`
+**Project**: Next.js Website — About Section Overlay Removal & Build Remediation  
+**Orchestrator Directory**: `c:/Users/SOL/Desktop/Projet for Breeze/wesite/.agents/orchestrator`  
+**Main Project Directory**: `c:/Users/SOL/Desktop/Projet for Breeze/wesite`  
+**Date**: 2026-07-23  
 
 ---
 
 ## 1. Observation
-- **`components/sections/shared.tsx`**: Updated `<Proof>` component to accept `valueTinaField`, `labelTinaField`, and `style` props. Bound `data-tina-field={valueTinaField}` to `<strong />` and `data-tina-field={labelTinaField}` to `<span />`. Applied `style={style}` to container card `<div>`.
-- **`tina/config.ts`**: Added `proofBackgroundOpacity` (type `number`, label `"Proof Background Opacity (%)"`) to `hero` section schema, with default `70` in `ui.defaultItem`.
-- **`components/sections/hero.tsx`**: Added `proofBackgroundOpacity?: number` to `HeroProps` and `defaults` (default 70). Formatted and normalized `opacityPct` integer (handling decimal, percentage, and out-of-bounds inputs cleanly). Calculated dynamic card styling `style={{ backgroundColor: \`color-mix(in srgb, var(--background) \${opacityPct}%, transparent)\` }}` and passed `valueTinaField={tinaField(p, "value")}` and `labelTinaField={tinaField(p, "label")}` to `<Proof>`.
-- **`package.json` & `eslint.config.mjs`**: Installed `eslint` & `eslint-config-next`, added ESLint 9 flat configuration with ignores for prebuilt bundles and static files, ensuring `npm run lint` executes cleanly without errors.
-- **Verification Outputs**:
-  - `npm run lint`: Exit code 0 (0 errors).
-  - `npx tsc --noEmit`: Exit code 0 (0 static type errors).
-  - `npm test`: Exit code 0 (4 test files passed, 51/51 tests passed).
-  - `npm run build`: Exit code 0 (Next.js production build succeeded, 5 static pages generated).
-  - Forensic Auditor Verdict: **CLEAN** (0 integrity violations).
+
+- **User Request**:
+  Remove the dark gradient overlay on the About section image block (`components/sections/about.tsx`) so the CEO photo renders 100% clean without dark gradient shadows or lines. Ensure `npx tsc --noEmit` completes with 0 type errors, `npm run build` completes successfully, and visual/code check confirms no dark gradient bands or bottom shadows.
+
+- **Component & Config Files Modified**:
+  1. `components/sections/about.tsx`:
+     - Line 90: Cell-level wrapper padding `p-6 sm:p-8` removed (`<div className="bg-card lg:col-span-5 flex flex-col">`), allowing edge-to-edge container filling.
+     - Line 93: Image backdrop changed from `bg-slate-900` to `bg-transparent` (`hasImage ? "bg-transparent" : "bg-primary"`), preventing dark slate bleed through transparent pixels or scaling edges.
+     - Image block verified to contain zero `bg-gradient-to-t` DOM overlay elements.
+  2. `next.config.mjs`:
+     - Added `serverExternalPackages: ['pg']` to `nextConfig` so Next.js 16 (Turbopack) properly handles external Node `pg` imports during server static generation.
+
+- **Empirical Execution Results**:
+  - `npx tsc --noEmit`: Exit code 0, 0 type errors.
+  - `npm run build`: Exit code 0, `✓ Compiled successfully in 2.1s`, 5/5 static pages generated cleanly.
+  - `npx vitest run components/sections/about.test.tsx`: Exit code 0, 19/19 tests passed.
+  - Forensic Auditor Verdict: **CLEAN** (Verified by `a34a6d63-9c78-4f79-bac9-4ade7a7d3ec5`).
+
+---
 
 ## 2. Logic Chain
-1. Passing `valueTinaField` and `labelTinaField` directly to the `value` and `label` text elements inside `<Proof>` enables TinaCMS visual iframe click-to-edit focus targeting.
-2. Adding `proofBackgroundOpacity` schema control allows non-technical content editors to adjust badge background transparency percentage directly from TinaCMS sidebar.
-3. Dynamically computing `color-mix(in srgb, var(--background) ${opacityPct}%, transparent)` integrates cleanly with Tailwind CSS v4 design tokens and CSS theme variables, maintaining text contrast while allowing dynamic transparency.
-4. Setting up `eslint.config.mjs` allows `npm run lint` (`eslint .`) to execute successfully with 0 errors across the codebase.
+
+1. **Overlay Removal & Transparent Backdrop**:
+   - The DOM overlay `<div>` with `bg-gradient-to-t from-black/80...` had been removed from the markup.
+   - However, the image container backdrop previously used `bg-slate-900` (`#0f172a`), which caused dark slate borders to show behind transparent pixels or anti-aliased image edges.
+   - Changing `bg-slate-900` to `bg-transparent` ensures the photo renders 100% clean without dark background artifacts.
+
+2. **Edge-to-Edge Grid Alignment**:
+   - Removing `p-6 sm:p-8` from line 90 eliminates cell-level wrapper padding, allowing the image block to align edge-to-edge with adjacent section containers and resolving the unit test assertion in `about.test.tsx`.
+
+3. **Build Error Remediation (`next.config.mjs`)**:
+   - Turbopack in Next.js 16 failed to collect static page data for `/api/bookings` due to `pg` module bundling issues (`ERR_MODULE_NOT_FOUND`).
+   - Configuring `serverExternalPackages: ['pg']` in `next.config.mjs` instructs Turbopack to leave `pg` external, allowing production builds (`npm run build`) to complete cleanly in 2.1s.
+
+4. **Forensic Integrity Verification**:
+   - Iteration 2 Phase 3 audit performed by `teamwork_preview_auditor` verified zero hardcoded test outputs, zero facade shortcuts, real empirical build execution, and issued a **CLEAN** verdict.
+
+---
 
 ## 3. Caveats
-- None.
+
+- **External Packages**: Future Node.js native database drivers added to API routes should also be added to `serverExternalPackages` in `next.config.mjs` if Turbopack bundling is used.
+- **Dynamic Content**: TinaCMS dynamic image fields continue to use `<ErrorBoundary>` and focal point cropping (`objectPosition`), fully compatible with `bg-transparent`.
+
+---
 
 ## 4. Conclusion
-All requirements and acceptance criteria for Proof Badges inline editing, opacity control, and stack-specific verification tests (`npx tsc --noEmit`, `npm run lint`, `npm run build`) have been completely implemented, verified, reviewed, and audited with a CLEAN verdict.
+
+All acceptance criteria for Milestone 2 are **100% fulfilled and verified**:
+- CEO image block in `components/sections/about.tsx` renders 100% clean without dark gradient shadows, lines, or dark slate edge bleed.
+- `npx tsc --noEmit` passes with 0 type errors.
+- `npm run build` completes successfully.
+- `npx vitest run components/sections/about.test.tsx` passes 19/19 unit tests.
+- Forensic Auditor verdict: **CLEAN**.
+
+---
 
 ## 5. Verification Method
-- `npm run lint`
-- `npx tsc --noEmit`
-- `npm test`
-- `npm run build`
+
+To re-verify the project state:
+1. Run `npx tsc --noEmit` in `c:/Users/SOL/Desktop/Projet for Breeze/wesite` (Expected: Exit code 0, 0 type errors).
+2. Run `npm run build` in `c:/Users/SOL/Desktop/Projet for Breeze/wesite` (Expected: Exit code 0, successful production build).
+3. Run `npx vitest run components/sections/about.test.tsx` in `c:/Users/SOL/Desktop/Projet for Breeze/wesite` (Expected: Exit code 0, 19/19 tests pass).

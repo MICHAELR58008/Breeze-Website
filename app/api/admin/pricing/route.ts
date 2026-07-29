@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import fs from "fs/promises"
 import path from "path"
 import { z } from "zod"
+import { createHmac } from "crypto"
 
 const bookingJsonPath = path.join(process.cwd(), "content", "booking", "booking.json")
 
@@ -27,7 +28,33 @@ const updatePricingSchema = z.object({
   addOns: z.array(addOnSchema),
 })
 
-export async function GET() {
+function validateSession(cookieHeader: string | null): boolean {
+  const adminSecret = process.env.ADMIN_SECRET
+  if (!adminSecret) return false
+
+  const match = (cookieHeader || "").match(/admin_session=([^;]+)/)
+  if (!match) return false
+
+  const [signature, sessionId] = match[1].split(".")
+  if (!signature || !sessionId) return false
+
+  const expected = createHmac("sha256", adminSecret).update(sessionId).digest("hex")
+  return signature === expected
+}
+
+function authorize(request: Request): NextResponse | null {
+  if (!process.env.ADMIN_SECRET) {
+    return NextResponse.json({ error: "ADMIN_SECRET not configured on server" }, { status: 500 })
+  }
+  if (!validateSession(request.headers.get("cookie"))) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  }
+  return null
+}
+
+export async function GET(request: Request) {
+  const auth = authorize(request)
+  if (auth) return auth
   try {
     const fileData = await fs.readFile(bookingJsonPath, "utf-8")
     const booking = JSON.parse(fileData)
@@ -42,6 +69,8 @@ export async function GET() {
 }
 
 export async function PUT(request: Request) {
+  const auth = authorize(request)
+  if (auth) return auth
   try {
     const body = await request.json()
     const parsed = updatePricingSchema.safeParse(body)

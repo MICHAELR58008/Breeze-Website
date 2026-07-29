@@ -1,38 +1,22 @@
-# Task Execution Plan: Proof Badges Inline Editing & Opacity Control
+# Execution Plan — About Section Layout Alignment & RCA
 
-## Overview
-Enable inline editing for Proof Text fields and add background opacity control in TinaCMS for the Hero section.
+## Objective
+Identify why previous padding/alignment edits in `components/sections/about.tsx` failed to visually align on Vercel deployment & TinaCMS editor, fix alignment across mobile/desktop breakpoints to seamlessly match `Services` / `Add-ons` and `Testimonials`, and verify via `npx tsc --noEmit` and `npm run build`.
 
-## Milestones & Phases
+## Phases
 
-### Milestone 1: Proof Badges Inline Editing & Opacity Control
+### Phase 1: Root Cause Analysis (Exploration)
+- **Explorer 1**: Analyze `components/sections/about.tsx` layout structure (padding, margins, container flex/grid classes, image container wrapper) and compare line-by-line with `components/sections/services.tsx` and `components/sections/testimonials.tsx`.
+- **Explorer 2**: Analyze Next.js layout composition (`app/page.tsx`, `components/layout/`), section wrappers, and TinaCMS visual edit wrappers (`tina/`, edit controls, block wrappers) for hidden padding/margin or rendering overrides.
+- **Explorer 3**: Analyze CSS hierarchy, Tailwind utility precedence/override rules, purge settings, and Vercel build/caching effects.
 
-#### Phase 1: Exploration & Blueprinting
-- Dispatch 3 Explorers in parallel (`teamwork_preview_explorer`):
-  - **Explorer 1** (`.agents/explorer_1`): Analyze `components/sections/shared.tsx` and `components/sections/hero.tsx` for proof component rendering, props, and existing `tinaField` / `data-tina-field` pattern usage.
-  - **Explorer 2** (`.agents/explorer_2`): Analyze `tina/config.ts` hero section schema and how opacity / style fields are defined in TinaCMS schemas in this codebase.
-  - **Explorer 3** (`.agents/explorer_3`): Synthesize exact file changes required across `components/sections/shared.tsx`, `components/sections/hero.tsx`, and `tina/config.ts`, including typescript interfaces and default opacity values.
+### Phase 2: Implementation & Build Verification
+- **Worker 1**: Based on consolidated RCA, modify `components/sections/about.tsx` (and any container/wrapper if necessary) to achieve exact left alignment for CEO image block matching adjacent sections across all breakpoints. Run `npx tsc --noEmit` and `npm run build`.
 
-#### Phase 2: Implementation & Verification
-- Dispatch Worker (`teamwork_preview_worker` in `.agents/worker_1`):
-  - Modify `components/sections/shared.tsx` to pass/apply `data-tina-field` attributes to value and label.
-  - Modify `tina/config.ts` to add Proof Background Opacity field to hero section schema.
-  - Modify `components/sections/hero.tsx` to pass tinaField metadata for value/label and apply dynamic opacity styling.
-  - Run verification tests: `npx tsc --noEmit`, `npm run lint`, `npm run build`.
+### Phase 3: Review & Verification
+- **Reviewer 1 & 2**: Code review for correctness, CSS hierarchy, responsive alignment across breakpoints, type safety, and clean build.
+- **Challenger 1 & 2**: Stress test layout alignment, breakpoint behavior, and TinaCMS preview compatibility.
+- **Forensic Auditor 1**: Verify genuine code implementation without hardcoded bypasses or facade checks.
 
-#### Phase 3: Independent Code Review
-- Dispatch 2 Reviewers (`teamwork_preview_reviewer` in `.agents/reviewer_1` and `.agents/reviewer_2`):
-  - Review code changes against requirements R1 and R2.
-  - Run `npx tsc --noEmit`, `npm run lint`, and `npm run build`.
-
-#### Phase 4: Adversarial Stress Testing
-- Dispatch 2 Challengers (`teamwork_preview_challenger` in `.agents/challenger_1` and `.agents/challenger_2`):
-  - Empirically verify correctness, type safety, dynamic styling fallback handling, and edge cases.
-
-#### Phase 5: Forensic Integrity Audit
-- Dispatch Forensic Auditor (`teamwork_preview_auditor` in `.agents/auditor_1`):
-  - Perform static analysis, git diff check, runtime build verification, and integrity check to ensure genuine non-hardcoded implementation.
-
-#### Phase 6: Final Synthesis & Victory Claim
-- Verify clean audit verdict.
-- Report completion and victory claim to parent.
+### Phase 4: Final Synthesis & Victory Submission
+- Confirm all acceptance criteria met, report to Sentinel.

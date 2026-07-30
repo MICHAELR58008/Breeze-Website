@@ -58,7 +58,7 @@ export function Navigation({ links = defaultLinks, config = navDefaults }: Navig
   const headerStyle: React.CSSProperties = {}
   if (config.barBackground) headerStyle.backgroundColor = config.barBackground
   if (config.barBorderColor) headerStyle.borderBottomColor = config.barBorderColor
-  if (config.barHeight) headerStyle.height = `${config.barHeight}px`
+  headerStyle.height = `${config.barHeight || 64}px`
   if (config.barWidth) headerStyle.maxWidth = `${config.barWidth}px`
 
   const headerClasses = [
@@ -140,7 +140,7 @@ export function Navigation({ links = defaultLinks, config = navDefaults }: Navig
         </button>
       </div>
       {open && (
-        <nav className="flex flex-col gap-1 border-t border-border bg-background p-5 md:hidden">
+        <nav className="flex flex-col gap-1 border-t border-border bg-background/95 backdrop-blur-xl p-5 md:hidden">
           {links.map(({ label, href }) => {
             const id = href.replace("#", "")
             return (

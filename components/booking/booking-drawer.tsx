@@ -346,7 +346,7 @@ function BookingDrawerCore({
                   e.preventDefault()
                 }
               }}
-              className="flex min-h-[calc(100vh-140px)] flex-col"
+              className="flex min-h-[calc(100dvh-140px)] flex-col"
               style={{ pointerEvents: "auto" }}
             >
               <input name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
@@ -484,7 +484,7 @@ function BookingDrawerCore({
                         return (
                           <FieldSet key={`field-${fieldIdx}`} data-tina-field={tinaAttr}>
                             <FieldLegend variant="label">{field.label}</FieldLegend>
-                            <div className="grid grid-cols-3 gap-2">
+                            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
                               {field.options?.map((opt) => (
                                 <button
                                   key={opt.id}

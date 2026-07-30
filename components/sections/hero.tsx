@@ -110,7 +110,7 @@ export function Hero(props: HeroProps) {
   const hasBgImage = Boolean(imageSrc && imageSrc.trim())
 
   return (
-    <section id="top" className="relative overflow-hidden border-b border-border pt-16">
+    <section id="top" className="relative overflow-hidden sm:overflow-visible border-b border-border pt-16">
       {hasBgImage && (
         <Image
           src={imageSrc!}
@@ -138,7 +138,7 @@ export function Hero(props: HeroProps) {
           </div>
 
           <div className="flex flex-col gap-8">
-            <h1 className="max-w-4xl text-balance font-display text-6xl leading-[0.9] tracking-tight text-white sm:text-7xl lg:text-[7.5rem]">
+            <h1 className="max-w-4xl text-balance font-display text-5xl leading-[0.9] tracking-tight text-white sm:text-7xl lg:text-[7.5rem]">
               <StyledText
                 visible={headingLine1Visible}
                 x={headingLine1X}

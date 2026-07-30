@@ -70,7 +70,7 @@ export function Contact(props: ContactProps) {
             y={headingY}
             size={headingSize}
             color={headingColor}
-            className="text-balance font-display text-6xl leading-none sm:text-8xl lg:text-9xl"
+            className="text-balance font-display text-5xl leading-none sm:text-8xl lg:text-9xl"
             data-tina-field={tinaField(props, "heading")}
           >
             {heading}

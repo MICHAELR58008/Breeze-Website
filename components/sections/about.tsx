@@ -158,7 +158,7 @@ export function About(props: AboutProps) {
           {/* Media Card */}
           <div className="bg-card lg:col-span-5 flex flex-col">
             <div
-              className={`relative w-full h-full min-h-[440px] overflow-hidden ${
+              className={`relative w-full h-full min-h-[280px] overflow-hidden sm:min-h-[440px] ${
                 hasImage ? "bg-transparent" : "bg-primary"
               }`}
               data-tina-field={hasImage ? tinaField(props, "galleryImages") : undefined}
@@ -202,7 +202,7 @@ export function About(props: AboutProps) {
                           visible={nameInitialVisible}
                           size={nameInitialSize}
                           color={nameInitialColor}
-                          className="font-display text-[9rem] leading-none"
+                          className="font-display text-[6rem] leading-none sm:text-[8rem] lg:text-[9rem]"
                           data-tina-field={tinaField(props, "nameInitial")}
                         >
                           {nameInitial}
@@ -230,7 +230,7 @@ export function About(props: AboutProps) {
                 y={ownerNameY}
                 size={ownerNameSize}
                 color={ownerNameColor}
-                className="font-display text-6xl sm:text-8xl"
+                className="font-display text-5xl sm:text-7xl lg:text-8xl"
                 data-tina-field={tinaField(props, "ownerName")}
               >
                 {ownerName}

@@ -20,7 +20,7 @@ export default function ThankYouClient() {
     <>
       <Navigation links={[]} config={{ ctaVisible: false }} />
       <main className="flex min-h-[80vh] items-center justify-center bg-muted/20 px-5 pt-24 pb-12">
-        <div className="mx-auto flex w-full max-w-lg flex-col items-center gap-8 rounded-2xl bg-background p-10 text-center shadow-sm border border-border">
+        <div className="mx-auto flex w-full max-w-lg flex-col items-center gap-8 rounded-2xl bg-background p-6 text-center shadow-sm border border-border sm:p-8 lg:p-10">
           <Brand />
           <div className="flex size-16 items-center justify-center rounded-full bg-primary text-primary-foreground">
             <Check className="size-8" aria-hidden="true" />

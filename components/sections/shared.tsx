@@ -170,7 +170,7 @@ export function SectionHeader(props: {
             y={titleY}
             size={titleSize}
             color={titleColor}
-            className="text-balance font-display text-5xl leading-none sm:text-7xl lg:text-8xl"
+            className="text-balance font-display text-4xl leading-none sm:text-7xl lg:text-8xl"
             data-tina-field={tinaFields?.title}
           >
             {title}

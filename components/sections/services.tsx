@@ -97,7 +97,7 @@ export function Services(props: ServicesProps) {
                 {item.subtitle || ""}
               </span>
               <h3
-                className="mt-4 font-display text-5xl"
+                className="mt-4 font-display text-4xl sm:text-5xl"
                 data-tina-field={rawPricing ? tinaField(rawPricing?.services?.[index], "name") : undefined}
               >
                 {item.name || "New Service"}

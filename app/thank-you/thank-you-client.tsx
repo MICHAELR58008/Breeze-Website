@@ -2,6 +2,9 @@
 
 import { Check, Sparkles } from "lucide-react"
 import { useSearchParams } from "next/navigation"
+import { tinaField } from "tinacms/dist/tina-field"
+import { t } from "@/lib/booking-content"
+import { useBooking } from "@/components/booking/booking-drawer"
 import { Button } from "@/components/ui/button"
 import { Brand } from "@/components/sections/shared"
 import { Navigation } from "@/components/sections/navigation"
@@ -10,6 +13,8 @@ import { Footer } from "@/components/sections/footer"
 export default function ThankYouClient() {
   const searchParams = useSearchParams()
   const name = searchParams.get("name") || "there"
+  const { content, rawBooking } = useBooking()
+  const { title, message, buttonText, phoneNumber } = content.success
 
   return (
     <>
@@ -21,17 +26,37 @@ export default function ThankYouClient() {
             <Check className="size-8" aria-hidden="true" />
           </div>
           <div className="flex flex-col gap-3">
-            <h1 className="font-display text-4xl text-foreground">Request received.</h1>
-            <p className="max-w-sm text-pretty leading-relaxed text-muted-foreground">
-              Thank you, {name}. We look forward to working with you. Breeze will get back to you within 24 hours to confirm the details.
+            <h1
+              className="font-display text-4xl text-foreground"
+              data-tina-field={rawBooking ? tinaField(rawBooking.success, "title") : undefined}
+            >
+              {title}
+            </h1>
+            <p
+              className="max-w-sm text-pretty leading-relaxed text-muted-foreground"
+              data-tina-field={rawBooking ? tinaField(rawBooking.success, "message") : undefined}
+            >
+              {t(message, { name })}
             </p>
           </div>
           <div className="flex items-center gap-2 font-mono text-xs tracking-wider text-muted-foreground">
             <Sparkles className="size-3.5 text-primary" />
-            Questions? Call <a href="tel:+18057608765" className="text-primary underline underline-offset-2 hover:text-primary/80">(805) 760-8765</a>
+            Questions? Call{" "}
+            <a
+              href={`tel:${phoneNumber?.replace(/\D/g, "")}`}
+              className="text-primary underline underline-offset-2 hover:text-primary/80"
+              data-tina-field={rawBooking ? tinaField(rawBooking.success, "phoneNumber") : undefined}
+            >
+              {phoneNumber}
+            </a>
           </div>
-          <Button asChild variant="outline" size="lg">
-            <a href="/">Return to Breeze</a>
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            data-tina-field={rawBooking ? tinaField(rawBooking.success, "buttonText") : undefined}
+          >
+            <a href="/">{buttonText}</a>
           </Button>
         </div>
       </main>

@@ -850,6 +850,7 @@ type BookingSuccess {
   title: String
   message: String
   buttonText: String
+  phoneNumber: String
 }
 
 type BookingEstimate {
@@ -1069,6 +1070,7 @@ input BookingSuccessFilter {
   title: StringFilter
   message: StringFilter
   buttonText: StringFilter
+  phoneNumber: StringFilter
 }
 
 input BookingEstimateFilter {
@@ -1594,6 +1596,7 @@ input BookingSuccessMutation {
   title: String
   message: String
   buttonText: String
+  phoneNumber: String
 }
 
 input BookingEstimateMutation {

@@ -23,7 +23,12 @@ export interface PageData {
 export async function fetchPageData(): Promise<PageData> {
   try {
     const { client } = await import("@/tina/__generated__/client")
-    const result = await client.queries.page({ relativePath: "page.json" })
+    const result = await Promise.race([
+      client.queries.page({ relativePath: "page.json" }),
+      new Promise<never>((_, reject) =>
+        setTimeout(() => reject(new Error("Tina query timed out")), 5000)
+      ),
+    ])
     const data = result.data as any
     return {
       tina: {

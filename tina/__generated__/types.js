@@ -423,6 +423,7 @@ export const BookingPartsFragmentDoc = gql`
     title
     message
     buttonText
+    phoneNumber
   }
   estimate {
     __typename

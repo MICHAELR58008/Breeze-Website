@@ -414,6 +414,7 @@ fragment BookingParts on Booking {
     title
     message
     buttonText
+    phoneNumber
   }
   estimate {
     __typename

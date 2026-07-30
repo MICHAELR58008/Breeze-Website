@@ -846,6 +846,7 @@ export default defineConfig({
               { type: "string", name: "title", label: "Title" },
               { type: "string", name: "message", label: "Message (use {name} for customer name)" },
               { type: "string", name: "buttonText", label: "Button Text" },
+              { type: "string", name: "phoneNumber", label: "Phone Number" },
             ],
           },
           {

@@ -68,7 +68,7 @@ export interface BookingContent {
     disclaimer: string
   }
   navigation: { back: string; continue: string; submit: string }
-  success: { title: string; message: string; buttonText: string }
+  success: { title: string; message: string; buttonText: string; phoneNumber: string }
   estimate: { label: string; customQuote: string; disclaimer: string }
   services: ServiceItemData[]
   addOns: AddOnData[]
@@ -185,7 +185,12 @@ export const bookingContent: BookingContent = {
 export async function fetchBookingContent(): Promise<BookingContentResult> {
   try {
     const { client } = await import("@/tina/__generated__/client")
-    const res = await (client.queries as any).booking({ relativePath: "booking.json" })
+    const res = await Promise.race([
+      (client.queries as any).booking({ relativePath: "booking.json" }),
+      new Promise<never>((_, reject) =>
+        setTimeout(() => reject(new Error("Tina booking query timed out")), 5000)
+      ),
+    ])
     const data = (res.data as any)?.booking
     if (!data) throw new Error("No booking data from Tina API")
     return {
@@ -239,6 +244,7 @@ export function normalizeBookingData(raw: any): BookingContent {
       title: raw.success?.title ?? bookingContent.success.title,
       message: raw.success?.message ?? bookingContent.success.message,
       buttonText: raw.success?.buttonText ?? bookingContent.success.buttonText,
+      phoneNumber: raw.success?.phoneNumber ?? bookingContent.success.phoneNumber,
     },
     estimate: {
       label: raw.estimate?.label ?? bookingContent.estimate.label,

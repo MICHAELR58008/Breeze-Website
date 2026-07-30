@@ -23,20 +23,22 @@ const BookingContext = createContext<{
   servicesList: ServiceItemData[]
   addOnsList: AddOnData[]
   rawPricing: any
+  rawBooking: any
 }>({
   openBooking: () => undefined,
   content: {} as BookingContent,
   servicesList: [],
   addOnsList: [],
   rawPricing: null,
+  rawBooking: null,
 })
 
 export const useBooking = () => useContext(BookingContext)
 
-const initialState: Record<string, any> = {
+export const initialState: Record<string, any> = {
   serviceType: "deep",
-  bedrooms: 1,
-  bathrooms: 1,
+  bedrooms: "",
+  bathrooms: "",
   addOns: [] as string[],
   preferredDate: "",
   preferredWindow: "flexible",
@@ -284,6 +286,7 @@ function BookingDrawerCore({
         servicesList,
         addOnsList,
         rawPricing,
+        rawBooking,
       }}
     >
       {children}
@@ -468,9 +471,7 @@ function BookingDrawerCore({
                               }}
                               onBlur={() => {
                                 const current = formData[field.name || ""]
-                                if (current === "" || current === undefined || current === null || Number(current) < (field.min ?? 1)) {
-                                  updateField(field.name || "", field.min ?? 1)
-                                } else if (Number(current) > (field.max ?? 10)) {
+                                if (current !== "" && current !== undefined && current !== null && Number(current) > (field.max ?? 10)) {
                                   updateField(field.name || "", field.max ?? 10)
                                 }
                               }}
